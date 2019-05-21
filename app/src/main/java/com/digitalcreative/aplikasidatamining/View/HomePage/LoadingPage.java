@@ -29,7 +29,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
  */
 public class LoadingPage extends Fragment {
     ProgressBar progressBar;
-    Halaman_Utama halaman_utama =  new Halaman_Utama();
 
     public LoadingPage() {
         // Required empty public constructor
@@ -67,7 +66,6 @@ public class LoadingPage extends Fragment {
                     loadIMEI();
                     loadtheFirebase();
                     progressAnimationbar();
-                    startApp();
                 }
 
             }
@@ -99,12 +97,6 @@ public class LoadingPage extends Fragment {
     private void loadtheFirebase() {
         Firebase firebase = new Firebase();
         firebase.loadfirebase(getContext());
-    }
-
-    private void startApp() {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_base, halaman_utama)
-                .commit();
     }
 
     private void progressAnimationbar() {

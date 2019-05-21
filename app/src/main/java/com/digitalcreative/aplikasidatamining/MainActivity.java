@@ -6,12 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.digitalcreative.aplikasidatamining.View.AkunPage;
-import com.digitalcreative.aplikasidatamining.View.BantuanPage;
-import com.digitalcreative.aplikasidatamining.View.PencarianPage;
+import com.digitalcreative.aplikasidatamining.View.MenuPages.AkunPage;
+import com.digitalcreative.aplikasidatamining.View.MenuPages.BantuanPage;
+import com.digitalcreative.aplikasidatamining.View.MenuPages.PencarianPage;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView nav;

@@ -1,4 +1,4 @@
-package com.digitalcreative.aplikasidatamining.View;
+package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 
 import android.Manifest;
@@ -22,8 +22,6 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,11 +43,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -389,12 +384,8 @@ public class PencarianPage extends Fragment {
 
                 boolean dbexist = checkDataBase();
                 if (dbexist) {
-                    PencarianPage_Only searchFragment = new PencarianPage_Only();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_container, searchFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
+                    Intent intent = new Intent(getActivity(), PencarianPage_Activity.class);
+                    startActivity(intent);
 
                 } else {
                     System.out.println("Database doesn't exist");
