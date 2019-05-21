@@ -2,10 +2,7 @@ package com.digitalcreative.aplikasidatamining.View.LoginandRegister;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -21,12 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digitalcreative.aplikasidatamining.BaseActivity;
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
 import com.digitalcreative.aplikasidatamining.MainActivity;
 import com.digitalcreative.aplikasidatamining.R;
-import com.digitalcreative.aplikasidatamining.View.HomePage.Halaman_Utama;
-import com.digitalcreative.aplikasidatamining.View.HomePage.LoadingPage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

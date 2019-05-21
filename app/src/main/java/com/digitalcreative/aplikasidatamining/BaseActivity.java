@@ -6,11 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.digitalcreative.aplikasidatamining.View.HomePage.Halaman_Utama;
-import com.digitalcreative.aplikasidatamining.View.HomePage.LoadingPage;
 import com.digitalcreative.aplikasidatamining.View.LoginandRegister.LoginPage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,8 +21,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import static android.content.ContentValues.TAG;
 
 public class BaseActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;

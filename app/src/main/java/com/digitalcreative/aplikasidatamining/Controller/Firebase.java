@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.digitalcreative.aplikasidatamining.View.HomePage.Halaman_Utama;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,8 +46,6 @@ public class Firebase {
                 String imei = dataSnapshot.child("imei").getValue().toString();
                 String last_update_data= dataSnapshot.child("last_update_data").getValue().toString();
 
-                sendBundle(nama_lengkap, no_telepon);
-
                 SharedPreferences.Editor chaching = context.getSharedPreferences("detailUser", Context.MODE_PRIVATE).edit();
                 chaching.putString("username", username);
                 chaching.putString("email", email);
@@ -69,15 +66,6 @@ public class Firebase {
 
             }
         });
-    }
-
-    private void sendBundle(String nama_lengkap, String no_telepon) {
-        Halaman_Utama frg =  new Halaman_Utama();
-        Bundle bundle =  new Bundle();
-        bundle.putString("namakite", nama_lengkap);
-        bundle.putString("notelpkite", no_telepon);
-        frg.setArguments(bundle);
-
     }
 
 }
