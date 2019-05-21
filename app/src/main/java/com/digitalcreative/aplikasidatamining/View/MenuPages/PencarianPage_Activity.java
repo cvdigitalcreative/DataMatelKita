@@ -105,19 +105,16 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 progressbar.setVisibility(View.VISIBLE);
                 data_=new ArrayList<>();
 
-                try {
-                    dbhelper = new DataBaseHelper(context);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
                 final DataBaseHelper finalDbhelper = dbhelper;
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         lastIndex=1;
                         //getSearchMobil = s;
-
+                        getSearchMobil=search.getText().toString();
                         data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
+
                         System.out.println("load data done");
                         finalDbhelper.close();
                         System.out.println("close");
