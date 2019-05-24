@@ -162,6 +162,7 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
         keyValues.put(R.id.btn_n, "n");
         keyValues.put(R.id.btn_m, "m");
         keyValues.put(R.id.btn_space, " ");
+        keyValues.put(R.id.btn_cancel, null);
 
     }
 
