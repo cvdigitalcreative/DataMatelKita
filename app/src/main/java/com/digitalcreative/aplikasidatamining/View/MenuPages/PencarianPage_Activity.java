@@ -104,8 +104,6 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 recyclerView.removeAllViewsInLayout();
                 progressbar.setVisibility(View.VISIBLE);
                 data_=new ArrayList<>();
-
-
                 final DataBaseHelper finalDbhelper = dbhelper;
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -114,10 +112,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
                         //getSearchMobil = s;
                         getSearchMobil=search.getText().toString();
                         data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
-
-                        System.out.println("load data done");
                         finalDbhelper.close();
-                        System.out.println("close");
                         performSearch();
                         System.out.println("searching done");
                         progressbar.setVisibility(View.INVISIBLE);
@@ -137,7 +132,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 progressbar.setVisibility(View.VISIBLE);
                 lastIndex=0;
                 //getSearchMobil = new_text;
-
+                getSearchMobil=search.getText().toString();
                 data_=dbhelper.getAllData(getSearchMobil,getSearchMobil);
                 dbhelper.close();
                 performSearch();
