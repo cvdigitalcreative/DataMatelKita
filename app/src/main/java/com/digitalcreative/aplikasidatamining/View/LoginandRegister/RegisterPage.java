@@ -164,7 +164,7 @@ public class RegisterPage extends Fragment {
                     // If sign in fails, display a message to the user.
                     pop_up.setVisibility(View.INVISIBLE);
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(getActivity(), "Email Telah Terdaftar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
