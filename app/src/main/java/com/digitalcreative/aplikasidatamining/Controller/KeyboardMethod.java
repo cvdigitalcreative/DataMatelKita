@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.LinearLayout;
 
@@ -162,7 +163,6 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
         keyValues.put(R.id.btn_n, "n");
         keyValues.put(R.id.btn_m, "m");
         keyValues.put(R.id.btn_space, " ");
-        keyValues.put(R.id.btn_cancel, null);
 
     }
 
@@ -179,6 +179,12 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
             } else {
                 inputConnection.commitText("", 1);
             }
+        }else  if (view.getId() == R.id.btn_cancel) {
+            CharSequence currentText = inputConnection.getExtractedText(new ExtractedTextRequest(), 0).text;
+            CharSequence beforCursorText = inputConnection.getTextBeforeCursor(currentText.length(), 0);
+            CharSequence afterCursorText = inputConnection.getTextAfterCursor(currentText.length(), 0);
+            inputConnection.deleteSurroundingText(beforCursorText.length(), afterCursorText.length());
+//            inputConnection.deleteSurroundingText(1, 0);
         } else {
             String value = keyValues.get(view.getId());
             inputConnection.commitText(value, 1);

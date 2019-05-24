@@ -97,15 +97,27 @@ public class BantuanPage extends Fragment {
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final String last_update_data = dataSnapshot.child("last_update_data").getValue().toString();
+                final String last_update_data= dataSnapshot.child("last_update_data").getValue().toString();
                 myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
-                        String last_update_data_sistem = dataSnapshots.child("update_terakhir").getValue().toString();
-                        if (!last_update_data.equals(last_update_data_sistem)) {
+                        String last_update_data_sistem= dataSnapshots.child("update_terakhir").getValue().toString();
+                        System.out.println("cuy masuk akal");
+                        SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date dateobj = Calendar.getInstance().getTime();
 
-                            Toast.makeText(getActivity(), "Silahkan Update Data", Toast.LENGTH_LONG).show();
+                        Date date = null;
+                        try {
+                            date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
+                            Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
+                            long milliseconds = date_2.getTime() - date.getTime();
+                            long days = milliseconds / (1000 * 60 * 60 * 24);
+                            if (days>0 ) {
+                                Toast.makeText(getActivity(), "Silahkan Update Data", Toast.LENGTH_LONG).show();
 
+                            }
+                        }  catch (ParseException e) {
+                            e.printStackTrace();
                         }
                     }
 
