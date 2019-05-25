@@ -2,6 +2,7 @@ package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
@@ -82,6 +83,44 @@ public class PencarianPage_Activity extends AppCompatActivity {
         });
     }
     DataBaseHelper dbhelper;
+    private class LongOperation extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            emptyText.setVisibility(View.INVISIBLE);
+            list.clear();
+            recyclerView.removeAllViewsInLayout();
+
+            data_=new ArrayList<>();
+            final DataBaseHelper finalDbhelper = dbhelper;
+            lastIndex=1;
+            //getSearchMobil = s;
+            getSearchMobil=search.getText().toString();
+            data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
+            finalDbhelper.close();
+
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            performSearch();
+            System.out.println("searching done");
+            System.out.println(data_.size());
+            if(data_.size()==0){
+                emptyText.setVisibility(View.VISIBLE);
+            }else{
+                emptyText.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
     private void searchFunc() {
         search.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -99,47 +138,49 @@ public class PencarianPage_Activity extends AppCompatActivity {
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                emptyText.setVisibility(View.INVISIBLE);
-                list.clear();
-                recyclerView.removeAllViewsInLayout();
-                progressbar.setVisibility(View.VISIBLE);
-                data_=new ArrayList<>();
-                final DataBaseHelper finalDbhelper = dbhelper;
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        lastIndex=1;
-                        //getSearchMobil = s;
-                        getSearchMobil=search.getText().toString();
-                        data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
-                        finalDbhelper.close();
-                        performSearch();
-                        System.out.println("searching done");
-                        progressbar.setVisibility(View.INVISIBLE);
-                        if(list.size()<1){
-                            emptyText.setVisibility(View.VISIBLE);
-                        }
-
-                    }
-                }, 1000);
+//                emptyText.setVisibility(View.INVISIBLE);
+//                list.clear();
+//                recyclerView.removeAllViewsInLayout();
+//                progressbar.setVisibility(View.VISIBLE);
+//                data_=new ArrayList<>();
+//                final DataBaseHelper finalDbhelper = dbhelper;
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        lastIndex=1;
+//                        //getSearchMobil = s;
+//                        getSearchMobil=search.getText().toString();
+//                        data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
+//                        finalDbhelper.close();
+//                        performSearch();
+//                        System.out.println("searching done");
+//                        progressbar.setVisibility(View.INVISIBLE);
+//                        if(list.size()<1){
+//                            emptyText.setVisibility(View.VISIBLE);
+//                        }
+//
+//                    }
+//                }, 1000);
+//                new LongOperation().execute("");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                emptyText.setVisibility(View.INVISIBLE);
-                list.clear();
-                recyclerView.removeAllViewsInLayout();
-                progressbar.setVisibility(View.VISIBLE);
-                lastIndex=0;
-                //getSearchMobil = new_text;
-                getSearchMobil=search.getText().toString();
-                data_=dbhelper.getAllData(getSearchMobil,getSearchMobil);
-                dbhelper.close();
-                performSearch();
-                progressbar.setVisibility(View.INVISIBLE);
-                if(list.size()<1){
-                    emptyText.setVisibility(View.VISIBLE);
-                }
+//                emptyText.setVisibility(View.INVISIBLE);
+//                list.clear();
+//                recyclerView.removeAllViewsInLayout();
+//                progressbar.setVisibility(View.VISIBLE);
+//                lastIndex=0;
+//                //getSearchMobil = new_text;
+//                getSearchMobil=search.getText().toString();
+//                data_=dbhelper.getAllData(getSearchMobil,getSearchMobil);
+//                dbhelper.close();
+//                performSearch();
+//                progressbar.setVisibility(View.INVISIBLE);
+//                if(list.size()<1){
+//                    emptyText.setVisibility(View.VISIBLE);
+//                }
+                new LongOperation().execute("");
             }
 
             @Override
