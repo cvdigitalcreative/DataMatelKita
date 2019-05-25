@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.MenuPages.BantuanPage">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_lacakmobil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/base_grey_color">
+
+            <LinearLayout
+                android:id="@+id/btn_costumer_service"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/whit_color"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/bantuan_btn_lainnya"
+                        android:layout_height="@dimen/bantuan_btn_lainnya"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/bantuan_btn_lainnya"
+                            android:layout_height="@dimen/bantuan_btn_lainnya"
+                            android:background="@drawable/rr_iconlacakupdate"
+                            android:paddingVertical="10dp"
+                            android:text="4" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:src="@mipmap/w_cs" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="vertical"
+                        tools:layout_editor_absoluteX="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Layanan"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Layanan Informasi Pelanggan"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/base_grey_color" />
+            </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/whit_color"
+                android:paddingHorizontal="15dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_costumer_service">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bantuan_detail_part_1"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/bantuan_detail_part_2"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView6"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/bantuan_detail_part_3"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toTopOf="@+id/barrier_textdetail"
+                    app:layout_constraintEnd_toEndOf="@+id/textView7"
+                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <RelativeLayout
+                    android:id="@+id/btn_whatsapp"
+                    android:layout_width="@dimen/bantuan_btn_wa_sms_tlp"
+                    android:layout_height="@dimen/bantuan_btn_wa_sms_tlp"
+                    android:layout_marginStart="24dp"
+                    android:background="@mipmap/w_wa"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_sms"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="@+id/textView8"
+                    app:layout_constraintTop_toTopOf="@+id/barrier_textdetail">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="#30ca59"
+                        app:civ_border_color="#dedede"
+                        app:civ_border_width="3dp" />
+
+                    <ImageView
+                        android:id="@+id/wa_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:padding="10dp"
+                        android:src="@mipmap/w_wa" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btn_sms"
+                    android:layout_width="@dimen/bantuan_btn_wa_sms_tlp"
+                    android:layout_height="@dimen/bantuan_btn_wa_sms_tlp"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_whatsapp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_telpon"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_whatsapp"
+                    app:layout_constraintTop_toTopOf="@+id/btn_whatsapp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="#43a2fa"
+                        app:civ_border_color="#dedede"
+                        app:civ_border_width="3dp" />
+
+                    <ImageView
+                        android:id="@+id/sms_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:padding="7dp"
+                        android:src="@mipmap/w_sms" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btn_telpon"
+                    android:layout_width="@dimen/bantuan_btn_wa_sms_tlp"
+                    android:layout_height="@dimen/bantuan_btn_wa_sms_tlp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@mipmap/w_call"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_whatsapp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView8"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_sms"
+                    app:layout_constraintTop_toTopOf="@+id/btn_whatsapp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorPrimary"
+                        app:civ_border_color="#dedede"
+                        app:civ_border_width="2dp" />
+
+                    <ImageView
+                        android:id="@+id/call_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:padding="10dp"
+                        android:src="@mipmap/w_call" />
+                </RelativeLayout>
+
+                <android.support.constraint.Barrier
+                    android:id="@+id/barrier_textdetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="textView8,textView6,textView7"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="630dp" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/btn_tambahdatamobil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/whit_color"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="6dp">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/bantuan_btn_lainnya"
+                        android:layout_height="@dimen/bantuan_btn_lainnya"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/bantuan_btn_lainnya"
+                            android:layout_height="@dimen/bantuan_btn_lainnya"
+                            android:background="@drawable/rr_iconlacakupdate"
+                            android:paddingVertical="10dp"
+                            android:text="4" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="7dp"
+                            android:src="@mipmap/w_addcar" />
+
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Tambah Data Kendaraan"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tekan untuk tambah data kendaraan."
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/btn_caraPembayaran"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/whit_color"
+                android:clickable="true"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="6dp"
+                app:layout_constraintEnd_toEndOf="@+id/btn_tambahdatamobil"
+                app:layout_constraintStart_toStartOf="@+id/btn_tambahdatamobil"
+                app:layout_constraintTop_toBottomOf="@+id/btn_tambahdatamobil">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="6dp">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/bantuan_btn_lainnya"
+                        android:layout_height="@dimen/bantuan_btn_lainnya"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/bantuan_btn_lainnya"
+                            android:layout_height="@dimen/bantuan_btn_lainnya"
+                            android:background="@drawable/rr_iconlacakupdate"
+                            android:paddingVertical="10dp"
+                            android:text="4" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:src="@mipmap/w_update" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Update Data Kendaraan"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tekan untuk update data kendaraan terbaru."
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/finish_progresbar3"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="false"
+        android:background="#6a000000">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="40dp"
+            android:background="#fff">
+            <TextView
+                android:id="@+id/text_bantuan_cuy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Update Berhasil"/>
+            <TextView
+                android:id="@+id/text_bantuan_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Jumlah Data :"/>
+            <TextView
+                android:id="@+id/text_bantuan_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Berhasil"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

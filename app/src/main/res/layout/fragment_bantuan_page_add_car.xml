@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_grey_color"
+    tools:context=".View.MenuPages.BantuanPage_addCar"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+   <include
+       layout="@layout/toolbar_lacakmobil"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="5dp"
+                    android:paddingVertical="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Unit Mobil"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_namamobil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Mobil"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No. Plat"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_noplat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Nomor Plat"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tahun"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_tahun"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="numberDecimal"
+                            android:textColor="#000"
+                            android:hint="Masukan Tahun"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="5dp"
+                    android:paddingVertical="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="OVD"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_OVD"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan OVD"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cabang"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_cabang"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Cabang"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Finance"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_finance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Finnace"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nomor Mesin"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_nosin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Nomor Mesin"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Noka"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_noka"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Noka"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simpan"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/whit_color"
+                android:background="@color/baseColor"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="12dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

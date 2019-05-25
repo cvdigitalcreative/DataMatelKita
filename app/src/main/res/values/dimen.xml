@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Textsize_listlacakmobil_top">7pt</dimen>
+    <dimen name="Textsize_listlacakmobil_bot">9pt</dimen>
+
+    <dimen name="imgIconPicture_size_user">60dp</dimen>
+    <dimen name="imgIconPicture_size">70dp</dimen>
+
+    <dimen name="IconMenu_size">70dp</dimen>
+    <dimen name="Title_IconMenu_size">80dp</dimen>
+
+    <dimen name="Base_margin">20dp</dimen>
+    <dimen name="Base_layout_height">150dp</dimen>
+    <dimen name="Base_paddingTop">15dp</dimen>
+
+    <dimen name="Menu_MarginRight">23dp</dimen>
+    <dimen name="Menu_padding_vertical">5dp</dimen>
+    <dimen name="Menu_padding_horizontal">12dp</dimen>
+
+    <dimen name="Btn_halUt_height">80dp</dimen>
+    <dimen name="Btn_margin_bot">15dp</dimen>
+
+    <dimen name="Toolbar_pad">20dp</dimen>
+
+    <dimen name="Nama_user">12pt</dimen>
+    <dimen name="User_margin_Hor">7dp</dimen>
+
+    <dimen name="Text_size_btn_lacakdanupdate">12pt</dimen>
+
+    <dimen name="Margin_btn_logout_atas">10dp</dimen>
+    <dimen name="Height_btn_logout">60dp</dimen>
+
+    <dimen name="Padding_btnImage">15dp</dimen>
+    <dimen name="Padding_menuImage">15dp</dimen>
+
+    <dimen name="Iconsize_wa_message_call_cs_square">55dp</dimen>
+    <dimen name="Iconsize_wa_message_call_cs_passive">40dp</dimen>
+    <dimen name="Iconsize_wa_message_call_cs_MarginRight">25dp</dimen>
+    <dimen name="Padding_linearlayout_inside">16dp</dimen>
+    <dimen name="Textview_marginBot">10dp</dimen>
+    <dimen name="Textsize_CS_title">13pt</dimen>
+    <dimen name="Textsize_CP_konten">9pt</dimen>
+
+    <!--Detil Mobil Dimensi-->
+    <dimen name="detail_mobil_textSize">14dp</dimen>
+    <dimen name="detail_mobil_paddingHor">20dp</dimen>
+    <dimen name="detail_mobil_paddingVer">0dp</dimen>
+
+    <dimen name="lacak_mobil">16dp</dimen>
+
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_titleSize">18sp</dimen>
+
+    <!-- Bantuan -->
+    <dimen name="bantuan_btn_wa_sms_tlp">65dp</dimen>
+    <dimen name="bantuan_btn_lainnya">50dp</dimen>
+
+    <!-- Akun -->
+    <dimen name="akun_photo_akun">55dp</dimen>
+    <dimen name="akun_text_description_size">14sp</dimen>
+    <dimen name="akun_text_title_size">16sp</dimen>
+
+    <!-- Register -->
+    <dimen name="register_txfield_horizontal">35dp</dimen>
+    <dimen name="register_txfield_vertical">13dp</dimen>
+
+    <!--Bantuan-->
+    <dimen name="bantuan_addCar_textSize">17sp</dimen>
+    <dimen name="bantuan_addCar_textSize_editText">16sp</dimen>
+
+
+    <!--Keyboard-->
+    <dimen name="buttonwidthheight">38dp</dimen>
+    <dimen name="margin_keyboard">0.5dp</dimen>
+    <dimen name="weight_keyboard">1.2dp</dimen>
+    <dimen name="paddingText">9dp</dimen>
+    <dimen name="layoutheight">50dp</dimen>
+    <dimen name="layoutheight_land">40dp</dimen>
+    <dimen name="paddingLayout">1dp</dimen>
+    <dimen name="textSize">20dp</dimen>
+</resources>

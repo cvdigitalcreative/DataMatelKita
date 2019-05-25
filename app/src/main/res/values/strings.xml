@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Data Matel Nusantara</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="bantuan_detail_part_1">Jika Anda memiliki pertanyaan, kritik, saran atau ingin melakukan konfirmasi pembayaran.</string>
+    <string name="bantuan_detail_part_2">Silahkan hubungi kami dibawah ini via Whatsapp, SMS, atau Telpon.</string>
+    <string name="bantuan_detail_part_3">Setiap hari 08:00 sampai 17:00.</string>
+</resources>

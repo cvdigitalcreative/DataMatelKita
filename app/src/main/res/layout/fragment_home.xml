@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.HomePage.Halaman_Utama"
+    tools:layout_editor_absoluteY="25dp">
+
+    <include
+        android:id="@+id/toolbar_top"
+        layout="@layout/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/Base_layout_height"
+        android:layout_below="@+id/toolbar_top"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_top" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/nama_user"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="40dp"
+        android:text="Nama User"
+        android:textColor="#fff"
+        android:textSize="@dimen/Nama_user"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/circleImageView"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/no_telp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="Notelp"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nama_user"
+        app:layout_constraintTop_toBottomOf="@+id/nama_user" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView"
+        android:layout_width="56dp"
+        android:layout_height="@dimen/imgIconPicture_size_user"
+        android:layout_marginBottom="8dp"
+        android:src="#7677cf"
+        app:civ_border_color="#fff"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/callImage_Btn"
+        app:layout_constraintEnd_toEndOf="@+id/callImage_Btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/callImage_Btn"
+        app:layout_constraintTop_toTopOf="@+id/nama_user"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/text_icon"
+        android:layout_width="27dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="A"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="14pt"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+        app:layout_constraintEnd_toEndOf="@+id/circleImageView"
+        app:layout_constraintStart_toStartOf="@+id/circleImageView"
+        app:layout_constraintTop_toTopOf="@+id/circleImageView" />
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout8"
+        android:layout_width="0dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rectangleround_menu"
+        android:paddingHorizontal="@dimen/Menu_padding_horizontal"
+        android:paddingVertical="@dimen/Menu_padding_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.822" />
+
+    <ImageButton
+        android:id="@+id/callImage_Btn"
+        android:layout_width="@dimen/IconMenu_size"
+        android:layout_height="@dimen/IconMenu_size"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/circle_iconimage"
+        android:padding="@dimen/Padding_menuImage"
+        android:src="@mipmap/w_cs"
+        app:layout_constraintBottom_toBottomOf="@+id/coordinatorLayout8"
+        app:layout_constraintEnd_toStartOf="@+id/caraImg_Btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/coordinatorLayout8"
+        app:layout_constraintTop_toTopOf="@+id/coordinatorLayout8" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="@dimen/Title_IconMenu_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="Costumer Service"
+        app:layout_constraintEnd_toEndOf="@+id/callImage_Btn"
+        app:layout_constraintStart_toStartOf="@+id/callImage_Btn"
+        app:layout_constraintTop_toBottomOf="@+id/callImage_Btn" />
+
+    <ImageButton
+        android:id="@+id/caraImg_Btn"
+        android:layout_width="@dimen/IconMenu_size"
+        android:layout_height="@dimen/IconMenu_size"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/circle_iconimage"
+        android:padding="10dp"
+        android:src="@mipmap/b_cara_bayar"
+        app:layout_constraintBottom_toBottomOf="@+id/coordinatorLayout8"
+        app:layout_constraintEnd_toStartOf="@+id/updateImg_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/callImage_Btn"
+        app:layout_constraintTop_toTopOf="@+id/coordinatorLayout8" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="@dimen/Title_IconMenu_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="Cara Pembayaran"
+        app:layout_constraintEnd_toEndOf="@+id/caraImg_Btn"
+        app:layout_constraintStart_toStartOf="@+id/caraImg_Btn"
+        app:layout_constraintTop_toBottomOf="@+id/caraImg_Btn" />
+
+    <ImageButton
+        android:id="@+id/updateImg_btn"
+        android:layout_width="@dimen/IconMenu_size"
+        android:layout_height="@dimen/IconMenu_size"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/circle_iconimage"
+        android:padding="@dimen/Padding_menuImage"
+        android:src="@mipmap/b_profil"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/coordinatorLayout8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/caraImg_Btn"
+        app:layout_constraintTop_toTopOf="@+id/coordinatorLayout8" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="@dimen/Title_IconMenu_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="Update Profil"
+        app:layout_constraintEnd_toEndOf="@+id/updateImg_btn"
+        app:layout_constraintStart_toStartOf="@+id/updateImg_btn"
+        app:layout_constraintTop_toBottomOf="@+id/updateImg_btn" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/lacakmobil_menu"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rectangleround_btn"
+        android:clickable="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/updatedata_menu"
+        app:layout_constraintEnd_toEndOf="@+id/coordinatorLayout8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/coordinatorLayout8"
+        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout8"
+        app:layout_constraintVertical_bias="0.256">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="69dp"
+            android:layout_height="70dp"
+            android:background="@drawable/rr_iconlacakupdate"
+            android:padding="@dimen/Padding_btnImage"
+            android:src="@mipmap/w_cari"
+            app:layout_constraintBottom_toBottomOf="@+id/lacakmobil_menu"
+            app:layout_constraintStart_toStartOf="@+id/lacakmobil_menu"
+            app:layout_constraintTop_toTopOf="@+id/lacakmobil_menu" />
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:gravity="center"
+        android:text="Cari Unit Kendaraan"
+        android:textSize="@dimen/Text_size_btn_lacakdanupdate"
+        app:layout_constraintBottom_toBottomOf="@+id/lacakmobil_menu"
+        app:layout_constraintEnd_toEndOf="@+id/lacakmobil_menu"
+        app:layout_constraintHorizontal_bias="0.731"
+        app:layout_constraintStart_toStartOf="@+id/lacakmobil_menu"
+        app:layout_constraintTop_toTopOf="@+id/lacakmobil_menu" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/updatedata_menu"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/rectangleround_btn"
+        android:clickable="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/logout_account"
+        app:layout_constraintEnd_toEndOf="@+id/coordinatorLayout8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/coordinatorLayout8"
+        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout8">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="69dp"
+            android:layout_height="70dp"
+            android:background="@drawable/rr_iconlacakupdate"
+            android:padding="@dimen/Padding_btnImage"
+            android:src="@mipmap/w_update" />
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:gravity="center"
+        android:text="Update Data"
+        android:textSize="@dimen/Text_size_btn_lacakdanupdate"
+        app:layout_constraintBottom_toBottomOf="@+id/updatedata_menu"
+        app:layout_constraintEnd_toEndOf="@+id/updatedata_menu"
+        app:layout_constraintStart_toStartOf="@+id/updatedata_menu"
+        app:layout_constraintTop_toTopOf="@+id/updatedata_menu" />
+
+    <Button
+        android:id="@+id/logout_account"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/rr_btn_logout"
+        android:text="Logout"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/updatedata_menu"
+        app:layout_constraintStart_toStartOf="@+id/updatedata_menu"
+        app:layout_constraintTop_toBottomOf="@+id/updatedata_menu" />
+
+
+
+    <LinearLayout
+        android:id="@+id/finish_progressbar"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="false"
+        android:background="#6a000000">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="40dp"
+            android:background="#fff">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Sedang Menyiapkan Data"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Tunggu Sebentar . . ."/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

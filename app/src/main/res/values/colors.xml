@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#061745</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="Menus_background_color">#b3ffffff</color>
+    <color name="base_color">#A1A6A8</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="whit_color">#fff</color>
+    <color name="transparan">#00FFFFFF</color>
+
+    <color name="base_grey_color">#F0F1F2F6</color>
+    <color name="baseColor">#f53b57</color>
+    <color name="baseColor_2nd">#B15F6A</color>
+    <color name="brightbaseColor">#C48A93</color>
+    <color name="baseblackColor">#485460</color>
+
+    <color name="loginregister_white">#FDFAFA</color>
+
+    <color name="detail_mobil">#5de2e1e1</color>
+
+    <color name="bnv_basecolor">@color/baseColor</color>
+    <color name="bnv_iconTint">#fff</color>
+    <color name="bnv_textColor">#fff</color>
+
+    <color name="keyboardTextcolor">#fff</color>
+    <color name="keyboardcolor">#F76565</color>
+    <color name="keyboardcolor2">#504E4E</color>
+</resources>

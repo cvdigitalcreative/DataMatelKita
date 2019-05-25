@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".View.MenuPages.Custumer_Service">
+
+    <!-- TODO: Update blank fragment layout -->
+    <include
+        android:id="@+id/toolbascs"
+        layout="@layout/toolbar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbascs"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/design_cs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/Padding_linearlayout_inside"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/Padding_linearlayout_inside">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Costumer Service"
+                                android:textSize="@dimen/Textsize_CS_title" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1.5dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:background="#4f6da5bf" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingVertical="@dimen/Padding_linearlayout_inside"
+                            android:paddingLeft="@dimen/Padding_linearlayout_inside"
+                            android:paddingRight="40dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="10dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="10dp"
+                                    android:background="@color/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/Textview_marginBot"
+                                    android:text="Jika Anda memiliki pertanyaan, kritik, saran atau ingin melakukan konfirmasi pembayaran."
+                                    android:textSize="8pt" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/Textview_marginBot"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hubungi Kami di Bawah Ini"
+                                    android:textSize="10pt" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Setiap hari 08.00 - 17.00"
+                                    android:textSize="8pt"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/Iconsize_wa_message_call_cs_passive" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/design_cs"
+                android:layout_marginTop="-80dp"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rr_cs_menu"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/Textview_marginBot">
+
+                    <RelativeLayout
+                        android:id="@+id/cs_wa"
+                        android:layout_width="@dimen/Iconsize_wa_message_call_cs_square"
+                        android:layout_height="@dimen/Iconsize_wa_message_call_cs_square"
+                        android:layout_marginRight="@dimen/Iconsize_wa_message_call_cs_MarginRight">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="#30ca59"
+                            app:civ_border_color="#dedede"
+                            app:civ_border_width="3dp"/>
+                        <ImageView
+                            android:id="@+id/wa_btn"
+                            android:clickable="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/w_wa"
+                            android:padding="12dp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/Iconsize_wa_message_call_cs_square"
+                        android:layout_height="@dimen/Iconsize_wa_message_call_cs_square"
+                        android:layout_marginRight="@dimen/Iconsize_wa_message_call_cs_MarginRight">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="#43a2fa"
+                            app:civ_border_color="#dedede"
+                            app:civ_border_width="3dp"/>
+                        <ImageView
+                            android:id="@+id/sms_btn"
+                            android:clickable="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/w_sms"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/Iconsize_wa_message_call_cs_square"
+                        android:layout_height="@dimen/Iconsize_wa_message_call_cs_square">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorPrimary"
+                            app:civ_border_color="#dedede"
+                            app:civ_border_width="3dp"/>
+                        <ImageView
+                            android:id="@+id/call_btn"
+                            android:clickable="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/w_call"
+                            android:padding="12dp"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/Padding_linearlayout_inside">
+       <Button
+           android:id="@+id/button_back"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:paddingHorizontal="20dp"
+           android:paddingVertical="15dp"
+           android:background="@drawable/rr_btn_logout"
+           android:textColor="#fff"
+           android:text="Kembali"/>
+    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

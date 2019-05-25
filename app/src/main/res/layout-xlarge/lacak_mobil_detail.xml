@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/base_gradient_color_bnv"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Detail Kendaraan"
+            android:textColor="@color/whit_color"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pemilik Mobil"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_pemilikmobil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="0dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Nama Unit"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_namaunit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="No Plat"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_noplat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tahun"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_tahun"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Warna"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_warna"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Noka"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_noka"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Nomor Mesin"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_nosin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="OVD"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_ovd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Finance"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_finance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Cabang"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_cabang"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                <!--<android.support.v7.widget.CardView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginVertical="0dp">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!---->
+                    <!--</LinearLayout>-->
+                <!--</android.support.v7.widget.CardView>-->
+
+                <!--<android.support.v7.widget.CardView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginVertical="2dp">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:orientation="vertical"-->
+                            <!--android:paddingHorizontal="@dimen/detail_mobil_paddingHor"-->
+                            <!--android:paddingVertical="@dimen/detail_mobil_paddingVer">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="Finance"-->
+                                <!--android:textStyle="bold" />-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/detail_finance"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:maxLines="1"-->
+                                <!--android:textSize="@dimen/detail_mobil_textSize" />-->
+
+                            <!--<View-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="2dp"-->
+                                <!--android:layout_margin="5dp"-->
+                                <!--android:background="@color/base_grey_color" />-->
+                        <!--</LinearLayout>-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:orientation="vertical"-->
+                            <!--android:paddingHorizontal="@dimen/detail_mobil_paddingHor"-->
+                            <!--android:paddingVertical="@dimen/detail_mobil_paddingVer">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="Cabang"-->
+                                <!--android:textStyle="bold" />-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/detail_cabang"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:maxLines="1"-->
+                                <!--android:textSize="@dimen/detail_mobil_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</android.support.v7.widget.CardView>-->
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/detail_btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rr_btn_edit"
+            android:text="Bagikan"
+            android:textSize="11dp"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/detail_btn_kembali"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/rr_btn_logout"
+            android:text="Kembali"
+            android:textSize="12dp"
+            android:textColor="#fff" />
+    </LinearLayout>
+</LinearLayout>
