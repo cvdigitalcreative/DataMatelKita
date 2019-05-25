@@ -87,10 +87,6 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            emptyText.setVisibility(View.INVISIBLE);
-            list.clear();
-            recyclerView.removeAllViewsInLayout();
-
             data_=new ArrayList<>();
             final DataBaseHelper finalDbhelper = dbhelper;
             lastIndex=1;
@@ -98,13 +94,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
             getSearchMobil=search.getText().toString();
             data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
             finalDbhelper.close();
-
-
             return "Executed";
         }
 
         @Override
         protected void onPostExecute(String result) {
+            progressbar.setVisibility(View.INVISIBLE);
             performSearch();
             System.out.println("searching done");
             System.out.println(data_.size());
@@ -180,6 +175,10 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                if(list.size()<1){
 //                    emptyText.setVisibility(View.VISIBLE);
 //                }
+                emptyText.setVisibility(View.INVISIBLE);
+                list.clear();
+                recyclerView.removeAllViewsInLayout();
+                progressbar.setVisibility(View.VISIBLE);
                 new LongOperation().execute("");
             }
 
