@@ -11,6 +11,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 
+import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 import de.siegmar.fastcsv.reader.CsvContainer;
 import de.siegmar.fastcsv.reader.CsvReader;
@@ -276,35 +279,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<ArrayList>  getAllData(String nopol, String nosin) {
+    public List<Model_LacakMobil> getAllData(String nopol, String nosin) {
         openDataBase();
         myDataBase.beginTransaction();
 
-        ArrayList<ArrayList> data = new ArrayList<>();
+        List<Model_LacakMobil> list = new ArrayList<>();
         Cursor c = myDataBase.rawQuery("SELECT DISTINCT nama,nopol,unit,finance,ovd,sipok,cabang,noka,nosin,tahun,warna FROM data " +
                 " where nopol"   + " like '%" + nopol
                 + "%'"+" or "+ "  nosin"   + " like '" + nosin
                 + "%'"+" or "+ "  noka"   + " like '" + nosin
-                + "%' limit 0,10 ", null);
+                + "%' limit 0,5 ", null);
 
         if (c.moveToFirst()){
             do {
-                // Passing values
-                ArrayList<String> datas = new ArrayList<>();
-                datas.add(c.getString(0));
-                datas.add(c.getString(1));
-                datas.add(c.getString(2));
-                datas.add(c.getString(3));
-                datas.add(c.getString(4));
-                datas.add(c.getString(5));
-                datas.add(c.getString(6));
-                datas.add(c.getString(7));
-                datas.add(c.getString(8));
-                datas.add(c.getString(9));
-                datas.add(c.getString(10));
-//                datas.add(c.getString(11));
-                data.add(datas);
 
+
+                final Model_LacakMobil model = new Model_LacakMobil();
+                model.setNama(c.getString(0));
+                model.setNo_plat(c.getString(1));
+                model.setNama_mobil(c.getString(2));
+                model.setFinance(c.getString(3));
+                model.setOvd(c.getString(4));
+                model.setSaldo(c.getString(5));
+                model.setCabang(c.getString(6));
+                model.setNoka(c.getString(7));
+                model.setNosin(c.getString(8));
+                model.setTahun(c.getString(9));
+                model.setWarna(c.getString(10));
+                list.add(model);
             }
             while(c.moveToNext());
         }
@@ -312,6 +314,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         myDataBase.endTransaction();
         myDataBase.close();
 
-        return data;
+        return list;
     }
 }

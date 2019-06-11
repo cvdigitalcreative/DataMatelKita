@@ -2,6 +2,7 @@ package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,8 +47,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
     LinearLayoutManager linearmanager;
     ProgressBar progressBar,progressbar;
     int lastIndex, index;
-    String recentWord;
-    Button backbutton;
+
     private EditText search;
     long diffInDays;
     Context context;
@@ -83,16 +83,18 @@ public class PencarianPage_Activity extends AppCompatActivity {
         });
     }
     DataBaseHelper dbhelper;
+
     private class LongOperation extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
-            data_=new ArrayList<>();
+
             final DataBaseHelper finalDbhelper = dbhelper;
             lastIndex=1;
-            //getSearchMobil = s;
+
             getSearchMobil=search.getText().toString();
-            data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
+            list= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
+
             finalDbhelper.close();
             return "Executed";
         }
@@ -101,9 +103,8 @@ public class PencarianPage_Activity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             progressbar.setVisibility(View.INVISIBLE);
             performSearch();
-            System.out.println("searching done");
-            System.out.println(data_.size());
-            if(data_.size()==0){
+
+            if(list.size()==0){
                 emptyText.setVisibility(View.VISIBLE);
             }else{
                 emptyText.setVisibility(View.INVISIBLE);
@@ -133,51 +134,15 @@ public class PencarianPage_Activity extends AppCompatActivity {
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                emptyText.setVisibility(View.INVISIBLE);
-//                list.clear();
-//                recyclerView.removeAllViewsInLayout();
-//                progressbar.setVisibility(View.VISIBLE);
-//                data_=new ArrayList<>();
-//                final DataBaseHelper finalDbhelper = dbhelper;
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        lastIndex=1;
-//                        //getSearchMobil = s;
-//                        getSearchMobil=search.getText().toString();
-//                        data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
-//                        finalDbhelper.close();
-//                        performSearch();
-//                        System.out.println("searching done");
-//                        progressbar.setVisibility(View.INVISIBLE);
-//                        if(list.size()<1){
-//                            emptyText.setVisibility(View.VISIBLE);
-//                        }
 //
-//                    }
-//                }, 1000);
-//                new LongOperation().execute("");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                emptyText.setVisibility(View.INVISIBLE);
-//                list.clear();
-//                recyclerView.removeAllViewsInLayout();
-//                progressbar.setVisibility(View.VISIBLE);
-//                lastIndex=0;
-//                //getSearchMobil = new_text;
-//                getSearchMobil=search.getText().toString();
-//                data_=dbhelper.getAllData(getSearchMobil,getSearchMobil);
-//                dbhelper.close();
-//                performSearch();
-//                progressbar.setVisibility(View.INVISIBLE);
-//                if(list.size()<1){
-//                    emptyText.setVisibility(View.VISIBLE);
-//                }
+//
                 emptyText.setVisibility(View.INVISIBLE);
-                list.clear();
-                recyclerView.removeAllViewsInLayout();
+
+
                 progressbar.setVisibility(View.VISIBLE);
                 new LongOperation().execute("");
             }
@@ -191,70 +156,6 @@ public class PencarianPage_Activity extends AppCompatActivity {
         InputConnection ic = search.onCreateInputConnection(new EditorInfo());
         keyboard.setInputConnection(ic);
 
-//        sv_search.setActivated(false);
-//        sv_search.clearFocus();
-//        sv_search.onActionViewExpanded();
-//        sv_search.setQueryHint("Masukan Noka atau Nosin atau Nopol");
-//        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(final String s) {
-//                keyboard.setVisibility(View.VISIBLE);
-//                emptyText.setVisibility(View.INVISIBLE);
-//                list.clear();
-//                recyclerView.removeAllViewsInLayout();
-//                progressbar.setVisibility(View.VISIBLE);
-//                data_=new ArrayList<>();
-//
-//                try {
-//                    dbhelper = new DataBaseHelper(context);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                final DataBaseHelper finalDbhelper = dbhelper;
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        lastIndex=1;
-//                        getSearchMobil = s;
-//
-//                        data_= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
-//                        System.out.println("load data done");
-//                        finalDbhelper.close();
-//                        System.out.println("close");
-//                        performSearch();
-//                        System.out.println("searching done");
-//                        progressbar.setVisibility(View.INVISIBLE);
-//                        if(list.size()<1){
-//                            emptyText.setVisibility(View.VISIBLE);
-//                        }
-//
-//                    }
-//                }, 1000);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(final String new_text) {
-//                emptyText.setVisibility(View.INVISIBLE);
-//                list.clear();
-//                recyclerView.removeAllViewsInLayout();
-//                progressbar.setVisibility(View.VISIBLE);
-//                lastIndex=0;
-//                getSearchMobil = new_text;
-//
-//
-//
-//                data_=dbhelper.getAllData(getSearchMobil,getSearchMobil);
-//                dbhelper.close();
-//                performSearch();
-//                progressbar.setVisibility(View.INVISIBLE);
-//                if(list.size()<1){
-//                    emptyText.setVisibility(View.VISIBLE);
-//                }
-//
-//                return false;
-//            }
-//        });
     }
 
     private void initObejct() {
@@ -281,31 +182,32 @@ public class PencarianPage_Activity extends AppCompatActivity {
     }
 
     private void performSearch(){
-        execute1stdataSearch(data_, lastIndex);
+        detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
         recyclerView.setAdapter(detaillacakMobil);
+
     }
 
-    private void execute1stdataSearch(ArrayList<ArrayList> data_, int current) {
-        int count = 0;
-
-        list.clear();
-        recyclerView.removeAllViewsInLayout();
-        for (index = 0; index < data_.size(); index++) {
-            final Model_LacakMobil model = new Model_LacakMobil();
-            model.setNama(data_.get(index).get(0).toString());
-            model.setNo_plat(data_.get(index).get(1).toString());
-            model.setNama_mobil(data_.get(index).get(2).toString());
-            model.setFinance(data_.get(index).get(3).toString());
-            model.setOvd(data_.get(index).get(4).toString());
-            model.setSaldo(data_.get(index).get(5).toString());
-            model.setCabang(data_.get(index).get(6).toString());
-            model.setNoka(data_.get(index).get(7).toString());
-            model.setNosin(data_.get(index).get(8).toString());
-            model.setTahun(data_.get(index).get(9).toString());
-            model.setWarna(data_.get(index).get(10).toString());
-            list.add(model);
-        }
-    }
+//    private void execute1stdataSearch(ArrayList<ArrayList> data_, int current) {
+//        int count = 0;
+//
+//        list.clear();
+//        recyclerView.removeAllViewsInLayout();
+//        for (index = 0; index < data_.size(); index++) {
+//            final Model_LacakMobil model = new Model_LacakMobil();
+//            model.setNama(data_.get(index).get(0).toString());
+//            model.setNo_plat(data_.get(index).get(1).toString());
+//            model.setNama_mobil(data_.get(index).get(2).toString());
+//            model.setFinance(data_.get(index).get(3).toString());
+//            model.setOvd(data_.get(index).get(4).toString());
+//            model.setSaldo(data_.get(index).get(5).toString());
+//            model.setCabang(data_.get(index).get(6).toString());
+//            model.setNoka(data_.get(index).get(7).toString());
+//            model.setNosin(data_.get(index).get(8).toString());
+//            model.setTahun(data_.get(index).get(9).toString());
+//            model.setWarna(data_.get(index).get(10).toString());
+//            list.add(model);
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
