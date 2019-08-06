@@ -179,7 +179,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
                 // use comma as separator
-                String[] country = line.split(";");
+                String[] country = line.split(",");
 
                 if(country.length==12){
 

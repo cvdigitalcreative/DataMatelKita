@@ -83,6 +83,8 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
                                                 +"Nomor Rangka : " +model.getNoka() +"\n"
                                                 +"Nomor Mesin : " +model.getNosin() +"\n"
                                                 +"Finance : " +model.getFinance() +"\n"
+                                                +"OVD : " +model.getOvd() +"\n"
+                                                +"Saldo : " +model.getSaldo() +"\n"
                                                 +"INI BUKAN ALAT SAH PENARIKAN UNIT"
                                               );
                                 v.getContext().startActivity(intent);
@@ -105,7 +107,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
     }
 
     private void sayHello(Model_LacakMobil model, final View inflater, final AlertDialog.Builder alertDialog) {
-        TextView pemilikmobil, no_plat, namaunit, dinance, ovd, detailcabang, noka, nosin, tahun, warna;
+        TextView pemilikmobil, no_plat, namaunit, dinance, ovd, detailcabang, noka, nosin, tahun, warna,sipok;
 
         warna = inflater.findViewById(R.id.detail_warna);
         pemilikmobil = inflater.findViewById(R.id.detail_pemilikmobil);
@@ -117,6 +119,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         noka = inflater.findViewById(R.id.detail_noka);
         nosin = inflater.findViewById(R.id.detail_nosin);
         tahun = inflater.findViewById(R.id.detail_tahun);
+        sipok = inflater.findViewById(R.id.detail_sipok);
 
         pemilikmobil.setText(model.getNama());
         no_plat.setText(model.getNo_plat());
@@ -128,6 +131,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         nosin.setText(model.getNosin());
         tahun.setText(model.getTahun());
         warna.setText(model.getWarna());
+        sipok.setText(model.getSaldo());
 
         share = inflater.findViewById(R.id.detail_btn_share);
         back = inflater.findViewById(R.id.detail_btn_kembali);
