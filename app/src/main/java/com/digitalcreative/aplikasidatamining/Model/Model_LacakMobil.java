@@ -12,6 +12,7 @@ public class Model_LacakMobil {
     String noka;
     String nosin;
 
+
     public String getWarna() {
         return warna;
     }
