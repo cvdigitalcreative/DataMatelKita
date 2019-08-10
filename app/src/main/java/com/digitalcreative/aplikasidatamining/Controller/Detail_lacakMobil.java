@@ -19,7 +19,9 @@ import android.widget.Toast;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.ViewHolder> {
     List<Model_LacakMobil> list;
@@ -72,6 +74,8 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(Intent.ACTION_SEND);
+                            NumberFormat format = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+                            Locale localeID = new Locale("in", "ID");
                             try {
                                 intent.setType("text/plain");
                                 intent.setPackage("com.whatsapp");
@@ -84,7 +88,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
                                                 +"Nomor Mesin : " +model.getNosin() +"\n"
                                                 +"Finance : " +model.getFinance() +"\n"
                                                 +"OVD : " +model.getOvd() +"\n"
-                                                +"Saldo : " +model.getSaldo() +"\n"
+                                                +"Saldo : " + (format.format(Double.parseDouble(model.getSaldo()))) +"\n"
                                                 +"INI BUKAN ALAT SAH PENARIKAN UNIT"
                                               );
                                 v.getContext().startActivity(intent);
