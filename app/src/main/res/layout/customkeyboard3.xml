@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/baseblackColor"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/btn_q"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_w"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_w"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_e"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_q"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="W"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_e"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_r"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_w"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="E"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_r"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_t"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_e"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_t"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_y"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_r"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="T"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_y"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_u"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_t"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Y"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_u"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_i"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_y"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="U"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_i"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_o"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_u"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_o"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_p"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_i"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="O"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_p"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_o"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="P"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_a"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_s"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_q">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_s"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_d"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_a"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="S"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_d"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_f"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_s"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="D"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_f"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_g"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_d"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="F"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_g"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_h"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_f"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="G"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_h"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_j"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_g"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="H"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_j"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_k"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_h"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="J"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_k"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_l"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_j"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="K"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_l"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_k"
+        app:layout_constraintTop_toTopOf="@+id/btn_a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="L"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_keyboard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_z"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_a">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_z"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_x"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/btn_s"
+        app:layout_constraintTop_toTopOf="@id/btn_keyboard">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Z"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_x"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_c"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_z"
+        app:layout_constraintTop_toTopOf="@+id/btn_keyboard">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_c"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_v"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_x"
+        app:layout_constraintTop_toTopOf="@+id/btn_keyboard">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="C"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_v"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_b"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_c"
+        app:layout_constraintTop_toTopOf="@+id/btn_keyboard">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="V"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_b"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_n"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_v"
+        app:layout_constraintTop_toTopOf="@+id/btn_keyboard">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="B"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_n"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_m"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_b"
+        app:layout_constraintTop_toTopOf="@+id/btn_keyboard">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="N"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_m"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/btn_k"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btn_n"
+        app:layout_constraintTop_toTopOf="@+id/btn_keyboard">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="M"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_enter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/btn_m"
+        app:layout_constraintTop_toTopOf="@id/btn_keyboard">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_return_white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_c">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_3"
+        app:layout_constraintStart_toEndOf="@id/btn_1"
+        app:layout_constraintTop_toTopOf="@+id/btn_1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_2"
+        app:layout_constraintTop_toTopOf="@+id/btn_1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="3"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="4"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_6"
+        app:layout_constraintStart_toEndOf="@id/btn_4"
+        app:layout_constraintTop_toTopOf="@+id/btn_4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="5"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_5"
+        app:layout_constraintTop_toTopOf="@+id/btn_4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="6"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="7"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/btn_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_9"
+        app:layout_constraintStart_toEndOf="@id/btn_7"
+        app:layout_constraintTop_toTopOf="@+id/btn_7">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="8"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_8"
+        app:layout_constraintTop_toTopOf="@+id/btn_7">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="9"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_7">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:src="@drawable/ic_delete"
+            app:srcCompat="@drawable/ic_delete" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/btn_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/bgKeyboardBlue"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btn_backspace"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel"
+        app:layout_constraintTop_toTopOf="@+id/btn_cancel">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_backspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_0"
+        app:layout_constraintTop_toTopOf="@+id/btn_cancel">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:src="@drawable/ic_backspace"
+            app:srcCompat="@drawable/ic_backspace" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/btn_space"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layoutheight"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@color/bgKeyboardBlue"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="@dimen/paddingLayout"
+        app:layout_constraintTop_toBottomOf="@id/btn_cancel"
+        app:layout_constraintStart_toStartOf="@id/btn_backspace"
+        app:layout_constraintEnd_toEndOf="@id/btn_cancel">
+
+        <TextView
+            android:id="@+id/tv_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingText"
+            android:text="SPASI"
+            android:textColor="@color/keyboardTextcolor"
+            android:textSize="@dimen/textSize"
+            android:textStyle="bold"
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingEnd="@dimen/padding_horizontal" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
