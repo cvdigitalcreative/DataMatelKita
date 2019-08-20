@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/btn_backspace"
+        android:id="@+id/btn_deletes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -33,7 +33,7 @@
         android:layout_marginStart="4dp"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/btn_backspace"
+        app:layout_constraintStart_toEndOf="@+id/btn_deletes"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -168,7 +168,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/btn_deletes"
+        android:id="@+id/btn_cancel"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
@@ -179,14 +179,15 @@
         app:layout_constraintStart_toEndOf="@+id/btn_3"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="DEL"
-            android:textAlignment="center"
-            android:textColor="@color/keyboardTextcolor"
-            android:textSize="20sp" />
+            android:paddingStart="@dimen/padding_horizontal"
+            android:paddingTop="@dimen/padding_vertical"
+            android:paddingEnd="@dimen/padding_horizontal"
+            android:paddingBottom="@dimen/padding_vertical"
+            android:src="@drawable/ic_delete"
+            app:srcCompat="@drawable/ic_delete" />
     </LinearLayout>
 
     <LinearLayout
@@ -195,9 +196,9 @@
         android:layout_height="wrap_content"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/btn_backspace"
+        app:layout_constraintEnd_toEndOf="@+id/btn_deletes"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/btn_backspace"
+        app:layout_constraintStart_toStartOf="@+id/btn_deletes"
         app:layout_constraintTop_toTopOf="@+id/btn_7">
 
         <TextView

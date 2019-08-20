@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.digitalcreative.aplikasidatamining.R;
 
@@ -16,26 +17,35 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
     private LinearLayout button1, button2, button3, button4, button5, button6, button7, button8, button9, button0,
             buttonq, buttonw, buttone, buttonr, buttont, buttony, buttonu, buttoni, buttono, buttonp,
             buttona, buttons, buttond, buttonf, buttong, buttonh, buttonj, buttonk, buttonl,
-            buttonz, buttonx, buttonc, buttonv, buttonb, buttonn, buttonm, buttonspasi, buttoncancel, buttondelete;
+            buttonz, buttonx, buttonc, buttonv, buttonb, buttonn, buttonm, buttonspasi, buttoncancel, buttondelete, button_keyboard;
 
     private SparseArray<String> keyValues = new SparseArray<>();
     private InputConnection inputConnection;
+    private ChangeKeyboardAlert alertKeyboard;
+    private Context context;
+    private AttributeSet attributeSet;
+
+    private TextView key1,key2,key3;
+    private View view;
 
     public KeyboardMethod(Context context) {
-        this(context, null, 0);
+        this(context, null, 0, R.layout.customkeyboard2);
     }
 
     public KeyboardMethod(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, 0, R.layout.customkeyboard);
     }
 
-    public KeyboardMethod(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KeyboardMethod(Context context, AttributeSet attrs, int defStyleAttr, int keyboardId) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
+        this.context = context;
+        this.attributeSet = attrs;
+        keyboardChooseInit(context);
+        init(context, attrs, keyboardId);
     }
 
-    private void init(Context context, AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.customkeyboard2, this, true);
+    private void init(Context context, AttributeSet attrs, int keyboardId) {
+        view = LayoutInflater.from(context).inflate(keyboardId, this, true);
         //Number
         button1 = findViewById(R.id.btn_1);
         button1.setOnClickListener(this);
@@ -122,6 +132,8 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
         buttoncancel.setOnClickListener(this);
         buttondelete = findViewById(R.id.btn_deletes);
         buttondelete.setOnClickListener(this);
+        button_keyboard = findViewById(R.id.btn_keyboard);
+        button_keyboard.setOnClickListener(this);
 
         keyValues.put(R.id.btn_0, "0");
         keyValues.put(R.id.btn_1, "1");
@@ -179,12 +191,29 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
             } else {
                 inputConnection.commitText("", 1);
             }
-        }else  if (view.getId() == R.id.btn_cancel) {
+        } else  if (view.getId() == R.id.btn_cancel) {
             CharSequence currentText = inputConnection.getExtractedText(new ExtractedTextRequest(), 0).text;
             CharSequence beforCursorText = inputConnection.getTextBeforeCursor(currentText.length(), 0);
             CharSequence afterCursorText = inputConnection.getTextAfterCursor(currentText.length(), 0);
             inputConnection.deleteSurroundingText(beforCursorText.length(), afterCursorText.length());
 //            inputConnection.deleteSurroundingText(1, 0);
+        } else if(view.getId()== R.id.btn_keyboard){
+            alertKeyboard.showAlert();
+        } else if(view.getId() == R.id.keyboard1_choose){
+            alertKeyboard.hideAlert();
+            this.removeAllViews();
+            keyboardChooseInit(context);
+            init(context, attributeSet, R.layout.customkeyboard);
+        } else if(view.getId() == R.id.keyboard2_choose){
+            alertKeyboard.hideAlert();
+            this.removeAllViews();
+            keyboardChooseInit(context);
+            init(context, attributeSet, R.layout.customkeyboard2);
+        } else if(view.getId() == R.id.keyboard3_choose){
+            alertKeyboard.hideAlert();
+            this.removeAllViews();
+            keyboardChooseInit(context);
+            init(context, attributeSet, R.layout.customkeyboard3);
         } else {
             String value = keyValues.get(view.getId());
             inputConnection.commitText(value, 1);
@@ -193,5 +222,16 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
 
     public void setInputConnection(InputConnection ic) {
         inputConnection = ic;
+    }
+
+    public void keyboardChooseInit(Context context){
+        alertKeyboard = new ChangeKeyboardAlert(context);
+        key1 = alertKeyboard.getAlertView().findViewById(R.id.keyboard1_choose);
+        key2 = alertKeyboard.getAlertView().findViewById(R.id.keyboard2_choose);
+        key3 = alertKeyboard.getAlertView().findViewById(R.id.keyboard3_choose);
+
+        key1.setOnClickListener(this);
+        key2.setOnClickListener(this);
+        key3.setOnClickListener(this);
     }
 }

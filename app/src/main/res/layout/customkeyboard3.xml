@@ -861,7 +861,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@id/btn_backspace"
+        app:layout_constraintEnd_toStartOf="@id/btn_deletes"
         app:layout_constraintStart_toEndOf="@id/btn_cancel"
         app:layout_constraintTop_toTopOf="@+id/btn_cancel">
 
@@ -879,7 +879,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/btn_backspace"
+        android:id="@+id/btn_deletes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
