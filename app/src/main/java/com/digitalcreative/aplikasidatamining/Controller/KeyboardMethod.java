@@ -146,34 +146,34 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
         keyValues.put(R.id.btn_8, "8");
         keyValues.put(R.id.btn_9, "9");
 
-        keyValues.put(R.id.btn_q, "q");
-        keyValues.put(R.id.btn_w, "w");
-        keyValues.put(R.id.btn_e, "e");
-        keyValues.put(R.id.btn_r, "r");
-        keyValues.put(R.id.btn_t, "t");
-        keyValues.put(R.id.btn_y, "y");
-        keyValues.put(R.id.btn_u, "u");
-        keyValues.put(R.id.btn_i, "i");
-        keyValues.put(R.id.btn_o, "o");
-        keyValues.put(R.id.btn_p, "p");
+        keyValues.put(R.id.btn_q, "Q");
+        keyValues.put(R.id.btn_w, "W");
+        keyValues.put(R.id.btn_e, "E");
+        keyValues.put(R.id.btn_r, "R");
+        keyValues.put(R.id.btn_t, "T");
+        keyValues.put(R.id.btn_y, "Y");
+        keyValues.put(R.id.btn_u, "U");
+        keyValues.put(R.id.btn_i, "I");
+        keyValues.put(R.id.btn_o, "O");
+        keyValues.put(R.id.btn_p, "P");
 
-        keyValues.put(R.id.btn_a, "a");
-        keyValues.put(R.id.btn_s, "s");
-        keyValues.put(R.id.btn_d, "d");
-        keyValues.put(R.id.btn_f, "f");
-        keyValues.put(R.id.btn_g, "g");
-        keyValues.put(R.id.btn_h, "h");
-        keyValues.put(R.id.btn_j, "j");
-        keyValues.put(R.id.btn_k, "k");
-        keyValues.put(R.id.btn_l, "l");
+        keyValues.put(R.id.btn_a, "A");
+        keyValues.put(R.id.btn_s, "S");
+        keyValues.put(R.id.btn_d, "D");
+        keyValues.put(R.id.btn_f, "F");
+        keyValues.put(R.id.btn_g, "G");
+        keyValues.put(R.id.btn_h, "H");
+        keyValues.put(R.id.btn_j, "J");
+        keyValues.put(R.id.btn_k, "K");
+        keyValues.put(R.id.btn_l, "L");
 
-        keyValues.put(R.id.btn_z, "z");
-        keyValues.put(R.id.btn_x, "x");
-        keyValues.put(R.id.btn_c, "c");
-        keyValues.put(R.id.btn_v, "v");
-        keyValues.put(R.id.btn_b, "b");
-        keyValues.put(R.id.btn_n, "n");
-        keyValues.put(R.id.btn_m, "m");
+        keyValues.put(R.id.btn_z, "Z");
+        keyValues.put(R.id.btn_x, "X");
+        keyValues.put(R.id.btn_c, "C");
+        keyValues.put(R.id.btn_v, "V");
+        keyValues.put(R.id.btn_b, "B");
+        keyValues.put(R.id.btn_n, "N");
+        keyValues.put(R.id.btn_m, "M");
         keyValues.put(R.id.btn_space, " ");
 
     }
