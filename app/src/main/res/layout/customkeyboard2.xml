@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/btn_deletes"
@@ -46,7 +48,7 @@
             android:text="1"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/btn_1"
@@ -69,7 +72,7 @@
             android:text="2"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,6 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/btn_2"
@@ -92,7 +96,7 @@
             android:text="3"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,7 +120,7 @@
             android:text="4"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -140,7 +144,7 @@
             android:text="5"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -164,7 +168,7 @@
             android:text="6"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -172,6 +176,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/btn_9"
@@ -212,7 +217,7 @@
             android:text="0"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -236,7 +241,7 @@
             android:text="7"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -260,7 +265,7 @@
             android:text="8"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -284,7 +289,7 @@
             android:text="9"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -307,7 +312,7 @@
             android:text="Q"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -329,7 +334,7 @@
             android:text="W"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -351,7 +356,7 @@
             android:text="E"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -373,7 +378,7 @@
             android:text="R"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -395,7 +400,7 @@
             android:text="T"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -417,7 +422,7 @@
             android:text="Y"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -439,7 +444,7 @@
             android:text="U"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -461,7 +466,7 @@
             android:text="I"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -483,7 +488,7 @@
             android:text="O"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -506,7 +511,7 @@
             android:text="P"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -529,7 +534,7 @@
             android:text="A"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -551,7 +556,7 @@
             android:text="S"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -573,7 +578,7 @@
             android:text="D"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -595,7 +600,7 @@
             android:text="F"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -617,7 +622,7 @@
             android:text="G"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -639,7 +644,7 @@
             android:text="H"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -661,7 +666,7 @@
             android:text="J"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -683,7 +688,7 @@
             android:text="K"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -706,7 +711,7 @@
             android:text="L"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -747,7 +752,7 @@
             android:text="Z"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -769,7 +774,7 @@
             android:text="X"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -791,7 +796,7 @@
             android:text="C"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -813,7 +818,7 @@
             android:text="V"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -835,7 +840,7 @@
             android:text="B"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -857,7 +862,7 @@
             android:text="N"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -879,7 +884,7 @@
             android:text="M"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -920,7 +925,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -19,6 +19,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_w"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -27,7 +28,7 @@
             android:text="Q"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,6 +43,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_e"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_q"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -50,7 +52,7 @@
             android:text="W"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,6 +67,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_r"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_w"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -73,7 +76,7 @@
             android:text="E"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -88,6 +91,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_t"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_e"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -96,7 +100,7 @@
             android:text="R"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -111,6 +115,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_y"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_r"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -119,7 +124,7 @@
             android:text="T"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -134,6 +139,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_u"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_t"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -142,7 +148,7 @@
             android:text="Y"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -157,6 +163,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_i"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_y"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -165,7 +172,7 @@
             android:text="U"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -180,6 +187,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_o"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_u"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -188,7 +196,7 @@
             android:text="I"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -203,6 +211,7 @@
         app:layout_constraintEnd_toStartOf="@id/btn_p"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_i"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -211,7 +220,7 @@
             android:text="O"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -227,6 +236,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btn_o"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -235,7 +245,7 @@
             android:text="P"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -243,7 +253,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
         android:padding="@dimen/padding_vertical"
@@ -258,7 +268,7 @@
             android:text="A"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -280,7 +290,7 @@
             android:text="S"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -302,7 +312,7 @@
             android:text="D"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -324,7 +334,7 @@
             android:text="F"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -346,7 +356,7 @@
             android:text="G"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -368,7 +378,7 @@
             android:text="H"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -390,7 +400,7 @@
             android:text="J"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -412,7 +422,7 @@
             android:text="K"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -435,7 +445,7 @@
             android:text="L"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -443,7 +453,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:orientation="vertical"
         android:padding="@dimen/padding_vertical"
@@ -462,7 +472,6 @@
         android:id="@+id/btn_z"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:background="@color/bgKeyboardBlue"
         android:orientation="vertical"
         android:padding="@dimen/padding_vertical"
@@ -477,7 +486,7 @@
             android:text="Z"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -499,7 +508,7 @@
             android:text="X"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -521,7 +530,7 @@
             android:text="C"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -543,7 +552,7 @@
             android:text="V"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -565,7 +574,7 @@
             android:text="B"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -587,7 +596,7 @@
             android:text="N"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -609,7 +618,7 @@
             android:text="M"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -654,7 +663,7 @@
             android:text="1"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -679,7 +688,7 @@
             android:text="2"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -704,7 +713,7 @@
             android:text="3"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -730,7 +739,7 @@
             android:text="4"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -755,7 +764,7 @@
             android:text="5"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -780,7 +789,7 @@
             android:text="6"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -806,7 +815,7 @@
             android:text="7"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -831,7 +840,7 @@
             android:text="8"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -856,7 +865,7 @@
             android:text="9"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -904,7 +913,7 @@
             android:text="0"
             android:textAlignment="center"
             android:textColor="@color/keyboardTextcolor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_keyboard_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -945,7 +954,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_cancel">
+        app:layout_constraintTop_toBottomOf="@+id/btn_0">
 
         <TextView
             android:id="@+id/tv_space"
