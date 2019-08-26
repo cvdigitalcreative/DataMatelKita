@@ -221,6 +221,13 @@ public class PencarianPage_Activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //Keyboard
+        keyboard = findViewById(R.id.mykeyboard);
+    }
 }
 
 

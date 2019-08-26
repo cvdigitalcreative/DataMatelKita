@@ -43,7 +43,7 @@
                 app:searchHintIcon="@null"
                 app:searchIcon="@null"
                 app:iconifiedByDefault="false"
-                android:maxLines="1" />
+                android:maxLines="1"/>
         </LinearLayout>
     </LinearLayout>
 
