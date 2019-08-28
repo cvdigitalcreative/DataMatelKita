@@ -205,7 +205,7 @@ public class BantuanPage extends Fragment {
      private ArrayList<Long> jumlah_id;
     private ArrayList<Long> jumlah__download_id;
     private long downloadID;
-
+    private int total_file=0;
     private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -217,7 +217,7 @@ public class BantuanPage extends Fragment {
             System.out.println(jumlah_id.size());
             System.out.println(jumlah__download_id.size());
             if (jumlah_id.size()==jumlah__download_id.size()) {
-
+                total_file=jumlah__download_id.size();
 
                                                                 insert_database(subpath_t1);
                                                                 insert_database(subpath_t2);
@@ -643,6 +643,11 @@ public class BantuanPage extends Fragment {
                     e.printStackTrace();
                 } finally {
                     file[0].delete();
+                    total_file--;
+                    if(total_file==0){
+                        Toast.makeText(getActivity(), "Data Berhasil Diupdate", Toast.LENGTH_LONG).show();
+                    }
+
 //            fixing_data();
 
                 }
