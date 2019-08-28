@@ -43,6 +43,7 @@ import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import io.realm.Sort;
 
 public class PencarianPage_Activity extends AppCompatActivity {
@@ -101,7 +102,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // start loading animation maybe?
             progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
                     "ProgressDialog",
-                    "Loading all words!");
+                    "Loading!");
         }
 
         @Override
@@ -121,7 +122,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 // completely detached from realm and is not monitored by realm
                 // for changes. Thus this list of values is free to move around
                 // inside any thread.
-                list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
+
+
+                list= realm.where(Model_LacakMobil.class).limit(30).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
                 List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
                 realm.close();
                 return safeWords;
