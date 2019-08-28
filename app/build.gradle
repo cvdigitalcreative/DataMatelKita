@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
-
+apply plugin: 'realm-android'
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.digitalcreative.aplikasidatamining"
-        minSdkVersion 19
+        minSdkVersion 26
         targetSdkVersion 28
-        versionCode 15
-        versionName "1.15"
+        versionCode 16
+        versionName "1.16"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

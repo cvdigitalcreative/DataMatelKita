@@ -1,8 +1,11 @@
 package com.digitalcreative.aplikasidatamining.Model;
 
-public class Model_LacakMobil {
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
+import io.realm.annotations.PrimaryKey;
+
+public class Model_LacakMobil extends RealmObject {
     String nama;
-    String no_plat;
     String nama_mobil;
     String cabang;
     String tahun;
@@ -11,6 +14,13 @@ public class Model_LacakMobil {
     String ovd;
     String noka;
     String nosin;
+    String warna;
+    String saldo;
+   @PrimaryKey @Index
+    String no_plat;
+
+
+
 
 
     public String getWarna() {
@@ -21,7 +31,7 @@ public class Model_LacakMobil {
         this.warna = warna;
     }
 
-    String warna;
+
 
     public String getSaldo() {
         return saldo;
@@ -31,7 +41,7 @@ public class Model_LacakMobil {
         this.saldo = saldo;
     }
 
-    String saldo;
+
 
     public String getTahun() {
         return tahun;
