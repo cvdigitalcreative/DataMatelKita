@@ -20,6 +20,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,9 @@ import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.Controller.DataBaseHelper;
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
+import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
+import com.digitalcreative.aplikasidatamining.RealmHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,13 +42,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +68,9 @@ public class BantuanPage extends Fragment {
     private static String DB_PATH;
 
     private static String DB_NAME = "tes.db";
+    Realm realm;
+    RealmHelper realmHelper;
+
     private boolean checkDataBase() {
         boolean checkdb = false;
         try {
@@ -87,13 +99,32 @@ public class BantuanPage extends Fragment {
 
         //Init the Variable
         sayHelloboys(view);
+//        Realm.init(this.getContext());
+//        RealmConfiguration config =
+//                new RealmConfiguration.Builder()
+//                        .name("test.db")
+//                        .schemaVersion(1)
+//                        .deleteRealmIfMigrationNeeded()
+//                        .build();
+//        realm = Realm.getInstance(config);
+        //Set up Realm
+        Realm.init(this.getContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                        .name("test.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+        realm = Realm.getInstance(configuration);
 
+        realmHelper = new RealmHelper(realm);
         //Actions
         doitBoys();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         myRef = firebaseDatabase.getReference();
+
+
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -186,27 +217,21 @@ public class BantuanPage extends Fragment {
             System.out.println(jumlah_id.size());
             System.out.println(jumlah__download_id.size());
             if (jumlah_id.size()==jumlah__download_id.size()) {
-                DataBaseHelper db= null;
-                try {
-                    db = new DataBaseHelper(getContext());
-                    db.reset_data();
-                    System.out.println("delete data");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                                                                insert_database(subpath_t1);
-                                                                insert_database(subpath_t2);
-                                                                insert_database(subpath_t3);
-                                                                insert_database(subpath_t4);
-                                                                insert_database(subpath_t5);
-                                                                insert_database(subpath_data_update);
+
+
+//                                                                insert_database(subpath_t1);
+//                                                                insert_database(subpath_t2);
+//                                                                insert_database(subpath_t3);
+//                                                                insert_database(subpath_t4);
+//                                                                insert_database(subpath_t5);
+//                                                                insert_database(subpath_data_update);
                                                                 insert_database(subpath_t0);
+//                                                                    update_data();
                                                                 progress.dismiss();
-                                                                update_data();
-                DataBaseHelper dbhelper;
-                try {
-                    dbhelper=new DataBaseHelper(getContext());
-                    long count_data=dbhelper.count_data();
+
+
+
+
 
 
                     Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
@@ -218,10 +243,8 @@ public class BantuanPage extends Fragment {
                         }
                     });
 
-                    tv2.setText(String.valueOf(count_data));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    tv2.setText("berhasil");
+
 
             }
 
@@ -314,6 +337,7 @@ public class BantuanPage extends Fragment {
 //                        e.printStackTrace();
 //                    }
                     System.out.println("done");
+
                     progress = new ProgressDialog(getActivity());
                     progress.setMessage("Updating Data . . .");
                     progress.setIndeterminate(true);
@@ -356,6 +380,12 @@ public class BantuanPage extends Fragment {
                                                 Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
 
                                             } else {
+                                                realm.executeTransaction(new Realm.Transaction() {
+                                                    @Override
+                                                    public void execute(Realm realm) {
+                                                        realm.deleteAll();
+                                                    }
+                                                });
                                                 myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -394,25 +424,6 @@ public class BantuanPage extends Fragment {
                                                         downloadfromdropbox(url_data_update, subpath_data_update);
 
 
-//                                                        final Timer timer = new Timer();
-//                                                        timer.schedule(new TimerTask() {
-//                                                            @Override
-//                                                            public void run() {
-//
-//                                                                insert_database(subpath_t1);
-//                                                                insert_database(subpath_t2);
-//                                                                insert_database(subpath_t3);
-//                                                                insert_database(subpath_t4);
-//                                                                insert_database(subpath_t5);
-//                                                                insert_database(subpath_data_update);
-//                                                                insert_database(subpath_t0);
-//                                                                progress.dismiss();
-//                                                                update_data();
-//
-//
-//                                                            }
-//                                                        }, Long.parseLong(waktu_download));
-
 //
                                                     }
 
@@ -447,6 +458,12 @@ public class BantuanPage extends Fragment {
 
 
                     }else{
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                realm.deleteAll();
+                            }
+                        });
                         myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -480,23 +497,6 @@ public class BantuanPage extends Fragment {
                                 url_data_update = dataSnapshot.child("link_data").getValue().toString();
                                 subpath_data_update = "dataupdate.csv";
                                 downloadfromdropbox(url_data_update, subpath_data_update);
-
-//                                final Timer timer = new Timer();
-//                                timer.schedule(new TimerTask() {
-//                                    @Override
-//                                    public void run() {
-//                                        insert_database(subpath_t1);
-//                                        insert_database(subpath_t2);
-//                                        insert_database(subpath_t3);
-//                                        insert_database(subpath_t4);
-//                                        insert_database(subpath_t5);
-//                                        insert_database(subpath_data_update);
-//                                        insert_database(subpath_t0);
-//                                        progress.dismiss();
-//                                        update_data();
-//
-//                                    }
-//                                }, Long.parseLong(waktu_download));
 
 //
                             }
@@ -571,23 +571,75 @@ public class BantuanPage extends Fragment {
 
     public void insert_database(String subpath) {
         System.out.println("kesini cuy");
-        final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
 
-        final DataBaseHelper dbhelper;
-        try {
-            dbhelper = new DataBaseHelper(getContext());
-            file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
-            String localFile = file[0].toString();
-            System.out.println("ado dak " + file[0].toString());
-            dbhelper.insertdata(localFile.toString());
-            file[0].delete();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+          insertdata(subpath);
+//          file[0].delete();
+
 
     }
 
+    public void insertdata(final String subpath) {
+        // get writable database as we want to write data
+        final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
+        file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
+        final String localFile = file[0].toString();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
 
+                    String line = "";
+                    while ((line = br.readLine()) != null) {
+
+
+                        // use comma as separator
+                        final String[] country = line.split(",");
+
+                        if(country.length==12){
+                            final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
+                            model_lacakMobil.setNama_mobil(country[1]);
+                            model_lacakMobil.setNo_plat(country[2]);
+                            model_lacakMobil.setNamaunit(country[3]);
+                            model_lacakMobil.setFinance(country[4]);
+                            model_lacakMobil.setOvd(country[5]);
+                            model_lacakMobil.setSaldo(country[6]);
+                            model_lacakMobil.setCabang(country[7]);
+                            model_lacakMobil.setNoka(country[8]);
+                            model_lacakMobil.setNosin(country[9]);
+                            model_lacakMobil.setTahun(country[10]);
+                            model_lacakMobil.setWarna(country[11]);
+                            bgRealm.insertOrUpdate(model_lacakMobil);
+                        }
+
+
+
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+//            fixing_data();
+
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                file[0].delete();
+                Log.v("TAGGED", "SAVED");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                Log.v("TAGGED", "FAILED");
+            }
+        });
+
+
+
+
+
+    }
 
     public static boolean isDownloadManagerAvailable(Context context) {
 

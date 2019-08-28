@@ -31,10 +31,14 @@ import com.digitalcreative.aplikasidatamining.Controller.KeyboardMethod;
 import com.digitalcreative.aplikasidatamining.MainActivity;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
+import com.digitalcreative.aplikasidatamining.RealmHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class PencarianPage_Activity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -52,7 +56,8 @@ public class PencarianPage_Activity extends AppCompatActivity {
     long diffInDays;
     Context context;
     KeyboardMethod keyboard;
-
+    Realm realm;
+    RealmHelper realmHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +71,16 @@ public class PencarianPage_Activity extends AppCompatActivity {
         searchFunc();
         backFunc();
 
-        try {
-            dbhelper = new DataBaseHelper(getApplicationContext());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Realm.init(context);
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                .name("test.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+
     }
 
     private void backFunc() {
@@ -82,20 +92,20 @@ public class PencarianPage_Activity extends AppCompatActivity {
             }
         });
     }
-    DataBaseHelper dbhelper;
 
     private class LongOperation extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
 
-            final DataBaseHelper finalDbhelper = dbhelper;
+
             lastIndex=1;
 
             getSearchMobil=search.getText().toString();
-            list= finalDbhelper.getAllData(getSearchMobil,getSearchMobil);
+            // Setup Realm
 
-            finalDbhelper.close();
+
+
             return "Executed";
         }
 
@@ -140,16 +150,20 @@ public class PencarianPage_Activity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 //
-                emptyText.setVisibility(View.INVISIBLE);
 
 
-                progressbar.setVisibility(View.VISIBLE);
-                new LongOperation().execute("");
+                list = new ArrayList<>();
+
+                list = realmHelper.getAllMahasiswa(s.toString());
+                System.out.println(list.size());
+                System.out.println(s);
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
+                recyclerView.setAdapter(detaillacakMobil);
             }
         });
 
