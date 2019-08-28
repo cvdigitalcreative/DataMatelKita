@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.BaseActivity;
 import com.digitalcreative.aplikasidatamining.Controller.DataBaseHelper;
@@ -79,7 +80,15 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 
 
-        realmHelper = new RealmHelper(realm);
+        Realm.init(context);
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                .name("test.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(configuration);
+        long count = realm.where(Model_LacakMobil.class).count();
+        Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
 
     }
 

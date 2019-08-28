@@ -250,9 +250,8 @@ public class BantuanPage extends Fragment {
                             .build();
                     realm = Realm.getInstance(configuration);
                     long count = realm.where(Model_LacakMobil.class).count();
-                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-
-
+//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+                tv2.setText("Berhasil download data data akan masuk beberapa saat lagi ");
             }
 
         }
@@ -611,7 +610,7 @@ public class BantuanPage extends Fragment {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(configuration);
-        realm.executeTransaction(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
