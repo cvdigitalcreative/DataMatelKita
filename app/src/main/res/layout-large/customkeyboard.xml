@@ -8,14 +8,14 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/layout_height"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/btn_1"
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -34,7 +34,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -53,7 +53,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -72,7 +72,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -91,7 +91,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -121,16 +121,17 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/layout_height"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/btn_6"
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -149,7 +150,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -168,7 +169,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -187,7 +188,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -206,7 +207,7 @@
             android:layout_margin="@dimen/margin_keyboard"
             android:clickable="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/keyboardcolor2"
             android:gravity="center">
@@ -236,6 +237,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -246,7 +248,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/layout_height"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -257,7 +259,7 @@
             <LinearLayout
                 android:id="@+id/btn_q"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -279,7 +281,7 @@
             <LinearLayout
                 android:id="@+id/btn_w"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -301,7 +303,7 @@
             <LinearLayout
                 android:id="@+id/btn_e"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -323,7 +325,7 @@
             <LinearLayout
                 android:id="@+id/btn_r"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -345,7 +347,7 @@
             <LinearLayout
                 android:id="@+id/btn_t"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -367,7 +369,7 @@
             <LinearLayout
                 android:id="@+id/btn_y"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -389,7 +391,7 @@
             <LinearLayout
                 android:id="@+id/btn_u"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -411,7 +413,7 @@
             <LinearLayout
                 android:id="@+id/btn_i"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -433,7 +435,7 @@
             <LinearLayout
                 android:id="@+id/btn_o"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -455,7 +457,7 @@
             <LinearLayout
                 android:id="@+id/btn_p"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -478,7 +480,7 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/layout_height"
             android:layout_marginVertical="2dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
@@ -493,7 +495,7 @@
             <LinearLayout
                 android:id="@+id/btn_a"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -515,7 +517,7 @@
             <LinearLayout
                 android:id="@+id/btn_s"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -537,7 +539,7 @@
             <LinearLayout
                 android:id="@+id/btn_d"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -559,7 +561,7 @@
             <LinearLayout
                 android:id="@+id/btn_f"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -581,7 +583,7 @@
             <LinearLayout
                 android:id="@+id/btn_g"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -603,7 +605,7 @@
             <LinearLayout
                 android:id="@+id/btn_h"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -625,7 +627,7 @@
             <LinearLayout
                 android:id="@+id/btn_j"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -647,7 +649,7 @@
             <LinearLayout
                 android:id="@+id/btn_k"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -669,7 +671,7 @@
             <LinearLayout
                 android:id="@+id/btn_l"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -692,7 +694,7 @@
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/layout_height"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:orientation="horizontal"
@@ -705,7 +707,7 @@
             <LinearLayout
                 android:id="@+id/btn_z"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -727,7 +729,7 @@
             <LinearLayout
                 android:id="@+id/btn_x"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -749,7 +751,7 @@
             <LinearLayout
                 android:id="@+id/btn_c"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -771,7 +773,7 @@
             <LinearLayout
                 android:id="@+id/btn_v"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -793,7 +795,7 @@
             <LinearLayout
                 android:id="@+id/btn_b"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -815,7 +817,7 @@
             <LinearLayout
                 android:id="@+id/btn_n"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -837,7 +839,7 @@
             <LinearLayout
                 android:id="@+id/btn_m"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
@@ -894,7 +896,7 @@
             <LinearLayout
                 android:id="@+id/btn_space"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/layoutheight"
+                android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
                 android:background="@color/keyboardcolor"
