@@ -219,14 +219,14 @@ public class BantuanPage extends Fragment {
             if (jumlah_id.size()==jumlah__download_id.size()) {
 
 
-//                                                                insert_database(subpath_t1);
-//                                                                insert_database(subpath_t2);
-//                                                                insert_database(subpath_t3);
-//                                                                insert_database(subpath_t4);
-//                                                                insert_database(subpath_t5);
-//                                                                insert_database(subpath_data_update);
+                                                                insert_database(subpath_t1);
+                                                                insert_database(subpath_t2);
+                                                                insert_database(subpath_t3);
+                                                                insert_database(subpath_t4);
+                                                                insert_database(subpath_t5);
+                                                                insert_database(subpath_data_update);
                                                                 insert_database(subpath_t0);
-//                                                                    update_data();
+                                                                update_data();
                                                                 progress.dismiss();
 
 
@@ -242,8 +242,15 @@ public class BantuanPage extends Fragment {
                             finished.setVisibility(View.INVISIBLE);
                         }
                     });
-
-                    tv2.setText("berhasil");
+                    Realm.init(getContext());
+                    RealmConfiguration configuration = new RealmConfiguration.Builder()
+                            .name("test.db")
+                            .schemaVersion(1)
+                            .deleteRealmIfMigrationNeeded()
+                            .build();
+                    realm = Realm.getInstance(configuration);
+                    long count = realm.where(Model_LacakMobil.class).count();
+                    tv2.setText("Jumlah Data = " + String.valueOf(count));
 
 
             }
@@ -380,6 +387,13 @@ public class BantuanPage extends Fragment {
                                                 Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
 
                                             } else {
+                                                Realm.init(getContext());
+                                                RealmConfiguration configuration = new RealmConfiguration.Builder()
+                                                        .name("test.db")
+                                                        .schemaVersion(1)
+                                                        .deleteRealmIfMigrationNeeded()
+                                                        .build();
+                                                realm = Realm.getInstance(configuration);
                                                 realm.executeTransaction(new Realm.Transaction() {
                                                     @Override
                                                     public void execute(Realm realm) {
@@ -458,6 +472,13 @@ public class BantuanPage extends Fragment {
 
 
                     }else{
+                        Realm.init(getContext());
+                        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                                .name("test.db")
+                                .schemaVersion(1)
+                                .deleteRealmIfMigrationNeeded()
+                                .build();
+                        realm = Realm.getInstance(configuration);
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
@@ -583,6 +604,13 @@ public class BantuanPage extends Fragment {
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
         final String localFile = file[0].toString();
+        Realm.init(this.getContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                .name("test.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(configuration);
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
