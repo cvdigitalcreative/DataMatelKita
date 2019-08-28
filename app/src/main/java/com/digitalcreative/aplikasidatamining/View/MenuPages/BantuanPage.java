@@ -610,7 +610,7 @@ public class BantuanPage extends Fragment {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(configuration);
-        realm.executeTransactionAsync(new Realm.Transaction() {
+        realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
@@ -644,9 +644,7 @@ public class BantuanPage extends Fragment {
                 } finally {
                     file[0].delete();
                     total_file--;
-                    if(total_file==0){
-                        Toast.makeText(getActivity(), "Data Berhasil Diupdate", Toast.LENGTH_LONG).show();
-                    }
+
 
 //            fixing_data();
 

@@ -85,14 +85,9 @@ public class PencarianPage extends Fragment {
         recentFucn();
         searchFunc();
         updateFunc();
-        if (Build.VERSION.SDK_INT >= 4.2) {
-            DB_PATH = getContext().getApplicationInfo().dataDir + "/databases/";
-        } else {
-            DB_PATH = "/data/data/" + getContext().getPackageName() + "/databases/";
-        }
 
-        boolean dbexist = checkDataBase();
-        if (dbexist) {
+
+
 
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
@@ -138,12 +133,7 @@ public class PencarianPage extends Fragment {
                 }
             });
 
-        } else {
-            System.out.println("Database doesn't exist");
-            animation.expand(btn_update);
-            popup_bup.setVisibility(View.VISIBLE);
-        }
-        getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
 
         return view;
     }
@@ -173,46 +163,10 @@ public class PencarianPage extends Fragment {
         Firebase firebase = new Firebase();
         firebase.loadfirebase(getContext());
     }
-    String url_t0;
-    String subpath_t0;
-    String url_t1;
-    String subpath_t1;
-    String url_t2;
-    String subpath_t2;
-    String url_t3;
-    String subpath_t3;
-    String url_t4;
-    String subpath_t4;
-    String url_t5;
-    String subpath_t5;
-    String url_data_update;
-    String subpath_data_update;
+
     private long downloadID;
 
-    private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
 
-            //Fetching the download id received with the broadcast
-            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
-            //Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadID == id) {
-
-                insert_database(subpath_t1);
-                insert_database(subpath_t2);
-                insert_database(subpath_t3);
-                insert_database(subpath_t4);
-                insert_database(subpath_t5);
-                insert_database(subpath_data_update);
-                insert_database(subpath_t0);
-                progress.dismiss();
-                update_data();
-                Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    };
 
     private void updateFunc() {
         popup_bup.setOnClickListener(new View.OnClickListener() {
@@ -310,65 +264,7 @@ public class PencarianPage extends Fragment {
 
         return date;
     }
-    private void update_data() {
-        FirebaseAuth firebaseAuth;
-        FirebaseUser firebaseUser;
-        FirebaseDatabase firebaseDatabase;
-        DatabaseReference myRef;
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        myRef = firebaseDatabase.getReference();
-        myRef.child("Users").child(firebaseUser.getUid()).child("last_update_data").setValue(getCurrentDate());
-        myRef.child("Users").child(firebaseUser.getUid()).child("status_download_db").setValue("1");
-    }
-    ProgressDialog progress;
-    public void downloadfromdropbox(String url, String subpath) {
-        System.out.println("cuy");
-        if (isDownloadManagerAvailable(getContext())) {
-            final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
-            file[0].delete();
-            System.out.println("cuy la");
-            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-            request.setDescription("Some descrition");
-            request.setTitle("Some title");
-// in order for this if to run, you must use the android 3.2 to compile your app
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            }
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
 
-// get download service and enqueue file
-            DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-            downloadID=manager.enqueue(request);
-        }
-    }
-
-    public void insert_database(String subpath) {
-        System.out.println("kesini cuy");
-        final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
-
-        final DataBaseHelper dbhelper;
-        try {
-            dbhelper = new DataBaseHelper(getContext());
-            file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
-            String localFile = file[0].toString();
-            System.out.println("ado dak " + file[0].toString());
-            dbhelper.insertdata(localFile.toString());
-            file[0].delete();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-    public static boolean isDownloadManagerAvailable(Context context) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            return true;
-        }
-        return false;
-    }
 
 
 
@@ -382,16 +278,11 @@ public class PencarianPage extends Fragment {
                     DB_PATH = "/data/data/" + getContext().getPackageName() + "/databases/";
                 }
 
-                boolean dbexist = checkDataBase();
-                if (dbexist) {
+
                     Intent intent = new Intent(getActivity(), PencarianPage_Activity.class);
                     startActivity(intent);
 
-                } else {
-                    System.out.println("Database doesn't exist");
-                    animation.expand(btn_update);
-                    popup_bup.setVisibility(View.VISIBLE);
-                }
+
             }
         });
     }
@@ -410,16 +301,6 @@ public class PencarianPage extends Fragment {
 
     }
 
-    private boolean checkDataBase() {
-        boolean checkdb = false;
-        try {
-            String myPath = DB_PATH + DB_NAME;
-            File dbfile = new File(myPath);
-            checkdb = dbfile.exists();
-        } catch (SQLiteException e) {
-            System.out.println("Database doesn't exist");
-        }
-        return checkdb;
-    }
+
 
 }

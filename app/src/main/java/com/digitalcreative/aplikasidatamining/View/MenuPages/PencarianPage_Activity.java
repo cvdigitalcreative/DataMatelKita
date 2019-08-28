@@ -109,9 +109,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             // start loading animation maybe?
-            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
-                    "ProgressDialog",
-                    "Loading!");
+//            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
+//                    "ProgressDialog",
+//                    "Loading!");
         }
 
         @Override
@@ -142,7 +142,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Model_LacakMobil> words) {
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
 
             // Please note here MyAdaptor constructor will now take the
             // list of words directly and not RealmResults so you slightly
