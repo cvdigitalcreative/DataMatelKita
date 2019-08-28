@@ -583,7 +583,7 @@ public class BantuanPage extends Fragment {
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
         final String localFile = file[0].toString();
-        realm.executeTransactionAsync(new Realm.Transaction() {
+        realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
@@ -610,28 +610,15 @@ public class BantuanPage extends Fragment {
                             model_lacakMobil.setWarna(country[11]);
                             bgRealm.insertOrUpdate(model_lacakMobil);
                         }
-
-
-
                     }
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
+                    file[0].delete();
 //            fixing_data();
 
                 }
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                file[0].delete();
-                Log.v("TAGGED", "SAVED");
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                Log.v("TAGGED", "FAILED");
             }
         });
 

@@ -1,5 +1,6 @@
 package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -37,8 +39,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
+import io.realm.Sort;
 
 public class PencarianPage_Activity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -51,7 +56,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
     LinearLayoutManager linearmanager;
     ProgressBar progressBar,progressbar;
     int lastIndex, index;
-
+    private YourAsyncTask mTask;
     private EditText search;
     long diffInDays;
     Context context;
@@ -71,13 +76,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         searchFunc();
         backFunc();
 
-        Realm.init(context);
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(configuration);
+
 
         realmHelper = new RealmHelper(realm);
 
@@ -93,39 +92,54 @@ public class PencarianPage_Activity extends AppCompatActivity {
         });
     }
 
-    private class LongOperation extends AsyncTask<String, Void, String> {
+   
+    private class YourAsyncTask extends AsyncTask<String, String, List<Model_LacakMobil>> {
 
+        ProgressDialog progressDialog;
         @Override
-        protected String doInBackground(String... params) {
-
-
-            lastIndex=1;
-
-            getSearchMobil=search.getText().toString();
-            // Setup Realm
-
-
-
-            return "Executed";
+        protected void onPreExecute() {
+            // start loading animation maybe?
+            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
+                    "ProgressDialog",
+                    "Loading all words!");
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            progressbar.setVisibility(View.INVISIBLE);
-            performSearch();
+        protected List<Model_LacakMobil> doInBackground(String... params) {
+            Realm.init(context);
+            RealmConfiguration configuration = new RealmConfiguration.Builder()
+                    .name("test.db")
+                    .schemaVersion(1)
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            realm = Realm.getInstance(configuration);
 
-            if(list.size()==0){
-                emptyText.setVisibility(View.VISIBLE);
-            }else{
-                emptyText.setVisibility(View.INVISIBLE);
-            }
+
+                // This is where the magic happens. realm.copyFromRealm() takes
+                // a RealmResult and essentially returns a deep copy of the
+                // list that it contains. The elements of this list is however
+                // completely detached from realm and is not monitored by realm
+                // for changes. Thus this list of values is free to move around
+                // inside any thread.
+                list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
+                List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
+                realm.close();
+                return safeWords;
+
         }
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPostExecute(List<Model_LacakMobil> words) {
+            progressDialog.dismiss();
 
-        @Override
-        protected void onProgressUpdate(Void... values) {}
+            // Please note here MyAdaptor constructor will now take the
+            // list of words directly and not RealmResults so you slightly
+            // modify the MyAdapter constructor.
+            System.out.println(words.size());
+            detaillacakMobil = new Detail_lacakMobil(words, getApplicationContext(), recyclerView);
+            recyclerView.setAdapter(detaillacakMobil);
+
+        }
     }
     private void searchFunc() {
         search.setOnTouchListener(new View.OnTouchListener() {
@@ -148,22 +162,20 @@ public class PencarianPage_Activity extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(final CharSequence s, int start, int before, int count) {
 //
 
+//                list = new ArrayList<>();
+//
+//                list = realmHelper.getAllMahasiswa(s.toString());
 
-                list = new ArrayList<>();
-
-                list = realmHelper.getAllMahasiswa(s.toString());
-                System.out.println(list.size());
-                System.out.println(s);
+                mTask = (YourAsyncTask) new YourAsyncTask().execute(s.toString());
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
-                recyclerView.setAdapter(detaillacakMobil);
+
             }
         });
 

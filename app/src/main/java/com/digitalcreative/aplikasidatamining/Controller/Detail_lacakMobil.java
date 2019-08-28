@@ -21,6 +21,9 @@ import com.digitalcreative.aplikasidatamining.R;
 
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.ViewHolder> {
     List<Model_LacakMobil> list;
     Context context;
@@ -32,7 +35,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
-
+    Realm realm;
     public Detail_lacakMobil(List<Model_LacakMobil> list, Context context, RecyclerView recyclerView) {
         this.list = list;
         this.context = context;
@@ -48,7 +51,13 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
 
     @Override
     public void onBindViewHolder(@NonNull Detail_lacakMobil.ViewHolder holder, int i) {
-
+        Realm.init(context);
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                .name("test.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(configuration);
         if (holder instanceof ViewHolder){
             final Model_LacakMobil model = list.get(i);
             holder.nama_pemilik.setText(model.getNama());

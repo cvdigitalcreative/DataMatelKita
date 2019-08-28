@@ -34,7 +34,7 @@ public class RealmHelper {
 
     // untuk memanggil semua data
     public List<Model_LacakMobil> getAllMahasiswa(String a){
-        RealmResults<Model_LacakMobil> results = realm.where(Model_LacakMobil.class).beginsWith("no_plat",a, Case.INSENSITIVE).findAllAsync().sort("no_plat");
+        RealmResults<Model_LacakMobil> results = realm.where(Model_LacakMobil.class).beginsWith("no_plat",a, Case.INSENSITIVE).findAll().sort("no_plat");
         return results;
     }
 
