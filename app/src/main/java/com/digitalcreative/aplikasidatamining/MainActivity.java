@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.AkunPage;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.BantuanPage;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.PencarianPage;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView nav;
