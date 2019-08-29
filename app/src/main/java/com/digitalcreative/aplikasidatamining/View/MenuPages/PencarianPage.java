@@ -250,7 +250,7 @@ public class PencarianPage extends Fragment {
 //                    });
 
                 }
-                animation.collapse(btn_update);
+//                animation.collapse(btn_update);
             }
         });
     }

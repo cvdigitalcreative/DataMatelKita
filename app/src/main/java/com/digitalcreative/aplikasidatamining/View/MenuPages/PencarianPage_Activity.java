@@ -133,7 +133,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 // inside any thread.
 
 
-                list= realm.where(Model_LacakMobil.class).limit(30).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
+                list= realm.where(Model_LacakMobil.class).limit(30).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
                 List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
                 realm.close();
                 return safeWords;
