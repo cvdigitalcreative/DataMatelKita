@@ -60,9 +60,9 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         realm = Realm.getInstance(configuration);
         if (holder instanceof ViewHolder){
             final Model_LacakMobil model = list.get(i);
-            holder.nama_pemilik.setText(model.getNama());
+            holder.nama_pemilik.setText(model.getNama_mobil());
             holder.no_plat.setText(model.getNo_plat());
-            holder.mobil.setText(model.getNama_mobil());
+            holder.mobil.setText(model.getNamaunit());
             holder.tahun.setText(model.getFinance());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,7 +88,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
                                         "Dikirim melalui aplikasi data matel nusantara ->"
                                                 +"Link : https://play.google.com/store/apps/details?id=com.digitalcreative.aplikasidatamining "+"\n"
                                                 +"Nomor Polisi : " +model.getNo_plat() +"\n"
-                                                +"Model Unit : " +model.getNama_mobil() +"\n"
+                                                +"Model Unit : " +model.getNamaunit() +"\n"
                                                 +"Nomor Rangka : " +model.getNoka() +"\n"
                                                 +"Nomor Mesin : " +model.getNosin() +"\n"
                                                 +"Finance : " +model.getFinance() +"\n"
@@ -130,9 +130,9 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         tahun = inflater.findViewById(R.id.detail_tahun);
         sipok = inflater.findViewById(R.id.detail_sipok);
 
-        pemilikmobil.setText(model.getNama());
+        pemilikmobil.setText(model.getNama_mobil());
         no_plat.setText(model.getNo_plat());
-        namaunit.setText(model.getNama_mobil());
+        namaunit.setText(model.getNamaunit());
         dinance.setText(model.getFinance());
         ovd.setText(model.getOvd());
         detailcabang.setText(model.getCabang());
