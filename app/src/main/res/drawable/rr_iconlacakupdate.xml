@@ -24,8 +24,8 @@
                 android:bottomLeftRadius="20dp" />
             <gradient
                 android:angle="-0"
-                android:startColor="@color/baseColor"
-                android:endColor="#A03838" />
+                android:startColor="#2196F3"
+                android:endColor="#2196F3" />
         </shape>
     </item>
 </layer-list>
