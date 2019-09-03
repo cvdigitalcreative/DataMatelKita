@@ -1,52 +1,37 @@
 {
   "project_info": {
-    "project_number": "25667936935",
-    "firebase_url": "https://aplikasidatamining.firebaseio.com",
-    "project_id": "aplikasidatamining",
-    "storage_bucket": "aplikasidatamining.appspot.com"
+    "project_number": "303484907903",
+    "firebase_url": "https://vimatelindonesia.firebaseio.com",
+    "project_id": "vimatelindonesia",
+    "storage_bucket": "vimatelindonesia.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:25667936935:android:e417116a33b4909c",
+        "mobilesdk_app_id": "1:303484907903:android:b3913ff3bbea4587",
         "android_client_info": {
-          "package_name": "com.digitalcreative.aplikasidatamining"
+          "package_name": "com.digitalcreative.vimatelindonesia"
         }
       },
       "oauth_client": [
         {
-          "client_id": "25667936935-b55n61082o8dn3arstv5vm8ol1u3rasv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.digitalcreative.aplikasidatamining",
-            "certificate_hash": "59c3414b5a9733ea20e672f2093019456dd2d022"
-          }
-        },
-        {
-          "client_id": "25667936935-99204c87ljlkkgq2p584gpnuoulkrkau.apps.googleusercontent.com",
+          "client_id": "303484907903-h08nqatp24d5nqpqo47lqlhu92c2nggo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDhqwtLiVlh0eMm6Ytl6nQxIWf4Fn28sOo"
+          "current_key": "AIzaSyA_Msvy-_oa793x_Wr4LgyjUCjvikUJbWM"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "25667936935-99204c87ljlkkgq2p584gpnuoulkrkau.apps.googleusercontent.com",
+              "client_id": "303484907903-h08nqatp24d5nqpqo47lqlhu92c2nggo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
