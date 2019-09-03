@@ -427,16 +427,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .deleteRealmIfMigrationNeeded()
                     .build();
             realm = Realm.getInstance(configuration);
-
-
                 // This is where the magic happens. realm.copyFromRealm() takes
                 // a RealmResult and essentially returns a deep copy of the
                 // list that it contains. The elements of this list is however
                 // completely detached from realm and is not monitored by realm
                 // for changes. Thus this list of values is free to move around
                 // inside any thread.
-
-
                 list= realm.where(Model_LacakMobil.class).limit(10).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
                 List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
                 realm.close();
