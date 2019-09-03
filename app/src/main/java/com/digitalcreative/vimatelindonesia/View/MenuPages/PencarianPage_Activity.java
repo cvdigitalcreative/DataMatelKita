@@ -260,7 +260,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                     if(file7.exists()){
 //                        insert_database(subpath_data_update);
-//                        file7.delete();
+                        file7.delete();
                     }
                         downloadfromdropbox(url_data_update, subpath_data_update);
 
