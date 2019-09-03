@@ -12,7 +12,7 @@
             android:shape="rectangle"  >
             <gradient
                 android:angle="-0"
-                android:startColor="@color/baseColor"
+                android:startColor="@color/bgKeyboardBlue"
                 android:endColor="#8A2F2F" />
         </shape>
     </item>
