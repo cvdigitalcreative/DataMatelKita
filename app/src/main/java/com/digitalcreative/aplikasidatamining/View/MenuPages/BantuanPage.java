@@ -70,22 +70,29 @@ public class BantuanPage extends Fragment {
     private static String DB_NAME = "tes.db";
     Realm realm;
     RealmHelper realmHelper;
-
-    private boolean checkDataBase() {
-        boolean checkdb = false;
-        try {
-            String myPath = DB_PATH + DB_NAME;
-            File dbfile = new File(myPath);
-            checkdb = dbfile.exists();
-        } catch (SQLiteException e) {
-            System.out.println("Database doesn't exist");
-        }
-        return checkdb;
-    }
-
-    public BantuanPage() {
-        // Required empty public constructor
-    }
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference myRef;
+    String url_t0;
+    String subpath_t0;
+    String url_t1;
+    String subpath_t1;
+    String url_t2;
+    String subpath_t2;
+    String url_t3;
+    String subpath_t3;
+    String url_t4;
+    String subpath_t4;
+    String url_t5;
+    String subpath_t5;
+    String url_data_update;
+    String subpath_data_update;
+    private ArrayList<Long> jumlah_id;
+    private ArrayList<Long> jumlah__download_id;
+    private long downloadID;
+    private int total_file=0;
+    ProgressDialog progress;
 
 
     @Override
@@ -123,6 +130,9 @@ public class BantuanPage extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         myRef = firebaseDatabase.getReference();
+        jumlah_id=new ArrayList<>();
+        jumlah__download_id=new ArrayList<>();
+        getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
 
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -164,9 +174,6 @@ public class BantuanPage extends Fragment {
 
             }
         });
-        jumlah_id=new ArrayList<>();
-        jumlah__download_id=new ArrayList<>();
-        getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
         return view;
     }
@@ -188,24 +195,7 @@ public class BantuanPage extends Fragment {
         call_tbn = view.findViewById(R.id.call_btn);
         sms_btn = view.findViewById(R.id.sms_btn);
     }
-    String url_t0;
-     String subpath_t0;
-    String url_t1;
-     String subpath_t1;
-    String url_t2;
-     String subpath_t2;
-    String url_t3;
-     String subpath_t3;
-    String url_t4;
-     String subpath_t4;
-    String url_t5;
-     String subpath_t5;
-    String url_data_update;
-     String subpath_data_update;
-     private ArrayList<Long> jumlah_id;
-    private ArrayList<Long> jumlah__download_id;
-    private long downloadID;
-    private int total_file=0;
+
     private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -251,7 +241,7 @@ public class BantuanPage extends Fragment {
                     realm = Realm.getInstance(configuration);
                     long count = realm.where(Model_LacakMobil.class).count();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                tv2.setText("Berhasil download data data akan masuk beberapa saat lagi ");
+                tv2.setText("Berhasil download data jumlah data "+count);
             }
 
         }
@@ -353,14 +343,17 @@ public class BantuanPage extends Fragment {
                     firebaseDatabase = FirebaseDatabase.getInstance();
                     firebaseUser = firebaseAuth.getCurrentUser();
                     myRef = firebaseDatabase.getReference();
-                    if (Build.VERSION.SDK_INT >= 4.2) {
-                        DB_PATH = getContext().getApplicationInfo().dataDir + "/databases/";
-                    } else {
-                        DB_PATH = "/data/data/" + getContext().getPackageName() + "/databases/";
-                    }
 
-                    boolean dbexist = checkDataBase();
-                    if (dbexist) {
+
+                    Realm.init(BantuanPage.this.getContext());
+                    RealmConfiguration configuration = new RealmConfiguration.Builder()
+                            .name("test.db")
+                            .schemaVersion(1)
+                            .deleteRealmIfMigrationNeeded()
+                            .build();
+                    realm = Realm.getInstance(configuration);
+                    long count = realm.where(Model_LacakMobil.class).count();
+                    if (count!=0) {
                         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -471,12 +464,7 @@ public class BantuanPage extends Fragment {
 
 
                     }else{
-                        Realm.init(getContext());
-                        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                                .name("test.db")
-                                .schemaVersion(1)
-                                .deleteRealmIfMigrationNeeded()
-                                .build();
+
                         realm = Realm.getInstance(configuration);
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
@@ -534,10 +522,7 @@ public class BantuanPage extends Fragment {
         });
     }
 
-    FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference myRef;
+
 
     private String getCurrentDate() {
         String date;
@@ -563,13 +548,15 @@ public class BantuanPage extends Fragment {
         myRef.child("Users").child(firebaseUser.getUid()).child("status_download_db").setValue("1");
     }
 
-    ProgressDialog progress;
+
 
     public void downloadfromdropbox(String url, String subpath) {
         System.out.println("cuy");
         if (isDownloadManagerAvailable(getContext())) {
             final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
-            file[0].delete();
+            if(file[0].exists()){
+                file[0].delete();
+            }
             System.out.println("cuy la");
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setDescription("Some descrition");
