@@ -198,86 +198,74 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     subpath_t0 = "t0.csv";
                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                     if(file.exists()){
-                        insert_database(subpath_t0);
-//                        file.delete();
-                    }else{
-                        downloadfromdropbox(url_t0, subpath_t0);
+//                        insert_database(subpath_t0);
+                        file.delete();
                     }
+                        downloadfromdropbox(url_t0, subpath_t0);
+
 
                     url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
                     subpath_t1 = "t1.csv";
                     File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
                     if(file2.exists()){
-                        insert_database(subpath_t1);
-//                        file2.delete();
-                    }else {
-                        downloadfromdropbox(url_t1, subpath_t1);
+//                        insert_database(subpath_t1);
+                        file2.delete();
                     }
+                        downloadfromdropbox(url_t1, subpath_t1);
+
 
                     url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
                     subpath_t2 = "t2.csv";
                     File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
                     if(file3.exists()){
-                        insert_database(subpath_t2);
+//                        insert_database(subpath_t2);
 
-//                        file3.delete();
-                    }else {
-                        downloadfromdropbox(url_t2, subpath_t2);
+                        file3.delete();
                     }
+                        downloadfromdropbox(url_t2, subpath_t2);
+
 
                     url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
                     subpath_t3 = "t3.csv";
                     File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
                     if(file4.exists()){
-                        insert_database(subpath_t3);
-//                        file4.delete();
-                    }else{
-                        downloadfromdropbox(url_t3, subpath_t3);
+//                        insert_database(subpath_t3);
+                        file4.delete();
                     }
+                        downloadfromdropbox(url_t3, subpath_t3);
+
 
 
                     url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
                     subpath_t4 = "t4.csv";
                     File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
                     if(file5.exists()){
-                        insert_database(subpath_t4);
-//                        file5.delete();
-                    }else {
-                        downloadfromdropbox(url_t4, subpath_t4);
+//                        insert_database(subpath_t4);
+                        file5.delete();
                     }
+                        downloadfromdropbox(url_t4, subpath_t4);
+
 
                     url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
                     subpath_t5 = "t5.csv";
                     File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
                     if(file6.exists()){
-                        insert_database(subpath_t5);
-//                        file6.delete();
-                    }else {
-                        downloadfromdropbox(url_t5, subpath_t5);
+//                        insert_database(subpath_t5);
+                        file6.delete();
                     }
+                        downloadfromdropbox(url_t5, subpath_t5);
+
                     url_data_update = dataSnapshot.child("link_data").getValue().toString();
                     subpath_data_update = "dataupdate.csv";
                     File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                     if(file7.exists()){
-                        insert_database(subpath_data_update);
-//                        file7.delete();
-                    }else {
-                        downloadfromdropbox(url_data_update, subpath_data_update);
+//                        insert_database(subpath_data_update);
+                        file7.delete();
                     }
+                        downloadfromdropbox(url_data_update, subpath_data_update);
 
 
 
-                    Realm.init(context);
-                    RealmConfiguration configuration = new RealmConfiguration.Builder()
-                            .name("test.db")
-                            .schemaVersion(1)
-                            .deleteRealmIfMigrationNeeded()
-                            .build();
-                    realm = Realm.getInstance(configuration);
-                    long count = realm.where(Model_LacakMobil.class).count();
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                    Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
 //
                 }
 
