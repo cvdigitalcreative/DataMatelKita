@@ -8,13 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,21 +25,27 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digitalcreative.vimatelindonesia.BaseActivity;
+import com.digitalcreative.vimatelindonesia.Controller.DataBaseHelper;
 import com.digitalcreative.vimatelindonesia.Controller.Detail_lacakMobil;
 import com.digitalcreative.vimatelindonesia.Controller.KeyboardMethod;
 import com.digitalcreative.vimatelindonesia.MainActivity;
 import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
 import com.digitalcreative.vimatelindonesia.R;
+import com.digitalcreative.vimatelindonesia.RealmHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,12 +58,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class PencarianPage_Activity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -123,7 +139,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
         long count = realm.where(Model_LacakMobil.class).count();
         Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
         if(count<100000){
-
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.deleteAll();
+                }
+            });
             progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
                     "Loading",
                     "Sedang mengupdate data harap di tgg!");
@@ -153,7 +174,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        //loading Data
 //                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
 //                        backendFirebase.downloadFile(getContext());
-             progressDialog.dismiss();
+            progressDialog.dismiss();
         } else {
             Realm.init(context);
             RealmConfiguration configuration = new RealmConfiguration.Builder()
@@ -177,59 +198,86 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     subpath_t0 = "t0.csv";
                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                     if(file.exists()){
-                        file.delete();
+                        insert_database(subpath_t0);
+//                        file.delete();
+                    }else{
+                        downloadfromdropbox(url_t0, subpath_t0);
                     }
-                    downloadfromdropbox(url_t0, subpath_t0);
 
                     url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
                     subpath_t1 = "t1.csv";
                     File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
                     if(file2.exists()){
-                        file2.delete();
+                        insert_database(subpath_t1);
+//                        file2.delete();
+                    }else {
+                        downloadfromdropbox(url_t1, subpath_t1);
                     }
-                    downloadfromdropbox(url_t1, subpath_t1);
 
                     url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
                     subpath_t2 = "t2.csv";
                     File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
                     if(file3.exists()){
-                        file3.delete();
+                        insert_database(subpath_t2);
+
+//                        file3.delete();
+                    }else {
+                        downloadfromdropbox(url_t2, subpath_t2);
                     }
-                    downloadfromdropbox(url_t2, subpath_t2);
 
                     url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
                     subpath_t3 = "t3.csv";
                     File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
                     if(file4.exists()){
-                        file4.delete();
+                        insert_database(subpath_t3);
+//                        file4.delete();
+                    }else{
+                        downloadfromdropbox(url_t3, subpath_t3);
                     }
-                    downloadfromdropbox(url_t3, subpath_t3);
+
 
                     url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
                     subpath_t4 = "t4.csv";
                     File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
                     if(file5.exists()){
-                        file5.delete();
+                        insert_database(subpath_t4);
+//                        file5.delete();
+                    }else {
+                        downloadfromdropbox(url_t4, subpath_t4);
                     }
-                    downloadfromdropbox(url_t4, subpath_t4);
-
 
                     url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
                     subpath_t5 = "t5.csv";
                     File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
                     if(file6.exists()){
-                        file6.delete();
+                        insert_database(subpath_t5);
+//                        file6.delete();
+                    }else {
+                        downloadfromdropbox(url_t5, subpath_t5);
                     }
-                    downloadfromdropbox(url_t5, subpath_t5);
-
                     url_data_update = dataSnapshot.child("link_data").getValue().toString();
                     subpath_data_update = "dataupdate.csv";
                     File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                     if(file7.exists()){
-                        file7.delete();
+                        insert_database(subpath_data_update);
+//                        file7.delete();
+                    }else {
+                        downloadfromdropbox(url_data_update, subpath_data_update);
                     }
-                    downloadfromdropbox(url_data_update, subpath_data_update);
 
+
+
+                    Realm.init(context);
+                    RealmConfiguration configuration = new RealmConfiguration.Builder()
+                            .name("test.db")
+                            .schemaVersion(1)
+                            .deleteRealmIfMigrationNeeded()
+                            .build();
+                    realm = Realm.getInstance(configuration);
+                    long count = realm.where(Model_LacakMobil.class).count();
+//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+                    Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 //
                 }
 
@@ -411,16 +459,16 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .deleteRealmIfMigrationNeeded()
                     .build();
             realm = Realm.getInstance(configuration);
-                // This is where the magic happens. realm.copyFromRealm() takes
-                // a RealmResult and essentially returns a deep copy of the
-                // list that it contains. The elements of this list is however
-                // completely detached from realm and is not monitored by realm
-                // for changes. Thus this list of values is free to move around
-                // inside any thread.
-                list= realm.where(Model_LacakMobil.class).limit(10).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
-                List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
-                realm.close();
-                return safeWords;
+            // This is where the magic happens. realm.copyFromRealm() takes
+            // a RealmResult and essentially returns a deep copy of the
+            // list that it contains. The elements of this list is however
+            // completely detached from realm and is not monitored by realm
+            // for changes. Thus this list of values is free to move around
+            // inside any thread.
+            list= realm.where(Model_LacakMobil.class).limit(10).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
+            List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
+            realm.close();
+            return safeWords;
 
         }
 
@@ -474,7 +522,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //
 //                list = realmHelper.getAllMahasiswa(s.toString());
 
-                    emptyText.setVisibility(View.INVISIBLE);
+                emptyText.setVisibility(View.INVISIBLE);
 
 
                 mTask = (YourAsyncTask) new YourAsyncTask().execute(s.toString());
