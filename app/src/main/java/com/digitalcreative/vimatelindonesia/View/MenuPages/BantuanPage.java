@@ -746,6 +746,7 @@ public class BantuanPage extends Fragment {
 
     public void insertdata(final String subpath) {
         System.out.println("jumlah file " + jumlah_file);
+        final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
@@ -767,7 +768,7 @@ public class BantuanPage extends Fragment {
                         // use comma as separator
                         final String[] country = line.split(",");
                         if (country.length == 12) {
-                            final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
+
                             model_lacakMobil.setNama_mobil(country[1]);
                             model_lacakMobil.setNo_plat(country[2]);
                             model_lacakMobil.setNamaunit(country[3]);
