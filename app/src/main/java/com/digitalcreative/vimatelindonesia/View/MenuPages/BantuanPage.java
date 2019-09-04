@@ -227,7 +227,7 @@ public class BantuanPage extends Fragment {
                         .build();
                 realm = Realm.getInstance(configuration);
                 long count = realm.where(Model_LacakMobil.class).count();
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+                    tv2.setText("Jumlah Data = " + String.valueOf(count));
 
                 Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
 
