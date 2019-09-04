@@ -88,6 +88,10 @@ public class BantuanPage extends Fragment {
     private ArrayList<Long> jumlah__download_id;
     private long downloadID;
     private int total_file=0;
+    private ArrayList<String> path_file;
+    private ArrayList<String>  url_file;
+    private int jumlah_file;
+
     ProgressDialog progress;
 
 
@@ -128,6 +132,11 @@ public class BantuanPage extends Fragment {
         myRef = firebaseDatabase.getReference();
         jumlah_id=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
+        jumlah_id=new ArrayList<>();
+        path_file=new ArrayList<>();
+        url_file=new ArrayList<>();
+        jumlah__download_id=new ArrayList<>();
+        jumlah_file=7;
         getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
 
@@ -199,45 +208,29 @@ public class BantuanPage extends Fragment {
             //Fetching the download id received with the broadcast
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             jumlah_id.add(id);
+            System.out.println("download selesai "+id);
+            System.out.println("jumlah id "+jumlah_id.size());
+            System.out.println("jumlah download "+jumlah__download_id.size());
+
             //Checking if the received broadcast is for our enqueued download by matching download id
-            System.out.println(jumlah_id.size());
-            System.out.println(jumlah__download_id.size());
+
             if (jumlah_id.size()==jumlah__download_id.size()) {
-                total_file=jumlah__download_id.size();
-
-                                                                insert_database(subpath_t1);
-                                                                insert_database(subpath_t2);
-                                                                insert_database(subpath_t3);
-                                                                insert_database(subpath_t4);
-                                                                insert_database(subpath_t5);
-                                                                insert_database(subpath_data_update);
-                                                                insert_database(subpath_t0);
-                                                                update_data();
-                                                                progress.dismiss();
-
-
-
-
-
-
-                    Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
-                    finished.setVisibility(View.VISIBLE);
-                    finished.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finished.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                    Realm.init(getContext());
-                    RealmConfiguration configuration = new RealmConfiguration.Builder()
-                            .name("test.db")
-                            .schemaVersion(1)
-                            .deleteRealmIfMigrationNeeded()
-                            .build();
-                    realm = Realm.getInstance(configuration);
-                    long count = realm.where(Model_LacakMobil.class).count();
+                System.out.println("mulai memasukan data");
+                for(int i=0; i<path_file.size(); i++){
+                    insert_database(path_file.get(i));
+                }
+                Realm.init(context);
+                RealmConfiguration configuration = new RealmConfiguration.Builder()
+                        .name("test.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                realm = Realm.getInstance(configuration);
+                long count = realm.where(Model_LacakMobil.class).count();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                tv2.setText("Berhasil download data jumlah data "+count);
+
+                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
+
             }
 
         }
@@ -397,11 +390,14 @@ public class BantuanPage extends Fragment {
                                                         subpath_t0 = "t0.csv";
                                                         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                                                         if(file.exists()){
+                                                            System.out.println("insert db");
                                                             insert_database(subpath_t0);
 //                        file.delete();
                                                         }else{
-                                                            jumlah__download_id.add(Long.valueOf(1));
-                                                            downloadfromdropbox(url_t0, subpath_t0);
+                                                            System.out.println("insert url");
+                                                            path_file.add(subpath_t0);
+                                                            url_file.add(url_t0);
+
 
                                                         }
 
@@ -410,11 +406,14 @@ public class BantuanPage extends Fragment {
                                                         subpath_t1 = "t1.csv";
                                                         File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
                                                         if(file2.exists()){
+                                                            System.out.println("insert db");
                                                             insert_database(subpath_t1);
 //                        file2.delete();
                                                         }else{
-                                                            jumlah__download_id.add(Long.valueOf(2));
-                                                            downloadfromdropbox(url_t1, subpath_t1);
+                                                            System.out.println("insert url");
+
+                                                            path_file.add(subpath_t1);
+                                                            url_file.add(url_t1);
 
                                                         }
 
@@ -423,12 +422,16 @@ public class BantuanPage extends Fragment {
                                                         subpath_t2 = "t2.csv";
                                                         File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
                                                         if(file3.exists()){
+                                                            System.out.println("insert db");
                                                             insert_database(subpath_t2);
 
 //                        file3.delete();
                                                         }else{
-                                                            jumlah__download_id.add(Long.valueOf(3));
-                                                            downloadfromdropbox(url_t2, subpath_t2);
+                                                            System.out.println("insert url");
+
+                                                            path_file.add(subpath_t2);
+                                                            url_file.add(url_t2);
+
 
                                                         }
 
@@ -437,11 +440,14 @@ public class BantuanPage extends Fragment {
                                                         subpath_t3 = "t3.csv";
                                                         File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
                                                         if(file4.exists()){
+                                                            System.out.println("insert db");
                                                             insert_database(subpath_t3);
 //                        file4.delete();
                                                         }else{
-                                                            jumlah__download_id.add(Long.valueOf(4));
-                                                            downloadfromdropbox(url_t3, subpath_t3);
+                                                            System.out.println("insert url");
+                                                            path_file.add(subpath_t3);
+                                                            url_file.add(url_t3);
+
                                                         }
 
 
@@ -451,11 +457,14 @@ public class BantuanPage extends Fragment {
                                                         subpath_t4 = "t4.csv";
                                                         File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
                                                         if(file5.exists()){
+                                                            System.out.println("insert db");
                                                             insert_database(subpath_t4);
 //                        file5.delete();
                                                         }else{
-                                                            jumlah__download_id.add(Long.valueOf(5));
-                                                            downloadfromdropbox(url_t4, subpath_t4);
+                                                            System.out.println("insert url");
+                                                            path_file.add(subpath_t4);
+                                                            url_file.add(url_t4);
+
                                                         }
 
 
@@ -464,11 +473,14 @@ public class BantuanPage extends Fragment {
                                                         subpath_t5 = "t5.csv";
                                                         File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
                                                         if(file6.exists()){
+                                                            System.out.println("insert db");
                                                             insert_database(subpath_t5);
 //                        file6.delete();
                                                         }else{
-                                                            jumlah__download_id.add(Long.valueOf(6));
-                                                            downloadfromdropbox(url_t5, subpath_t5);
+                                                            System.out.println("insert url");
+                                                            path_file.add(subpath_t5);
+                                                            url_file.add(url_t5);
+
                                                         }
 
 
@@ -476,14 +488,19 @@ public class BantuanPage extends Fragment {
                                                         subpath_data_update = "dataupdate.csv";
                                                         File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                                                         if(file7.exists()){
+                                                            System.out.println("insert db");
                                                             insert_database(subpath_data_update);
 //                        file7.delete();
                                                         }else{
-                                                            jumlah__download_id.add(Long.valueOf(7));
-                                                            downloadfromdropbox(url_data_update, subpath_data_update);
+                                                            System.out.println("insert url");
+                                                            path_file.add(subpath_data_update);
+                                                            url_file.add(url_data_update);
+
                                                         }
 
-
+                                                        for(int i=0; i<url_file.size(); i++){
+                                                            downloadfromdropbox(url_file.get(i), path_file.get(i));
+                                                        }
 
 
 
@@ -539,11 +556,14 @@ public class BantuanPage extends Fragment {
                                 subpath_t0 = "t0.csv";
                                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                                 if(file.exists()){
+                                    System.out.println("insert db");
                                     insert_database(subpath_t0);
 //                        file.delete();
                                 }else{
-                                    jumlah__download_id.add(Long.valueOf(1));
-                                    downloadfromdropbox(url_t0, subpath_t0);
+                                    System.out.println("insert url");
+                                    path_file.add(subpath_t0);
+                                    url_file.add(url_t0);
+
 
                                 }
 
@@ -552,11 +572,14 @@ public class BantuanPage extends Fragment {
                                 subpath_t1 = "t1.csv";
                                 File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
                                 if(file2.exists()){
+                                    System.out.println("insert db");
                                     insert_database(subpath_t1);
 //                        file2.delete();
                                 }else{
-                                    jumlah__download_id.add(Long.valueOf(2));
-                                    downloadfromdropbox(url_t1, subpath_t1);
+                                    System.out.println("insert url");
+
+                                    path_file.add(subpath_t1);
+                                    url_file.add(url_t1);
 
                                 }
 
@@ -565,12 +588,16 @@ public class BantuanPage extends Fragment {
                                 subpath_t2 = "t2.csv";
                                 File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
                                 if(file3.exists()){
+                                    System.out.println("insert db");
                                     insert_database(subpath_t2);
 
 //                        file3.delete();
                                 }else{
-                                    jumlah__download_id.add(Long.valueOf(3));
-                                    downloadfromdropbox(url_t2, subpath_t2);
+                                    System.out.println("insert url");
+
+                                    path_file.add(subpath_t2);
+                                    url_file.add(url_t2);
+
 
                                 }
 
@@ -579,11 +606,14 @@ public class BantuanPage extends Fragment {
                                 subpath_t3 = "t3.csv";
                                 File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
                                 if(file4.exists()){
+                                    System.out.println("insert db");
                                     insert_database(subpath_t3);
 //                        file4.delete();
                                 }else{
-                                    jumlah__download_id.add(Long.valueOf(4));
-                                    downloadfromdropbox(url_t3, subpath_t3);
+                                    System.out.println("insert url");
+                                    path_file.add(subpath_t3);
+                                    url_file.add(url_t3);
+
                                 }
 
 
@@ -593,11 +623,14 @@ public class BantuanPage extends Fragment {
                                 subpath_t4 = "t4.csv";
                                 File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
                                 if(file5.exists()){
+                                    System.out.println("insert db");
                                     insert_database(subpath_t4);
 //                        file5.delete();
                                 }else{
-                                    jumlah__download_id.add(Long.valueOf(5));
-                                    downloadfromdropbox(url_t4, subpath_t4);
+                                    System.out.println("insert url");
+                                    path_file.add(subpath_t4);
+                                    url_file.add(url_t4);
+
                                 }
 
 
@@ -606,11 +639,14 @@ public class BantuanPage extends Fragment {
                                 subpath_t5 = "t5.csv";
                                 File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
                                 if(file6.exists()){
+                                    System.out.println("insert db");
                                     insert_database(subpath_t5);
 //                        file6.delete();
                                 }else{
-                                    jumlah__download_id.add(Long.valueOf(6));
-                                    downloadfromdropbox(url_t5, subpath_t5);
+                                    System.out.println("insert url");
+                                    path_file.add(subpath_t5);
+                                    url_file.add(url_t5);
+
                                 }
 
 
@@ -618,14 +654,19 @@ public class BantuanPage extends Fragment {
                                 subpath_data_update = "dataupdate.csv";
                                 File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                                 if(file7.exists()){
+                                    System.out.println("insert db");
                                     insert_database(subpath_data_update);
 //                        file7.delete();
                                 }else{
-                                    jumlah__download_id.add(Long.valueOf(7));
-                                    downloadfromdropbox(url_data_update, subpath_data_update);
+                                    System.out.println("insert url");
+                                    path_file.add(subpath_data_update);
+                                    url_file.add(url_data_update);
+
                                 }
 
-
+                                for(int i=0; i<url_file.size(); i++){
+                                    downloadfromdropbox(url_file.get(i), path_file.get(i));
+                                }
 
 
 
@@ -673,22 +714,23 @@ public class BantuanPage extends Fragment {
 
 
     public void downloadfromdropbox(String url, String subpath) {
-        System.out.println("cuy");
+
         if (isDownloadManagerAvailable(getContext())) {
 
-            System.out.println("cuy la");
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setDescription("Some descrition");
             request.setTitle("Some title");
-            // in order for this if to run, you must use the android 3.2 to compile your app
+// in order for this if to run, you must use the android 3.2 to compile your app
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             }
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
-            // get download service and enqueue file
+            System.out.println("sub path download "+subpath);
+// get download service and enqueue file
             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
+            jumlah__download_id.add(Long.valueOf(downloadID));
 
         }
     }
@@ -703,6 +745,7 @@ public class BantuanPage extends Fragment {
     }
 
     public void insertdata(final String subpath) {
+        System.out.println("jumlah file " + jumlah_file);
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
@@ -721,12 +764,9 @@ public class BantuanPage extends Fragment {
 
                     String line = "";
                     while ((line = br.readLine()) != null) {
-
-
                         // use comma as separator
                         final String[] country = line.split(",");
-
-                        if(country.length==12){
+                        if (country.length == 12) {
                             final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
                             model_lacakMobil.setNama_mobil(country[1]);
                             model_lacakMobil.setNo_plat(country[2]);
@@ -746,8 +786,19 @@ public class BantuanPage extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
+                    System.out.println("nama file " + file[0].getAbsolutePath());
+                    System.out.println("jumlah file diolah " + jumlah_file);
                     file[0].delete();
+                    if (jumlah_file == 1) {
+                        System.out.println("masuk sini");
+//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+                        progress.dismiss();
+                        update_data();
+                    } else {
+                        jumlah_file = jumlah_file - 1;
 
+                        System.out.println("file exist " + file[0].exists());
+                    }
 
 
 //            fixing_data();
@@ -755,13 +806,7 @@ public class BantuanPage extends Fragment {
                 }
             }
         });
-
-
-
-
-
     }
-
     public static boolean isDownloadManagerAvailable(Context context) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {

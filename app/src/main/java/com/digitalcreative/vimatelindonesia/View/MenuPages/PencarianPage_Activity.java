@@ -111,6 +111,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
     String subpath_data_update;
     private ArrayList<Long> jumlah_id;
     private ArrayList<String> path_file;
+    private ArrayList<String>  url_file;
     private ArrayList<Long> jumlah__download_id;
     private int jumlah_file;
     private long downloadID;
@@ -140,7 +141,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         realm = Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
 
-        if(count<100000){
+        if(count<400000){
 //            realm.executeTransaction(new Realm.Transaction() {
 //                @Override
 //                public void execute(Realm realm) {
@@ -156,6 +157,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             myRef = firebaseDatabase.getReference();
             jumlah_id=new ArrayList<>();
             path_file=new ArrayList<>();
+            url_file=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
             jumlah_file=7;
             PencarianPage_Activity.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
@@ -209,9 +211,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        file.delete();
                     }else{
                         System.out.println("insert url");
-                        jumlah__download_id.add(Long.valueOf(1));
                         path_file.add(subpath_t0);
-                        downloadfromdropbox(url_t0, subpath_t0);
+                        url_file.add(url_t0);
+
 
                     }
 
@@ -225,9 +227,10 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        file2.delete();
                     }else{
                         System.out.println("insert url");
-                        jumlah__download_id.add(Long.valueOf(2));
+
                         path_file.add(subpath_t1);
-                        downloadfromdropbox(url_t1, subpath_t1);
+                        url_file.add(url_t1);
+
                     }
 
 
@@ -241,9 +244,10 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        file3.delete();
                     }else{
                         System.out.println("insert url");
-                        jumlah__download_id.add(Long.valueOf(3));
+
                         path_file.add(subpath_t2);
-                        downloadfromdropbox(url_t2, subpath_t2);
+                        url_file.add(url_t2);
+
 
                     }
 
@@ -257,9 +261,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        file4.delete();
                     }else{
                         System.out.println("insert url");
-                        jumlah__download_id.add(Long.valueOf(4));
                         path_file.add(subpath_t3);
-                        downloadfromdropbox(url_t3, subpath_t3);
+                        url_file.add(url_t3);
+
                     }
 
 
@@ -274,9 +278,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        file5.delete();
                     }else{
                         System.out.println("insert url");
-                        jumlah__download_id.add(Long.valueOf(5));
                         path_file.add(subpath_t4);
-                        downloadfromdropbox(url_t4, subpath_t4);
+                        url_file.add(url_t4);
+
                     }
 
 
@@ -290,9 +294,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        file6.delete();
                     }else{
                         System.out.println("insert url");
-                        jumlah__download_id.add(Long.valueOf(6));
                         path_file.add(subpath_t5);
-                        downloadfromdropbox(url_t5, subpath_t5);
+                        url_file.add(url_t5);
+
                     }
 
 
@@ -305,12 +309,14 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        file7.delete();
                     }else{
                         System.out.println("insert url");
-                        jumlah__download_id.add(Long.valueOf(7));
                         path_file.add(subpath_data_update);
-                        downloadfromdropbox(url_data_update, subpath_data_update);
+                        url_file.add(url_data_update);
+
                     }
 
-
+                    for(int i=0; i<url_file.size(); i++){
+                        downloadfromdropbox(url_file.get(i), path_file.get(i));
+                    }
 
 
 
@@ -479,11 +485,11 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             }
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
-
+            System.out.println("sub path download "+subpath);
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) PencarianPage_Activity.this.getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
-
+            jumlah__download_id.add(Long.valueOf(downloadID));
 
         }
     }
@@ -673,7 +679,6 @@ public class PencarianPage_Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         //Keyboard
         keyboard = findViewById(R.id.mykeyboard);
     }
