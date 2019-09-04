@@ -375,12 +375,12 @@ public class BantuanPage extends Fragment {
                                                         .deleteRealmIfMigrationNeeded()
                                                         .build();
                                                 realm = Realm.getInstance(configuration);
-                                                realm.executeTransaction(new Realm.Transaction() {
-                                                    @Override
-                                                    public void execute(Realm realm) {
-                                                        realm.deleteAll();
-                                                    }
-                                                });
+//                                                realm.executeTransaction(new Realm.Transaction() {
+//                                                    @Override
+//                                                    public void execute(Realm realm) {
+//                                                        realm.deleteAll();
+//                                                    }
+//                                                });
                                                 myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -541,12 +541,12 @@ public class BantuanPage extends Fragment {
                     }else{
 
                         realm = Realm.getInstance(configuration);
-                        realm.executeTransaction(new Realm.Transaction() {
-                            @Override
-                            public void execute(Realm realm) {
-                                realm.deleteAll();
-                            }
-                        });
+//                        realm.executeTransaction(new Realm.Transaction() {
+//                            @Override
+//                            public void execute(Realm realm) {
+//                                realm.deleteAll();
+//                            }
+//                        });
                         myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -757,7 +757,7 @@ public class BantuanPage extends Fragment {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(configuration);
-        realm.executeTransaction(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
@@ -796,7 +796,6 @@ public class BantuanPage extends Fragment {
                         update_data();
                     } else {
                         jumlah_file = jumlah_file - 1;
-
                         System.out.println("file exist " + file[0].exists());
                     }
 
