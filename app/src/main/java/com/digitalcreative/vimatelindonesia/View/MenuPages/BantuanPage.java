@@ -397,41 +397,53 @@ public class BantuanPage extends Fragment {
                                                         subpath_t0 = "t0.csv";
                                                         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                                                         if(file.exists()){
-//                        insert_database(subpath_t0);
-                                                            file.delete();
+                                                            insert_database(subpath_t0);
+//                        file.delete();
+                                                        }else{
+                                                            jumlah__download_id.add(Long.valueOf(1));
+                                                            downloadfromdropbox(url_t0, subpath_t0);
+
                                                         }
-                                                        downloadfromdropbox(url_t0, subpath_t0);
 
 
                                                         url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
                                                         subpath_t1 = "t1.csv";
                                                         File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
                                                         if(file2.exists()){
-//                        insert_database(subpath_t1);
-                                                            file2.delete();
+                                                            insert_database(subpath_t1);
+//                        file2.delete();
+                                                        }else{
+                                                            jumlah__download_id.add(Long.valueOf(2));
+                                                            downloadfromdropbox(url_t1, subpath_t1);
+
                                                         }
-                                                        downloadfromdropbox(url_t1, subpath_t1);
 
 
                                                         url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
                                                         subpath_t2 = "t2.csv";
                                                         File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
                                                         if(file3.exists()){
-//                        insert_database(subpath_t2);
+                                                            insert_database(subpath_t2);
 
-                                                            file3.delete();
+//                        file3.delete();
+                                                        }else{
+                                                            jumlah__download_id.add(Long.valueOf(3));
+                                                            downloadfromdropbox(url_t2, subpath_t2);
+
                                                         }
-                                                        downloadfromdropbox(url_t2, subpath_t2);
 
 
                                                         url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
                                                         subpath_t3 = "t3.csv";
                                                         File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
                                                         if(file4.exists()){
-//                        insert_database(subpath_t3);
-                                                            file4.delete();
+                                                            insert_database(subpath_t3);
+//                        file4.delete();
+                                                        }else{
+                                                            jumlah__download_id.add(Long.valueOf(4));
+                                                            downloadfromdropbox(url_t3, subpath_t3);
                                                         }
-                                                        downloadfromdropbox(url_t3, subpath_t3);
+
 
 
 
@@ -439,29 +451,38 @@ public class BantuanPage extends Fragment {
                                                         subpath_t4 = "t4.csv";
                                                         File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
                                                         if(file5.exists()){
-//                        insert_database(subpath_t4);
-                                                            file5.delete();
+                                                            insert_database(subpath_t4);
+//                        file5.delete();
+                                                        }else{
+                                                            jumlah__download_id.add(Long.valueOf(5));
+                                                            downloadfromdropbox(url_t4, subpath_t4);
                                                         }
-                                                        downloadfromdropbox(url_t4, subpath_t4);
+
 
 
                                                         url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
                                                         subpath_t5 = "t5.csv";
                                                         File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
                                                         if(file6.exists()){
-//                        insert_database(subpath_t5);
-                                                            file6.delete();
+                                                            insert_database(subpath_t5);
+//                        file6.delete();
+                                                        }else{
+                                                            jumlah__download_id.add(Long.valueOf(6));
+                                                            downloadfromdropbox(url_t5, subpath_t5);
                                                         }
-                                                        downloadfromdropbox(url_t5, subpath_t5);
+
 
                                                         url_data_update = dataSnapshot.child("link_data").getValue().toString();
                                                         subpath_data_update = "dataupdate.csv";
                                                         File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                                                         if(file7.exists()){
-//                        insert_database(subpath_data_update);
-                                                          file7.delete();
+                                                            insert_database(subpath_data_update);
+//                        file7.delete();
+                                                        }else{
+                                                            jumlah__download_id.add(Long.valueOf(7));
+                                                            downloadfromdropbox(url_data_update, subpath_data_update);
                                                         }
-                                                        downloadfromdropbox(url_data_update, subpath_data_update);
+
 
 
 
@@ -518,41 +539,53 @@ public class BantuanPage extends Fragment {
                                 subpath_t0 = "t0.csv";
                                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                                 if(file.exists()){
-//                        insert_database(subpath_t0);
-                                    file.delete();
+                                    insert_database(subpath_t0);
+//                        file.delete();
+                                }else{
+                                    jumlah__download_id.add(Long.valueOf(1));
+                                    downloadfromdropbox(url_t0, subpath_t0);
+
                                 }
-                                downloadfromdropbox(url_t0, subpath_t0);
 
 
                                 url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
                                 subpath_t1 = "t1.csv";
                                 File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
                                 if(file2.exists()){
-//                        insert_database(subpath_t1);
-                                    file2.delete();
+                                    insert_database(subpath_t1);
+//                        file2.delete();
+                                }else{
+                                    jumlah__download_id.add(Long.valueOf(2));
+                                    downloadfromdropbox(url_t1, subpath_t1);
+
                                 }
-                                downloadfromdropbox(url_t1, subpath_t1);
 
 
                                 url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
                                 subpath_t2 = "t2.csv";
                                 File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
                                 if(file3.exists()){
-//                        insert_database(subpath_t2);
+                                    insert_database(subpath_t2);
 
-                                    file3.delete();
+//                        file3.delete();
+                                }else{
+                                    jumlah__download_id.add(Long.valueOf(3));
+                                    downloadfromdropbox(url_t2, subpath_t2);
+
                                 }
-                                downloadfromdropbox(url_t2, subpath_t2);
 
 
                                 url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
                                 subpath_t3 = "t3.csv";
                                 File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
                                 if(file4.exists()){
-//                        insert_database(subpath_t3);
-                                    file4.delete();
+                                    insert_database(subpath_t3);
+//                        file4.delete();
+                                }else{
+                                    jumlah__download_id.add(Long.valueOf(4));
+                                    downloadfromdropbox(url_t3, subpath_t3);
                                 }
-                                downloadfromdropbox(url_t3, subpath_t3);
+
 
 
 
@@ -560,29 +593,38 @@ public class BantuanPage extends Fragment {
                                 subpath_t4 = "t4.csv";
                                 File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
                                 if(file5.exists()){
-//                        insert_database(subpath_t4);
-                                    file5.delete();
+                                    insert_database(subpath_t4);
+//                        file5.delete();
+                                }else{
+                                    jumlah__download_id.add(Long.valueOf(5));
+                                    downloadfromdropbox(url_t4, subpath_t4);
                                 }
-                                downloadfromdropbox(url_t4, subpath_t4);
+
 
 
                                 url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
                                 subpath_t5 = "t5.csv";
                                 File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
                                 if(file6.exists()){
-//                        insert_database(subpath_t5);
-                                    file6.delete();
+                                    insert_database(subpath_t5);
+//                        file6.delete();
+                                }else{
+                                    jumlah__download_id.add(Long.valueOf(6));
+                                    downloadfromdropbox(url_t5, subpath_t5);
                                 }
-                                downloadfromdropbox(url_t5, subpath_t5);
+
 
                                 url_data_update = dataSnapshot.child("link_data").getValue().toString();
                                 subpath_data_update = "dataupdate.csv";
                                 File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                                 if(file7.exists()){
-//                        insert_database(subpath_data_update);
-                                    file7.delete();
+                                    insert_database(subpath_data_update);
+//                        file7.delete();
+                                }else{
+                                    jumlah__download_id.add(Long.valueOf(7));
+                                    downloadfromdropbox(url_data_update, subpath_data_update);
                                 }
-                                downloadfromdropbox(url_data_update, subpath_data_update);
+
 
 
 
@@ -612,8 +654,6 @@ public class BantuanPage extends Fragment {
         SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date dateobj = Calendar.getInstance().getTime();
         date = curFormat.format(dateobj);
-
-
         return date;
     }
 
@@ -640,18 +680,16 @@ public class BantuanPage extends Fragment {
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setDescription("Some descrition");
             request.setTitle("Some title");
-// in order for this if to run, you must use the android 3.2 to compile your app
+            // in order for this if to run, you must use the android 3.2 to compile your app
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             }
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
-
-// get download service and enqueue file
+            // get download service and enqueue file
             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
-            jumlah__download_id.add(downloadID);
-            System.out.println("tes"+downloadID);
+
         }
     }
 

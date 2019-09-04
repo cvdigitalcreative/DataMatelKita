@@ -187,59 +187,9 @@ public class PencarianPage extends Fragment {
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_container, bantuanPage).commit();
 
-//                    System.out.println("done");
-//                    progress = new ProgressDialog(getActivity());
-//                    progress.setMessage("Updating Data . . .");
-//                    progress.setIndeterminate(true);
-//                    progress.setCancelable(false);
-//                    progress.show();
-//                    finished.setVisibility(View.VISIBLE);
-//                    myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-//
-//
-//                            url_t0 = dataSnapshot.child("link_tes").getValue().toString();
-//                            subpath_t0 = "t0.csv";
-//                            downloadfromdropbox(url_t0, subpath_t0);
-//
-//                            url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
-//                            subpath_t1 = "t1.csv";
-//                            downloadfromdropbox(url_t1, subpath_t1);
-//
-//                            url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
-//                            subpath_t2 = "t2.csv";
-//                            downloadfromdropbox(url_t2, subpath_t2);
-//
-//                            url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
-//                            subpath_t3 = "t3.csv";
-//                            downloadfromdropbox(url_t3, subpath_t3);
-//
-//                            url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
-//                            subpath_t4 = "t4.csv";
-//                            downloadfromdropbox(url_t4, subpath_t4);
-//
-//
-//                            url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
-//                            subpath_t5 = "t5.csv";
-//                            downloadfromdropbox(url_t5, subpath_t5);
-//
-//                            url_data_update = dataSnapshot.child("link_data").getValue().toString();
-//                            subpath_data_update = "dataupdate.csv";
-//                            downloadfromdropbox(url_data_update, subpath_data_update);
-//
-//
-////
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                        }
-//                    });
 
                 }
-//                animation.collapse(btn_update);
+//
             }
         });
     }
