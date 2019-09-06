@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.Controller.Firebase;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
 import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
 import com.digitalcreative.vimatelindonesia.R;
 import com.digitalcreative.vimatelindonesia.RealmHelper;
@@ -137,7 +138,6 @@ public class BantuanPage extends Fragment {
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
-        getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
 
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -181,6 +181,21 @@ public class BantuanPage extends Fragment {
         });
 
         return view;
+    }
+    public void startService() {
+        FirebaseAuth firebaseAuth;
+        FirebaseUser firebaseUser;
+        FirebaseDatabase firebaseDatabase;
+        DatabaseReference myRef;
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        myRef = firebaseDatabase.getReference();
+        String uid=firebaseUser.getUid();
+        Intent serviceIntent = new Intent(getContext(), ForegroundService.class);
+        serviceIntent.putExtra("inputExtra", uid);
+
+        ContextCompat.startForegroundService(getContext(), serviceIntent);
     }
 
     private void sayHelloboys(View view) {
@@ -314,11 +329,6 @@ public class BantuanPage extends Fragment {
 //                    }
                     System.out.println("done");
 
-                    progress = new ProgressDialog(getActivity());
-                    progress.setMessage("Updating Data . . .");
-                    progress.setIndeterminate(true);
-                    progress.setCancelable(false);
-                    progress.show();
                     firebaseAuth = FirebaseAuth.getInstance();
                     firebaseDatabase = FirebaseDatabase.getInstance();
                     firebaseUser = firebaseAuth.getCurrentUser();
@@ -359,151 +369,7 @@ public class BantuanPage extends Fragment {
                                                 Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
 
                                             } else {
-                                                Realm.init(getContext());
-                                                RealmConfiguration configuration = new RealmConfiguration.Builder()
-                                                        .name("vimatel.db")
-                                                        .schemaVersion(1)
-                                                        .deleteRealmIfMigrationNeeded()
-                                                        .build();
-                                                realm = Realm.getInstance(configuration);
-//                                                realm.executeTransaction(new Realm.Transaction() {
-//                                                    @Override
-//                                                    public void execute(Realm realm) {
-//                                                        realm.deleteAll();
-//                                                    }
-//                                                });
-                                                myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-
-
-                                                        url_t0 = dataSnapshot.child("link_tes").getValue().toString();
-                                                        subpath_t0 = "t0.csv";
-                                                        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
-                                                        if(file.exists()){
-                                                            System.out.println("insert db");
-                                                            insert_database(subpath_t0);
-//                        file.delete();
-                                                        }else{
-                                                            System.out.println("insert url");
-                                                            path_file.add(subpath_t0);
-                                                            url_file.add(url_t0);
-
-
-                                                        }
-
-
-                                                        url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
-                                                        subpath_t1 = "t1.csv";
-                                                        File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
-                                                        if(file2.exists()){
-                                                            System.out.println("insert db");
-                                                            insert_database(subpath_t1);
-//                        file2.delete();
-                                                        }else{
-                                                            System.out.println("insert url");
-
-                                                            path_file.add(subpath_t1);
-                                                            url_file.add(url_t1);
-
-                                                        }
-
-
-                                                        url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
-                                                        subpath_t2 = "t2.csv";
-                                                        File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
-                                                        if(file3.exists()){
-                                                            System.out.println("insert db");
-                                                            insert_database(subpath_t2);
-
-//                        file3.delete();
-                                                        }else{
-                                                            System.out.println("insert url");
-
-                                                            path_file.add(subpath_t2);
-                                                            url_file.add(url_t2);
-
-
-                                                        }
-
-
-                                                        url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
-                                                        subpath_t3 = "t3.csv";
-                                                        File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
-                                                        if(file4.exists()){
-                                                            System.out.println("insert db");
-                                                            insert_database(subpath_t3);
-//                        file4.delete();
-                                                        }else{
-                                                            System.out.println("insert url");
-                                                            path_file.add(subpath_t3);
-                                                            url_file.add(url_t3);
-
-                                                        }
-
-
-
-
-                                                        url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
-                                                        subpath_t4 = "t4.csv";
-                                                        File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
-                                                        if(file5.exists()){
-                                                            System.out.println("insert db");
-                                                            insert_database(subpath_t4);
-//                        file5.delete();
-                                                        }else{
-                                                            System.out.println("insert url");
-                                                            path_file.add(subpath_t4);
-                                                            url_file.add(url_t4);
-
-                                                        }
-
-
-
-                                                        url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
-                                                        subpath_t5 = "t5.csv";
-                                                        File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
-                                                        if(file6.exists()){
-                                                            System.out.println("insert db");
-                                                            insert_database(subpath_t5);
-//                        file6.delete();
-                                                        }else{
-                                                            System.out.println("insert url");
-                                                            path_file.add(subpath_t5);
-                                                            url_file.add(url_t5);
-
-                                                        }
-
-
-                                                        url_data_update = dataSnapshot.child("link_data").getValue().toString();
-                                                        subpath_data_update = "dataupdate.csv";
-                                                        File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
-                                                        if(file7.exists()){
-                                                            System.out.println("insert db");
-                                                            insert_database(subpath_data_update);
-//                        file7.delete();
-                                                        }else{
-                                                            System.out.println("insert url");
-                                                            path_file.add(subpath_data_update);
-                                                            url_file.add(url_data_update);
-
-                                                        }
-
-                                                        for(int i=0; i<url_file.size(); i++){
-                                                            downloadfromdropbox(url_file.get(i), path_file.get(i));
-                                                        }
-
-
-
-
-//
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                    }
-                                                });
+                                                startService();
                                             }
                                         } catch (ParseException e) {
                                             e.printStackTrace();
@@ -527,152 +393,9 @@ public class BantuanPage extends Fragment {
 
                             }
                         });
-
-
                     }else{
-
-                        realm = Realm.getInstance(configuration);
-//                        realm.executeTransaction(new Realm.Transaction() {
-//                            @Override
-//                            public void execute(Realm realm) {
-//                                realm.deleteAll();
-//                            }
-//                        });
-                        myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-
-
-                                url_t0 = dataSnapshot.child("link_tes").getValue().toString();
-                                subpath_t0 = "t0.csv";
-                                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
-                                if(file.exists()){
-                                    System.out.println("insert db");
-                                    insert_database(subpath_t0);
-//                        file.delete();
-                                }else{
-                                    System.out.println("insert url");
-                                    path_file.add(subpath_t0);
-                                    url_file.add(url_t0);
-
-
-                                }
-
-
-                                url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
-                                subpath_t1 = "t1.csv";
-                                File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
-                                if(file2.exists()){
-                                    System.out.println("insert db");
-                                    insert_database(subpath_t1);
-//                        file2.delete();
-                                }else{
-                                    System.out.println("insert url");
-
-                                    path_file.add(subpath_t1);
-                                    url_file.add(url_t1);
-
-                                }
-
-
-                                url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
-                                subpath_t2 = "t2.csv";
-                                File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
-                                if(file3.exists()){
-                                    System.out.println("insert db");
-                                    insert_database(subpath_t2);
-
-//                        file3.delete();
-                                }else{
-                                    System.out.println("insert url");
-
-                                    path_file.add(subpath_t2);
-                                    url_file.add(url_t2);
-
-
-                                }
-
-
-                                url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
-                                subpath_t3 = "t3.csv";
-                                File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
-                                if(file4.exists()){
-                                    System.out.println("insert db");
-                                    insert_database(subpath_t3);
-//                        file4.delete();
-                                }else{
-                                    System.out.println("insert url");
-                                    path_file.add(subpath_t3);
-                                    url_file.add(url_t3);
-
-                                }
-
-
-
-
-                                url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
-                                subpath_t4 = "t4.csv";
-                                File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
-                                if(file5.exists()){
-                                    System.out.println("insert db");
-                                    insert_database(subpath_t4);
-//                        file5.delete();
-                                }else{
-                                    System.out.println("insert url");
-                                    path_file.add(subpath_t4);
-                                    url_file.add(url_t4);
-
-                                }
-
-
-
-                                url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
-                                subpath_t5 = "t5.csv";
-                                File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
-                                if(file6.exists()){
-                                    System.out.println("insert db");
-                                    insert_database(subpath_t5);
-//                        file6.delete();
-                                }else{
-                                    System.out.println("insert url");
-                                    path_file.add(subpath_t5);
-                                    url_file.add(url_t5);
-
-                                }
-
-
-                                url_data_update = dataSnapshot.child("link_data").getValue().toString();
-                                subpath_data_update = "dataupdate.csv";
-                                File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
-                                if(file7.exists()){
-                                    System.out.println("insert db");
-                                    insert_database(subpath_data_update);
-//                        file7.delete();
-                                }else{
-                                    System.out.println("insert url");
-                                    path_file.add(subpath_data_update);
-                                    url_file.add(url_data_update);
-
-                                }
-
-                                for(int i=0; i<url_file.size(); i++){
-                                    downloadfromdropbox(url_file.get(i), path_file.get(i));
-                                }
-
-
-
-
-//
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        startService();
                     }
-
-
                 }
             }
         });

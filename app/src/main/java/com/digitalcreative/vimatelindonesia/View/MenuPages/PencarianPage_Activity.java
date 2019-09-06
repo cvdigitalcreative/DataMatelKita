@@ -144,26 +144,22 @@ public class PencarianPage_Activity extends AppCompatActivity {
         long count = realm.where(Model_LacakMobil.class).count();
 
         if(count<=0){
-//            realm.executeTransaction(new Realm.Transaction() {
-//                @Override
-//                public void execute(Realm realm) {
-//                    realm.deleteAll();
-//                }
-//            });
-            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
-                    "Loading",
-                    "Sedang mengupdate data harap di tgg!");
-            firebaseAuth = FirebaseAuth.getInstance();
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            firebaseUser = firebaseAuth.getCurrentUser();
-            myRef = firebaseDatabase.getReference();
-            jumlah_id=new ArrayList<>();
-            path_file=new ArrayList<>();
-            url_file=new ArrayList<>();
-            jumlah__download_id=new ArrayList<>();
-            jumlah_file=7;
-            PencarianPage_Activity.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-            update_data();
+            Toast.makeText(context, "Sedang mendownload data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
+//
+//            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
+//                    "Loading",
+//                    "Sedang mengupdate data harap di tgg!");
+//            firebaseAuth = FirebaseAuth.getInstance();
+//            firebaseDatabase = FirebaseDatabase.getInstance();
+//            firebaseUser = firebaseAuth.getCurrentUser();
+//            myRef = firebaseDatabase.getReference();
+//            jumlah_id=new ArrayList<>();
+//            path_file=new ArrayList<>();
+//            url_file=new ArrayList<>();
+//            jumlah__download_id=new ArrayList<>();
+//            jumlah_file=7;
+//            PencarianPage_Activity.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+//            update_data();
 
         }else{
             Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
@@ -175,8 +171,6 @@ public class PencarianPage_Activity extends AppCompatActivity {
         boolean hasPermission = (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         if (!hasPermission) {
-
-
             ActivityCompat.requestPermissions(PencarianPage_Activity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_WRITE_STORAGE);

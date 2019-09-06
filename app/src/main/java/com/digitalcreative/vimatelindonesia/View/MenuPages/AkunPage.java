@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.BaseActivity;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
 import com.digitalcreative.vimatelindonesia.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -67,53 +69,26 @@ public class AkunPage extends Fragment {
 
         //do Function
         btnlogoutFunc();
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseUser =  firebaseAuth.getCurrentUser();
-        myRef = firebaseDatabase.getReference();
-        myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final String last_update_data= dataSnapshot.child("last_update_data").getValue().toString();
-                myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
-                        String last_update_data_sistem= dataSnapshots.child("update_terakhir").getValue().toString();
-                        System.out.println("cuy masuk akal");
-                        SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        Date dateobj = Calendar.getInstance().getTime();
 
-                        Date date = null;
-                        try {
-                            date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
-                            Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
-                            long milliseconds = date_2.getTime() - date.getTime();
-                            long days = milliseconds / (1000 * 60 * 60 * 24);
-                            if (days>0 ) {
-                                Toast.makeText(getActivity(), "Silahkan Update Data", Toast.LENGTH_LONG).show();
-
-                            }
-                        }  catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         return view;
     }
+    public void startService() {
+        FirebaseAuth firebaseAuth;
+        FirebaseUser firebaseUser;
+        FirebaseDatabase firebaseDatabase;
+        DatabaseReference myRef;
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        myRef = firebaseDatabase.getReference();
+        String uid=firebaseUser.getUid();
+        Intent serviceIntent = new Intent(getContext(), ForegroundService.class);
+        serviceIntent.putExtra("inputExtra", uid);
 
-    private void btnlogoutFunc() {
+        ContextCompat.startForegroundService(getContext(), serviceIntent);
+    }
+
+        private void btnlogoutFunc() {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

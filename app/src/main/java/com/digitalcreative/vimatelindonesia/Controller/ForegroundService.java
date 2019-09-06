@@ -40,6 +40,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,18 +91,21 @@ public class ForegroundService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
         createNotificationChannel();
-        Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, notificationIntent, 0);
+//        Intent notificationIntent = new Intent(this, MainActivity.class);
+//        // Create an IntentFilter instance.
+//        IntentFilter intentFilter = new IntentFilter();
+//
+//        intentFilter.addAction("android.intent.action.ACTION_DOWNLOAD_COMPLETE");
+//
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+//                0, notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Download Data")
                 .setContentText("sedang mendownload File")
-                .setContentIntent(pendingIntent)
                 .build();
 
         startForeground(1, notification);
-
         //do heavy work on a background thread
         Realm.init(ForegroundService.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
@@ -111,8 +115,21 @@ public class ForegroundService extends Service {
                 .build();
         realm = Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
-
-        if(count<=0){
+        subpath_t0 = "t0.csv";
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
+        subpath_t1 = "t1.csv";
+        File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
+        subpath_t2 = "t2.csv";
+        File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
+        subpath_t3 = "t3.csv";
+        File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
+        subpath_t4 = "t4.csv";
+        File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
+        subpath_t5 = "t5.csv";
+        File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
+        subpath_data_update = "dataupdate.csv";
+        File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
+        if(count<=0  ){
 //            realm.executeTransaction(new Realm.Transaction() {
 //                @Override
 //                public void execute(Realm realm) {
@@ -129,11 +146,67 @@ public class ForegroundService extends Service {
             url_file=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
             jumlah_file=7;
-            ForegroundService.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
             update_data();
 
         }else{
-            stopForegroundService();
+            firebaseAuth = FirebaseAuth.getInstance();
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            firebaseUser = firebaseAuth.getCurrentUser();
+            myRef = firebaseDatabase.getReference();
+            myRef.child("Users").child(input).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                                 @Override
+                                                                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                                                     final String status_download_db = dataSnapshot.child("status_download_db").getValue().toString();
+
+                                                                                                     final String last_update_data = dataSnapshot.child("last_update_data").getValue().toString();
+                                                                                                     myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                                         @Override
+                                                                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
+                                                                                                             System.out.println("cuy masuk akal");
+                                                                                                             String last_update_data_sistem = dataSnapshots.child("update_terakhir").getValue().toString();
+                                                                                                             SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                                                                                             Date dateobj = Calendar.getInstance().getTime();
+
+                                                                                                             Date date = null;
+                                                                                                             try {
+                                                                                                                 date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
+                                                                                                                 Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
+                                                                                                                 long milliseconds = date_2.getTime() - date.getTime();
+                                                                                                                 long days = milliseconds / (1000 * 60 * 60 * 24);
+                                                                                                                 if (days<=0 && status_download_db.trim().equals("1")) {
+                                                                                                                     stopForegroundService();
+                                                                                                                 }else{
+                                                                                                                     firebaseAuth = FirebaseAuth.getInstance();
+                                                                                                                     firebaseDatabase = FirebaseDatabase.getInstance();
+                                                                                                                     firebaseUser = firebaseAuth.getCurrentUser();
+                                                                                                                     myRef = firebaseDatabase.getReference();
+                                                                                                                     jumlah_id=new ArrayList<>();
+                                                                                                                     path_file=new ArrayList<>();
+                                                                                                                     url_file=new ArrayList<>();
+                                                                                                                     jumlah__download_id=new ArrayList<>();
+                                                                                                                     jumlah_file=7;
+                                                                                                                     registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+                                                                                                                     update_data();
+                                                                                                                 }
+                                                                                                             } catch (ParseException e) {
+                                                                                                                 e.printStackTrace();
+                                                                                                             }
+
+                                                                                                         }
+
+                                                                                                         @Override
+                                                                                                         public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                                                         }
+                                                                                                     });
+                                                                                                 }
+
+                                                                                                 @Override
+                                                                                                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                                                 }
+                                                                                             });
+
         }
 
         //stopSelf();
@@ -348,13 +421,14 @@ public class ForegroundService extends Service {
                     if( jumlah_file==1){
                         System.out.println("masuk sini");
                         update_data_s();
+                        stopForegroundService();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
 
                     }else{
                         jumlah_file=jumlah_file-1;
                         update_data_s();
                         System.out.println("file exist "+file[0].exists());
-                        stopForegroundService();
+
                     }
 
 
