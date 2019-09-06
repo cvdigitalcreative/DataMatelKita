@@ -110,7 +110,10 @@ public class PencarianPage_Activity extends AppCompatActivity {
     String url_data_update;
     String subpath_data_update;
     private ArrayList<Long> jumlah_id;
+    private ArrayList<String> path_file;
+    private ArrayList<String>  url_file;
     private ArrayList<Long> jumlah__download_id;
+    private int jumlah_file;
     private long downloadID;
 
     ProgressDialog progressDialog;
@@ -137,14 +140,14 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 .build();
         realm = Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
-        Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
-        if(count<100000){
-            realm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    realm.deleteAll();
-                }
-            });
+
+        if(count<400000){
+//            realm.executeTransaction(new Realm.Transaction() {
+//                @Override
+//                public void execute(Realm realm) {
+//                    realm.deleteAll();
+//                }
+//            });
             progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
                     "Loading",
                     "Sedang mengupdate data harap di tgg!");
@@ -153,10 +156,15 @@ public class PencarianPage_Activity extends AppCompatActivity {
             firebaseUser = firebaseAuth.getCurrentUser();
             myRef = firebaseDatabase.getReference();
             jumlah_id=new ArrayList<>();
+            path_file=new ArrayList<>();
+            url_file=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
+            jumlah_file=7;
             PencarianPage_Activity.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
             update_data();
 
+        }else{
+            Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -174,7 +182,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                        //loading Data
 //                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
 //                        backendFirebase.downloadFile(getContext());
-             progressDialog.dismiss();
+            progressDialog.dismiss();
         } else {
             Realm.init(context);
             RealmConfiguration configuration = new RealmConfiguration.Builder()
@@ -183,12 +191,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .deleteRealmIfMigrationNeeded()
                     .build();
             realm = Realm.getInstance(configuration);
-            realm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    realm.deleteAll();
-                }
-            });
+//            realm.executeTransaction(new Realm.Transaction() {
+//                @Override
+//                public void execute(Realm realm) {
+//                    realm.deleteAll();
+//                }
+//            });
             myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -198,41 +206,66 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     subpath_t0 = "t0.csv";
                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                     if(file.exists()){
-//                        insert_database(subpath_t0);
-                        file.delete();
+                        System.out.println("insert db");
+                        insert_database(subpath_t0);
+//                        file.delete();
+                    }else{
+                        System.out.println("insert url");
+                        path_file.add(subpath_t0);
+                        url_file.add(url_t0);
+
+
                     }
-                        downloadfromdropbox(url_t0, subpath_t0);
 
 
                     url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
                     subpath_t1 = "t1.csv";
                     File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
                     if(file2.exists()){
-//                        insert_database(subpath_t1);
-                        file2.delete();
+                        System.out.println("insert db");
+                        insert_database(subpath_t1);
+//                        file2.delete();
+                    }else{
+                        System.out.println("insert url");
+
+                        path_file.add(subpath_t1);
+                        url_file.add(url_t1);
+
                     }
-                        downloadfromdropbox(url_t1, subpath_t1);
 
 
                     url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
                     subpath_t2 = "t2.csv";
                     File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
                     if(file3.exists()){
-//                        insert_database(subpath_t2);
+                        System.out.println("insert db");
+                        insert_database(subpath_t2);
 
-                        file3.delete();
+//                        file3.delete();
+                    }else{
+                        System.out.println("insert url");
+
+                        path_file.add(subpath_t2);
+                        url_file.add(url_t2);
+
+
                     }
-                        downloadfromdropbox(url_t2, subpath_t2);
 
 
                     url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
                     subpath_t3 = "t3.csv";
                     File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
                     if(file4.exists()){
-//                        insert_database(subpath_t3);
-                        file4.delete();
+                        System.out.println("insert db");
+                        insert_database(subpath_t3);
+//                        file4.delete();
+                    }else{
+                        System.out.println("insert url");
+                        path_file.add(subpath_t3);
+                        url_file.add(url_t3);
+
                     }
-                        downloadfromdropbox(url_t3, subpath_t3);
+
 
 
 
@@ -240,29 +273,51 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     subpath_t4 = "t4.csv";
                     File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
                     if(file5.exists()){
-//                        insert_database(subpath_t4);
-                        file5.delete();
+                        System.out.println("insert db");
+                        insert_database(subpath_t4);
+//                        file5.delete();
+                    }else{
+                        System.out.println("insert url");
+                        path_file.add(subpath_t4);
+                        url_file.add(url_t4);
+
                     }
-                        downloadfromdropbox(url_t4, subpath_t4);
+
 
 
                     url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
                     subpath_t5 = "t5.csv";
                     File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
                     if(file6.exists()){
-//                        insert_database(subpath_t5);
-                        file6.delete();
+                        System.out.println("insert db");
+                        insert_database(subpath_t5);
+//                        file6.delete();
+                    }else{
+                        System.out.println("insert url");
+                        path_file.add(subpath_t5);
+                        url_file.add(url_t5);
+
                     }
-                        downloadfromdropbox(url_t5, subpath_t5);
+
 
                     url_data_update = dataSnapshot.child("link_data").getValue().toString();
                     subpath_data_update = "dataupdate.csv";
                     File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
                     if(file7.exists()){
-//                        insert_database(subpath_data_update);
-                        file7.delete();
+                        System.out.println("insert db");
+                        insert_database(subpath_data_update);
+//                        file7.delete();
+                    }else{
+                        System.out.println("insert url");
+                        path_file.add(subpath_data_update);
+                        url_file.add(url_data_update);
+
                     }
-                        downloadfromdropbox(url_data_update, subpath_data_update);
+
+                    for(int i=0; i<url_file.size(); i++){
+                        downloadfromdropbox(url_file.get(i), path_file.get(i));
+                    }
+
 
 
 
@@ -279,7 +334,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         }
     }
     public void insert_database(String subpath) {
-        System.out.println("kesini cuy");
+
 
         insertdata(subpath);
 //          file[0].delete();
@@ -288,6 +343,8 @@ public class PencarianPage_Activity extends AppCompatActivity {
     }
 
     public void insertdata(final String subpath) {
+        System.out.println("jumlah file "+jumlah_file);
+        final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
@@ -299,20 +356,17 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(configuration);
-        realm.executeTransaction(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
 
                     String line = "";
                     while ((line = br.readLine()) != null) {
-
-
                         // use comma as separator
                         final String[] country = line.split(",");
-
                         if(country.length==12){
-                            final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
+
                             model_lacakMobil.setNama_mobil(country[1]);
                             model_lacakMobil.setNo_plat(country[2]);
                             model_lacakMobil.setNamaunit(country[3]);
@@ -331,10 +385,20 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-
-                    if(file[0].exists()){
-                        file[0].delete();
+                    System.out.println("nama file "+file[0].getAbsolutePath());
+                    System.out.println("jumlah file diolah "+jumlah_file);
+                    file[0].delete();
+                    if( jumlah_file==1){
+                        System.out.println("masuk sini");
+//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+                        progressDialog.dismiss();
+                        update_data_s();
+                    }else{
+                        jumlah_file=jumlah_file-1;
+                        System.out.println("file exist "+file[0].exists());
                     }
+
+
 
 
 
@@ -350,6 +414,29 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 
     }
+    private void update_data_s() {
+        FirebaseAuth firebaseAuth;
+        FirebaseUser firebaseUser;
+        FirebaseDatabase firebaseDatabase;
+        DatabaseReference myRef;
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        myRef = firebaseDatabase.getReference();
+        myRef.child("Users").child(firebaseUser.getUid()).child("last_update_data").setValue(getCurrentDate());
+        myRef.child("Users").child(firebaseUser.getUid()).child("status_download_db").setValue("1");
+    }
+    private String getCurrentDate() {
+        String date;
+
+        SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateobj = Calendar.getInstance().getTime();
+        date = curFormat.format(dateobj);
+
+
+        return date;
+    }
+
 
     private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
         @Override
@@ -358,18 +445,17 @@ public class PencarianPage_Activity extends AppCompatActivity {
             //Fetching the download id received with the broadcast
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             jumlah_id.add(id);
-            //Checking if the received broadcast is for our enqueued download by matching download id
-            System.out.println(jumlah_id.size());
-            System.out.println(jumlah__download_id.size());
-            if (jumlah_id.size()==jumlah__download_id.size()) {
+            System.out.println("download selesai "+id);
+            System.out.println("jumlah id "+jumlah_id.size());
+            System.out.println("jumlah download "+jumlah__download_id.size());
 
-                insert_database(subpath_t0);
-                insert_database(subpath_t1);
-                insert_database(subpath_t2);
-                insert_database(subpath_t3);
-                insert_database(subpath_t4);
-                insert_database(subpath_t5);
-                insert_database(subpath_data_update);
+            //Checking if the received broadcast is for our enqueued download by matching download id
+
+            if (jumlah_id.size()==jumlah__download_id.size()) {
+                System.out.println("mulai memasukan data");
+                for(int i=0; i<path_file.size(); i++){
+                    insert_database(path_file.get(i));
+                }
                 Realm.init(context);
                 RealmConfiguration configuration = new RealmConfiguration.Builder()
                         .name("test.db")
@@ -379,8 +465,8 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 realm = Realm.getInstance(configuration);
                 long count = realm.where(Model_LacakMobil.class).count();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+
+                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
 
             }
 
@@ -388,9 +474,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
     };
 
     public void downloadfromdropbox(String url, String subpath) {
-        System.out.println("cuy");
+
         if (isDownloadManagerAvailable(context)) {
-            System.out.println("cuy la");
+
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setDescription("Some descrition");
             request.setTitle("Some title");
@@ -400,11 +486,11 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             }
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
-
+            System.out.println("sub path download "+subpath);
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) PencarianPage_Activity.this.getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
-            jumlah__download_id.add(downloadID);
+            jumlah__download_id.add(Long.valueOf(downloadID));
 
         }
     }
@@ -429,7 +515,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
     private class YourAsyncTask extends AsyncTask<String, String, List<Model_LacakMobil>> {
 
-        ProgressDialog progressDialog;
+//        ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
             // start loading animation maybe?
@@ -447,16 +533,22 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .deleteRealmIfMigrationNeeded()
                     .build();
             realm = Realm.getInstance(configuration);
-                // This is where the magic happens. realm.copyFromRealm() takes
-                // a RealmResult and essentially returns a deep copy of the
-                // list that it contains. The elements of this list is however
-                // completely detached from realm and is not monitored by realm
-                // for changes. Thus this list of values is free to move around
-                // inside any thread.
-                list= realm.where(Model_LacakMobil.class).limit(10).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
-                List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
-                realm.close();
-                return safeWords;
+            // This is where the magic happens. realm.copyFromRealm() takes
+            // a RealmResult and essentially returns a deep copy of the
+            // list that it contains. The elements of this list is however
+            // completely detached from realm and is not monitored by realm
+            // for changes. Thus this list of values is free to move around
+            // inside any thread.
+            list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
+            List<Model_LacakMobil> safeWords;
+            if(list.size()>17){
+               safeWords = realm.copyFromRealm(list.subList(0,15));
+            }else{
+                safeWords = realm.copyFromRealm(list);
+            }
+
+            realm.close();
+            return safeWords;
 
         }
 
@@ -467,7 +559,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // Please note here MyAdaptor constructor will now take the
             // list of words directly and not RealmResults so you slightly
             // modify the MyAdapter constructor.
-            System.out.println(words.size());
+            progressbar.setVisibility(View.INVISIBLE);
             if(words.size()==0){
 
                 emptyText.setVisibility(View.VISIBLE);
@@ -510,8 +602,8 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //
 //                list = realmHelper.getAllMahasiswa(s.toString());
 
-                    emptyText.setVisibility(View.INVISIBLE);
-
+                emptyText.setVisibility(View.INVISIBLE);
+                progressbar.setVisibility(View.VISIBLE);
 
                 mTask = (YourAsyncTask) new YourAsyncTask().execute(s.toString());
 
@@ -543,19 +635,13 @@ public class PencarianPage_Activity extends AppCompatActivity {
         //Button
         //backbutton = view.findViewById(R.id.lacak_backbutton);
         //progress bar
-        progressBar = findViewById(R.id.progressBar);
-        progressbar = findViewById(R.id.progressbar);
+        progressbar = findViewById(R.id.progressbarwait);
         emptyText = findViewById(R.id.tv_no_data);
 
         //Keyboard
         keyboard = findViewById(R.id.mykeyboard);
     }
 
-    private void performSearch(){
-        detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
-        recyclerView.setAdapter(detaillacakMobil);
-
-    }
 
 //    private void execute1stdataSearch(ArrayList<ArrayList> data_, int current) {
 //        int count = 0;
@@ -594,7 +680,6 @@ public class PencarianPage_Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         //Keyboard
         keyboard = findViewById(R.id.mykeyboard);
     }
