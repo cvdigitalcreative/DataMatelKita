@@ -632,7 +632,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 //
                 mHandler.removeCallbacks(mFilterTask);
-                mHandler.postDelayed(mFilterTask, 2000);
+                mHandler.postDelayed(mFilterTask, 500);
             }
 
             @Override
