@@ -365,7 +365,7 @@ public class BantuanPage extends Fragment {
                                             long milliseconds = date_2.getTime() - date.getTime();
                                             long days = milliseconds / (1000 * 60 * 60 * 24);
                                             if (days<=0 && status_download_db.trim().equals("1")) {
-                                                progress.dismiss();
+
                                                 Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
 
                                             } else {

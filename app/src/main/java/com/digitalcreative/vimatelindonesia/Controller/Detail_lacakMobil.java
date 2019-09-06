@@ -16,7 +16,9 @@ import android.widget.Toast;
 import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
 import com.digitalcreative.vimatelindonesia.R;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -81,6 +83,16 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
                             try {
                                 intent.setType("text/plain");
                                 intent.setPackage("com.whatsapp");
+                                String saldo;
+                                NumberFormat format = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+                                Locale localeID = new Locale("in", "ID");
+                                NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+
+                                if(model.getSaldo().equals("-")){
+                                    saldo=model.getSaldo();
+                                }else{
+                                    saldo=formatRupiah.format(Double.valueOf(model.getSaldo()));
+                                }
                                 intent.putExtra(Intent.EXTRA_TEXT,
                                         "Dikirim melalui aplikasi data matel nusantara ->"
                                                 +"Link : https://play.google.com/store/apps/details?id=com.digitalcreative.vimatelindonesia "+"\n"
@@ -90,7 +102,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
                                                 +"Nomor Mesin : " +model.getNosin() +"\n"
                                                 +"Finance : " +model.getFinance() +"\n"
                                                 +"OVD : " +model.getOvd() +"\n"
-                                                +"Saldo : " +model.getSaldo() +"\n"
+                                                +"Saldo : " +saldo +"\n"
                                                 +"INI BUKAN ALAT SAH PENARIKAN UNIT"
                                               );
                                 v.getContext().startActivity(intent);
@@ -126,6 +138,9 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         nosin = inflater.findViewById(R.id.detail_nosin);
         tahun = inflater.findViewById(R.id.detail_tahun);
         sipok = inflater.findViewById(R.id.detail_sipok);
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         pemilikmobil.setText(model.getNama_mobil());
         no_plat.setText(model.getNo_plat());
@@ -137,7 +152,12 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         nosin.setText(model.getNosin());
         tahun.setText(model.getTahun());
         warna.setText(model.getWarna());
-        sipok.setText(model.getSaldo());
+        if(model.getSaldo().equals("-")){
+            sipok.setText(model.getSaldo());
+        }else{
+            sipok.setText(formatRupiah.format(Double.valueOf(model.getSaldo())));
+        }
+
 
         share = inflater.findViewById(R.id.detail_btn_share);
         back = inflater.findViewById(R.id.detail_btn_kembali);
