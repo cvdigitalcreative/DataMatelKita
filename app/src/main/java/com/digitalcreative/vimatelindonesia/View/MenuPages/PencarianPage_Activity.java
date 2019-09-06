@@ -134,7 +134,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
         Realm.init(context);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
+                .name("vimatel.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -186,7 +186,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         } else {
             Realm.init(context);
             RealmConfiguration configuration = new RealmConfiguration.Builder()
-                    .name("test.db")
+                    .name("vimatel.db")
                     .schemaVersion(1)
                     .deleteRealmIfMigrationNeeded()
                     .build();
@@ -351,7 +351,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         final String localFile = file[0].toString();
         Realm.init(context);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
+                .name("vimatel.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -458,7 +458,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 }
                 Realm.init(context);
                 RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("test.db")
+                        .name("vimatel.db")
                         .schemaVersion(1)
                         .deleteRealmIfMigrationNeeded()
                         .build();
@@ -528,7 +528,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         protected List<Model_LacakMobil> doInBackground(String... params) {
             Realm.init(context);
             RealmConfiguration configuration = new RealmConfiguration.Builder()
-                    .name("test.db")
+                    .name("vimatel.db")
                     .schemaVersion(1)
                     .deleteRealmIfMigrationNeeded()
                     .build();
@@ -541,8 +541,8 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // inside any thread.
             list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
             List<Model_LacakMobil> safeWords;
-            if(list.size()>17){
-                safeWords = realm.copyFromRealm(list.subList(0,15));
+            if(list.size()>6){
+                safeWords = realm.copyFromRealm(list.subList(0,5));
             }else{
                 safeWords = realm.copyFromRealm(list);
             }
@@ -559,11 +559,10 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // Please note here MyAdaptor constructor will now take the
             // list of words directly and not RealmResults so you slightly
             // modify the MyAdapter constructor.
+            list=new ArrayList<>();
             progressbar.setVisibility(View.INVISIBLE);
             if(words.size()==0){
-
                 emptyText.setVisibility(View.VISIBLE);
-
             }else{
 
                 emptyText.setVisibility(View.INVISIBLE);

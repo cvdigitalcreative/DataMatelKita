@@ -109,7 +109,7 @@ public class BantuanPage extends Fragment {
 //        Realm.init(this.getContext());
 //        RealmConfiguration config =
 //                new RealmConfiguration.Builder()
-//                        .name("test.db")
+//                        .name("vimatel.db")
 //                        .schemaVersion(1)
 //                        .deleteRealmIfMigrationNeeded()
 //                        .build();
@@ -117,7 +117,7 @@ public class BantuanPage extends Fragment {
         //Set up Realm
         Realm.init(this.getContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("test.db")
+                        .name("vimatel.db")
                         .schemaVersion(1)
                         .deleteRealmIfMigrationNeeded()
                         .build();
@@ -221,7 +221,7 @@ public class BantuanPage extends Fragment {
                 }
                 Realm.init(context);
                 RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("test.db")
+                        .name("vimatel.db")
                         .schemaVersion(1)
                         .deleteRealmIfMigrationNeeded()
                         .build();
@@ -336,7 +336,7 @@ public class BantuanPage extends Fragment {
 
                     Realm.init(BantuanPage.this.getContext());
                     RealmConfiguration configuration = new RealmConfiguration.Builder()
-                            .name("test.db")
+                            .name("vimatel.db")
                             .schemaVersion(1)
                             .deleteRealmIfMigrationNeeded()
                             .build();
@@ -370,7 +370,7 @@ public class BantuanPage extends Fragment {
                                             } else {
                                                 Realm.init(getContext());
                                                 RealmConfiguration configuration = new RealmConfiguration.Builder()
-                                                        .name("test.db")
+                                                        .name("vimatel.db")
                                                         .schemaVersion(1)
                                                         .deleteRealmIfMigrationNeeded()
                                                         .build();
@@ -753,7 +753,7 @@ public class BantuanPage extends Fragment {
         final String localFile = file[0].toString();
         Realm.init(this.getContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
+                .name("vimatel.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();

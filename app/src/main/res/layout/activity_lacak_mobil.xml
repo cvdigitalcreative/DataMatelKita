@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <com.digitalcreative.aplikasidatamining.Controller.KeyboardMethod
+    <com.digitalcreative.vimatelindonesia.Controller.KeyboardMethod
         android:visibility="visible"
         android:id="@+id/mykeyboard"
         android:layout_width="match_parent"
