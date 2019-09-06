@@ -142,7 +142,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         realm = Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
 
-        if(count<400000){
+        if(count<=0){
 //            realm.executeTransaction(new Realm.Transaction() {
 //                @Override
 //                public void execute(Realm realm) {
@@ -361,7 +361,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
-
+                    file[0].delete();
                     String line = "";
                     while ((line = br.readLine()) != null) {
                         // use comma as separator
@@ -388,14 +388,33 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 } finally {
                     System.out.println("nama file "+file[0].getAbsolutePath());
                     System.out.println("jumlah file diolah "+jumlah_file);
-                    file[0].delete();
+
                     if( jumlah_file==1){
                         System.out.println("masuk sini");
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
                         progressDialog.dismiss();
                         update_data_s();
+//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+
                     }else{
                         jumlah_file=jumlah_file-1;
+                        progressDialog.dismiss();
+
+                        PencarianPage_Activity.this
+                                .runOnUiThread(new Runnable() {
+                            public void run() {
+                                Realm.init(context);
+                                RealmConfiguration configuration = new RealmConfiguration.Builder()
+                                        .name("vimatel.db")
+                                        .schemaVersion(1)
+                                        .deleteRealmIfMigrationNeeded()
+                                        .build();
+                                realm = Realm.getInstance(configuration);
+                                long count = realm.where(Model_LacakMobil.class).count();
+                                Toast.makeText(context, "Berhasil download data ke "+(8-jumlah_file) +" jumlah data "+count, Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                        update_data_s();
                         System.out.println("file exist "+file[0].exists());
                     }
 
@@ -632,7 +651,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 //
                 mHandler.removeCallbacks(mFilterTask);
-                mHandler.postDelayed(mFilterTask, 500);
+                mHandler.postDelayed(mFilterTask, 300);
             }
 
             @Override
