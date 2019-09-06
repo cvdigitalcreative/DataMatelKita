@@ -388,15 +388,15 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     System.out.println("nama file "+file[0].getAbsolutePath());
                     System.out.println("jumlah file diolah "+jumlah_file);
                     file[0].delete();
-                        if( jumlah_file==1){
-                            System.out.println("masuk sini");
+                    if( jumlah_file==1){
+                        System.out.println("masuk sini");
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                            progressDialog.dismiss();
-                            update_data_s();
-                        }else{
-                            jumlah_file=jumlah_file-1;
-                            System.out.println("file exist "+file[0].exists());
-                        }
+                        progressDialog.dismiss();
+                        update_data_s();
+                    }else{
+                        jumlah_file=jumlah_file-1;
+                        System.out.println("file exist "+file[0].exists());
+                    }
 
 
 
@@ -515,7 +515,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
     private class YourAsyncTask extends AsyncTask<String, String, List<Model_LacakMobil>> {
 
-        ProgressDialog progressDialog;
+        //        ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
             // start loading animation maybe?
@@ -539,8 +539,14 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // completely detached from realm and is not monitored by realm
             // for changes. Thus this list of values is free to move around
             // inside any thread.
-            list= realm.where(Model_LacakMobil.class).limit(10).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
-            List<Model_LacakMobil> safeWords = realm.copyFromRealm(list);
+            list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
+            List<Model_LacakMobil> safeWords;
+            if(list.size()>17){
+                safeWords = realm.copyFromRealm(list.subList(0,15));
+            }else{
+                safeWords = realm.copyFromRealm(list);
+            }
+
             realm.close();
             return safeWords;
 
@@ -553,7 +559,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // Please note here MyAdaptor constructor will now take the
             // list of words directly and not RealmResults so you slightly
             // modify the MyAdapter constructor.
-
+            progressbar.setVisibility(View.INVISIBLE);
             if(words.size()==0){
 
                 emptyText.setVisibility(View.VISIBLE);
@@ -597,7 +603,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                list = realmHelper.getAllMahasiswa(s.toString());
 
                 emptyText.setVisibility(View.INVISIBLE);
-
+                progressbar.setVisibility(View.VISIBLE);
 
                 mTask = (YourAsyncTask) new YourAsyncTask().execute(s.toString());
 
@@ -629,19 +635,13 @@ public class PencarianPage_Activity extends AppCompatActivity {
         //Button
         //backbutton = view.findViewById(R.id.lacak_backbutton);
         //progress bar
-        progressBar = findViewById(R.id.progressBar);
-        progressbar = findViewById(R.id.progressbar);
+        progressbar = findViewById(R.id.progressbarwait);
         emptyText = findViewById(R.id.tv_no_data);
 
         //Keyboard
         keyboard = findViewById(R.id.mykeyboard);
     }
 
-    private void performSearch(){
-        detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
-        recyclerView.setAdapter(detaillacakMobil);
-
-    }
 
 //    private void execute1stdataSearch(ArrayList<ArrayList> data_, int current) {
 //        int count = 0;
