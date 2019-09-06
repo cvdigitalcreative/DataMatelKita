@@ -410,7 +410,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
                                         .build();
                                 realm = Realm.getInstance(configuration);
                                 long count = realm.where(Model_LacakMobil.class).count();
-                                
+
                                 Toast.makeText(context, "Berhasil download data ke "+(8-jumlah_file) +" jumlah data "+count, Toast.LENGTH_LONG).show();
                             }
                         });
