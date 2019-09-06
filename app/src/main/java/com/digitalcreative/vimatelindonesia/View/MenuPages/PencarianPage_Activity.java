@@ -446,29 +446,40 @@ public class PencarianPage_Activity extends AppCompatActivity {
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             jumlah_id.add(id);
             System.out.println("download selesai "+id);
+            System.out.println("id download "+jumlah__download_id);
             System.out.println("jumlah id "+jumlah_id.size());
             System.out.println("jumlah download "+jumlah__download_id.size());
+            int index=0;
+            for(int i=0; i<jumlah__download_id.size(); i++){
+                if(id==jumlah__download_id.get(i)){
+                    index=i;
+                    break;
+                }
+            }
+            if(!path_file.isEmpty()){
+                insert_database(path_file.get(index));
+            }
 
             //Checking if the received broadcast is for our enqueued download by matching download id
 
-            if (jumlah_id.size()==jumlah__download_id.size()) {
-                System.out.println("mulai memasukan data");
-                for(int i=0; i<path_file.size(); i++){
-                    insert_database(path_file.get(i));
-                }
-                Realm.init(context);
-                RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("vimatel.db")
-                        .schemaVersion(1)
-                        .deleteRealmIfMigrationNeeded()
-                        .build();
-                realm = Realm.getInstance(configuration);
-                long count = realm.where(Model_LacakMobil.class).count();
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-
-                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
-
-            }
+//            if (jumlah_id.size()==jumlah__download_id.size()) {
+//                System.out.println("mulai memasukan data");
+//                for(int i=0; i<path_file.size(); i++){
+//                    insert_database(path_file.get(i));
+//                }
+//                Realm.init(context);
+//                RealmConfiguration configuration = new RealmConfiguration.Builder()
+//                        .name("vimatel.db")
+//                        .schemaVersion(1)
+//                        .deleteRealmIfMigrationNeeded()
+//                        .build();
+//                realm = Realm.getInstance(configuration);
+//                long count = realm.where(Model_LacakMobil.class).count();
+////                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+//
+//                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
+//
+//            }
 
         }
     };
@@ -596,7 +607,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
             @Override
             public void onTextChanged(final CharSequence s, int start, int before, int count) {
 //
-
+                if(mTask!=null){
+                    mTask.cancel(true);
+                }
                 list = new ArrayList<>();
                 detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
                 recyclerView.setAdapter(detaillacakMobil);
