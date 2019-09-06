@@ -64,6 +64,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
 
 import io.realm.Case;
 import io.realm.Realm;
@@ -550,8 +551,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // completely detached from realm and is not monitored by realm
             // for changes. Thus this list of values is free to move around
             // inside any thread.
-            list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
+            list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
             List<Model_LacakMobil> safeWords;
+            System.out.println("search done");
             if(list.size()>6){
                 safeWords = realm.copyFromRealm(list.subList(0,5));
             }else{
@@ -570,6 +572,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // Please note here MyAdaptor constructor will now take the
             // list of words directly and not RealmResults so you slightly
             // modify the MyAdapter constructor.
+
             list=new ArrayList<>();
             progressbar.setVisibility(View.INVISIBLE);
             if(words.size()==0){
@@ -579,11 +582,13 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 emptyText.setVisibility(View.INVISIBLE);
 
             }
+
             detaillacakMobil = new Detail_lacakMobil(words, getApplicationContext(), recyclerView);
             recyclerView.setAdapter(detaillacakMobil);
 
         }
     }
+
     private void searchFunc() {
         search.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -606,7 +611,13 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(final CharSequence s, int start, int before, int count) {
-//
+                Realm.init(context);
+                RealmConfiguration configuration = new RealmConfiguration.Builder()
+                        .name("vimatel.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                realm = Realm.getInstance(configuration);
                 if(mTask!=null){
                     mTask.cancel(true);
                 }
@@ -619,8 +630,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 emptyText.setVisibility(View.INVISIBLE);
                 progressbar.setVisibility(View.VISIBLE);
 
-                mTask = (YourAsyncTask) new YourAsyncTask().execute(s.toString());
-
+//
+                mHandler.removeCallbacks(mFilterTask);
+                mHandler.postDelayed(mFilterTask, 500);
             }
 
             @Override
@@ -633,6 +645,17 @@ public class PencarianPage_Activity extends AppCompatActivity {
         keyboard.setInputConnection(ic);
 
     }
+    private Handler mHandler = new Handler();
+
+    Runnable mFilterTask = new Runnable() {
+
+        @Override
+        public void run() {
+
+            mTask = (YourAsyncTask) new YourAsyncTask().execute(search.getText().toString());
+
+        }
+    };
 
     private void initObejct() {
         //Search
