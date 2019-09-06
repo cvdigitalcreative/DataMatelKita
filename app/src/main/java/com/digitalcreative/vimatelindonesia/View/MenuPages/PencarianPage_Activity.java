@@ -597,7 +597,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
             public void onTextChanged(final CharSequence s, int start, int before, int count) {
 //
 
-//                list = new ArrayList<>();
+                list = new ArrayList<>();
+                detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
+                recyclerView.setAdapter(detaillacakMobil);
 //
 //                list = realmHelper.getAllMahasiswa(s.toString());
 
