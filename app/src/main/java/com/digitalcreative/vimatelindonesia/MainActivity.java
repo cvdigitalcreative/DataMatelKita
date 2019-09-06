@@ -1,13 +1,16 @@
 package com.digitalcreative.vimatelindonesia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.AkunPage;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.BantuanPage;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.PencarianPage;
@@ -28,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         //do some function here
         goButtonNavigationBar();
 
+        startService();
+
+    }
+    public void startService() {
+        Intent serviceIntent = new Intent(this, ForegroundService.class);
+        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+
+        ContextCompat.startForegroundService(this, serviceIntent);
     }
 
     private void goButtonNavigationBar() {

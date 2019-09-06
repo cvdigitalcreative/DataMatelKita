@@ -1,51 +1,33 @@
-package com.digitalcreative.vimatelindonesia.View.MenuPages;
+package com.digitalcreative.vimatelindonesia.Controller;
 
 import android.Manifest;
 import android.app.DownloadManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digitalcreative.vimatelindonesia.BaseActivity;
-import com.digitalcreative.vimatelindonesia.Controller.DataBaseHelper;
-import com.digitalcreative.vimatelindonesia.Controller.Detail_lacakMobil;
-import com.digitalcreative.vimatelindonesia.Controller.KeyboardMethod;
 import com.digitalcreative.vimatelindonesia.MainActivity;
 import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
-import com.digitalcreative.vimatelindonesia.R;
-import com.digitalcreative.vimatelindonesia.RealmHelper;
+import com.digitalcreative.vimatelindonesia.View.MenuPages.PencarianPage_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -58,37 +40,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Timer;
 
-import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
-import io.realm.Sort;
 
-public class PencarianPage_Activity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    List<Model_LacakMobil> list = new ArrayList<>();
-    ArrayList<ArrayList> data_;
-    Detail_lacakMobil detaillacakMobil;
-    TextView emptyText, toolbarText, titleText;
-    String getSearchMobil;
-    LinearLayout linearLayout, progress, back;
-    LinearLayoutManager linearmanager;
-    ProgressBar progressBar,progressbar;
-    int lastIndex, index;
-    private YourAsyncTask mTask;
-    private EditText search;
-    long diffInDays;
-    Context context;
-    KeyboardMethod keyboard;
+public class ForegroundService extends Service {
+    public static final String CHANNEL_ID = "ForegroundServiceChannel";
 
     Realm realm;
 
@@ -121,20 +82,28 @@ public class PencarianPage_Activity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private static final int REQUEST_WRITE_STORAGE = 112;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lacak_mobil);
-        context=this;
+    public void onCreate() {
+        super.onCreate();
+    }
 
-        initObejct();
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        String input = intent.getStringExtra("inputExtra");
+        createNotificationChannel();
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, 0);
 
-        //do Fucntion
-        searchFunc();
-        backFunc();
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Download Data")
+                .setContentText("sedang mendownload File")
+                .setContentIntent(pendingIntent)
+                .build();
 
+        startForeground(1, notification);
 
-
-        Realm.init(context);
+        //do heavy work on a background thread
+        Realm.init(ForegroundService.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("vimatel.db")
                 .schemaVersion(1)
@@ -150,9 +119,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                    realm.deleteAll();
 //                }
 //            });
-            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
-                    "Loading",
-                    "Sedang mengupdate data harap di tgg!");
+
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
@@ -162,31 +129,19 @@ public class PencarianPage_Activity extends AppCompatActivity {
             url_file=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
             jumlah_file=7;
-            PencarianPage_Activity.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            ForegroundService.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
             update_data();
 
         }else{
-            Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
+            stopForegroundService();
         }
+
+        //stopSelf();
+
+        return START_NOT_STICKY;
     }
-
     public void update_data(){
-        Toast.makeText(context, "Sedang Update", Toast.LENGTH_LONG).show();
-        boolean hasPermission = (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
-        if (!hasPermission) {
 
-
-            ActivityCompat.requestPermissions(PencarianPage_Activity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_WRITE_STORAGE);
-            Toast.makeText(context, "Silahkan update kembali", Toast.LENGTH_LONG).show();
-//                        //loading Data
-//                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
-//                        backendFirebase.downloadFile(getContext());
-            progressDialog.dismiss();
-        } else {
-            Realm.init(context);
             RealmConfiguration configuration = new RealmConfiguration.Builder()
                     .name("vimatel.db")
                     .schemaVersion(1)
@@ -334,7 +289,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 
         }
-    }
+
     public void insert_database(String subpath) {
 
 
@@ -351,7 +306,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
         final String localFile = file[0].toString();
-        Realm.init(context);
+        Realm.init(ForegroundService.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("vimatel.db")
                 .schemaVersion(1)
@@ -392,32 +347,14 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
                     if( jumlah_file==1){
                         System.out.println("masuk sini");
-                        progressDialog.dismiss();
                         update_data_s();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
 
                     }else{
                         jumlah_file=jumlah_file-1;
-                        progressDialog.dismiss();
-
-                        PencarianPage_Activity.this
-                                .runOnUiThread(new Runnable() {
-                            public void run() {
-                                Realm.init(context);
-                                RealmConfiguration configuration = new RealmConfiguration.Builder()
-                                        .name("vimatel.db")
-                                        .schemaVersion(1)
-                                        .deleteRealmIfMigrationNeeded()
-                                        .build();
-                                realm = Realm.getInstance(configuration);
-                                long count = realm.where(Model_LacakMobil.class).count();
-
-                                Toast.makeText(context, "Berhasil download data ke "+(8-jumlah_file) +" jumlah data "+count, Toast.LENGTH_LONG).show();
-                            }
-                        });
-
                         update_data_s();
                         System.out.println("file exist "+file[0].exists());
+                        stopForegroundService();
                     }
 
 
@@ -508,7 +445,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
     public void downloadfromdropbox(String url, String subpath) {
 
-        if (isDownloadManagerAvailable(context)) {
+        if (isDownloadManagerAvailable(ForegroundService.this)) {
 
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setDescription("Some descrition");
@@ -521,7 +458,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
             System.out.println("sub path download "+subpath);
 // get download service and enqueue file
-            DownloadManager manager = (DownloadManager) PencarianPage_Activity.this.getSystemService(Context.DOWNLOAD_SERVICE);
+            DownloadManager manager = (DownloadManager) ForegroundService.this.getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
             jumlah__download_id.add(Long.valueOf(downloadID));
 
@@ -535,215 +472,38 @@ public class PencarianPage_Activity extends AppCompatActivity {
         return false;
     }
 
-    private void backFunc() {
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+    private void stopForegroundService() {
+        Log.d("stop service", "Stop foreground service.");
 
+        // Stop foreground service and remove the notification.
+        stopForeground(true);
 
-    private class YourAsyncTask extends AsyncTask<String, String, List<Model_LacakMobil>> {
-
-        //        ProgressDialog progressDialog;
-        @Override
-        protected void onPreExecute() {
-            // start loading animation maybe?
-//            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
-//                    "ProgressDialog",
-//                    "Loading!");
-        }
-
-        @Override
-        protected List<Model_LacakMobil> doInBackground(String... params) {
-            Realm.init(context);
-            RealmConfiguration configuration = new RealmConfiguration.Builder()
-                    .name("vimatel.db")
-                    .schemaVersion(1)
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            realm = Realm.getInstance(configuration);
-            // This is where the magic happens. realm.copyFromRealm() takes
-            // a RealmResult and essentially returns a deep copy of the
-            // list that it contains. The elements of this list is however
-            // completely detached from realm and is not monitored by realm
-            // for changes. Thus this list of values is free to move around
-            // inside any thread.
-            list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            List<Model_LacakMobil> safeWords;
-            System.out.println("search done");
-            if(list.size()>6){
-                safeWords = realm.copyFromRealm(list.subList(0,5));
-            }else{
-                safeWords = realm.copyFromRealm(list);
-            }
-
-            realm.close();
-            return safeWords;
-
-        }
-
-        @Override
-        protected void onPostExecute(List<Model_LacakMobil> words) {
-//            progressDialog.dismiss();
-
-            // Please note here MyAdaptor constructor will now take the
-            // list of words directly and not RealmResults so you slightly
-            // modify the MyAdapter constructor.
-
-            list=new ArrayList<>();
-            progressbar.setVisibility(View.INVISIBLE);
-            if(words.size()==0){
-                emptyText.setVisibility(View.VISIBLE);
-            }else{
-
-                emptyText.setVisibility(View.INVISIBLE);
-
-            }
-
-            detaillacakMobil = new Detail_lacakMobil(words, getApplicationContext(), recyclerView);
-            recyclerView.setAdapter(detaillacakMobil);
-
-        }
-    }
-
-    private void searchFunc() {
-        search.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int inType = search.getInputType();
-                search.setInputType(InputType.TYPE_NULL);
-                search.onTouchEvent(event);
-                search.setInputType(inType);
-
-                keyboard.setVisibility(View.VISIBLE);
-                return true;
-            }
-        });
-
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence s, int start, int before, int count) {
-                Realm.init(context);
-                RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("vimatel.db")
-                        .schemaVersion(1)
-                        .deleteRealmIfMigrationNeeded()
-                        .build();
-                realm = Realm.getInstance(configuration);
-                if(mTask!=null){
-                    mTask.cancel(true);
-                }
-                list = new ArrayList<>();
-                detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
-                recyclerView.setAdapter(detaillacakMobil);
-//
-//                list = realmHelper.getAllMahasiswa(s.toString());
-
-                emptyText.setVisibility(View.INVISIBLE);
-                progressbar.setVisibility(View.VISIBLE);
-
-//
-                mHandler.removeCallbacks(mFilterTask);
-                mHandler.postDelayed(mFilterTask, 300);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        InputConnection ic = search.onCreateInputConnection(new EditorInfo());
-        keyboard.setInputConnection(ic);
-
-    }
-    private Handler mHandler = new Handler();
-
-    Runnable mFilterTask = new Runnable() {
-
-        @Override
-        public void run() {
-
-            mTask = (YourAsyncTask) new YourAsyncTask().execute(search.getText().toString());
-
-        }
-    };
-
-    private void initObejct() {
-        //Search
-        search = findViewById(R.id.search_mobil_act);
-        //RecyclerView
-        recyclerView = findViewById(R.id.recycler_view_act);
-        detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
-        linearmanager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(linearmanager);
-        //LinearLayout
-        linearLayout =  findViewById(R.id.lineargone);
-        back = findViewById(R.id.btn_pencarian_back);
-        //Button
-        //backbutton = view.findViewById(R.id.lacak_backbutton);
-        //progress bar
-        progressbar = findViewById(R.id.progressbarwait);
-        emptyText = findViewById(R.id.tv_no_data);
-
-        //Keyboard
-        keyboard = findViewById(R.id.mykeyboard);
-    }
-
-
-//    private void execute1stdataSearch(ArrayList<ArrayList> data_, int current) {
-//        int count = 0;
-//
-//        list.clear();
-//        recyclerView.removeAllViewsInLayout();
-//        for (index = 0; index < data_.size(); index++) {
-//            final Model_LacakMobil model = new Model_LacakMobil();
-//            model.setNama(data_.get(index).get(0).toString());
-//            model.setNo_plat(data_.get(index).get(1).toString());
-//            model.setNama_mobil(data_.get(index).get(2).toString());
-//            model.setFinance(data_.get(index).get(3).toString());
-//            model.setOvd(data_.get(index).get(4).toString());
-//            model.setSaldo(data_.get(index).get(5).toString());
-//            model.setCabang(data_.get(index).get(6).toString());
-//            model.setNoka(data_.get(index).get(7).toString());
-//            model.setNosin(data_.get(index).get(8).toString());
-//            model.setTahun(data_.get(index).get(9).toString());
-//            model.setWarna(data_.get(index).get(10).toString());
-//            list.add(model);
-//        }
-//    }
-
-    @Override
-    public void onBackPressed() {
-        // do something on back.
-        if (keyboard.getVisibility()==View.VISIBLE){
-            keyboard.setVisibility(View.GONE);
-        } else{
-            super.onBackPressed();
-            Intent intent =  new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-        }
+        // Stop the foreground service.
+        stopSelf();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        //Keyboard
-        keyboard = findViewById(R.id.mykeyboard);
+    public void onDestroy() {
+        super.onDestroy();
     }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel serviceChannel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Foreground Service Channel",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(serviceChannel);
+        }
+    }
+
 }
-
-
-
-
-
