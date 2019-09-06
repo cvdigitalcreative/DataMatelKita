@@ -446,29 +446,40 @@ public class PencarianPage_Activity extends AppCompatActivity {
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             jumlah_id.add(id);
             System.out.println("download selesai "+id);
+            System.out.println("id download "+jumlah__download_id);
             System.out.println("jumlah id "+jumlah_id.size());
             System.out.println("jumlah download "+jumlah__download_id.size());
+            int index=0;
+            for(int i=0; i<jumlah__download_id.size(); i++){
+                if(id==jumlah__download_id.get(i)){
+                    index=i;
+                    break;
+                }
+            }
+            if(!path_file.isEmpty()){
+                insert_database(path_file.get(index));
+            }
 
             //Checking if the received broadcast is for our enqueued download by matching download id
 
-            if (jumlah_id.size()==jumlah__download_id.size()) {
-                System.out.println("mulai memasukan data");
-                for(int i=0; i<path_file.size(); i++){
-                    insert_database(path_file.get(i));
-                }
-                Realm.init(context);
-                RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("test.db")
-                        .schemaVersion(1)
-                        .deleteRealmIfMigrationNeeded()
-                        .build();
-                realm = Realm.getInstance(configuration);
-                long count = realm.where(Model_LacakMobil.class).count();
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-
-                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
-
-            }
+//            if (jumlah_id.size()==jumlah__download_id.size()) {
+//                System.out.println("mulai memasukan data");
+//                for(int i=0; i<path_file.size(); i++){
+//                    insert_database(path_file.get(i));
+//                }
+//                Realm.init(context);
+//                RealmConfiguration configuration = new RealmConfiguration.Builder()
+//                        .name("test.db")
+//                        .schemaVersion(1)
+//                        .deleteRealmIfMigrationNeeded()
+//                        .build();
+//                realm = Realm.getInstance(configuration);
+//                long count = realm.where(Model_LacakMobil.class).count();
+////                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+//
+//                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
+//
+//            }
 
         }
     };
@@ -515,7 +526,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
     private class YourAsyncTask extends AsyncTask<String, String, List<Model_LacakMobil>> {
 
-//        ProgressDialog progressDialog;
+        //        ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
             // start loading animation maybe?
@@ -542,7 +553,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll().sort("no_plat");
             List<Model_LacakMobil> safeWords;
             if(list.size()>6){
-               safeWords = realm.copyFromRealm(list.subList(0,5));
+                safeWords = realm.copyFromRealm(list.subList(0,5));
             }else{
                 safeWords = realm.copyFromRealm(list);
             }
@@ -597,7 +608,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
             public void onTextChanged(final CharSequence s, int start, int before, int count) {
 //
 
-//                list = new ArrayList<>();
+                list = new ArrayList<>();
+                detaillacakMobil = new Detail_lacakMobil(list, getApplicationContext(), recyclerView);
+                recyclerView.setAdapter(detaillacakMobil);
 //
 //                list = realmHelper.getAllMahasiswa(s.toString());
 
