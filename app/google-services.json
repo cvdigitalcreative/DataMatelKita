@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "303484907903-hnmv0of0qh5cct9o4nkgngol9pr5s7is.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digitalcreative.vimatelindonesia",
+            "certificate_hash": "188e17b2eea477ac4459c12469025c02f33d1536"
+          }
+        },
+        {
           "client_id": "303484907903-h08nqatp24d5nqpqo47lqlhu92c2nggo.apps.googleusercontent.com",
           "client_type": 3
         }
