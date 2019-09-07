@@ -57,7 +57,7 @@ import io.realm.RealmConfiguration;
  * A simple {@link Fragment} subclass.
  */
 public class BantuanPage extends Fragment {
-    TextView tv1, tv2;
+    TextView tv1, tv2,tv0;
     LinearLayout finished;
     CardView addCar, update;
     ImageView wa_btn, call_tbn, sms_btn;
@@ -110,7 +110,7 @@ public class BantuanPage extends Fragment {
 //        Realm.init(this.getContext());
 //        RealmConfiguration config =
 //                new RealmConfiguration.Builder()
-//                        .name("vimatel.db")
+//                        .name("test.db")
 //                        .schemaVersion(1)
 //                        .deleteRealmIfMigrationNeeded()
 //                        .build();
@@ -118,10 +118,10 @@ public class BantuanPage extends Fragment {
         //Set up Realm
         Realm.init(this.getContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("vimatel.db")
-                        .schemaVersion(1)
-                        .deleteRealmIfMigrationNeeded()
-                        .build();
+                .name("vimatel.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
         realm = Realm.getInstance(configuration);
 
         realmHelper = new RealmHelper(realm);
@@ -179,7 +179,12 @@ public class BantuanPage extends Fragment {
 
             }
         });
-
+        finished.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finished.setVisibility(View.INVISIBLE);
+            }
+        });
         return view;
     }
     public void startService() {
@@ -202,7 +207,7 @@ public class BantuanPage extends Fragment {
         //TextView
         tv1 = view.findViewById(R.id.text_bantuan_1);
         tv2 = view.findViewById(R.id.text_bantuan_2);
-
+        tv0=view.findViewById(R.id.text_bantuan_cuy);
         //LinearLayout
         finished = view.findViewById(R.id.finish_progresbar3);
 
@@ -302,89 +307,61 @@ public class BantuanPage extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Sedang Update", Toast.LENGTH_LONG).show();
-                boolean hasPermission = (ContextCompat.checkSelfPermission(getActivity(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
-                if (!hasPermission) {
 
 
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            REQUEST_WRITE_STORAGE);
-                    Toast.makeText(getActivity(), "Silahkan update kembali", Toast.LENGTH_LONG).show();
-//                        //loading Data
-//                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
-//                        backendFirebase.downloadFile(getContext());
-
-                } else {
-
-                    //loading Data
+                Realm.init(BantuanPage.this.getContext());
+                RealmConfiguration configuration = new RealmConfiguration.Builder()
+                        .name("vimatel.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                realm = Realm.getInstance(configuration);
+                final long count = realm.where(Model_LacakMobil.class).count();
 
 
-//                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
-//                    try {
-//                        backendFirebase.downloadFile(getContext());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-                    System.out.println("done");
+                firebaseAuth = FirebaseAuth.getInstance();
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                firebaseUser = firebaseAuth.getCurrentUser();
+                myRef = firebaseDatabase.getReference();
+                myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final String status_download_db = dataSnapshot.child("status_download_db").getValue().toString();
 
-                    firebaseAuth = FirebaseAuth.getInstance();
-                    firebaseDatabase = FirebaseDatabase.getInstance();
-                    firebaseUser = firebaseAuth.getCurrentUser();
-                    myRef = firebaseDatabase.getReference();
-
-
-                    Realm.init(BantuanPage.this.getContext());
-                    RealmConfiguration configuration = new RealmConfiguration.Builder()
-                            .name("vimatel.db")
-                            .schemaVersion(1)
-                            .deleteRealmIfMigrationNeeded()
-                            .build();
-                    realm = Realm.getInstance(configuration);
-                    long count = realm.where(Model_LacakMobil.class).count();
-                    if (count!=0) {
-                        myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        final String last_update_data = dataSnapshot.child("last_update_data").getValue().toString();
+                        myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                final String status_download_db = dataSnapshot.child("status_download_db").getValue().toString();
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
+                                System.out.println("cuy masuk akal");
+                                String last_update_data_sistem = dataSnapshots.child("update_terakhir").getValue().toString();
+                                SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                Date dateobj = Calendar.getInstance().getTime();
 
-                                final String last_update_data = dataSnapshot.child("last_update_data").getValue().toString();
-                                myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
-                                        System.out.println("cuy masuk akal");
-                                        String last_update_data_sistem = dataSnapshots.child("update_terakhir").getValue().toString();
-                                        SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                        Date dateobj = Calendar.getInstance().getTime();
+                                Date date = null;
+                                try {
+                                    date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
+                                    Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
+                                    long milliseconds = date_2.getTime() - date.getTime();
+                                    long days = milliseconds / (1000 * 60 * 60 * 24);
+                                    String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                    String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                    String informasi="Jumlah data anda "+count;
+                                    finished.setVisibility(View.VISIBLE);
+                                    tv0.setText(infomarsis);
+                                    tv1.setText(infomarsi);
+                                    tv2.setText(informasi);
 
-                                        Date date = null;
-                                        try {
-                                            date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
-                                            Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
-                                            long milliseconds = date_2.getTime() - date.getTime();
-                                            long days = milliseconds / (1000 * 60 * 60 * 24);
-                                            if (days<=0 && status_download_db.trim().equals("1")) {
+                                    if (days<=0 && status_download_db.trim().equals("1")) {
 
-                                                Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
-
-                                            } else {
-                                                startService();
-                                            }
-                                        } catch (ParseException e) {
-                                            e.printStackTrace();
-                                        }
-
-
-
+                                        Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
 
                                     }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                    }
-                                });
+
 
                             }
 
@@ -393,10 +370,17 @@ public class BantuanPage extends Fragment {
 
                             }
                         });
-                    }else{
-                        startService();
+
                     }
-                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
             }
         });
     }
@@ -452,7 +436,7 @@ public class BantuanPage extends Fragment {
     public void insert_database(String subpath) {
         System.out.println("kesini cuy");
 
-          insertdata(subpath);
+        insertdata(subpath);
 //          file[0].delete();
 
 
