@@ -89,6 +89,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
     long diffInDays;
     Context context;
     KeyboardMethod keyboard;
+
     Realm realm;
 
     FirebaseAuth firebaseAuth;
@@ -142,27 +143,23 @@ public class PencarianPage_Activity extends AppCompatActivity {
         realm = Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
 
-        if(count<400000){
-//            realm.executeTransaction(new Realm.Transaction() {
-//                @Override
-//                public void execute(Realm realm) {
-//                    realm.deleteAll();
-//                }
-//            });
-            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
-                    "Loading",
-                    "Sedang mengupdate data harap di tgg!");
-            firebaseAuth = FirebaseAuth.getInstance();
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            firebaseUser = firebaseAuth.getCurrentUser();
-            myRef = firebaseDatabase.getReference();
-            jumlah_id=new ArrayList<>();
-            path_file=new ArrayList<>();
-            url_file=new ArrayList<>();
-            jumlah__download_id=new ArrayList<>();
-            jumlah_file=7;
-            PencarianPage_Activity.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-            update_data();
+        if(count<=0){
+            Toast.makeText(context, "Sedang mendownload data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
+//
+//            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
+//                    "Loading",
+//                    "Sedang mengupdate data harap di tgg!");
+//            firebaseAuth = FirebaseAuth.getInstance();
+//            firebaseDatabase = FirebaseDatabase.getInstance();
+//            firebaseUser = firebaseAuth.getCurrentUser();
+//            myRef = firebaseDatabase.getReference();
+//            jumlah_id=new ArrayList<>();
+//            path_file=new ArrayList<>();
+//            url_file=new ArrayList<>();
+//            jumlah__download_id=new ArrayList<>();
+//            jumlah_file=7;
+//            PencarianPage_Activity.this.registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+//            update_data();
 
         }else{
             Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
@@ -174,8 +171,6 @@ public class PencarianPage_Activity extends AppCompatActivity {
         boolean hasPermission = (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         if (!hasPermission) {
-
-
             ActivityCompat.requestPermissions(PencarianPage_Activity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_WRITE_STORAGE);
@@ -361,7 +356,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
-
+                    file[0].delete();
                     String line = "";
                     while ((line = br.readLine()) != null) {
                         // use comma as separator
@@ -388,14 +383,34 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 } finally {
                     System.out.println("nama file "+file[0].getAbsolutePath());
                     System.out.println("jumlah file diolah "+jumlah_file);
-                    file[0].delete();
+
                     if( jumlah_file==1){
                         System.out.println("masuk sini");
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
                         progressDialog.dismiss();
                         update_data_s();
+//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+
                     }else{
                         jumlah_file=jumlah_file-1;
+                        progressDialog.dismiss();
+
+                        PencarianPage_Activity.this
+                                .runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Realm.init(context);
+                                        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                                                .name("test.db")
+                                                .schemaVersion(1)
+                                                .deleteRealmIfMigrationNeeded()
+                                                .build();
+                                        realm = Realm.getInstance(configuration);
+                                        long count = realm.where(Model_LacakMobil.class).count();
+
+                                        Toast.makeText(context, "Berhasil download data ke "+(8-jumlah_file) +" jumlah data "+count, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                        update_data_s();
                         System.out.println("file exist "+file[0].exists());
                     }
 
@@ -574,7 +589,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // modify the MyAdapter constructor.
 
             list=new ArrayList<>();
-            progressbar.setVisibility(View.INVISIBLE);
+//            progressbar.setVisibility(View.INVISIBLE);
             if(words.size()==0){
                 emptyText.setVisibility(View.VISIBLE);
             }else{
@@ -628,11 +643,11 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                list = realmHelper.getAllMahasiswa(s.toString());
 
                 emptyText.setVisibility(View.INVISIBLE);
-                progressbar.setVisibility(View.VISIBLE);
+//                progressbar.setVisibility(View.VISIBLE);
 
 //
                 mHandler.removeCallbacks(mFilterTask);
-                mHandler.postDelayed(mFilterTask, 500);
+                mHandler.postDelayed(mFilterTask, 300);
             }
 
             @Override

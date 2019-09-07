@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digitalcreative.aplikasidatamining.Controller.DataBaseHelper;
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
 import com.digitalcreative.aplikasidatamining.RealmHelper;
@@ -46,7 +44,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,6 +89,10 @@ public class BantuanPage extends Fragment {
     private ArrayList<Long> jumlah__download_id;
     private long downloadID;
     private int total_file=0;
+    private ArrayList<String> path_file;
+    private ArrayList<String>  url_file;
+    private int jumlah_file;
+
     ProgressDialog progress;
 
 
@@ -117,10 +118,10 @@ public class BantuanPage extends Fragment {
         //Set up Realm
         Realm.init(this.getContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("test.db")
-                        .schemaVersion(1)
-                        .deleteRealmIfMigrationNeeded()
-                        .build();
+                .name("test.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
         realm = Realm.getInstance(configuration);
 
         realmHelper = new RealmHelper(realm);
@@ -132,7 +133,11 @@ public class BantuanPage extends Fragment {
         myRef = firebaseDatabase.getReference();
         jumlah_id=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
-        getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        jumlah_id=new ArrayList<>();
+        path_file=new ArrayList<>();
+        url_file=new ArrayList<>();
+        jumlah__download_id=new ArrayList<>();
+        jumlah_file=7;
 
 
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -177,6 +182,21 @@ public class BantuanPage extends Fragment {
 
         return view;
     }
+    public void startService() {
+        FirebaseAuth firebaseAuth;
+        FirebaseUser firebaseUser;
+        FirebaseDatabase firebaseDatabase;
+        DatabaseReference myRef;
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        myRef = firebaseDatabase.getReference();
+        String uid=firebaseUser.getUid();
+        Intent serviceIntent = new Intent(getContext(), ForegroundService.class);
+        serviceIntent.putExtra("inputExtra", uid);
+
+        ContextCompat.startForegroundService(getContext(), serviceIntent);
+    }
 
     private void sayHelloboys(View view) {
         //TextView
@@ -203,46 +223,21 @@ public class BantuanPage extends Fragment {
             //Fetching the download id received with the broadcast
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             jumlah_id.add(id);
-            //Checking if the received broadcast is for our enqueued download by matching download id
-            System.out.println(jumlah_id.size());
-            System.out.println(jumlah__download_id.size());
-            if (jumlah_id.size()==jumlah__download_id.size()) {
-                total_file=jumlah__download_id.size();
-
-                                                                insert_database(subpath_t1);
-                                                                insert_database(subpath_t2);
-                                                                insert_database(subpath_t3);
-                                                                insert_database(subpath_t4);
-                                                                insert_database(subpath_t5);
-                                                                insert_database(subpath_data_update);
-                                                                insert_database(subpath_t0);
-                                                                update_data();
-                                                                progress.dismiss();
-
-
-
-
-
-
-                    Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
-                    finished.setVisibility(View.VISIBLE);
-                    finished.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finished.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                    Realm.init(getContext());
-                    RealmConfiguration configuration = new RealmConfiguration.Builder()
-                            .name("test.db")
-                            .schemaVersion(1)
-                            .deleteRealmIfMigrationNeeded()
-                            .build();
-                    realm = Realm.getInstance(configuration);
-                    long count = realm.where(Model_LacakMobil.class).count();
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                tv2.setText("Berhasil download data jumlah data "+count);
+            System.out.println("download selesai "+id);
+            System.out.println("id download "+jumlah__download_id);
+            System.out.println("jumlah id "+jumlah_id.size());
+            System.out.println("jumlah download "+jumlah__download_id.size());
+            int index=0;
+            for(int i=0; i<jumlah__download_id.size(); i++){
+                if(id==jumlah__download_id.get(i)){
+                    index=i;
+                    break;
+                }
             }
+            if(!path_file.isEmpty()){
+                insert_database(path_file.get(index));
+            }
+
 
         }
     };
@@ -251,7 +246,7 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + "+6285268801717"));
+                intent.setData(Uri.parse("sms:" + "+62816342191"));
                 startActivity(intent);
             }
         });
@@ -259,7 +254,7 @@ public class BantuanPage extends Fragment {
         wa_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + "+6285268801717";
+                String url = "https://api.whatsapp.com/send?phone=" + "+62816342191";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 try {
                     intent.setData(Uri.parse(url));
@@ -287,7 +282,7 @@ public class BantuanPage extends Fragment {
                 } else {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    callIntent.setData(Uri.parse("tel:" + "+6285268801717"));
+                    callIntent.setData(Uri.parse("tel:" + "+62816342191"));
                     getActivity().startActivity(callIntent);
                 }
 
@@ -334,11 +329,6 @@ public class BantuanPage extends Fragment {
 //                    }
                     System.out.println("done");
 
-                    progress = new ProgressDialog(getActivity());
-                    progress.setMessage("Updating Data . . .");
-                    progress.setIndeterminate(true);
-                    progress.setCancelable(false);
-                    progress.show();
                     firebaseAuth = FirebaseAuth.getInstance();
                     firebaseDatabase = FirebaseDatabase.getInstance();
                     firebaseUser = firebaseAuth.getCurrentUser();
@@ -375,69 +365,11 @@ public class BantuanPage extends Fragment {
                                             long milliseconds = date_2.getTime() - date.getTime();
                                             long days = milliseconds / (1000 * 60 * 60 * 24);
                                             if (days<=0 && status_download_db.trim().equals("1")) {
-                                                progress.dismiss();
+
                                                 Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
 
                                             } else {
-                                                Realm.init(getContext());
-                                                RealmConfiguration configuration = new RealmConfiguration.Builder()
-                                                        .name("test.db")
-                                                        .schemaVersion(1)
-                                                        .deleteRealmIfMigrationNeeded()
-                                                        .build();
-                                                realm = Realm.getInstance(configuration);
-                                                realm.executeTransaction(new Realm.Transaction() {
-                                                    @Override
-                                                    public void execute(Realm realm) {
-                                                        realm.deleteAll();
-                                                    }
-                                                });
-                                                myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-
-
-
-
-                                                        String waktu_download=dataSnapshot.child("waktudownload").getValue().toString();
-                                                        url_t0 = dataSnapshot.child("link_tes").getValue().toString();
-                                                        subpath_t0 = "t0.csv";
-                                                        downloadfromdropbox(url_t0, subpath_t0);
-
-                                                        url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
-                                                        subpath_t1 = "t1.csv";
-                                                        downloadfromdropbox(url_t1, subpath_t1);
-
-                                                        url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
-                                                        subpath_t2 = "t2.csv";
-                                                        downloadfromdropbox(url_t2, subpath_t2);
-
-                                                        url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
-                                                        subpath_t3 = "t3.csv";
-                                                        downloadfromdropbox(url_t3, subpath_t3);
-
-                                                        url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
-                                                        subpath_t4 = "t4.csv";
-                                                        downloadfromdropbox(url_t4, subpath_t4);
-
-
-                                                        url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
-                                                        subpath_t5 = "t5.csv";
-                                                        downloadfromdropbox(url_t5, subpath_t5);
-
-                                                        url_data_update = dataSnapshot.child("link_data").getValue().toString();
-                                                        subpath_data_update = "dataupdate.csv";
-                                                        downloadfromdropbox(url_data_update, subpath_data_update);
-
-
-//
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                    }
-                                                });
+                                                startService();
                                             }
                                         } catch (ParseException e) {
                                             e.printStackTrace();
@@ -461,62 +393,9 @@ public class BantuanPage extends Fragment {
 
                             }
                         });
-
-
                     }else{
-
-                        realm = Realm.getInstance(configuration);
-                        realm.executeTransaction(new Realm.Transaction() {
-                            @Override
-                            public void execute(Realm realm) {
-                                realm.deleteAll();
-                            }
-                        });
-                        myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-
-
-                                url_t0 = dataSnapshot.child("link_tes").getValue().toString();
-                                subpath_t0 = "t0.csv";
-                                downloadfromdropbox(url_t0, subpath_t0);
-
-                                url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
-                                subpath_t1 = "t1.csv";
-                                downloadfromdropbox(url_t1, subpath_t1);
-
-                                url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
-                                subpath_t2 = "t2.csv";
-                                downloadfromdropbox(url_t2, subpath_t2);
-
-                                url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
-                                subpath_t3 = "t3.csv";
-                                downloadfromdropbox(url_t3, subpath_t3);
-
-                                url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
-                                subpath_t4 = "t4.csv";
-                                downloadfromdropbox(url_t4, subpath_t4);
-
-
-                                url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
-                                subpath_t5 = "t5.csv";
-                                downloadfromdropbox(url_t5, subpath_t5);
-
-                                url_data_update = dataSnapshot.child("link_data").getValue().toString();
-                                subpath_data_update = "dataupdate.csv";
-                                downloadfromdropbox(url_data_update, subpath_data_update);
-
-//
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        startService();
                     }
-
-
                 }
             }
         });
@@ -530,8 +409,6 @@ public class BantuanPage extends Fragment {
         SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date dateobj = Calendar.getInstance().getTime();
         date = curFormat.format(dateobj);
-
-
         return date;
     }
 
@@ -551,13 +428,9 @@ public class BantuanPage extends Fragment {
 
 
     public void downloadfromdropbox(String url, String subpath) {
-        System.out.println("cuy");
+
         if (isDownloadManagerAvailable(getContext())) {
-            final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
-            if(file[0].exists()){
-                file[0].delete();
-            }
-            System.out.println("cuy la");
+
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setDescription("Some descrition");
             request.setTitle("Some title");
@@ -567,25 +440,27 @@ public class BantuanPage extends Fragment {
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             }
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
-
+            System.out.println("sub path download "+subpath);
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
-            jumlah__download_id.add(downloadID);
-            System.out.println("tes"+downloadID);
+            jumlah__download_id.add(Long.valueOf(downloadID));
+
         }
     }
 
     public void insert_database(String subpath) {
         System.out.println("kesini cuy");
 
-          insertdata(subpath);
+        insertdata(subpath);
 //          file[0].delete();
 
 
     }
 
     public void insertdata(final String subpath) {
+        System.out.println("jumlah file " + jumlah_file);
+        final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
@@ -597,20 +472,17 @@ public class BantuanPage extends Fragment {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(configuration);
-        realm.executeTransaction(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
 
                     String line = "";
                     while ((line = br.readLine()) != null) {
-
-
                         // use comma as separator
                         final String[] country = line.split(",");
+                        if (country.length == 12) {
 
-                        if(country.length==12){
-                            final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
                             model_lacakMobil.setNama_mobil(country[1]);
                             model_lacakMobil.setNo_plat(country[2]);
                             model_lacakMobil.setNamaunit(country[3]);
@@ -629,8 +501,18 @@ public class BantuanPage extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
+                    System.out.println("nama file " + file[0].getAbsolutePath());
+                    System.out.println("jumlah file diolah " + jumlah_file);
                     file[0].delete();
-                    total_file--;
+                    if (jumlah_file == 1) {
+                        System.out.println("masuk sini");
+//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
+                        progress.dismiss();
+                        update_data();
+                    } else {
+                        jumlah_file = jumlah_file - 1;
+                        System.out.println("file exist " + file[0].exists());
+                    }
 
 
 //            fixing_data();
@@ -638,13 +520,7 @@ public class BantuanPage extends Fragment {
                 }
             }
         });
-
-
-
-
-
     }
-
     public static boolean isDownloadManagerAvailable(Context context) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
