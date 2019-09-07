@@ -349,13 +349,13 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Update Data Kendaraan"
+                            android:text="Check Data"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tekan untuk update data kendaraan terbaru."
+                            android:text="Teken untuk melihat informasi data"
                             android:textSize="10sp" />
                     </LinearLayout>
                 </LinearLayout>

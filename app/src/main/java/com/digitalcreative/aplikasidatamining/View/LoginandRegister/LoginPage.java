@@ -1,13 +1,17 @@
 package com.digitalcreative.aplikasidatamining.View.LoginandRegister;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +51,7 @@ public class LoginPage extends Fragment {
     EditText email, pass;
     String getemail, getpass;
     LinearLayout pop_up;
-
+    private static final int REQUEST_WRITE_STORAGE = 112;
     public LoginPage() {
         // Required empty public constructor
     }
@@ -83,6 +87,19 @@ public class LoginPage extends Fragment {
 
                 }
             });
+        boolean hasPermission = (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        if (!hasPermission) {
+
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_WRITE_STORAGE);
+//                        //loading Data
+//                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
+//                        backendFirebase.downloadFile(getContext());
+
+        }
         return view;
     }
 
