@@ -135,7 +135,7 @@ public class ForegroundService extends Service {
             path_file=new ArrayList<>();
             url_file=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
-            jumlah_file=3;
+            jumlah_file=2;
             update_data();
 
         }else{
@@ -193,8 +193,6 @@ public class ForegroundService extends Service {
                                         if(file2.exists()){
                                             insert_database(subpath_t1);
                                         }
-
-
                                     }
                                 }else{
                                     firebaseAuth = FirebaseAuth.getInstance();
@@ -205,7 +203,7 @@ public class ForegroundService extends Service {
                                     path_file=new ArrayList<>();
                                     url_file=new ArrayList<>();
                                     jumlah__download_id=new ArrayList<>();
-                                    jumlah_file=7;
+                                    jumlah_file=2;
                                     registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
                                     update_data();
                                 }
