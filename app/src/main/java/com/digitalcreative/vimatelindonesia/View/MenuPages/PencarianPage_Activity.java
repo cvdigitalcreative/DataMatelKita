@@ -589,7 +589,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // modify the MyAdapter constructor.
 
             list=new ArrayList<>();
-            progressbar.setVisibility(View.INVISIBLE);
+//            progressbar.setVisibility(View.INVISIBLE);
             if(words.size()==0){
                 emptyText.setVisibility(View.VISIBLE);
             }else{
@@ -643,7 +643,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 //                list = realmHelper.getAllMahasiswa(s.toString());
 
                 emptyText.setVisibility(View.INVISIBLE);
-                progressbar.setVisibility(View.VISIBLE);
+//                progressbar.setVisibility(View.VISIBLE);
 
 //
                 mHandler.removeCallbacks(mFilterTask);
