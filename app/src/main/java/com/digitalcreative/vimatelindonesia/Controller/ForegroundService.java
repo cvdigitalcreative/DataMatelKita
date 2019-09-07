@@ -118,18 +118,75 @@ public class ForegroundService extends Service {
         long count = realm.where(Model_LacakMobil.class).count();
         subpath_t0 = "t0.csv";
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
+
+
         subpath_t1 = "t1.csv";
         File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
+
+
         subpath_t2 = "t2.csv";
         File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
+
+
+
         subpath_t3 = "t3.csv";
         File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
+
+
         subpath_t4 = "t4.csv";
         File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
+
         subpath_t5 = "t5.csv";
         File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
+
+
         subpath_data_update = "dataupdate.csv";
         File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
+
+        if(file.exists()){
+            jumlah_file=jumlah_file+1;
+        }
+        if(file2.exists()){
+            jumlah_file=jumlah_file+1;
+        }
+        if(file3.exists()){
+            jumlah_file=jumlah_file+1;
+        }
+        if(file4.exists()){
+            jumlah_file=jumlah_file+1;
+        }
+        if(file5.exists()){
+            jumlah_file=jumlah_file+1;
+        }
+        if(file6.exists()){
+            jumlah_file=jumlah_file+1;
+        }
+        if(file7.exists()){
+            jumlah_file=jumlah_file+1;
+        }
+
+        if(file.exists()){
+            insert_database(subpath_t0);
+        }
+        if(file2.exists()){
+            insert_database(subpath_t1);
+        }
+        if(file3.exists()){
+            insert_database(subpath_t2);
+        }
+        if(file4.exists()){
+            insert_database(subpath_t3);
+        }
+        if(file5.exists()){
+            insert_database(subpath_t4);
+        }
+        if(file6.exists()){
+            insert_database(subpath_t5);
+        }
+        if(file7.exists()){
+            insert_database(subpath_data_update);
+        }
+
         if(count<=0  ){
 //            realm.executeTransaction(new Realm.Transaction() {
 //                @Override
