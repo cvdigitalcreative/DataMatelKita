@@ -110,7 +110,7 @@ public class ForegroundService extends Service {
         //do heavy work on a background thread
         Realm.init(ForegroundService.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("vimatel.db")
+                .name("test.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -192,7 +192,7 @@ public class ForegroundService extends Service {
 
 
                                     if(!file.exists()
-                                    && !file2.exists()
+                                            && !file2.exists()
                                             && !file3.exists()
                                             && !file4.exists()
                                             && !file5.exists()
@@ -287,7 +287,7 @@ public class ForegroundService extends Service {
     public void update_data(){
 
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("vimatel.db")
+                .name("test.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -452,7 +452,7 @@ public class ForegroundService extends Service {
         final String localFile = file[0].toString();
         Realm.init(ForegroundService.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("vimatel.db")
+                .name("test.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -574,7 +574,7 @@ public class ForegroundService extends Service {
 //                }
 //                Realm.init(context);
 //                RealmConfiguration configuration = new RealmConfiguration.Builder()
-//                        .name("vimatel.db")
+//                        .name("test.db")
 //                        .schemaVersion(1)
 //                        .deleteRealmIfMigrationNeeded()
 //                        .build();
