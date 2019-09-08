@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -71,7 +72,7 @@ import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIB
  * A simple {@link Fragment} subclass.
  */
 public class BantuanPage extends Fragment {
-    TextView tv1, tv2,tv0;
+    TextView tv1, tv2,tv0,tv3;
     LinearLayout finished;
     CardView addCar, update;
     ImageView wa_btn, call_tbn, sms_btn;
@@ -220,6 +221,7 @@ public class BantuanPage extends Fragment {
         //TextView
         tv1 = view.findViewById(R.id.text_bantuan_1);
         tv2 = view.findViewById(R.id.text_bantuan_2);
+        tv3 = view.findViewById(R.id.text_bantuan_3);
         tv0=view.findViewById(R.id.text_bantuan_cuy);
         //LinearLayout
         finished = view.findViewById(R.id.finish_progresbar3);
@@ -354,10 +356,17 @@ public class BantuanPage extends Fragment {
                                     String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                     String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
                                     String informasi="Jumlah data anda "+count;
+                                    long progress=((count*100)/3000000);
                                     finished.setVisibility(View.VISIBLE);
                                     tv0.setText(infomarsis);
                                     tv1.setText(infomarsi);
                                     tv2.setText(informasi);
+                                    if(progress>=100){
+                                        tv3.setText("Progress Data anda 100 %");
+                                    }else{
+                                        tv3.setText("Progress Data anda "+(count/3000000)+ "%");
+                                    }
+
                                     int  status_download= mSettings.getInt("download_status", 0);
 
                                     if(isMyServiceRunning(ForegroundService_t0.class)
@@ -366,20 +375,22 @@ public class BantuanPage extends Fragment {
                                             ||isMyServiceRunning(ForegroundService_t3.class)
                                             ||isMyServiceRunning(ForegroundService_t4.class)
                                             ||isMyServiceRunning(ForegroundService_t5.class)
+                                            || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
                                     ){
                                         Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-                                    }else{
-                                        if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
-                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
-                                        }else{
-                                            Toast.makeText(getActivity(), "Update Data dimulai", Toast.LENGTH_LONG).show();
-                                            SharedPreferences.Editor editor = mSettings.edit();
-                                            editor.putInt("download_status", 1);
-                                            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-                                            dowloadFile_t0.download(getContext(),0,"link_tes","t0.csv");
-
-                                        }
                                     }
+//                                    else{
+//                                        if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
+//                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+//                                        }else{
+//                                            Toast.makeText(getActivity(), "Update Data dimulai", Toast.LENGTH_LONG).show();
+//                                            SharedPreferences.Editor editor = mSettings.edit();
+//                                            editor.putInt("download_status", 1);
+//                                            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
+//                                            dowloadFile_t0.download(getContext(),0,"link_tes","t0.csv");
+//
+//                                        }
+//                                    }
 
                                 } catch (ParseException e) {
                                     e.printStackTrace();
@@ -409,7 +420,21 @@ public class BantuanPage extends Fragment {
             }
         });
     }
+    public static boolean checkStatus(Context context , int status) {
+        DownloadManager downloadManager = (DownloadManager)
+                context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Query query = new DownloadManager.Query();
 
+        query.setFilterByStatus(status);
+        Cursor c = downloadManager.query(query);
+        if (c.moveToFirst()) {
+            c.close();
+
+            return true;
+        }
+
+        return false;
+    }
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {

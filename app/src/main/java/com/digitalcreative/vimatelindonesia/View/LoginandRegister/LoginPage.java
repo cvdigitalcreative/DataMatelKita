@@ -102,6 +102,7 @@ public class LoginPage extends Fragment {
 //                        backendFirebase.downloadFile(getContext());
 
         }
+
         return view;
     }
 

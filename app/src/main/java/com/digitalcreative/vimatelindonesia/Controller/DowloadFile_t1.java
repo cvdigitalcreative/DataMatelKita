@@ -73,6 +73,7 @@ public class DowloadFile_t1 {
         if (isDownloadManagerAvailable(context)) {
 
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
             request.setDescription("Some descrition");
             request.setTitle("Some title");
 // in order for this if to run, you must use the android 3.2 to compile your app
