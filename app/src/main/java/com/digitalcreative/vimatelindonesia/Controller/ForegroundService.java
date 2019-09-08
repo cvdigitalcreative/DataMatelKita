@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -116,10 +117,14 @@ public class ForegroundService extends Service {
                 .build();
         realm = Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
-        subpath_t0 = "t0.csv";
+
+        String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        Log.d("Files", "Size: "+ files.length);
 
 
-        if(count<=0  ){
+        if(count<=2900000  ){
 //            realm.executeTransaction(new Realm.Transaction() {
 //                @Override
 //                public void execute(Realm realm) {
@@ -135,10 +140,22 @@ public class ForegroundService extends Service {
             path_file=new ArrayList<>();
             url_file=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
-            jumlah_file=7;
+            jumlah_file=6;
             update_data();
 
         }else{
+            for (int i = 0; i < files.length; i++)
+            {
+                if(files[i].getName().contains("t0")
+                        || files[i].getName().contains("t1")
+                        || files[i].getName().contains("t2")
+                        || files[i].getName().contains("t3")
+                        || files[i].getName().contains("t4")
+                        || files[i].getName().contains("t5")
+                ) {
+                    files[i].delete();
+                }
+            }
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
@@ -164,6 +181,7 @@ public class ForegroundService extends Service {
                                 long milliseconds = date_2.getTime() - date.getTime();
                                 long days = milliseconds / (1000 * 60 * 60 * 24);
                                 if (days<=0 && status_download_db.trim().equals("1")) {
+                                    subpath_t0 = "t0.csv";
                                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
 
 
@@ -179,16 +197,17 @@ public class ForegroundService extends Service {
                                     subpath_t3 = "t3.csv";
                                     File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
 
-
                                     subpath_t4 = "t4.csv";
+
                                     File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
 
+
+
                                     subpath_t5 = "t5.csv";
+
                                     File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
 
 
-                                    subpath_data_update = "dataupdate.csv";
-                                    File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
 
 
                                     if(!file.exists()
@@ -196,8 +215,8 @@ public class ForegroundService extends Service {
                                             && !file3.exists()
                                             && !file4.exists()
                                             && !file5.exists()
+
                                             && !file6.exists()
-                                            && !file7.exists()
                                     ){
                                         System.out.println("masuk sini");
                                         stopForegroundService();
@@ -215,14 +234,17 @@ public class ForegroundService extends Service {
                                             jumlah_file=jumlah_file+1;
                                         }
                                         if(file5.exists()){
+
                                             jumlah_file=jumlah_file+1;
+
                                         }
+
                                         if(file6.exists()){
+
                                             jumlah_file=jumlah_file+1;
+
                                         }
-                                        if(file7.exists()){
-                                            jumlah_file=jumlah_file+1;
-                                        }
+
 
                                         if(file.exists()){
                                             insert_database(subpath_t0);
@@ -242,9 +264,7 @@ public class ForegroundService extends Service {
                                         if(file6.exists()){
                                             insert_database(subpath_t5);
                                         }
-                                        if(file7.exists()){
-                                            insert_database(subpath_data_update);
-                                        }
+
 
                                     }
                                 }else{
@@ -257,7 +277,7 @@ public class ForegroundService extends Service {
                                     path_file=new ArrayList<>();
                                     url_file=new ArrayList<>();
                                     jumlah__download_id=new ArrayList<>();
-                                    jumlah_file=7;
+                                    jumlah_file=6;
                                     registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
                                     update_data();
                                 }
@@ -369,53 +389,63 @@ public class ForegroundService extends Service {
 
                 }
 
-
-
-
                 url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
+
                 subpath_t4 = "t4.csv";
+
                 File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
+
                 if(file5.exists()){
+
                     System.out.println("insert db");
+
                     insert_database(subpath_t4);
+
 //                        file5.delete();
+
                 }else{
+
                     System.out.println("insert url");
+
                     path_file.add(subpath_t4);
+
                     url_file.add(url_t4);
 
-                }
 
+
+                }
 
 
                 url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
+
                 subpath_t5 = "t5.csv";
+
                 File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
+
                 if(file6.exists()){
+
                     System.out.println("insert db");
+
                     insert_database(subpath_t5);
+
 //                        file6.delete();
+
                 }else{
+
                     System.out.println("insert url");
+
                     path_file.add(subpath_t5);
+
                     url_file.add(url_t5);
 
+
+
                 }
 
 
-                url_data_update = dataSnapshot.child("link_data").getValue().toString();
-                subpath_data_update = "dataupdate.csv";
-                File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
-                if(file7.exists()){
-                    System.out.println("insert db");
-                    insert_database(subpath_data_update);
-//                        file7.delete();
-                }else{
-                    System.out.println("insert url");
-                    path_file.add(subpath_data_update);
-                    url_file.add(url_data_update);
 
-                }
+
+
 
                 for(int i=0; i<url_file.size(); i++){
                     downloadfromdropbox(url_file.get(i), path_file.get(i));
@@ -551,22 +581,48 @@ public class ForegroundService extends Service {
         public void onReceive(Context context, Intent intent) {
 
             //Fetching the download id received with the broadcast
+//            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+//            jumlah_id.add(id);
+//            System.out.println("download selesai "+id);
+//            System.out.println("id download "+jumlah__download_id);
+//            System.out.println("jumlah id "+jumlah_id.size());
+//            System.out.println("jumlah download "+jumlah__download_id.size());
+//            int index=0;
+//            for(int i=0; i<jumlah__download_id.size(); i++){
+//                if(id==jumlah__download_id.get(i)){
+//                    index=i;
+//                    break;
+//                }
+//            }
+//            if(!path_file.isEmpty()){
+//                insert_database(path_file.get(index));
+//            }
+            //Fetching the download id received with the broadcast
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+
             jumlah_id.add(id);
             System.out.println("download selesai "+id);
             System.out.println("id download "+jumlah__download_id);
             System.out.println("jumlah id "+jumlah_id.size());
             System.out.println("jumlah download "+jumlah__download_id.size());
-            int index=0;
-            for(int i=0; i<jumlah__download_id.size(); i++){
-                if(id==jumlah__download_id.get(i)){
-                    index=i;
-                    break;
-                }
+
+            // get the DownloadManager instance
+            DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+
+            DownloadManager.Query q = new DownloadManager.Query();
+            Cursor c = manager.query(q);
+
+            if(c.moveToFirst()) {
+                do {
+                    String name = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+                    System.out.println("nama file"+name);
+                    insert_database(name);
+                } while (c.moveToNext());
+            } else {
+                Log.i("DOWNLOAD LISTENER", "empty cursor :(");
             }
-            if(!path_file.isEmpty()){
-                insert_database(path_file.get(index));
-            }
+
+            c.close();
 
             //Checking if the received broadcast is for our enqueued download by matching download id
 

@@ -138,7 +138,7 @@ public class BantuanPage extends Fragment {
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
-
+        startService();
 
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -151,7 +151,6 @@ public class BantuanPage extends Fragment {
                         System.out.println("cuy masuk akal");
                         SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
                         Date dateobj = Calendar.getInstance().getTime();
-
                         Date date = null;
                         try {
                             date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
@@ -308,7 +307,7 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
 
-
+                startService();
                 Realm.init(BantuanPage.this.getContext());
                 RealmConfiguration configuration = new RealmConfiguration.Builder()
                         .name("vimatel.db")
