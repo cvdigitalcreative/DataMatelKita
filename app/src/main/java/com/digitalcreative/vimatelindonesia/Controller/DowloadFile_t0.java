@@ -30,32 +30,28 @@ public class DowloadFile_t0 {
     DatabaseReference myRef;
     Context context;
     String url_t0;
-    String subpath_t0;
-    String url_t1;
-    String subpath_t1;
-    String url_t2;
-    String subpath_t2;
-    String url_t3;
-    String subpath_t3;
-    String url_t4;
-    String subpath_t4;
-    String url_t5;
-    String subpath_t5;
-    String url_data_update;
-    String subpath_data_update;
-    private ArrayList<Long> jumlah_id;
+    String subpath_t0= "t0.csv";
+
+    private ArrayList<String>  url_file;
+    private int jumlah_file=0;
+    String link_tes="link_tes";
     private ArrayList<Long> jumlah__download_id;
     private long downloadID;
-    private int total_file=0;
-    private ArrayList<String> path_file;
-    private ArrayList<String>  url_file;
-    private int jumlah_file;
     private BroadcastReceiver onDownloadComplete_t0 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-           startService_t0();
-
+//           startService_t0();
+            if(jumlah_file!=5){
+                jumlah_file=jumlah_file+1;
+                link_tes ="link_tes"+jumlah_file;
+                System.out.println(link_tes);
+                subpath_t0 = "t"+jumlah_file+".csv";
+                System.out.println(subpath_t0);
+                download(context,jumlah_file,link_tes,subpath_t0);
+            }else{
+                startService_t0();
+            }
 
 
 
@@ -103,40 +99,36 @@ public class DowloadFile_t0 {
         }
         return false;
     }
-    public void download(Context context){
+    public void download(Context context, int jumlah_file, final String link_tes, final String subpath_t0){
         this.context=context;
+        this.jumlah_file=jumlah_file;
+        this.link_tes=link_tes;
+        this.subpath_t0=subpath_t0;
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         myRef = firebaseDatabase.getReference();
-        jumlah_id=new ArrayList<>();
+
         jumlah__download_id=new ArrayList<>();
-        jumlah_id=new ArrayList<>();
-        path_file=new ArrayList<>();
-        url_file=new ArrayList<>();
+
         jumlah__download_id=new ArrayList<>();
-        jumlah_file=1;
+
         context.registerReceiver(onDownloadComplete_t0,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
 
-                url_t0 = dataSnapshot.child("link_tes").getValue().toString();
-                subpath_t0 = "t0.csv";
+                url_t0 = dataSnapshot.child(link_tes).getValue().toString();
+
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
-                if(file.exists()){
-                    System.out.println("insert db");
-                    startService_t0();
-//                    insert_database(subpath_t0);
-//                        file.delete();
-                }else{
+
                     System.out.println("insert url");
                     downloadfromdropbox(url_t0, subpath_t0);
 
 
 
-                }
+
 
 
 

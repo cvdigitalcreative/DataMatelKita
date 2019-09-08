@@ -376,7 +376,7 @@ public class BantuanPage extends Fragment {
                                             SharedPreferences.Editor editor = mSettings.edit();
                                             editor.putInt("download_status", 1);
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-                                            dowloadFile_t0.download(getContext());
+                                            dowloadFile_t0.download(getContext(),0,"link_tes","t0.csv");
 
                                         }
                                     }
