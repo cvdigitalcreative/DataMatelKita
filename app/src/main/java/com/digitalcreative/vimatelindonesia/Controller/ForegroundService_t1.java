@@ -124,7 +124,7 @@ public class ForegroundService_t1 extends Service {
                     update_data_s();
                     stopForegroundService();
                     DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
-                    dowloadFile_t2.download(getApplicationContext());
+                    dowloadFile_t2.download(getApplication());
 //            fixing_data();
 
                 }

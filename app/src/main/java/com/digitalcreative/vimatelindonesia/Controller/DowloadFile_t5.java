@@ -38,7 +38,20 @@ public class DowloadFile_t5 {
     private ArrayList<String> path_file;
     private ArrayList<String>  url_file;
 
+    private BroadcastReceiver onDownloadComplete_t5 = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            context.unregisterReceiver(onDownloadComplete_t5);
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if(id==downloadID){
+                startService_t0();
+            }
 
+
+
+
+        }
+    };
     public void startService_t0() {
         FirebaseAuth firebaseAuth;
         FirebaseUser firebaseUser;
@@ -54,7 +67,34 @@ public class DowloadFile_t5 {
 
         ContextCompat.startForegroundService(context, serviceIntent);
     }
+    public void downloadfromdropbox(String url, String subpath) {
 
+        if (isDownloadManagerAvailable(context)) {
+
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setDescription("Some descrition");
+            request.setTitle("Some title");
+// in order for this if to run, you must use the android 3.2 to compile your app
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            }
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
+            System.out.println("sub path download "+subpath);
+// get download service and enqueue file
+            DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            downloadID=manager.enqueue(request);
+            jumlah__download_id.add(Long.valueOf(downloadID));
+
+        }
+    }
+    public static boolean isDownloadManagerAvailable(Context context) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            return true;
+        }
+        return false;
+    }
     public void download(Context context){
 
         this.context=context ;
@@ -68,15 +108,28 @@ public class DowloadFile_t5 {
         path_file=new ArrayList<>();
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
+
+        context.registerReceiver(onDownloadComplete_t5,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
 
-                url_t0 = dataSnapshot.child("link_tes4").getValue().toString();
+                url_t0 = dataSnapshot.child("link_tes5").getValue().toString();
                 subpath_t0 = "t5.csv";
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
-                startService_t0();
+                if(file.exists()){
+                    System.out.println("insert db");
+                    startService_t0();
+//                    insert_database(subpath_t0);
+//                        file.delete();
+                }else{
+                    System.out.println("insert url");
+                    downloadfromdropbox(url_t0, subpath_t0);
+
+
+
+                }
 
 
 

@@ -97,6 +97,7 @@ public class ForegroundService_t5 extends Service {
     }
 
     public void insertdata(final String subpath) {
+        System.out.println("insert t5");
         System.out.println("jumlah file "+jumlah_file);
         final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
         // get writable database as we want to write data
@@ -145,12 +146,12 @@ public class ForegroundService_t5 extends Service {
                     File[] files = directory.listFiles();
                     for (int i = 0; i < files.length; i++)
                     {
-                        if(files[i].getName().contains("t0")
-                                || files[i].getName().contains("t1")
-                                || files[i].getName().contains("t2")
-                                || files[i].getName().contains("t3")
-                                || files[i].getName().contains("t4")
-                                || files[i].getName().contains("t5")
+                        if(files[i].getName().contains("t0-")
+                                || files[i].getName().contains("t1-")
+                                || files[i].getName().contains("t2-")
+                                || files[i].getName().contains("t3-")
+                                || files[i].getName().contains("t4-")
+                                || files[i].getName().contains("t5-")
                         ) {
                             files[i].delete();
                         }

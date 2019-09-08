@@ -123,7 +123,7 @@ public class ForegroundService_t0 extends Service {
                     update_data_s();
                     stopForegroundService();
                     DowloadFile_t1 dowloadFile_t0=new DowloadFile_t1();
-                    dowloadFile_t0.download(getApplicationContext());
+                    dowloadFile_t0.download(getApplication());
 
 
 

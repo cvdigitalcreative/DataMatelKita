@@ -143,7 +143,7 @@ public class ForegroundService_t4 extends Service {
                     update_data_s();
                     stopForegroundService();
                     DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
-                    dowloadFile_t5.download(getApplicationContext());
+                    dowloadFile_t5.download(getApplication());
 
 
 

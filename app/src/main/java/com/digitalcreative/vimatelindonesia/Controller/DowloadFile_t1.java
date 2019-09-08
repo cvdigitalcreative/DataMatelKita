@@ -39,11 +39,14 @@ public class DowloadFile_t1 {
     private ArrayList<String> path_file;
     private ArrayList<String>  url_file;
 
-    private BroadcastReceiver onDownloadComplete_t0 = new BroadcastReceiver() {
+    private BroadcastReceiver onDownloadComplete_t1 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
-            startService_t0();
+            context.unregisterReceiver(onDownloadComplete_t1);
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if(id==downloadID){
+                startService_t0();
+            }
 
 
 
@@ -65,13 +68,41 @@ public class DowloadFile_t1 {
 
         ContextCompat.startForegroundService(context, serviceIntent);
     }
+    public void downloadfromdropbox(String url, String subpath) {
 
+        if (isDownloadManagerAvailable(context)) {
+
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setDescription("Some descrition");
+            request.setTitle("Some title");
+// in order for this if to run, you must use the android 3.2 to compile your app
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            }
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
+            System.out.println("sub path download "+subpath);
+// get download service and enqueue file
+            DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            downloadID=manager.enqueue(request);
+            jumlah__download_id.add(Long.valueOf(downloadID));
+
+        }
+    }
+    public static boolean isDownloadManagerAvailable(Context context) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            return true;
+        }
+        return false;
+    }
     public void download(Context context){
         Intent myService = new Intent(context, ForegroundService_t0.class);
         //startService(myService);
 
         this.context=context ;
 
+        this.context.registerReceiver(onDownloadComplete_t1,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -97,7 +128,7 @@ public class DowloadFile_t1 {
 //                        file.delete();
                 }else{
                     System.out.println("insert url");
-//                    downloadfromdropbox(url_t0, subpath_t0);
+                    downloadfromdropbox(url_t0, subpath_t0);
 
 
 

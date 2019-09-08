@@ -31,7 +31,7 @@ public class DowloadFile_t0 {
     Context context;
     String url_t0;
     String subpath_t0= "t0.csv";
-
+    long id_download=0;
     private ArrayList<String>  url_file;
     private int jumlah_file=0;
     String link_tes="link_tes";
@@ -40,18 +40,22 @@ public class DowloadFile_t0 {
     private BroadcastReceiver onDownloadComplete_t0 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
-//           startService_t0();
-            if(jumlah_file!=5){
-                jumlah_file=jumlah_file+1;
-                link_tes ="link_tes"+jumlah_file;
-                System.out.println(link_tes);
-                subpath_t0 = "t"+jumlah_file+".csv";
-                System.out.println(subpath_t0);
-                download(context,jumlah_file,link_tes,subpath_t0);
-            }else{
+            context.unregisterReceiver(onDownloadComplete_t0);
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if(id==downloadID){
                 startService_t0();
             }
+
+//            if(jumlah_file!=5){
+//                jumlah_file=jumlah_file+1;
+//                link_tes ="link_tes"+jumlah_file;
+//                System.out.println(link_tes);
+//                subpath_t0 = "t"+jumlah_file+".csv";
+//                System.out.println(subpath_t0);
+//                download(context,jumlah_file,link_tes,subpath_t0);
+//            }else{
+//                startService_t0();
+//
 
 
 
@@ -88,7 +92,7 @@ public class DowloadFile_t0 {
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
-            jumlah__download_id.add(Long.valueOf(downloadID));
+
 
         }
     }
