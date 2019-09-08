@@ -140,23 +140,24 @@ public class ForegroundService_t5 extends Service {
                 } finally {
                     System.out.println("nama file "+file[0].getAbsolutePath());
                     file[0].delete();
-                    update_data_s();
-                    stopForegroundService();
                     String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
                     File directory = new File(path);
                     File[] files = directory.listFiles();
                     for (int i = 0; i < files.length; i++)
                     {
-                        if(files[i].getName().contains("t0-")
-                                || files[i].getName().contains("t1-")
-                                || files[i].getName().contains("t2-")
-                                || files[i].getName().contains("t3-")
-                                || files[i].getName().contains("t4-")
-                                || files[i].getName().contains("t5-")
+                        if(files[i].getName().contains("t0")
+                                || files[i].getName().contains("t1")
+                                || files[i].getName().contains("t2")
+                                || files[i].getName().contains("t3")
+                                || files[i].getName().contains("t4")
+                                || files[i].getName().contains("t5")
                         ) {
                             files[i].delete();
                         }
                     }
+                    update_data_s();
+                    stopForegroundService();
+
 //            fixing_data();
 
                 }

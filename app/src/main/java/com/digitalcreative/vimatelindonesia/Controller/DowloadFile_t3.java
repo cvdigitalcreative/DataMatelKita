@@ -64,34 +64,7 @@ public class DowloadFile_t3 {
 
         ContextCompat.startForegroundService(context, serviceIntent);
     }
-    public void downloadfromdropbox(String url, String subpath) {
 
-        if (isDownloadManagerAvailable(context)) {
-
-            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-            request.setDescription("Some descrition");
-            request.setTitle("Some title");
-// in order for this if to run, you must use the android 3.2 to compile your app
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            }
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subpath);
-            System.out.println("sub path download "+subpath);
-// get download service and enqueue file
-            DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-            downloadID=manager.enqueue(request);
-            jumlah__download_id.add(Long.valueOf(downloadID));
-
-        }
-    }
-    public static boolean isDownloadManagerAvailable(Context context) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            return true;
-        }
-        return false;
-    }
     public void download(Context context){
 
         this.context=context ;
@@ -105,7 +78,6 @@ public class DowloadFile_t3 {
         path_file=new ArrayList<>();
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
-        context.registerReceiver(onDownloadComplete_t3,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
