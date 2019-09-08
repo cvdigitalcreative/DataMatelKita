@@ -112,7 +112,7 @@ public class DowloadFile_t5 {
 
 
                 url_t0 = dataSnapshot.child("link_tes4").getValue().toString();
-                subpath_t0 = "t4.csv";
+                subpath_t0 = "t5.csv";
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
                 if(file.exists()){
                     System.out.println("insert db");
@@ -121,7 +121,7 @@ public class DowloadFile_t5 {
 //                        file.delete();
                 }else{
                     System.out.println("insert url");
-                    downloadfromdropbox(url_t0, subpath_t0);
+//                    downloadfromdropbox(url_t0, subpath_t0);
 
 
 
