@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.MainActivity;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
+import com.digitalcreative.aplikasidatamining.R;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.PencarianPage_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -76,6 +78,7 @@ public class ForegroundService extends Service {
     String subpath_data_update;
     private ArrayList<Long> jumlah_id;
     private ArrayList<String> path_file;
+    private ArrayList<String> path_file_download;
     private ArrayList<String>  url_file;
     private ArrayList<Long> jumlah__download_id;
     private int jumlah_file;
@@ -119,7 +122,7 @@ public class ForegroundService extends Service {
         subpath_t0 = "t0.csv";
         jumlah_file=1;
 
-        if(count<=0  ){
+        if(count<=400000  ){
 //            realm.executeTransaction(new Realm.Transaction() {
 //                @Override
 //                public void execute(Realm realm) {
@@ -134,11 +137,23 @@ public class ForegroundService extends Service {
             jumlah_id=new ArrayList<>();
             path_file=new ArrayList<>();
             url_file=new ArrayList<>();
+            path_file_download=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
             jumlah_file=2;
             update_data();
 
         }else{
+            String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+            File directory = new File(path);
+            File[] files = directory.listFiles();
+            Log.d("Files", "Size: "+ files.length);
+            for (int i = 0; i < files.length; i++)
+            {
+                if(files[i].getName().contains("t0") || files[i].getName().contains("t1")) {
+                    files[i].delete();
+                }
+            }
+
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
@@ -166,13 +181,8 @@ public class ForegroundService extends Service {
                                 if (days<=0 && status_download_db.trim().equals("1")) {
                                     subpath_t0 = "t0.csv";
                                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
-
-
                                     subpath_t1 = "t1.csv";
                                     File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
-
-
-
                                     if(!file.exists()
                                             && !file2.exists()
 
@@ -441,6 +451,7 @@ public class ForegroundService extends Service {
                         System.out.println("masuk sini");
                         update_data_s();
                         stopForegroundService();
+                        createNotificationChannel2();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
 
                     }else{
@@ -465,6 +476,21 @@ public class ForegroundService extends Service {
 
 
 
+    }
+    private void createNotificationChannel2() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void update_data_s() {
@@ -497,21 +523,32 @@ public class ForegroundService extends Service {
 
             //Fetching the download id received with the broadcast
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+
             jumlah_id.add(id);
             System.out.println("download selesai "+id);
             System.out.println("id download "+jumlah__download_id);
             System.out.println("jumlah id "+jumlah_id.size());
             System.out.println("jumlah download "+jumlah__download_id.size());
-            int index=0;
-            for(int i=0; i<jumlah__download_id.size(); i++){
-                if(id==jumlah__download_id.get(i)){
-                    index=i;
-                    break;
-                }
+
+            // get the DownloadManager instance
+            DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+
+            DownloadManager.Query q = new DownloadManager.Query();
+            Cursor c = manager.query(q);
+
+            if(c.moveToFirst()) {
+                do {
+                    String name = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+                    System.out.println("nama file"+name);
+                    insert_database(name);
+                } while (c.moveToNext());
+            } else {
+                Log.i("DOWNLOAD LISTENER", "empty cursor :(");
             }
-            if(!path_file.isEmpty()){
-                insert_database(path_file.get(index));
-            }
+
+            c.close();
+
+
 
             //Checking if the received broadcast is for our enqueued download by matching download id
 

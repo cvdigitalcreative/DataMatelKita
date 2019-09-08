@@ -7,4 +7,7 @@
     <string name="bantuan_detail_part_1">Jika Anda memiliki pertanyaan, kritik, saran atau ingin melakukan konfirmasi pembayaran.</string>
     <string name="bantuan_detail_part_2">Silahkan hubungi kami dibawah ini via Whatsapp, SMS, atau Telpon.</string>
     <string name="bantuan_detail_part_3">Setiap hari 08:00 sampai 17:00.</string>
+    <string name="channel_name">Notifikasi Download.</string>
+    <string name="channel_description">Data Berhasil Didownload</string>
+
 </resources>

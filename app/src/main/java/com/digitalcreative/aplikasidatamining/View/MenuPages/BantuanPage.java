@@ -139,6 +139,12 @@ public class BantuanPage extends Fragment {
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
 
+        long count = realm.where(Model_LacakMobil.class).count();
+
+        if(count<=400000) {
+            startService();
+        }
+
 
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -343,7 +349,7 @@ public class BantuanPage extends Fragment {
                                     Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
                                     long milliseconds = date_2.getTime() - date.getTime();
                                     long days = milliseconds / (1000 * 60 * 60 * 24);
-                                    String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                    String infomarsi="Tanggal Update Data Anda " +last_update_data;
                                     String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
                                     String informasi="Jumlah data anda "+count;
                                     finished.setVisibility(View.VISIBLE);
