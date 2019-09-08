@@ -76,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
 //                        backendFirebase.downloadFile(getContext());
         }
         Realm.init(getApplicationContext());
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
+        final RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("vimatel.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
-        Realm realm;
-        realm = Realm.getInstance(configuration);
-        final long count = realm.where(Model_LacakMobil.class).count();
+        final Realm[] realm = new Realm[1];
+        realm[0] = Realm.getInstance(configuration);
+        final long count = realm[0].where(Model_LacakMobil.class).count();
         String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
         File directory = new File(path);
         File[] files = directory.listFiles();
@@ -148,6 +148,13 @@ public class MainActivity extends AppCompatActivity {
                                 if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
                                 }else{
+//                                    realm[0] = Realm.getInstance(configuration);
+//                                    realm[0].executeTransaction(new Realm.Transaction() {
+//                                        @Override
+//                                        public void execute(Realm realm) {
+//                                            realm.deleteAll();
+//                                        }
+//                                    });
                                     Toast.makeText(getApplication(), "Update Data dimulai", Toast.LENGTH_LONG).show();
                                     DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                     dowloadFile_t0.download(getApplication(),0,"link_tes","t0.csv");

@@ -364,10 +364,9 @@ public class BantuanPage extends Fragment {
                                     if(progress>=100){
                                         tv3.setText("Progress Data anda 100 %");
                                     }else{
-                                        tv3.setText("Progress Data anda "+(count/3000000)+ "%");
+                                        tv3.setText("Progress Data anda "+progress+ "%");
                                     }
 
-                                    int  status_download= mSettings.getInt("download_status", 0);
 
                                     if(isMyServiceRunning(ForegroundService_t0.class)
                                             ||isMyServiceRunning(ForegroundService_t1.class)
@@ -379,18 +378,11 @@ public class BantuanPage extends Fragment {
                                     ){
                                         Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                     }
-//                                    else{
-//                                        if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
-//                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
-//                                        }else{
-//                                            Toast.makeText(getActivity(), "Update Data dimulai", Toast.LENGTH_LONG).show();
-//                                            SharedPreferences.Editor editor = mSettings.edit();
-//                                            editor.putInt("download_status", 1);
-//                                            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-//                                            dowloadFile_t0.download(getContext(),0,"link_tes","t0.csv");
-//
-//                                        }
-//                                    }
+                                    else{
+                                        if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
+                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
 
                                 } catch (ParseException e) {
                                     e.printStackTrace();
