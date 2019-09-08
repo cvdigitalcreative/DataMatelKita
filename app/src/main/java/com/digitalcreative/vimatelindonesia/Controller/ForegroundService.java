@@ -12,6 +12,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -93,14 +94,14 @@ public class ForegroundService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
         createNotificationChannel();
-//        Intent notificationIntent = new Intent(this, MainActivity.class);
-//        // Create an IntentFilter instance.
-//        IntentFilter intentFilter = new IntentFilter();
-//
-//        intentFilter.addAction("android.intent.action.ACTION_DOWNLOAD_COMPLETE");
-//
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-//                0, notificationIntent, 0);
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        // Create an IntentFilter instance.
+        IntentFilter intentFilter = new IntentFilter();
+
+        intentFilter.addAction("android.intent.action.ACTION_DOWNLOAD_COMPLETE");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Download Data")
@@ -131,7 +132,18 @@ public class ForegroundService extends Service {
 //                    realm.deleteAll();
 //                }
 //            });
-
+            for (int i = 0; i < files.length; i++)
+            {
+                if(files[i].getName().contains("t0-")
+                        || files[i].getName().contains("t1-")
+                        || files[i].getName().contains("t2-")
+                        || files[i].getName().contains("t3-")
+                        || files[i].getName().contains("t4-")
+                        || files[i].getName().contains("t5-")
+                ) {
+                    files[i].delete();
+                }
+            }
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
@@ -146,6 +158,7 @@ public class ForegroundService extends Service {
         }else{
             for (int i = 0; i < files.length; i++)
             {
+
                 if(files[i].getName().contains("t0")
                         || files[i].getName().contains("t1")
                         || files[i].getName().contains("t2")
@@ -493,7 +506,6 @@ public class ForegroundService extends Service {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
-                    file[0].delete();
                     String line = "";
                     while ((line = br.readLine()) != null) {
                         // use comma as separator
@@ -523,12 +535,45 @@ public class ForegroundService extends Service {
                     System.out.println("jumlah file diolah "+jumlah_file);
 
                     if( jumlah_file==1){
+                        String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+                        File directory = new File(path);
+                        File[] files = directory.listFiles();
+                        for (int i = 0; i < files.length; i++)
+                        {
+                            if(files[i].getName().contains("t0")
+                                    || files[i].getName().contains("t1")
+                                    || files[i].getName().contains("t2")
+                                    || files[i].getName().contains("t3")
+                                    || files[i].getName().contains("t4")
+                                    || files[i].getName().contains("t5")
+                            ) {
+                                files[i].delete();
+                            }
+                        }
                         System.out.println("masuk sini");
                         update_data_s();
+                        SharedPreferences mSettings = getApplication().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mSettings.edit();
+                        editor.putInt("download_status", 0);
                         stopForegroundService();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
 
                     }else{
+                        String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+                        File directory = new File(path);
+                        File[] files = directory.listFiles();
+                        for (int i = 0; i < files.length; i++)
+                        {
+                            if(files[i].getName().contains("t0-")
+                                    || files[i].getName().contains("t1-")
+                                    || files[i].getName().contains("t2-")
+                                    || files[i].getName().contains("t3-")
+                                    || files[i].getName().contains("t4-")
+                                    || files[i].getName().contains("t5-")
+                            ) {
+                                files[i].delete();
+                            }
+                        }
                         jumlah_file=jumlah_file-1;
                         update_data_s();
                         System.out.println("file exist "+file[0].exists());
@@ -607,43 +652,17 @@ public class ForegroundService extends Service {
             System.out.println("jumlah download "+jumlah__download_id.size());
 
             // get the DownloadManager instance
-            DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
 
-            DownloadManager.Query q = new DownloadManager.Query();
-            Cursor c = manager.query(q);
-
-            if(c.moveToFirst()) {
-                do {
-                    String name = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
-                    System.out.println("nama file"+name);
-                    insert_database(name);
-                } while (c.moveToNext());
-            } else {
-                Log.i("DOWNLOAD LISTENER", "empty cursor :(");
+            int index=0;
+            for(int i=0; i<jumlah__download_id.size(); i++){
+                if(id==jumlah__download_id.get(i)){
+                    index=i;
+                    break;
+                }
             }
-
-            c.close();
-
-            //Checking if the received broadcast is for our enqueued download by matching download id
-
-//            if (jumlah_id.size()==jumlah__download_id.size()) {
-//                System.out.println("mulai memasukan data");
-//                for(int i=0; i<path_file.size(); i++){
-//                    insert_database(path_file.get(i));
-//                }
-//                Realm.init(context);
-//                RealmConfiguration configuration = new RealmConfiguration.Builder()
-//                        .name("vimatel.db")
-//                        .schemaVersion(1)
-//                        .deleteRealmIfMigrationNeeded()
-//                        .build();
-//                realm = Realm.getInstance(configuration);
-//                long count = realm.where(Model_LacakMobil.class).count();
-////                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-//
-//                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
-//
-//            }
+            if(!path_file.isEmpty()){
+                insert_database(path_file.get(index));
+            }
 
         }
     };

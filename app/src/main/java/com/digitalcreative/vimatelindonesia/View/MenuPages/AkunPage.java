@@ -5,32 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.BaseActivity;
-import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
 import com.digitalcreative.vimatelindonesia.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,21 +60,7 @@ public class AkunPage extends Fragment {
 
         return view;
     }
-    public void startService() {
-        FirebaseAuth firebaseAuth;
-        FirebaseUser firebaseUser;
-        FirebaseDatabase firebaseDatabase;
-        DatabaseReference myRef;
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        myRef = firebaseDatabase.getReference();
-        String uid=firebaseUser.getUid();
-        Intent serviceIntent = new Intent(getContext(), ForegroundService.class);
-        serviceIntent.putExtra("inputExtra", uid);
 
-        ContextCompat.startForegroundService(getContext(), serviceIntent);
-    }
 
         private void btnlogoutFunc() {
         logout.setOnClickListener(new View.OnClickListener() {

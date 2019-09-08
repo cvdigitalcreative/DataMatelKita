@@ -2,12 +2,15 @@ package com.digitalcreative.vimatelindonesia.View.MenuPages;
 
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.DownloadManager;
+import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -24,11 +27,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t0;
 import com.digitalcreative.vimatelindonesia.Controller.Firebase;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t0;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t1;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t2;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t3;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t4;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t5;
 import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
 import com.digitalcreative.vimatelindonesia.R;
 import com.digitalcreative.vimatelindonesia.RealmHelper;
@@ -52,6 +63,9 @@ import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,7 +108,7 @@ public class BantuanPage extends Fragment {
     private int jumlah_file;
 
     ProgressDialog progress;
-
+    SharedPreferences mSettings;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -138,7 +152,7 @@ public class BantuanPage extends Fragment {
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
-        startService();
+         mSettings = getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -186,7 +200,7 @@ public class BantuanPage extends Fragment {
         });
         return view;
     }
-    public void startService() {
+    public void startService_t0() {
         FirebaseAuth firebaseAuth;
         FirebaseUser firebaseUser;
         FirebaseDatabase firebaseDatabase;
@@ -196,7 +210,7 @@ public class BantuanPage extends Fragment {
         firebaseUser = firebaseAuth.getCurrentUser();
         myRef = firebaseDatabase.getReference();
         String uid=firebaseUser.getUid();
-        Intent serviceIntent = new Intent(getContext(), ForegroundService.class);
+        Intent serviceIntent = new Intent(getContext(), ForegroundService_t0.class);
         serviceIntent.putExtra("inputExtra", uid);
 
         ContextCompat.startForegroundService(getContext(), serviceIntent);
@@ -220,6 +234,7 @@ public class BantuanPage extends Fragment {
         sms_btn = view.findViewById(R.id.sms_btn);
     }
 
+
     private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -231,16 +246,10 @@ public class BantuanPage extends Fragment {
             System.out.println("id download "+jumlah__download_id);
             System.out.println("jumlah id "+jumlah_id.size());
             System.out.println("jumlah download "+jumlah__download_id.size());
-            int index=0;
-            for(int i=0; i<jumlah__download_id.size(); i++){
-                if(id==jumlah__download_id.get(i)){
-                    index=i;
-                    break;
-                }
-            }
-            if(!path_file.isEmpty()){
-                insert_database(path_file.get(index));
-            }
+            Toast.makeText(getActivity(), "Data berhasil didownload tgg beberapa saat untuk masuk ke file", Toast.LENGTH_LONG).show();
+
+
+
 
 
         }
@@ -307,7 +316,7 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startService();
+
                 Realm.init(BantuanPage.this.getContext());
                 RealmConfiguration configuration = new RealmConfiguration.Builder()
                         .name("vimatel.db")
@@ -349,12 +358,29 @@ public class BantuanPage extends Fragment {
                                     tv0.setText(infomarsis);
                                     tv1.setText(infomarsi);
                                     tv2.setText(informasi);
+                                    int  status_download= mSettings.getInt("download_status", 0);
 
-                                    if (days<=0 && status_download_db.trim().equals("1")) {
+                                    if(isMyServiceRunning(ForegroundService_t0.class)
+                                            ||isMyServiceRunning(ForegroundService_t1.class)
+                                            ||isMyServiceRunning(ForegroundService_t2.class)
+                                            ||isMyServiceRunning(ForegroundService_t3.class)
+                                            ||isMyServiceRunning(ForegroundService_t4.class)
+                                            ||isMyServiceRunning(ForegroundService_t5.class)
+                                    ){
+                                        Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
+                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+                                        }else{
+                                            Toast.makeText(getActivity(), "Update Data dimulai", Toast.LENGTH_LONG).show();
+                                            SharedPreferences.Editor editor = mSettings.edit();
+                                            editor.putInt("download_status", 1);
+                                            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
+                                            dowloadFile_t0.download(getContext());
 
-                                        Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
-
+                                        }
                                     }
+
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -384,7 +410,15 @@ public class BantuanPage extends Fragment {
         });
     }
 
-
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private String getCurrentDate() {
         String date;

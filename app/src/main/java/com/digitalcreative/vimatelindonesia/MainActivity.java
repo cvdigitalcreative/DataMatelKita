@@ -1,9 +1,11 @@
 package com.digitalcreative.vimatelindonesia;
 
 import android.Manifest;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -15,18 +17,20 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
+import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.AkunPage;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.BantuanPage;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.PencarianPage;
-import com.digitalcreative.vimatelindonesia.View.MenuPages.PencarianPage_Activity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.File;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView nav;
     private static final int REQUEST_WRITE_STORAGE = 112;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,27 +52,34 @@ public class MainActivity extends AppCompatActivity {
 //                        //loading Data
 //                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
 //                        backendFirebase.downloadFile(getContext());
-        }else{
-            startService();
+        }
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                .name("vimatel.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm realm;
+        realm = Realm.getInstance(configuration);
+        final long count = realm.where(Model_LacakMobil.class).count();
+        String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        for (int i = 0; i < files.length; i++)
+        {
+            if(files[i].getName().contains("t0-")
+                    || files[i].getName().contains("t1-")
+                    || files[i].getName().contains("t2-")
+                    || files[i].getName().contains("t3-")
+                    || files[i].getName().contains("t4-")
+                    || files[i].getName().contains("t5-")
+            ) {
+                files[i].delete();
+            }
         }
 
-
     }
-    public void startService() {
-        FirebaseAuth firebaseAuth;
-        FirebaseUser firebaseUser;
-        FirebaseDatabase firebaseDatabase;
-        DatabaseReference myRef;
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        myRef = firebaseDatabase.getReference();
-        String uid=firebaseUser.getUid();
-        Intent serviceIntent = new Intent(this, ForegroundService.class);
-        serviceIntent.putExtra("inputExtra", uid);
 
-        ContextCompat.startForegroundService(this, serviceIntent);
-    }
 
     private void goButtonNavigationBar() {
         //here default load page

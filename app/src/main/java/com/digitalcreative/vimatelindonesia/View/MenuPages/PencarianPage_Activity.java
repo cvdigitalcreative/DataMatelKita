@@ -145,8 +145,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         long count = realm.where(Model_LacakMobil.class).count();
 
         if(count<=2900000 ){
-            startService();
-            Toast.makeText(context, "Sedang mendownload data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Data anda belum lengkap silahkan tgg beberapa saat sistem sedang memasukan data ", Toast.LENGTH_LONG).show();
 //
 //            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
 //                    "Loading",
@@ -167,21 +166,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
             Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
         }
     }
-    public void startService() {
-        FirebaseAuth firebaseAuth;
-        FirebaseUser firebaseUser;
-        FirebaseDatabase firebaseDatabase;
-        DatabaseReference myRef;
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        myRef = firebaseDatabase.getReference();
-        String uid=firebaseUser.getUid();
-        Intent serviceIntent = new Intent(this, ForegroundService.class);
-        serviceIntent.putExtra("inputExtra", uid);
 
-        ContextCompat.startForegroundService(this, serviceIntent);
-    }
     public void update_data(){
         Toast.makeText(context, "Sedang Update", Toast.LENGTH_LONG).show();
         boolean hasPermission = (ContextCompat.checkSelfPermission(context,

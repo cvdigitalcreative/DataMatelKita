@@ -30,6 +30,30 @@
             android:name=".Controller.ForegroundService"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t0"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t1"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t2"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t3"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t4"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t5"
+            android:enabled="true"
+            android:exported="true"></service>
         <activity
             android:name="com.digitalcreative.vimatelindonesia.MainActivity"
             android:label="@string/title_activity_main"
