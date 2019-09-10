@@ -21,6 +21,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t0;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t1;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t2;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t3;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t4;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t5;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t0;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t1;
@@ -135,7 +140,10 @@ public class MainActivity extends AppCompatActivity {
                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
                             String informasi="Jumlah data anda "+count;
-
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            int status=pref.getInt("key_name2", 0);
+                            System.out.println("status "+status);
                             if(isMyServiceRunning(ForegroundService_t0.class)
                                     ||isMyServiceRunning(ForegroundService_t1.class)
                                     ||isMyServiceRunning(ForegroundService_t2.class)
@@ -156,8 +164,32 @@ public class MainActivity extends AppCompatActivity {
 //                                        }
 //                                    });
                                     Toast.makeText(getApplication(), "Update Data dimulai", Toast.LENGTH_LONG).show();
-                                    DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-                                    dowloadFile_t0.download(getApplication(),0,"link_tes","t0.csv");
+
+                                    if(status==0){
+                                        DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
+                                        dowloadFile_t0.download(getApplication(),0,"link_tes","t0.csv");
+                                    }else if(status==1)
+                                    {
+                                        DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
+                                        dowloadFile_t1.download(getApplication());
+                                    }else if(status==2)
+                                    {
+                                        DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
+                                        dowloadFile_t2.download(getApplication());
+                                    }else if(status==3)
+                                    {
+                                        DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
+                                        dowloadFile_t3.download(getApplication());
+                                    }else if(status==4)
+                                    {
+                                        DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
+                                        dowloadFile_t4.download(getApplication());
+                                    }else if(status==5)
+                                    {
+                                        DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
+                                        dowloadFile_t5.download(getApplication());
+                                    }
+
 
                                 }
                             }

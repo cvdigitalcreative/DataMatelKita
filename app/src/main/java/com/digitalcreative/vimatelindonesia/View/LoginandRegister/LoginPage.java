@@ -4,6 +4,7 @@ package com.digitalcreative.vimatelindonesia.View.LoginandRegister;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -42,6 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -151,6 +153,10 @@ public class LoginPage extends Fragment {
 //                                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
 //                                            transaction.replace(R.id.container_base, new LoadingPage())
 //                                                    .commit();
+                                            SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = pref.edit();
+                                            editor.putInt("key_name2", 0);
+                                            editor.apply();
                                             Intent intent = new Intent(getActivity(), MainActivity.class);
                                             startActivity(intent);
 

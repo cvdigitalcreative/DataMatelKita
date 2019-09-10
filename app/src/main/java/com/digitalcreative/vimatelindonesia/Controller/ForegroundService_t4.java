@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
@@ -138,6 +139,14 @@ public class ForegroundService_t4 extends Service {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    int status=pref.getInt("key_name2", 0);
+                    System.out.println("status download "+status);
+                    editor.clear();
+                    editor.commit(); // commit changes
+                    editor.putInt("key_name2", 5);
+                    editor.apply();
                     System.out.println("nama file "+file[0].getAbsolutePath());
                     file[0].delete();
                     update_data_s();
