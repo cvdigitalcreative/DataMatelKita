@@ -98,12 +98,10 @@ public class DowloadFile_t1 {
         return false;
     }
     public void download(Context context){
-        Intent myService = new Intent(context, ForegroundService_t0.class);
-        //startService(myService);
 
         this.context=context ;
 
-        this.context.registerReceiver(onDownloadComplete_t1,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        context.registerReceiver(onDownloadComplete_t1,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();

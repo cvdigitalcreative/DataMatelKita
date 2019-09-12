@@ -38,7 +38,6 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
                         android:orientation="vertical">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -49,22 +48,22 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Pemilik Mobil"
+                                android:text="No Plat"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/detail_pemilikmobil"
+                                android:id="@+id/detail_noplat"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLines="1"
                                 android:textSize="@dimen/detail_mobil_textSize" />
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="2dp"
-                                android:layout_margin="0dp"
+                                android:layout_margin="5dp"
                                 android:background="@color/base_grey_color" />
                         </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -102,19 +101,47 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="No Plat"
+                                android:text="Finance"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/detail_noplat"
+                                android:id="@+id/detail_finance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:maxLines="1"
                                 android:textSize="@dimen/detail_mobil_textSize" />
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="2dp"
                                 android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pemilik Mobil"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_pemilikmobil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="0dp"
                                 android:background="@color/base_grey_color" />
                         </LinearLayout>
 
@@ -222,7 +249,30 @@
                                 android:layout_margin="5dp"
                                 android:background="@color/base_grey_color" />
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
+                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Saldo"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/detail_sipok"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/detail_mobil_textSize" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_margin="5dp"
+                                android:background="@color/base_grey_color" />
+                        </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -248,57 +298,6 @@
                                 android:background="@color/base_grey_color" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
-                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Finance"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/detail_finance"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:maxLines="1"
-                                android:textSize="@dimen/detail_mobil_textSize" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:layout_margin="5dp"
-                                android:background="@color/base_grey_color" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="@dimen/detail_mobil_paddingHor"
-                            android:paddingVertical="@dimen/detail_mobil_paddingVer">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Saldo"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/detail_sipok"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/detail_mobil_textSize" />
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:layout_margin="5dp"
-                                android:background="@color/base_grey_color" />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"

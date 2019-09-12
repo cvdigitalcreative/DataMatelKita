@@ -153,7 +153,8 @@ public class MainActivity extends AppCompatActivity {
                             ){
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
-                                if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
+                                if (days<=0 && status_download_db.trim().equals("1") && count >2900000 ) {
+
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
                                 }else{
 //                                    realm[0] = Realm.getInstance(configuration);
@@ -163,32 +164,72 @@ public class MainActivity extends AppCompatActivity {
 //                                            realm.deleteAll();
 //                                        }
 //                                    });
-                                    Toast.makeText(getApplication(), "Update Data dimulai", Toast.LENGTH_LONG).show();
 
-                                    if(status==0){
-                                        DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-                                        dowloadFile_t0.download(getApplication(),0,"link_tes","t0.csv");
-                                    }else if(status==1)
-                                    {
-                                        DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
-                                        dowloadFile_t1.download(getApplication());
-                                    }else if(status==2)
-                                    {
-                                        DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
-                                        dowloadFile_t2.download(getApplication());
-                                    }else if(status==3)
-                                    {
-                                        DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
-                                        dowloadFile_t3.download(getApplication());
-                                    }else if(status==4)
-                                    {
-                                        DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
-                                        dowloadFile_t4.download(getApplication());
-                                    }else if(status==5)
-                                    {
-                                        DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
-                                        dowloadFile_t5.download(getApplication());
+                                    Toast.makeText(getApplication(), "Sedang Mengupdate", Toast.LENGTH_LONG).show();
+                                    if(count>2900000){
+                                        editor.clear();
+                                        editor.commit(); // commit changes
+                                        editor.putInt("key_name2", 0);
+                                        editor.apply();
+                                        System.out.println("status download "+status);
+                                        realm[0] = Realm.getInstance(configuration);
+                                        realm[0].executeTransaction(new Realm.Transaction() {
+                                        @Override
+                                        public void execute(Realm realm) {
+                                            realm.deleteAll();
+                                        }
+                                        });
+                                        if(status==0){
+                                            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
+                                            dowloadFile_t0.download(getApplication(),0,"link_tes","t0.csv");
+                                        }else if(status==1)
+                                        {
+                                            DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
+                                            dowloadFile_t1.download(getApplication());
+                                        }else if(status==2)
+                                        {
+                                            DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
+                                            dowloadFile_t2.download(getApplication());
+                                        }else if(status==3)
+                                        {
+                                            DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
+                                            dowloadFile_t3.download(getApplication());
+                                        }else if(status==4)
+                                        {
+                                            DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
+                                            dowloadFile_t4.download(getApplication());
+                                        }else if(status==5)
+                                        {
+                                            DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
+                                            dowloadFile_t5.download(getApplication());
+                                        }
+                                    }else{
+                                        if(status==0){
+                                            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
+                                            dowloadFile_t0.download(getApplication(),0,"link_tes","t0.csv");
+                                        }else if(status==1)
+                                        {
+                                            DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
+                                            dowloadFile_t1.download(getApplication());
+                                        }else if(status==2)
+                                        {
+                                            DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
+                                            dowloadFile_t2.download(getApplication());
+                                        }else if(status==3)
+                                        {
+                                            DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
+                                            dowloadFile_t3.download(getApplication());
+                                        }else if(status==4)
+                                        {
+                                            DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
+                                            dowloadFile_t4.download(getApplication());
+                                        }else if(status==5)
+                                        {
+                                            DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
+                                            dowloadFile_t5.download(getApplication());
+                                        }
                                     }
+
 
 
                                 }

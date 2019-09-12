@@ -567,15 +567,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
             // completely detached from realm and is not monitored by realm
             // for changes. Thus this list of values is free to move around
             // inside any thread.
-            list= realm.where(Model_LacakMobil.class).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
+            list= realm.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
             List<Model_LacakMobil> safeWords;
-            System.out.println("search done");
-            if(list.size()>6){
-                safeWords = realm.copyFromRealm(list.subList(0,5));
-            }else{
-                safeWords = realm.copyFromRealm(list);
-            }
-
+            safeWords = realm.copyFromRealm(list);
             realm.close();
             return safeWords;
 
@@ -648,7 +642,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 //
                 mHandler.removeCallbacks(mFilterTask);
-                mHandler.postDelayed(mFilterTask, 300);
+                mHandler.postDelayed(mFilterTask, 50);
             }
 
             @Override
