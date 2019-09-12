@@ -17,7 +17,7 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
     private LinearLayout button1, button2, button3, button4, button5, button6, button7, button8, button9, button0,
             buttonq, buttonw, buttone, buttonr, buttont, buttony, buttonu, buttoni, buttono, buttonp,
             buttona, buttons, buttond, buttonf, buttong, buttonh, buttonj, buttonk, buttonl,
-            buttonz, buttonx, buttonc, buttonv, buttonb, buttonn, buttonm, buttonspasi, buttoncancel, buttondelete, button_keyboard;
+            buttonz, buttonx, buttonc, buttonv, buttonb, buttonn, buttonm,  buttoncancel, buttondelete, button_keyboard;
 
     private SparseArray<String> keyValues = new SparseArray<>();
     private InputConnection inputConnection;
@@ -126,8 +126,7 @@ public class KeyboardMethod extends LinearLayout implements View.OnClickListener
         buttonn.setOnClickListener(this);
         buttonm = findViewById(R.id.btn_m);
         buttonm.setOnClickListener(this);
-        buttonspasi = findViewById(R.id.btn_space);
-        buttonspasi.setOnClickListener(this);
+
         buttoncancel = findViewById(R.id.btn_cancel);
         buttoncancel.setOnClickListener(this);
         buttondelete = findViewById(R.id.btn_deletes);

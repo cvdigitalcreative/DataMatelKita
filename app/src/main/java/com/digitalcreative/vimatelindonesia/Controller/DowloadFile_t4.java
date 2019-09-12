@@ -41,7 +41,7 @@ public class DowloadFile_t4 {
     private BroadcastReceiver onDownloadComplete_t4 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            context.unregisterReceiver(onDownloadComplete_t4);
+
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             if(id==downloadID){
                 startService_t0();

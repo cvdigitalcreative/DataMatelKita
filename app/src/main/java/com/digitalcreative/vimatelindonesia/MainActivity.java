@@ -157,16 +157,9 @@ public class MainActivity extends AppCompatActivity {
 
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
                                 }else{
-//                                    realm[0] = Realm.getInstance(configuration);
-//                                    realm[0].executeTransaction(new Realm.Transaction() {
-//                                        @Override
-//                                        public void execute(Realm realm) {
-//                                            realm.deleteAll();
-//                                        }
-//                                    });
-
+//
                                     Toast.makeText(getApplication(), "Sedang Mengupdate", Toast.LENGTH_LONG).show();
-                                    if(count>2900000){
+                                    if(count>3000000){
                                         editor.clear();
                                         editor.commit(); // commit changes
                                         editor.putInt("key_name2", 0);

@@ -2,9 +2,13 @@ package com.digitalcreative.vimatelindonesia.View.MenuPages;
 
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.app.DownloadManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +26,12 @@ import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.Controller.ExpandCollapse;
 import com.digitalcreative.vimatelindonesia.Controller.Firebase;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t0;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t1;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t2;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t3;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t4;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t5;
 import com.digitalcreative.vimatelindonesia.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -101,10 +111,16 @@ public class PencarianPage extends Fragment {
                                 Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
                                 long milliseconds = date_2.getTime() - date.getTime();
                                 long days = milliseconds / (1000 * 60 * 60 * 24);
-                                if (days>0 ) {
-                                    Toast.makeText(getActivity(), "Silahkan Update Data", Toast.LENGTH_LONG).show();
-
+                                if(isMyServiceRunning(ForegroundService_t0.class)
+                                        ||isMyServiceRunning(ForegroundService_t1.class)
+                                        ||isMyServiceRunning(ForegroundService_t2.class)
+                                        ||isMyServiceRunning(ForegroundService_t3.class)
+                                        ||isMyServiceRunning(ForegroundService_t4.class)
+                                        ||isMyServiceRunning(ForegroundService_t5.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+                                ){
+                                    Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                 }
+
                             }  catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -127,7 +143,30 @@ public class PencarianPage extends Fragment {
 
         return view;
     }
+    public static boolean checkStatus(Context context , int status) {
+        DownloadManager downloadManager = (DownloadManager)
+                context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Query query = new DownloadManager.Query();
 
+        query.setFilterByStatus(status);
+        Cursor c = downloadManager.query(query);
+        if (c.moveToFirst()) {
+            c.close();
+
+            return true;
+        }
+
+        return false;
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
     private void recentFucn() {
 //        //Preparing Data
 //        String[] recent = new String[]{};

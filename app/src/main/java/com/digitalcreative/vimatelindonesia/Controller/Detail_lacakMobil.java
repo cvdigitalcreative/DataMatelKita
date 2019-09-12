@@ -152,9 +152,10 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         nosin.setText(model.getNosin());
         tahun.setText(model.getTahun());
         warna.setText(model.getWarna());
-        if(model.getSaldo().equals("-")){
+        if(model.getSaldo().replace(" ","").equals("-".trim())){
             sipok.setText(model.getSaldo());
         }else{
+
             sipok.setText(formatRupiah.format(Double.valueOf(model.getSaldo())));
         }
 

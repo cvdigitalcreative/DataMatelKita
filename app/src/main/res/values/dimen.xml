@@ -75,9 +75,9 @@
     <dimen name="margin_keyboard">0.5dp</dimen>
     <dimen name="weight_keyboard">1.2dp</dimen>
     <dimen name="paddingText">9dp</dimen>
-    <dimen name="layoutheight">40dp</dimen>
-    <dimen name="layout_height">60dp</dimen>
-    <dimen name="layoutheight_land">40dp</dimen>
+    <dimen name="layoutheight">50dp</dimen>
+    <dimen name="layout_height">70dp</dimen>
+    <dimen name="layoutheight_land">50dp</dimen>
     <dimen name="paddingLayout">1dp</dimen>
-    <dimen name="textSize">22sp</dimen>
+    <dimen name="textSize">25sp</dimen>
 </resources>

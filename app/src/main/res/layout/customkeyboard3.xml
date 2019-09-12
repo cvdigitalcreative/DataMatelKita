@@ -643,7 +643,7 @@
     <LinearLayout
         android:id="@+id/btn_1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -669,7 +669,7 @@
     <LinearLayout
         android:id="@+id/btn_2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
@@ -694,7 +694,7 @@
     <LinearLayout
         android:id="@+id/btn_3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
@@ -719,7 +719,7 @@
     <LinearLayout
         android:id="@+id/btn_4"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -745,7 +745,7 @@
     <LinearLayout
         android:id="@+id/btn_5"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
@@ -770,7 +770,7 @@
     <LinearLayout
         android:id="@+id/btn_6"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
@@ -795,7 +795,7 @@
     <LinearLayout
         android:id="@+id/btn_7"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -807,7 +807,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingStart="@dimen/padding_horizontal"
             android:paddingTop="@dimen/paddingText"
             android:paddingEnd="@dimen/padding_horizontal"
@@ -821,7 +821,7 @@
     <LinearLayout
         android:id="@+id/btn_8"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
@@ -846,7 +846,7 @@
     <LinearLayout
         android:id="@+id/btn_9"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
@@ -894,7 +894,7 @@
     <LinearLayout
         android:id="@+id/btn_0"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/bgKeyboardBlue"
@@ -938,34 +938,5 @@
             app:srcCompat="@drawable/ic_backspace" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/btn_space"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:background="@color/bgKeyboardBlue"
-        android:clickable="true"
-        android:gravity="center"
-        android:padding="@dimen/paddingLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_0">
 
-        <TextView
-            android:id="@+id/tv_space"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingText"
-            android:paddingStart="@dimen/padding_horizontal"
-            android:paddingEnd="@dimen/padding_horizontal"
-            android:text="SPASI"
-            android:textColor="@color/keyboardTextcolor"
-            android:textSize="@dimen/textSize"
-            android:textStyle="bold" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

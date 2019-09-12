@@ -902,6 +902,7 @@
                 android:background="@color/keyboardcolor"
                 android:clickable="true"
                 android:gravity="center"
+                android:visibility="invisible"
                 android:padding="@dimen/paddingLayout">
 
                 <TextView

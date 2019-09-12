@@ -1,9 +1,12 @@
 package com.digitalcreative.vimatelindonesia.View.MenuPages;
 
 
+import android.app.ActivityManager;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.BaseActivity;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t0;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t1;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t2;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t3;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t4;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t5;
 import com.digitalcreative.vimatelindonesia.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,6 +67,15 @@ public class AkunPage extends Fragment {
 
         //do Function
         btnlogoutFunc();
+        if(isMyServiceRunning(ForegroundService_t0.class)
+                ||isMyServiceRunning(ForegroundService_t1.class)
+                ||isMyServiceRunning(ForegroundService_t2.class)
+                ||isMyServiceRunning(ForegroundService_t3.class)
+                ||isMyServiceRunning(ForegroundService_t4.class)
+                ||isMyServiceRunning(ForegroundService_t5.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+        ){
+            Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+        }
 
         return view;
     }
@@ -73,6 +92,30 @@ public class AkunPage extends Fragment {
 //                fragmentTransaction.replace(R.id.container_base, update_profil).commit();
             }
         });
+    }
+    public static boolean checkStatus(Context context , int status) {
+        DownloadManager downloadManager = (DownloadManager)
+                context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Query query = new DownloadManager.Query();
+
+        query.setFilterByStatus(status);
+        Cursor c = downloadManager.query(query);
+        if (c.moveToFirst()) {
+            c.close();
+
+            return true;
+        }
+
+        return false;
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
     private void sayHelloboys(View view) {
         //TextView

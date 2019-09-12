@@ -33,6 +33,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t0;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t1;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t2;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t3;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t4;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t5;
 import com.digitalcreative.vimatelindonesia.Controller.Firebase;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t0;
@@ -67,6 +72,7 @@ import io.realm.RealmConfiguration;
 
 import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
 import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -122,15 +128,7 @@ public class BantuanPage extends Fragment {
 
         //Init the Variable
         sayHelloboys(view);
-//        Realm.init(this.getContext());
-//        RealmConfiguration config =
-//                new RealmConfiguration.Builder()
-//                        .name("test.db")
-//                        .schemaVersion(1)
-//                        .deleteRealmIfMigrationNeeded()
-//                        .build();
-//        realm = Realm.getInstance(config);
-        //Set up Realm
+//
         Realm.init(this.getContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("vimatel.db")
@@ -153,8 +151,16 @@ public class BantuanPage extends Fragment {
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
-         mSettings = getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
-
+         mSettings = getActivity().getSharedPreferences("Settings", MODE_PRIVATE);
+        if(isMyServiceRunning(ForegroundService_t0.class)
+                ||isMyServiceRunning(ForegroundService_t1.class)
+                ||isMyServiceRunning(ForegroundService_t2.class)
+                ||isMyServiceRunning(ForegroundService_t3.class)
+                ||isMyServiceRunning(ForegroundService_t4.class)
+                ||isMyServiceRunning(ForegroundService_t5.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+        ){
+            Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+        }
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -346,26 +352,16 @@ public class BantuanPage extends Fragment {
                                 String last_update_data_sistem = dataSnapshots.child("update_terakhir").getValue().toString();
                                 SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
                                 Date dateobj = Calendar.getInstance().getTime();
-
+                                SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                int status=pref.getInt("key_name2", 0);
                                 Date date = null;
                                 try {
                                     date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
                                     Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
                                     long milliseconds = date_2.getTime() - date.getTime();
                                     long days = milliseconds / (1000 * 60 * 60 * 24);
-                                    String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
-                                    String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                    String informasi="Jumlah data anda "+count;
-                                    long progress=((count*100)/3000000);
-                                    finished.setVisibility(View.VISIBLE);
-                                    tv0.setText(infomarsis);
-                                    tv1.setText(infomarsi);
-                                    tv2.setText(informasi);
-                                    if(progress>=100){
-                                        tv3.setText("Progress Data anda 100 %");
-                                    }else{
-                                        tv3.setText("Progress Data anda "+progress+ "%");
-                                    }
+
 
 
                                     if(isMyServiceRunning(ForegroundService_t0.class)
@@ -376,11 +372,210 @@ public class BantuanPage extends Fragment {
                                             ||isMyServiceRunning(ForegroundService_t5.class)
                                             || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
                                     ){
+                                        if(status==0){
+
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            long progress=(count*100)/2900000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+
+                                        }else if(status==1)
+                                        {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            long progress=(count*100)/2900000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+                                        }else if(status==2)
+                                        {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            long progress=(count*100)/2900000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+                                        }else if(status==3)
+                                        {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            long progress=(count*100)/2900000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+                                        }else if(status==4)
+                                        {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            long progress=(count*100)/2900000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+                                        }else if(status==5)
+                                        {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            long progress=(count*100)/2900000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+                                        }
                                         Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                     }
                                     else{
                                         if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            long progress=(count*100)/2900000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
                                             Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+                                        }else{
+                                            if(status==0){
+
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                                String informasi="Jumlah data anda "+count;
+                                                long progress=(count*100)/3100000;
+                                                finished.setVisibility(View.VISIBLE);
+                                                tv0.setText(infomarsis);
+                                                tv1.setText(infomarsi);
+                                                tv2.setText(informasi);
+                                                if(progress>=100){
+                                                    tv3.setText("Progress Data anda 100 %");
+                                                }else{
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+                                                }
+
+                                            }else if(status==1)
+                                            {
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                                String informasi="Jumlah data anda "+count;
+                                                long progress=(count*100)/2900000;
+                                                finished.setVisibility(View.VISIBLE);
+                                                tv0.setText(infomarsis);
+                                                tv1.setText(infomarsi);
+                                                tv2.setText(informasi);
+                                                if(progress>=100){
+                                                    tv3.setText("Progress Data anda 100 %");
+                                                }else{
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+                                                }
+                                            }else if(status==2)
+                                            {
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                                String informasi="Jumlah data anda "+count;
+                                                long progress=(count*100)/2900000;
+                                                finished.setVisibility(View.VISIBLE);
+                                                tv0.setText(infomarsis);
+                                                tv1.setText(infomarsi);
+                                                tv2.setText(informasi);
+                                                if(progress>=100){
+                                                    tv3.setText("Progress Data anda 100 %");
+                                                }else{
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+                                                }
+                                            }else if(status==3)
+                                            {
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                                String informasi="Jumlah data anda "+count;
+                                                long progress=(count*100)/2900000;
+                                                finished.setVisibility(View.VISIBLE);
+                                                tv0.setText(infomarsis);
+                                                tv1.setText(infomarsi);
+                                                tv2.setText(informasi);
+                                                if(progress>=100){
+                                                    tv3.setText("Progress Data anda 100 %");
+                                                }else{
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+                                                }
+                                            }else if(status==4)
+                                            {
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                                String informasi="Jumlah data anda "+count;
+                                                long progress=(count*100)/2900000;
+                                                finished.setVisibility(View.VISIBLE);
+                                                tv0.setText(infomarsis);
+                                                tv1.setText(infomarsi);
+                                                tv2.setText(informasi);
+                                                if(progress>=100){
+                                                    tv3.setText("Progress Data anda 100 %");
+                                                }else{
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+                                                }
+                                            }else if(status==5)
+                                            {
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                                String informasi="Jumlah data anda "+count;
+                                                long progress=(count*100)/2900000;
+                                                finished.setVisibility(View.VISIBLE);
+                                                tv0.setText(infomarsis);
+                                                tv1.setText(infomarsi);
+                                                tv2.setText(informasi);
+                                                if(progress>=100){
+                                                    tv3.setText("Progress Data anda 100 %");
+                                                }else{
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+                                                }
+                                            }
+                                            Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                         }
                                     }
 
