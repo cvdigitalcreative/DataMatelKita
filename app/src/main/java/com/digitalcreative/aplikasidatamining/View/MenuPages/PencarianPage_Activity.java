@@ -146,7 +146,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
         if(count<=400000){
             Toast.makeText(context, "Sedang mendownload data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
-            startService();
+
 //
 //            progressDialog = ProgressDialog.show(PencarianPage_Activity.this,
 //                    "Loading",

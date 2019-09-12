@@ -938,34 +938,5 @@
             app:srcCompat="@drawable/ic_backspace" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/btn_space"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:background="@color/bgKeyboardBlue"
-        android:clickable="true"
-        android:gravity="center"
-        android:padding="@dimen/paddingLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_0">
 
-        <TextView
-            android:id="@+id/tv_space"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingText"
-            android:paddingStart="@dimen/padding_horizontal"
-            android:paddingEnd="@dimen/padding_horizontal"
-            android:text="SPASI"
-            android:textColor="@color/keyboardTextcolor"
-            android:textSize="@dimen/textSize"
-            android:textStyle="bold" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

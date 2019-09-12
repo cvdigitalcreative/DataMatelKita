@@ -2,13 +2,15 @@ package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t0;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t1;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
 import com.digitalcreative.aplikasidatamining.RealmHelper;
@@ -53,11 +56,13 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BantuanPage extends Fragment {
-    TextView tv1, tv2,tv0;
+    TextView tv1, tv2,tv0,tv3;
     LinearLayout finished;
     CardView addCar, update;
     ImageView wa_btn, call_tbn, sms_btn;
@@ -94,7 +99,7 @@ public class BantuanPage extends Fragment {
     private int jumlah_file;
 
     ProgressDialog progress;
-
+    SharedPreferences mSettings;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -138,13 +143,7 @@ public class BantuanPage extends Fragment {
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
-
-        long count = realm.where(Model_LacakMobil.class).count();
-
-        if(count<=400000) {
-            startService();
-        }
-
+        mSettings = getActivity().getSharedPreferences("Settings", MODE_PRIVATE);
 
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -157,7 +156,6 @@ public class BantuanPage extends Fragment {
                         System.out.println("cuy masuk akal");
                         SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
                         Date dateobj = Calendar.getInstance().getTime();
-
                         Date date = null;
                         try {
                             date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
@@ -193,7 +191,7 @@ public class BantuanPage extends Fragment {
         });
         return view;
     }
-    public void startService() {
+    public void startService_t0() {
         FirebaseAuth firebaseAuth;
         FirebaseUser firebaseUser;
         FirebaseDatabase firebaseDatabase;
@@ -203,7 +201,7 @@ public class BantuanPage extends Fragment {
         firebaseUser = firebaseAuth.getCurrentUser();
         myRef = firebaseDatabase.getReference();
         String uid=firebaseUser.getUid();
-        Intent serviceIntent = new Intent(getContext(), ForegroundService.class);
+        Intent serviceIntent = new Intent(getContext(), ForegroundService_t0.class);
         serviceIntent.putExtra("inputExtra", uid);
 
         ContextCompat.startForegroundService(getContext(), serviceIntent);
@@ -213,6 +211,7 @@ public class BantuanPage extends Fragment {
         //TextView
         tv1 = view.findViewById(R.id.text_bantuan_1);
         tv2 = view.findViewById(R.id.text_bantuan_2);
+        tv3 = view.findViewById(R.id.text_bantuan_3);
         tv0=view.findViewById(R.id.text_bantuan_cuy);
         //LinearLayout
         finished = view.findViewById(R.id.finish_progresbar3);
@@ -227,6 +226,7 @@ public class BantuanPage extends Fragment {
         sms_btn = view.findViewById(R.id.sms_btn);
     }
 
+
     private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -238,16 +238,10 @@ public class BantuanPage extends Fragment {
             System.out.println("id download "+jumlah__download_id);
             System.out.println("jumlah id "+jumlah_id.size());
             System.out.println("jumlah download "+jumlah__download_id.size());
-            int index=0;
-            for(int i=0; i<jumlah__download_id.size(); i++){
-                if(id==jumlah__download_id.get(i)){
-                    index=i;
-                    break;
-                }
-            }
-            if(!path_file.isEmpty()){
-                insert_database(path_file.get(index));
-            }
+            Toast.makeText(getActivity(), "Data berhasil didownload tgg beberapa saat untuk masuk ke file", Toast.LENGTH_LONG).show();
+
+
+
 
 
         }
@@ -325,10 +319,10 @@ public class BantuanPage extends Fragment {
                 final long count = realm.where(Model_LacakMobil.class).count();
 
 
-                    firebaseAuth = FirebaseAuth.getInstance();
-                    firebaseDatabase = FirebaseDatabase.getInstance();
-                    firebaseUser = firebaseAuth.getCurrentUser();
-                    myRef = firebaseDatabase.getReference();
+                firebaseAuth = FirebaseAuth.getInstance();
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                firebaseUser = firebaseAuth.getCurrentUser();
+                myRef = firebaseDatabase.getReference();
                 myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -349,19 +343,61 @@ public class BantuanPage extends Fragment {
                                     Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
                                     long milliseconds = date_2.getTime() - date.getTime();
                                     long days = milliseconds / (1000 * 60 * 60 * 24);
-                                    String infomarsi="Tanggal Update Data Anda " +last_update_data;
-                                    String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                    String informasi="Jumlah data anda "+count;
-                                    finished.setVisibility(View.VISIBLE);
-                                    tv0.setText(infomarsis);
-                                    tv1.setText(infomarsi);
-                                    tv2.setText(informasi);
 
-                                    if (days<=0 && status_download_db.trim().equals("1")) {
 
-                                        Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+                                    if(isMyServiceRunning(ForegroundService_t0.class)
+                                            ||isMyServiceRunning(ForegroundService_t1.class)
 
+                                            || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+                                    ){
+                                        String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                        String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                        String informasi="Jumlah data anda "+count;
+                                        SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        int status=pref.getInt("key_name2", 0);
+                                        long progress=0;
+                                        if(status==0){
+                                            progress=50;
+                                        }else if(status==1)
+                                        {
+                                            progress=100;
+                                        }
+                                        finished.setVisibility(View.VISIBLE);
+                                        tv0.setText(infomarsis);
+                                        tv1.setText(infomarsi);
+                                        tv2.setText(informasi);
+                                        if(progress>=100){
+                                            tv3.setText("Progress Data anda 100 %");
+                                        }else{
+                                            tv3.setText("Progress Data anda "+progress+ "%");
+                                        }
+
+                                        Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                     }
+                                    else{
+                                        if (days<=0 && status_download_db.trim().equals("1") && count>400000) {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+count;
+                                            SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = pref.edit();
+                                            int status=pref.getInt("key_name2", 0);
+                                            long progress=100;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+
+                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -390,8 +426,30 @@ public class BantuanPage extends Fragment {
             }
         });
     }
+    public static boolean checkStatus(Context context , int status) {
+        DownloadManager downloadManager = (DownloadManager)
+                context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Query query = new DownloadManager.Query();
 
+        query.setFilterByStatus(status);
+        Cursor c = downloadManager.query(query);
+        if (c.moveToFirst()) {
+            c.close();
 
+            return true;
+        }
+
+        return false;
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private String getCurrentDate() {
         String date;
@@ -524,3 +582,4 @@ public class BantuanPage extends Fragment {
         firebase.loadfirebase(getContext());
     }
 }
+

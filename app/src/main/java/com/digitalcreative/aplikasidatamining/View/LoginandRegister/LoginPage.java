@@ -1,9 +1,9 @@
 package com.digitalcreative.aplikasidatamining.View.LoginandRegister;
 
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -42,6 +42,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,7 +52,7 @@ public class LoginPage extends Fragment {
     EditText email, pass;
     String getemail, getpass;
     LinearLayout pop_up;
-    private static final int REQUEST_WRITE_STORAGE = 112;
+
     public LoginPage() {
         // Required empty public constructor
     }
@@ -62,44 +63,47 @@ public class LoginPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login_page, container, false);
-            firebaseAuth = FirebaseAuth.getInstance();
-            email = view.findViewById(R.id.username);
-            pass = view.findViewById(R.id.password);
-            pop_up = view.findViewById(R.id.pop_up_login);
+        firebaseAuth = FirebaseAuth.getInstance();
+        email = view.findViewById(R.id.username);
+        pass = view.findViewById(R.id.password);
+        pop_up = view.findViewById(R.id.pop_up_login);
 
-            //Button Register
-            final TextView btn_registrasi =  view.findViewById(R.id.btn_register);
-            btn_registrasi.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.container_base, new RegisterPage())
-                            .addToBackStack(null).commit();
-                }
-            });
+        //Button Register
+        final TextView btn_registrasi =  view.findViewById(R.id.btn_register);
+        btn_registrasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container_base, new RegisterPage())
+                        .addToBackStack(null).commit();
+            }
+        });
 
-            //Button Login
-            final Button btn_login = view.findViewById(R.id.btn_login);
-            btn_login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    checkemail_instance();
+        //Button Login
+        final Button btn_login = view.findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkemail_instance();
 
-                }
-            });
-        boolean hasPermission = (ContextCompat.checkSelfPermission(getActivity(),
+            }
+        });
+        int REQUEST_WRITE_STORAGE = 112;
+        boolean hasPermission = (ContextCompat.checkSelfPermission(LoginPage.this.getContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         if (!hasPermission) {
 
 
-            ActivityCompat.requestPermissions(getActivity(),
+            ActivityCompat.requestPermissions(LoginPage.this.getActivity(),
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_WRITE_STORAGE);
+
 //                        //loading Data
 //                        BackendFirebase backendFirebase = new BackendFirebase(getContext(), v, finished, tv1, tv2);
 //                        backendFirebase.downloadFile(getContext());
 
         }
+
         return view;
     }
 
@@ -148,6 +152,10 @@ public class LoginPage extends Fragment {
 //                                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
 //                                            transaction.replace(R.id.container_base, new LoadingPage())
 //                                                    .commit();
+                                            SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = pref.edit();
+                                            editor.putInt("key_name2", 0);
+                                            editor.apply();
                                             Intent intent = new Intent(getActivity(), MainActivity.class);
                                             startActivity(intent);
 

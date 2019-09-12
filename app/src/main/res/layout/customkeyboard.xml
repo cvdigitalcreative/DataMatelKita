@@ -902,17 +902,10 @@
                 android:background="@color/keyboardcolor"
                 android:clickable="true"
                 android:gravity="center"
+                android:visibility="invisible"
                 android:padding="@dimen/paddingLayout">
 
-                <TextView
-                    android:id="@+id/tv_space"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/paddingText"
-                    android:text="SPASI"
-                    android:textColor="@color/keyboardTextcolor"
-                    android:textSize="@dimen/textSize"
-                    android:textStyle="bold" />
+
             </LinearLayout>
         </LinearLayout>
 

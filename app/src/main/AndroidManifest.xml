@@ -29,6 +29,14 @@
             android:name=".Controller.ForegroundService"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t1"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t0"
+            android:enabled="true"
+            android:exported="true"></service>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
