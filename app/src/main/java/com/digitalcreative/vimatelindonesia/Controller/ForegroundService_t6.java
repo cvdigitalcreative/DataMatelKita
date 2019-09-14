@@ -35,8 +35,8 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class ForegroundService_t5 extends Service {
-    public static final String CHANNEL_ID = "ForegroundServiceChannel_t6";
+public class ForegroundService_t6 extends Service {
+    public static final String CHANNEL_ID = "ForegroundServiceChannel_t5";
 
     Realm realm;
 
@@ -92,7 +92,7 @@ public class ForegroundService_t5 extends Service {
                 .build();
 
         startForeground(1, notification);
-        subpath_t0 = "t6.csv";
+        subpath_t0 = "t5.csv";
         insertdata(subpath_t0);
         return START_NOT_STICKY;
     }
@@ -105,7 +105,7 @@ public class ForegroundService_t5 extends Service {
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
         final String localFile = file[0].toString();
-        Realm.init(ForegroundService_t5.this);
+        Realm.init(ForegroundService_t6.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("vimatel.db")
                 .schemaVersion(1)
@@ -146,14 +146,27 @@ public class ForegroundService_t5 extends Service {
                     System.out.println("status download "+status);
                     editor.clear();
                     editor.commit(); // commit changes
-                    editor.putInt("key_name2", 6);
+                    editor.putInt("key_name2", 0);
                     editor.apply();
                     System.out.println("nama file "+file[0].getAbsolutePath());
                     file[0].delete();
+                    String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+                    File directory = new File(path);
+                    File[] files = directory.listFiles();
+                    for (int i = 0; i < files.length; i++)
+                    {
+                        if(files[i].getName().contains("t0")
+                                || files[i].getName().contains("t1")
+                                || files[i].getName().contains("t2")
+                                || files[i].getName().contains("t3")
+                                || files[i].getName().contains("t4")
+                                || files[i].getName().contains("t5")
+                        ) {
+                            files[i].delete();
+                        }
+                    }
                     update_data_s();
                     stopForegroundService();
-                    DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
-                    dowloadFile_t6.download(getApplication());
 
 //            fixing_data();
 

@@ -26,6 +26,7 @@ import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t2;
 import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t3;
 import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t4;
 import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t5;
+import com.digitalcreative.vimatelindonesia.Controller.DowloadFile_t6;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t0;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t1;
@@ -33,6 +34,7 @@ import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t2;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t3;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t4;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t5;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t6;
 import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.AkunPage;
 import com.digitalcreative.vimatelindonesia.View.MenuPages.BantuanPage;
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                                     ||isMyServiceRunning(ForegroundService_t2.class)
                                     ||isMyServiceRunning(ForegroundService_t3.class)
                                     ||isMyServiceRunning(ForegroundService_t4.class)
-                                    ||isMyServiceRunning(ForegroundService_t5.class) || checkStatus(getApplication() , DownloadManager.STATUS_RUNNING)
+                                    ||isMyServiceRunning(ForegroundService_t5.class) ||isMyServiceRunning(ForegroundService_t6.class)|| checkStatus(getApplication() , DownloadManager.STATUS_RUNNING)
                             ){
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
@@ -195,6 +197,10 @@ public class MainActivity extends AppCompatActivity {
                                         {
                                             DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
                                             dowloadFile_t5.download(getApplication());
+                                        }else if(status==6)
+                                        {
+                                            DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
+                                            dowloadFile_t6.download(getApplication());
                                         }
                                     }else{
                                         if(status==0){
@@ -220,6 +226,10 @@ public class MainActivity extends AppCompatActivity {
                                         {
                                             DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
                                             dowloadFile_t5.download(getApplication());
+                                        }else if(status==6)
+                                        {
+                                            DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
+                                            dowloadFile_t6.download(getApplication());
                                         }
                                     }
 

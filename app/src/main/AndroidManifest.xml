@@ -56,6 +56,10 @@
             android:name=".Controller.ForegroundService_t5"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".Controller.ForegroundService_t6"
+            android:enabled="true"
+            android:exported="true"></service>
         <activity
             android:name="com.digitalcreative.vimatelindonesia.MainActivity"
             android:label="@string/title_activity_main"
