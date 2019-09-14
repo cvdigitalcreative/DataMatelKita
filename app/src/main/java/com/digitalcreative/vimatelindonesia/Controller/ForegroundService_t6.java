@@ -161,6 +161,7 @@ public class ForegroundService_t6 extends Service {
                                 || files[i].getName().contains("t3")
                                 || files[i].getName().contains("t4")
                                 || files[i].getName().contains("t5")
+                                || files[i].getName().contains("t6")
                         ) {
                             files[i].delete();
                         }
