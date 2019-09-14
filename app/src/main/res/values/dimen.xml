@@ -79,5 +79,5 @@
     <dimen name="layout_height">70dp</dimen>
     <dimen name="layoutheight_land">50dp</dimen>
     <dimen name="paddingLayout">1dp</dimen>
-    <dimen name="textSize">24sp</dimen>
+    <dimen name="textSize">20sp</dimen>
 </resources>

@@ -144,7 +144,17 @@ public class BantuanPage extends Fragment {
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
         mSettings = getActivity().getSharedPreferences("Settings", MODE_PRIVATE);
+        if(isMyServiceRunning(ForegroundService_t0.class)
 
+                ||isMyServiceRunning(ForegroundService_t1.class)
+
+                || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+
+        ){
+
+            Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+
+        }
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -251,7 +261,7 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + "+62816342191"));
+                intent.setData(Uri.parse("sms:" + "+6285268801717"));
                 startActivity(intent);
             }
         });
@@ -259,7 +269,7 @@ public class BantuanPage extends Fragment {
         wa_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + "+62816342191";
+                String url = "https://api.whatsapp.com/send?phone=" + "+6285268801717";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 try {
                     intent.setData(Uri.parse(url));
@@ -287,7 +297,7 @@ public class BantuanPage extends Fragment {
                 } else {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    callIntent.setData(Uri.parse("tel:" + "+62816342191"));
+                    callIntent.setData(Uri.parse("tel:" + "+6285268801717"));
                     getActivity().startActivity(callIntent);
                 }
 
@@ -324,101 +334,282 @@ public class BantuanPage extends Fragment {
                 firebaseUser = firebaseAuth.getCurrentUser();
                 myRef = firebaseDatabase.getReference();
                 myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
+
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         final String status_download_db = dataSnapshot.child("status_download_db").getValue().toString();
 
+
+
                         final String last_update_data = dataSnapshot.child("last_update_data").getValue().toString();
+
                         myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
+
                             @Override
+
                             public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
+
                                 System.out.println("cuy masuk akal");
+
                                 String last_update_data_sistem = dataSnapshots.child("update_terakhir").getValue().toString();
+
                                 SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
+
                                 Date dateobj = Calendar.getInstance().getTime();
 
+                                SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+
+                                SharedPreferences.Editor editor = pref.edit();
+
+                                int status=pref.getInt("key_name2", 0);
+
                                 Date date = null;
+
                                 try {
+
                                     date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
+
                                     Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
+
                                     long milliseconds = date_2.getTime() - date.getTime();
+
                                     long days = milliseconds / (1000 * 60 * 60 * 24);
 
 
+
+
+
+
+
                                     if(isMyServiceRunning(ForegroundService_t0.class)
+
                                             ||isMyServiceRunning(ForegroundService_t1.class)
 
+
                                             || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+
                                     ){
-                                        String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
-                                        String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                        String informasi="Jumlah data anda "+count;
-                                        SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = pref.edit();
-                                        int status=pref.getInt("key_name2", 0);
-                                        long progress=0;
+
                                         if(status==0){
-                                            progress=50;
+
+
+
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+
+                                            String informasi="Jumlah data anda "+count;
+
+                                            long progress=(count*100)/400000;
+
+                                            finished.setVisibility(View.VISIBLE);
+
+                                            tv0.setText(infomarsis);
+
+                                            tv1.setText(infomarsi);
+
+                                            tv2.setText(informasi);
+
+                                            if(progress>=100){
+
+                                                tv3.setText("Progress Data anda 100 %");
+
+                                            }else{
+
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+
+                                            }
+
+
+
                                         }else if(status==1)
+
                                         {
-                                            progress=100;
-                                        }
-                                        finished.setVisibility(View.VISIBLE);
-                                        tv0.setText(infomarsis);
-                                        tv1.setText(infomarsi);
-                                        tv2.setText(informasi);
-                                        if(progress>=100){
-                                            tv3.setText("Progress Data anda 100 %");
-                                        }else{
-                                            tv3.setText("Progress Data anda "+progress+ "%");
+
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+
+                                            String informasi="Jumlah data anda "+count;
+
+                                            long progress=(count*100)/400000;
+
+                                            finished.setVisibility(View.VISIBLE);
+
+                                            tv0.setText(infomarsis);
+
+                                            tv1.setText(infomarsi);
+
+                                            tv2.setText(informasi);
+
+                                            if(progress>=100){
+
+                                                tv3.setText("Progress Data anda 100 %");
+
+                                            }else{
+
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+
+                                            }
+
                                         }
 
                                         Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+
                                     }
+
                                     else{
+
                                         if (days<=0 && status_download_db.trim().equals("1") && count>400000) {
+
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+
                                             String informasi="Jumlah data anda "+count;
-                                            SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = pref.edit();
-                                            int status=pref.getInt("key_name2", 0);
-                                            long progress=100;
+
+                                            long progress=(count*100)/400000;
+
                                             finished.setVisibility(View.VISIBLE);
+
                                             tv0.setText(infomarsis);
+
                                             tv1.setText(infomarsi);
+
                                             tv2.setText(informasi);
+
                                             if(progress>=100){
+
                                                 tv3.setText("Progress Data anda 100 %");
+
                                             }else{
+
                                                 tv3.setText("Progress Data anda "+progress+ "%");
+
                                             }
 
                                             Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+
+                                        }else{
+
+                                            if(status==0){
+
+
+
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+
+                                                String informasi="Jumlah data anda "+count;
+
+                                                long progress=(count*100)/400000;
+
+                                                finished.setVisibility(View.VISIBLE);
+
+                                                tv0.setText(infomarsis);
+
+                                                tv1.setText(infomarsi);
+
+                                                tv2.setText(informasi);
+
+                                                if(progress>=100){
+
+                                                    tv3.setText("Progress Data anda 100 %");
+
+                                                }else{
+
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+
+                                                }
+
+
+
+                                            }else if(status==1)
+
+                                            {
+
+                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+
+                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+
+                                                String informasi="Jumlah data anda "+count;
+
+                                                long progress=(count*100)/400000;
+
+                                                finished.setVisibility(View.VISIBLE);
+
+                                                tv0.setText(infomarsis);
+
+                                                tv1.setText(infomarsi);
+
+                                                tv2.setText(informasi);
+
+                                                if(progress>=100){
+
+                                                    tv3.setText("Progress Data anda 100 %");
+
+                                                }else{
+
+                                                    tv3.setText("Progress Data anda "+progress+ "%");
+
+                                                }
+
+
+
+                                            }
+
+                                            Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+
                                         }
+
                                     }
 
+
+
                                 } catch (ParseException e) {
+
                                     e.printStackTrace();
+
                                 }
 
 
 
 
+
+
+
+
+
                             }
+
+
 
                             @Override
+
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+
+
                             }
+
                         });
 
+
+
                     }
+
+
 
                     @Override
+
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
+
+
                     }
+
                 });
 
 
