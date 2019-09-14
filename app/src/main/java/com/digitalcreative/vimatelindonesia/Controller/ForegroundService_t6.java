@@ -92,7 +92,7 @@ public class ForegroundService_t6 extends Service {
                 .build();
 
         startForeground(1, notification);
-        subpath_t0 = "t5.csv";
+        subpath_t0 = "t6.csv";
         insertdata(subpath_t0);
         return START_NOT_STICKY;
     }
@@ -104,10 +104,41 @@ public class ForegroundService_t6 extends Service {
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
+        if(!file[0].exists()){
+
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            int status=pref.getInt("key_name2", 0);
+            System.out.println("status download "+status);
+            editor.clear();
+            editor.commit(); // commit changes
+            editor.putInt("key_name2", 0);
+            editor.apply();
+            System.out.println("nama file "+file[0].getAbsolutePath());
+            file[0].delete();
+            String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+            File directory = new File(path);
+            File[] files = directory.listFiles();
+            for (int i = 0; i < files.length; i++)
+            {
+                if(files[i].getName().contains("t0")
+                        || files[i].getName().contains("t1")
+                        || files[i].getName().contains("t2")
+                        || files[i].getName().contains("t3")
+                        || files[i].getName().contains("t4")
+                        || files[i].getName().contains("t5")
+                        || files[i].getName().contains("t6")
+                ) {
+                    files[i].delete();
+                }
+            }
+            update_data_s();
+            stopForegroundService();
+        }
         final String localFile = file[0].toString();
         Realm.init(ForegroundService_t6.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("vimatel.db")
+                .name("vimatel7.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -169,6 +200,7 @@ public class ForegroundService_t6 extends Service {
                     update_data_s();
                     stopForegroundService();
 
+
 //            fixing_data();
 
                 }
@@ -220,6 +252,9 @@ public class ForegroundService_t6 extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+//        Intent broadcastIntent = new Intent(this, BroadcastReceiverForegroundServiceRestart_t6.class);
+//
+//        sendBroadcast(broadcastIntent);
     }
 
     @Nullable

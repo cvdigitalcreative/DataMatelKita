@@ -16,7 +16,8 @@
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true"
-        android:xlargeScreens="true" />
+        android:xlargeScreens="true"
+        android:excludeFromRecents="true"/>
 
     <application
         android:allowBackup="true"
@@ -31,35 +32,85 @@
         <service
             android:name=".Controller.ForegroundService"
             android:enabled="true"
-            android:exported="true"></service>
+            ></service>
         <service
             android:name=".Controller.ForegroundService_t0"
             android:enabled="true"
-            android:exported="true"></service>
+          ></service>
         <service
             android:name=".Controller.ForegroundService_t1"
             android:enabled="true"
-            android:exported="true"></service>
+          ></service>
         <service
             android:name=".Controller.ForegroundService_t2"
             android:enabled="true"
-            android:exported="true"></service>
+        ></service>
         <service
             android:name=".Controller.ForegroundService_t3"
             android:enabled="true"
-            android:exported="true"></service>
+         ></service>
         <service
             android:name=".Controller.ForegroundService_t4"
             android:enabled="true"
-            android:exported="true"></service>
+            ></service>
         <service
             android:name=".Controller.ForegroundService_t5"
             android:enabled="true"
-            android:exported="true"></service>
+          ></service>
         <service
             android:name=".Controller.ForegroundService_t6"
             android:enabled="true"
-            android:exported="true"></service>
+            ></service>
+        <receiver
+            android:name=".Controller.BroadcastReceiverForegroundServiceRestart_t0"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
+        <receiver
+            android:name=".Controller.BroadcastReceiverForegroundServiceRestart_t1"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
+        <receiver
+            android:name=".Controller.BroadcastReceiverForegroundServiceRestart_t2"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
+        <receiver
+            android:name=".Controller.BroadcastReceiverForegroundServiceRestart_t3"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
+        <receiver
+            android:name=".Controller.BroadcastReceiverForegroundServiceRestart_t4"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
+        <receiver
+            android:name=".Controller.BroadcastReceiverForegroundServiceRestart_t5"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
+        <receiver
+            android:name=".Controller.BroadcastReceiverForegroundServiceRestart_t6"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
+
         <activity
             android:name="com.digitalcreative.vimatelindonesia.MainActivity"
             android:label="@string/title_activity_main"

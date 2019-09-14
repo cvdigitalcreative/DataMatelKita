@@ -46,6 +46,7 @@ import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t2;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t3;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t4;
 import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t5;
+import com.digitalcreative.vimatelindonesia.Controller.ForegroundService_t6;
 import com.digitalcreative.vimatelindonesia.Model.Model_LacakMobil;
 import com.digitalcreative.vimatelindonesia.R;
 import com.digitalcreative.vimatelindonesia.RealmHelper;
@@ -129,15 +130,7 @@ public class BantuanPage extends Fragment {
         //Init the Variable
         sayHelloboys(view);
 //
-        Realm.init(this.getContext());
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("vimatel.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(configuration);
 
-        realmHelper = new RealmHelper(realm);
         //Actions
         doitBoys();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -157,7 +150,7 @@ public class BantuanPage extends Fragment {
                 ||isMyServiceRunning(ForegroundService_t2.class)
                 ||isMyServiceRunning(ForegroundService_t3.class)
                 ||isMyServiceRunning(ForegroundService_t4.class)
-                ||isMyServiceRunning(ForegroundService_t5.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+                ||isMyServiceRunning(ForegroundService_t5.class) ||isMyServiceRunning(ForegroundService_t6.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
         ){
             Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
         }
@@ -324,21 +317,96 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                Realm.init(BantuanPage.this.getContext());
-                RealmConfiguration configuration = new RealmConfiguration.Builder()
+                Realm.init(getContext());
+                RealmConfiguration configuration= new RealmConfiguration.Builder()
                         .name("vimatel.db")
                         .schemaVersion(1)
                         .deleteRealmIfMigrationNeeded()
                         .build();
-                realm = Realm.getInstance(configuration);
-                final long count = realm.where(Model_LacakMobil.class).count();
+                final Realm realm= Realm.getInstance(configuration);
+                long count = realm.where(Model_LacakMobil.class).count();
+                realm.close();
+                System.out.println("t0 ="+count);
+
+                Realm.init(getContext());
+                RealmConfiguration configuration2 = new RealmConfiguration.Builder()
+                        .name("vimatel2.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm2 = Realm.getInstance(configuration2);
+                count = realm2.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t1 ="+ realm2.where(Model_LacakMobil.class).count());
+                realm2.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration3 = new RealmConfiguration.Builder()
+                        .name("vimatel3.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm3 = Realm.getInstance(configuration3);
+                count = realm3.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t2 ="+realm3.where(Model_LacakMobil.class).count());
+                realm3.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration4 = new RealmConfiguration.Builder()
+                        .name("vimatel4.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm4 = Realm.getInstance(configuration4);
+                count = realm4.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t3 ="+ realm4.where(Model_LacakMobil.class).count());
+                realm4.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration5 = new RealmConfiguration.Builder()
+                        .name("vimatel5.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm5 = Realm.getInstance(configuration5);
+                System.out.println("t4 ="+realm5.where(Model_LacakMobil.class).count());
+                count = realm5.where(Model_LacakMobil.class).count()+count;
+                realm5.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration6 = new RealmConfiguration.Builder()
+                        .name("vimatel6.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm6 = Realm.getInstance(configuration6);
+                count = realm6.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t5 ="+realm6.where(Model_LacakMobil.class).count());
+                realm6.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration7 = new RealmConfiguration.Builder()
+                        .name("vimatel7.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm7 = Realm.getInstance(configuration7);
+                count = realm7.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t6 ="+realm7.where(Model_LacakMobil.class).count());
+                realm7.close();
+
+                //realm
 
 
                 firebaseAuth = FirebaseAuth.getInstance();
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 firebaseUser = firebaseAuth.getCurrentUser();
                 myRef = firebaseDatabase.getReference();
+                final long finalCount = count;
                 myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -376,8 +444,8 @@ public class BantuanPage extends Fragment {
 
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+count;
-                                            long progress=(count*100)/2900000;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -392,8 +460,8 @@ public class BantuanPage extends Fragment {
                                         {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+count;
-                                            long progress=(count*100)/2900000;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -407,8 +475,8 @@ public class BantuanPage extends Fragment {
                                         {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+count;
-                                            long progress=(count*100)/2900000;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -422,8 +490,8 @@ public class BantuanPage extends Fragment {
                                         {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+count;
-                                            long progress=(count*100)/2900000;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -437,8 +505,8 @@ public class BantuanPage extends Fragment {
                                         {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+count;
-                                            long progress=(count*100)/2900000;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -452,8 +520,8 @@ public class BantuanPage extends Fragment {
                                         {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+count;
-                                            long progress=(count*100)/2900000;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -467,11 +535,11 @@ public class BantuanPage extends Fragment {
                                         Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                     }
                                     else{
-                                        if (days<=0 && status_download_db.trim().equals("1") && count>2900000) {
+                                        if (days<=0 && status_download_db.trim().equals("1") && finalCount >3300000) {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+count;
-                                            long progress=(count*100)/2900000;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -487,8 +555,8 @@ public class BantuanPage extends Fragment {
 
                                                 String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                                 String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                                String informasi="Jumlah data anda "+count;
-                                                long progress=(count*100)/3100000;
+                                                String informasi="Jumlah data anda "+ finalCount;
+                                                long progress=(finalCount *100)/3300000;
                                                 finished.setVisibility(View.VISIBLE);
                                                 tv0.setText(infomarsis);
                                                 tv1.setText(infomarsi);
@@ -503,8 +571,8 @@ public class BantuanPage extends Fragment {
                                             {
                                                 String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                                 String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                                String informasi="Jumlah data anda "+count;
-                                                long progress=(count*100)/2900000;
+                                                String informasi="Jumlah data anda "+ finalCount;
+                                                long progress=(finalCount *100)/3300000;
                                                 finished.setVisibility(View.VISIBLE);
                                                 tv0.setText(infomarsis);
                                                 tv1.setText(infomarsi);
@@ -518,8 +586,8 @@ public class BantuanPage extends Fragment {
                                             {
                                                 String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                                 String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                                String informasi="Jumlah data anda "+count;
-                                                long progress=(count*100)/2900000;
+                                                String informasi="Jumlah data anda "+ finalCount;
+                                                long progress=(finalCount *100)/3300000;
                                                 finished.setVisibility(View.VISIBLE);
                                                 tv0.setText(infomarsis);
                                                 tv1.setText(infomarsi);
@@ -533,8 +601,8 @@ public class BantuanPage extends Fragment {
                                             {
                                                 String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                                 String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                                String informasi="Jumlah data anda "+count;
-                                                long progress=(count*100)/2900000;
+                                                String informasi="Jumlah data anda "+ finalCount;
+                                                long progress=(finalCount *100)/3300000;
                                                 finished.setVisibility(View.VISIBLE);
                                                 tv0.setText(infomarsis);
                                                 tv1.setText(infomarsi);
@@ -548,8 +616,8 @@ public class BantuanPage extends Fragment {
                                             {
                                                 String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                                 String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                                String informasi="Jumlah data anda "+count;
-                                                long progress=(count*100)/2900000;
+                                                String informasi="Jumlah data anda "+ finalCount;
+                                                long progress=(finalCount *100)/3300000;
                                                 finished.setVisibility(View.VISIBLE);
                                                 tv0.setText(infomarsis);
                                                 tv1.setText(infomarsi);
@@ -563,8 +631,8 @@ public class BantuanPage extends Fragment {
                                             {
                                                 String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                                 String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                                String informasi="Jumlah data anda "+count;
-                                                long progress=(count*100)/2900000;
+                                                String informasi="Jumlah data anda "+ finalCount;
+                                                long progress=(finalCount *100)/3300000;
                                                 finished.setVisibility(View.VISIBLE);
                                                 tv0.setText(infomarsis);
                                                 tv1.setText(infomarsi);
@@ -678,78 +746,7 @@ public class BantuanPage extends Fragment {
         }
     }
 
-    public void insert_database(String subpath) {
-        System.out.println("kesini cuy");
 
-        insertdata(subpath);
-//          file[0].delete();
-
-
-    }
-
-    public void insertdata(final String subpath) {
-        System.out.println("jumlah file " + jumlah_file);
-        final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
-        // get writable database as we want to write data
-        final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
-        file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
-        final String localFile = file[0].toString();
-        Realm.init(this.getContext());
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("vimatel.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(configuration);
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
-
-                    String line = "";
-                    while ((line = br.readLine()) != null) {
-                        // use comma as separator
-                        final String[] country = line.split(",");
-                        if (country.length == 12) {
-
-                            model_lacakMobil.setNama_mobil(country[1]);
-                            model_lacakMobil.setNo_plat(country[2]);
-                            model_lacakMobil.setNamaunit(country[3]);
-                            model_lacakMobil.setFinance(country[4]);
-                            model_lacakMobil.setOvd(country[5]);
-                            model_lacakMobil.setSaldo(country[6]);
-                            model_lacakMobil.setCabang(country[7]);
-                            model_lacakMobil.setNoka(country[8]);
-                            model_lacakMobil.setNosin(country[9]);
-                            model_lacakMobil.setTahun(country[10]);
-                            model_lacakMobil.setWarna(country[11]);
-                            bgRealm.insertOrUpdate(model_lacakMobil);
-                        }
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    System.out.println("nama file " + file[0].getAbsolutePath());
-                    System.out.println("jumlah file diolah " + jumlah_file);
-                    file[0].delete();
-                    if (jumlah_file == 1) {
-                        System.out.println("masuk sini");
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                        progress.dismiss();
-                        update_data();
-                    } else {
-                        jumlah_file = jumlah_file - 1;
-                        System.out.println("file exist " + file[0].exists());
-                    }
-
-
-//            fixing_data();
-
-                }
-            }
-        });
-    }
     public static boolean isDownloadManagerAvailable(Context context) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {

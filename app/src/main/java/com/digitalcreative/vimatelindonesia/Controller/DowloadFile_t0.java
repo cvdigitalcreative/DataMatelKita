@@ -104,11 +104,8 @@ public class DowloadFile_t0 {
         }
         return false;
     }
-    public void download(Context context, int jumlah_file, final String link_tes, final String subpath_t0){
-        this.context=context;
-        this.jumlah_file=jumlah_file;
-        this.link_tes=link_tes;
-        this.subpath_t0=subpath_t0;
+    public void download(Context context){
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -124,8 +121,8 @@ public class DowloadFile_t0 {
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
 
-                url_t0 = dataSnapshot.child(link_tes).getValue().toString();
-
+                url_t0 = dataSnapshot.child("link_test").getValue().toString();
+                subpath_t0="t0.csv";
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
 
                     System.out.println("insert url");
