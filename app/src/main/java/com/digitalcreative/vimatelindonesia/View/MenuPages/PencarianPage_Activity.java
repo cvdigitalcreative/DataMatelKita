@@ -84,6 +84,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         final Realm realm= Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
         realm.close();
+        System.out.println("t0 ="+count);
 
         Realm.init(getApplicationContext());
         RealmConfiguration configuration2 = new RealmConfiguration.Builder()
@@ -91,10 +92,70 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
-
         final Realm realm2 = Realm.getInstance(configuration2);
         count = realm2.where(Model_LacakMobil.class).count()+count;
+        System.out.println("t1 ="+ realm2.where(Model_LacakMobil.class).count());
         realm2.close();
+
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration3 = new RealmConfiguration.Builder()
+                .name("vimatel3.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        final Realm realm3 = Realm.getInstance(configuration3);
+        count = realm3.where(Model_LacakMobil.class).count()+count;
+        System.out.println("t2 ="+realm3.where(Model_LacakMobil.class).count());
+        realm3.close();
+
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration4 = new RealmConfiguration.Builder()
+                .name("vimatel4.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        final Realm realm4 = Realm.getInstance(configuration4);
+        count = realm4.where(Model_LacakMobil.class).count()+count;
+        System.out.println("t3 ="+ realm4.where(Model_LacakMobil.class).count());
+        realm4.close();
+
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration5 = new RealmConfiguration.Builder()
+                .name("vimatel5.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        final Realm realm5 = Realm.getInstance(configuration5);
+        System.out.println("t4 ="+realm5.where(Model_LacakMobil.class).count());
+        count = realm5.where(Model_LacakMobil.class).count()+count;
+        realm5.close();
+
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration6 = new RealmConfiguration.Builder()
+                .name("vimatel6.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        final Realm realm6 = Realm.getInstance(configuration6);
+        count = realm6.where(Model_LacakMobil.class).count()+count;
+        System.out.println("t5 ="+realm6.where(Model_LacakMobil.class).count());
+        realm6.close();
+
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration7 = new RealmConfiguration.Builder()
+                .name("vimatel7.db")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        final Realm realm7 = Realm.getInstance(configuration7);
+        count = realm7.where(Model_LacakMobil.class).count()+count;
+        System.out.println("t6 ="+realm7.where(Model_LacakMobil.class).count());
+        realm7.close();
 
         if(count<=3300000 ){
             Toast.makeText(context, "Data anda belum lengkap silahkan tgg beberapa saat sistem sedang memasukan data ", Toast.LENGTH_LONG).show();
@@ -165,10 +226,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .build();
             realm = Realm.getInstance(configuration);
             list= realm.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-
             temp1 = realm.copyFromRealm(list);
             System.out.println(temp1);
             realm.close();
+            if(!temp1.isEmpty()){
+                return temp1;
+            }
 
             Realm.init(context);
             RealmConfiguration configuration2 = new RealmConfiguration.Builder()
@@ -181,6 +244,9 @@ public class PencarianPage_Activity extends AppCompatActivity {
             temp2 = realm2.copyFromRealm(list);
             System.out.println(temp2);
             realm2.close();
+            if(!temp2.isEmpty()){
+                return temp2;
+            }
 
             Realm.init(context);
             RealmConfiguration configuration3 = new RealmConfiguration.Builder()
@@ -190,9 +256,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .build();
             final Realm realm3 = Realm.getInstance(configuration3);
             list= realm3.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp3 = realm2.copyFromRealm(list);
+            temp3 = realm3.copyFromRealm(list);
             System.out.println(temp2);
             realm3.close();
+            if(!temp3.isEmpty()){
+                return temp3;
+            }
 
             Realm.init(context);
             RealmConfiguration configuration4 = new RealmConfiguration.Builder()
@@ -202,9 +271,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .build();
             final Realm realm4 = Realm.getInstance(configuration4);
             list= realm4.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp4 = realm2.copyFromRealm(list);
+            temp4 = realm4.copyFromRealm(list);
             System.out.println(temp2);
             realm4.close();
+            if(!temp4.isEmpty()){
+                return temp4;
+            }
 
             Realm.init(context);
             RealmConfiguration configuration5 = new RealmConfiguration.Builder()
@@ -214,9 +286,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .build();
             final Realm realm5 = Realm.getInstance(configuration5);
             list= realm5.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp5 = realm2.copyFromRealm(list);
+            temp5 = realm5.copyFromRealm(list);
             System.out.println(temp2);
             realm5.close();
+            if(!temp5.isEmpty()){
+                return temp5;
+            }
 
             Realm.init(context);
             RealmConfiguration configuration6 = new RealmConfiguration.Builder()
@@ -226,9 +301,12 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .build();
             final Realm realm6 = Realm.getInstance(configuration6);
             list= realm6.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp6 = realm2.copyFromRealm(list);
+            temp6 = realm6.copyFromRealm(list);
             System.out.println(temp2);
             realm6.close();
+            if(!temp6.isEmpty()){
+                return temp6;
+            }
 
             Realm.init(context);
             RealmConfiguration configuration7 = new RealmConfiguration.Builder()
@@ -238,27 +316,22 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .build();
             final Realm realm7 = Realm.getInstance(configuration7);
             list= realm7.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp7 = realm2.copyFromRealm(list);
+            temp7 = realm7.copyFromRealm(list);
             System.out.println(temp2);
             realm7.close();
-
-            if(!temp1.isEmpty()){
-                safeWords=temp1;
-            }else if(!temp2.isEmpty()){
-                safeWords=temp2;
-            }else if(!temp3.isEmpty()){
-                safeWords=temp3;
-            }else if(!temp4.isEmpty()){
-                safeWords=temp4;
-            }else if(!temp5.isEmpty()){
-                safeWords=temp5;
-            }else if(!temp6.isEmpty()){
-                safeWords=temp6;
-            }else if(!temp7.isEmpty()){
-                safeWords=temp7;
-            }else {
-                safeWords=temp1;
+            if(!temp7.isEmpty()){
+                return  temp7;
             }
+
+
+
+
+
+
+
+
+                safeWords=temp1;
+
 
             return safeWords;
 
