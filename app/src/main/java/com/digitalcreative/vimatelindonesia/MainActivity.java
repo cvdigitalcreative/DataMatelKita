@@ -253,7 +253,6 @@ public class MainActivity extends AppCompatActivity {
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
                                         final Realm realm= Realm.getInstance(configuration);
-                                        long count = realm.where(Model_LacakMobil.class).count();
                                         realm.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
@@ -270,7 +269,6 @@ public class MainActivity extends AppCompatActivity {
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
                                         final Realm realm2 = Realm.getInstance(configuration2);
-                                        count = realm2.where(Model_LacakMobil.class).count()+count;
                                         realm2.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
@@ -287,7 +285,6 @@ public class MainActivity extends AppCompatActivity {
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
                                         final Realm realm3 = Realm.getInstance(configuration3);
-                                        count = realm3.where(Model_LacakMobil.class).count()+count;
                                         realm3.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
@@ -304,7 +301,6 @@ public class MainActivity extends AppCompatActivity {
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
                                         final Realm realm4 = Realm.getInstance(configuration4);
-                                        count = realm4.where(Model_LacakMobil.class).count()+count;
                                         realm4.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
@@ -321,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
                                         final Realm realm5 = Realm.getInstance(configuration5);
-                                        count = realm5.where(Model_LacakMobil.class).count()+count;
                                         realm5.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
@@ -338,7 +333,6 @@ public class MainActivity extends AppCompatActivity {
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
                                         final Realm realm6 = Realm.getInstance(configuration6);
-                                        count = realm6.where(Model_LacakMobil.class).count()+count;
                                         realm6.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
@@ -355,7 +349,6 @@ public class MainActivity extends AppCompatActivity {
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
                                         final Realm realm7 = Realm.getInstance(configuration7);
-                                        count = realm7.where(Model_LacakMobil.class).count()+count;
                                         realm7.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
@@ -363,34 +356,134 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
                                         realm7.close();
+
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
                                     }else{
                                         if(count_t0==0){
+                                            Realm.init(getApplicationContext());
+                                            RealmConfiguration configuration= new RealmConfiguration.Builder()
+                                                    .name("vimatel.db")
+                                                    .schemaVersion(1)
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .build();
+                                            final Realm realm= Realm.getInstance(configuration);
+                                            realm.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    realm.deleteAll();
+                                                }
+                                            });
+                                            realm.close();
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
-                                        }else if(count_t1==1)
+                                        }else if(count_t1==0)
                                         {
+                                            Realm.init(getApplicationContext());
+                                            RealmConfiguration configuration2 = new RealmConfiguration.Builder()
+                                                    .name("vimatel2.db")
+                                                    .schemaVersion(1)
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .build();
+                                            final Realm realm2 = Realm.getInstance(configuration2);
+                                            realm2.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    realm2.deleteAll();
+                                                }
+                                            });
+                                            realm2.close();
                                             DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
                                             dowloadFile_t1.download(getApplication());
-                                        }else if(count_t2==2)
+                                        }else if(count_t2==0)
                                         {
+                                            Realm.init(getApplicationContext());
+                                            RealmConfiguration configuration3 = new RealmConfiguration.Builder()
+                                                    .name("vimatel3.db")
+                                                    .schemaVersion(1)
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .build();
+                                            final Realm realm3 = Realm.getInstance(configuration3);
+                                            realm3.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    realm3.deleteAll();
+                                                }
+                                            });
+                                            realm3.close();
                                             DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
                                             dowloadFile_t2.download(getApplication());
-                                        }else if(count_t3==3)
+                                        }else if(count_t3==0)
                                         {
+                                            Realm.init(getApplicationContext());
+                                            RealmConfiguration configuration4 = new RealmConfiguration.Builder()
+                                                    .name("vimatel4.db")
+                                                    .schemaVersion(1)
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .build();
+                                            final Realm realm4 = Realm.getInstance(configuration4);
+                                            realm4.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    realm4.deleteAll();
+                                                }
+                                            });
+                                            realm4.close();
                                             DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
                                             dowloadFile_t3.download(getApplication());
-                                        }else if(count_t4==4)
+                                        }else if(count_t4==0)
                                         {
+                                            Realm.init(getApplicationContext());
+                                            RealmConfiguration configuration5 = new RealmConfiguration.Builder()
+                                                    .name("vimatel5.db")
+                                                    .schemaVersion(1)
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .build();
+                                            final Realm realm5 = Realm.getInstance(configuration5);
+                                            realm5.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    realm5.deleteAll();
+                                                }
+                                            });
+                                            realm5.close();
                                             DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
                                             dowloadFile_t4.download(getApplication());
-                                        }else if(count_t5==5)
+                                        }else if(count_t5==0)
                                         {
+                                            Realm.init(getApplicationContext());
+                                            RealmConfiguration configuration6 = new RealmConfiguration.Builder()
+                                                    .name("vimatel6.db")
+                                                    .schemaVersion(1)
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .build();
+                                            final Realm realm6 = Realm.getInstance(configuration6);
+                                            realm6.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    realm6.deleteAll();
+                                                }
+                                            });
+                                            realm6.close();
                                             DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
                                             dowloadFile_t5.download(getApplication());
-                                        }else if(count_t6==6)
+                                        }else if(count_t6==0)
                                         {
+                                            Realm.init(getApplicationContext());
+                                            RealmConfiguration configuration7 = new RealmConfiguration.Builder()
+                                                    .name("vimatel7.db")
+                                                    .schemaVersion(1)
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .build();
+                                            final Realm realm7 = Realm.getInstance(configuration7);
+                                            realm7.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    realm7.deleteAll();
+                                                }
+                                            });
+                                            realm7.close();
+
                                             DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
                                             dowloadFile_t6.download(getApplication());
                                         }

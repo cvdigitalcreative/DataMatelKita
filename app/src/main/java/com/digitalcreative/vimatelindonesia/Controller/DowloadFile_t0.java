@@ -105,7 +105,7 @@ public class DowloadFile_t0 {
         return false;
     }
     public void download(Context context){
-
+        this.context=context;
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -121,8 +121,8 @@ public class DowloadFile_t0 {
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
 
-                url_t0 = dataSnapshot.child("link_test").getValue().toString();
-                subpath_t0="t0.csv";
+                url_t0 = dataSnapshot.child("link_tes").getValue().toString();
+                subpath_t0 = "t0.csv";
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
 
                     System.out.println("insert url");

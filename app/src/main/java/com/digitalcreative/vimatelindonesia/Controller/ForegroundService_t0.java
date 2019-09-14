@@ -236,34 +236,35 @@ public class ForegroundService_t0 extends Service {
                     count_t6=realm7.where(Model_LacakMobil.class).count();
                     realm7.close();
 
-                    if(count_t0==0){
-                        DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-                        dowloadFile_t0.download(getApplication());
-                    }else if(count_t1==1)
+                     if(count_t1==0)
                     {
                         DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
                         dowloadFile_t1.download(getApplication());
-                    }else if(count_t2==2)
+                    }else if(count_t2==0)
                     {
                         DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
                         dowloadFile_t2.download(getApplication());
-                    }else if(count_t3==3)
+                    }else if(count_t3==0)
                     {
                         DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
                         dowloadFile_t3.download(getApplication());
-                    }else if(count_t4==4)
+                    }else if(count_t4==0)
                     {
                         DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
                         dowloadFile_t4.download(getApplication());
-                    }else if(count_t5==5)
+                    }else if(count_t5==0)
                     {
                         DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
                         dowloadFile_t5.download(getApplication());
-                    }else if(count_t6==6)
+                    }else if(count_t6==0)
                     {
                         DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
                         dowloadFile_t6.download(getApplication());
                     }
+//                     else{
+//                         DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
+//                         dowloadFile_t1.download(getApplication());
+//                     }
                     //realm
 
 
