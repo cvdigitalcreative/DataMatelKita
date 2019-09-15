@@ -115,25 +115,28 @@ public class ForegroundService_t6 extends Service {
             editor.putInt("key_name2", 0);
             editor.apply();
             System.out.println("nama file "+file[0].getAbsolutePath());
-            file[0].delete();
-            String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
-            File directory = new File(path);
-            File[] files = directory.listFiles();
-            for (int i = 0; i < files.length; i++)
-            {
-                if(files[i].getName().contains("t0")
-                        || files[i].getName().contains("t1")
-                        || files[i].getName().contains("t2")
-                        || files[i].getName().contains("t3")
-                        || files[i].getName().contains("t4")
-                        || files[i].getName().contains("t5")
-                        || files[i].getName().contains("t6")
-                ) {
-                    files[i].delete();
-                }
-            }
             update_data_s();
             stopForegroundService();
+            DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
+            dowloadFile_t6.download(getApplication());
+
+//            String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+//            File directory = new File(path);
+//            File[] files = directory.listFiles();
+//            for (int i = 0; i < files.length; i++)
+//            {
+//                if(files[i].getName().contains("t0")
+//                        || files[i].getName().contains("t1")
+//                        || files[i].getName().contains("t2")
+//                        || files[i].getName().contains("t3")
+//                        || files[i].getName().contains("t4")
+//                        || files[i].getName().contains("t5")
+//                        || files[i].getName().contains("t6")
+//                ) {
+//                    files[i].delete();
+//                }
+//            }
+
         }
         final String localFile = file[0].toString();
         Realm.init(ForegroundService_t6.this);
@@ -148,11 +151,11 @@ public class ForegroundService_t6 extends Service {
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
                     String line = "";
+
                     while ((line = br.readLine()) != null) {
                         // use comma as separator
                         final String[] country = line.split(",");
                         if(country.length==12){
-
                             model_lacakMobil.setNama_mobil(country[1]);
                             model_lacakMobil.setNo_plat(country[2]);
                             model_lacakMobil.setNamaunit(country[3]);
@@ -170,42 +173,52 @@ public class ForegroundService_t6 extends Service {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    int status=pref.getInt("key_name2", 0);
-                    System.out.println("status download "+status);
-                    editor.clear();
-                    editor.commit(); // commit changes
-                    editor.putInt("key_name2", 0);
-                    editor.apply();
-                    System.out.println("nama file "+file[0].getAbsolutePath());
-                    file[0].delete();
-                    String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
-                    File directory = new File(path);
-                    File[] files = directory.listFiles();
-                    for (int i = 0; i < files.length; i++)
-                    {
-                        if(files[i].getName().contains("t0")
-                                || files[i].getName().contains("t1")
-                                || files[i].getName().contains("t2")
-                                || files[i].getName().contains("t3")
-                                || files[i].getName().contains("t4")
-                                || files[i].getName().contains("t5")
-                                || files[i].getName().contains("t6")
-                        ) {
-                            files[i].delete();
-                        }
-                    }
-                    update_data_s();
-                    stopForegroundService();
-
-
-//            fixing_data();
-
                 }
             }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                int status=pref.getInt("key_name2", 0);
+                System.out.println("status download "+status);
+                editor.clear();
+                editor.commit(); // commit changes
+                editor.putInt("key_name2", 0);
+                editor.apply();
+                System.out.println("nama file "+file[0].getAbsolutePath());
+                file[0].delete();
+                String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+                File directory = new File(path);
+                File[] files = directory.listFiles();
+                for (int i = 0; i < files.length; i++)
+                {
+                    if(files[i].getName().contains("t0")
+                            || files[i].getName().contains("t1")
+                            || files[i].getName().contains("t2")
+                            || files[i].getName().contains("t3")
+                            || files[i].getName().contains("t4")
+                            || files[i].getName().contains("t5")
+                            || files[i].getName().contains("t6")
+                    ) {
+                        files[i].delete();
+                    }
+                }
+                update_data_s();
+                stopForegroundService();
+
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+
+                DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
+                dowloadFile_t6.download(getApplication());
+                realm.close();
+            }
         });
+
 
 
 
@@ -227,12 +240,9 @@ public class ForegroundService_t6 extends Service {
     }
     private String getCurrentDate() {
         String date;
-
         SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date dateobj = Calendar.getInstance().getTime();
         date = curFormat.format(dateobj);
-
-
         return date;
     }
 
