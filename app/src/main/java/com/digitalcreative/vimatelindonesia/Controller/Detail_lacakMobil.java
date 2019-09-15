@@ -141,7 +141,6 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
         Locale localeID = new Locale("in", "ID");
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-
         pemilikmobil.setText(model.getNama_mobil());
         no_plat.setText(model.getNo_plat());
         namaunit.setText(model.getNamaunit());
@@ -156,7 +155,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
             sipok.setText(model.getSaldo());
         }else{
 
-            sipok.setText(formatRupiah.format(Double.valueOf(model.getSaldo())));
+            sipok.setText(formatRupiah.format(Double.valueOf(model.getSaldo().replace("-",""))));
         }
 
 

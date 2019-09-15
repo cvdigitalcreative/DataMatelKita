@@ -233,13 +233,27 @@ public class MainActivity extends AppCompatActivity {
                             ){
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
-                                if (days<=0 && status_download_db.trim().equals("1") && finalCount >3300000 ) {
+                                if (days<=0 && status_download_db.trim().equals("1")
+                                        && count_t0!=0
+                                        && count_t1!=0
+                                        && count_t2!=0
+                                        && count_t3!=0
+                                        && count_t4!=0
+                                        && count_t5!=0
+                                        && count_t6!=0
+                                ) {
 
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
                                 }else{
 //
                                     Toast.makeText(getApplication(), "Sedang Mengupdate", Toast.LENGTH_LONG).show();
-                                    if(finalCount >3300000){
+                                    if(count_t0!=0
+                                            && count_t1!=0
+                                            && count_t2!=0
+                                            && count_t3!=0
+                                            && count_t4!=0
+                                            && count_t5!=0
+                                            && count_t6!=0){
                                         editor.clear();
                                         editor.commit(); // commit changes
                                         editor.putInt("key_name2", 0);

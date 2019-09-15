@@ -96,7 +96,7 @@ public class ForegroundService_t0 extends Service {
             update_data_s();
             status_foreground=1;
             stopForegroundService();
-            DowloadFile_t1 dowloadFile_t0=new DowloadFile_t1();
+            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
             dowloadFile_t0.download(getApplication());
         }
         final String localFile = file[0].toString();
@@ -144,7 +144,7 @@ public class ForegroundService_t0 extends Service {
                     editor.commit(); // commit changes
                     editor.putInt("key_name2", 1);
                     editor.apply();
-                    file[0].delete();
+
                     status_foreground=1;
                     stopForegroundService();
                     update_data_s();
@@ -242,22 +242,27 @@ public class ForegroundService_t0 extends Service {
                         dowloadFile_t1.download(getApplication());
                     }else if(count_t2==0)
                     {
+                        file[0].delete();
                         DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
                         dowloadFile_t2.download(getApplication());
                     }else if(count_t3==0)
                     {
+                        file[0].delete();
                         DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
                         dowloadFile_t3.download(getApplication());
                     }else if(count_t4==0)
                     {
+                        file[0].delete();
                         DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
                         dowloadFile_t4.download(getApplication());
                     }else if(count_t5==0)
                     {
+                        file[0].delete();
                         DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
                         dowloadFile_t5.download(getApplication());
                     }else if(count_t6==0)
                     {
+                        file[0].delete();
                         DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
                         dowloadFile_t6.download(getApplication());
                     }

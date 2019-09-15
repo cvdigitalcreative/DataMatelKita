@@ -98,7 +98,7 @@ public class ForegroundService_t6 extends Service {
     }
 
     public void insertdata(final String subpath) {
-        System.out.println("insert t5");
+        System.out.println("insert t6");
         System.out.println("jumlah file "+jumlah_file);
         final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
         // get writable database as we want to write data

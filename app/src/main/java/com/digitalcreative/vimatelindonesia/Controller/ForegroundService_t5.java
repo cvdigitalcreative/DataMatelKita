@@ -120,8 +120,8 @@ public class ForegroundService_t5 extends Service {
             stopForegroundService();
             update_data_s();
 
-            DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
-            dowloadFile_t6.download(getApplication());
+            DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
+            dowloadFile_t5.download(getApplication());
         }
         final String localFile = file[0].toString();
         Realm.init(ForegroundService_t5.this);
@@ -169,7 +169,7 @@ public class ForegroundService_t5 extends Service {
                     editor.putInt("key_name2", 6);
                     editor.apply();
                     System.out.println("nama file "+file[0].getAbsolutePath());
-                    file[0].delete();
+
                     update_data_s();
                     status_foreground=1;
                     stopForegroundService();
@@ -261,22 +261,27 @@ public class ForegroundService_t5 extends Service {
                     realm7.close();
 
                     if(count_t0==0){
+                        file[0].delete();
                         DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                         dowloadFile_t0.download(getApplication());
                     }else if(count_t1==0)
                     {
+                        file[0].delete();
                         DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
                         dowloadFile_t1.download(getApplication());
                     }else if(count_t2==0)
                     {
+                        file[0].delete();
                         DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
                         dowloadFile_t2.download(getApplication());
                     }else if(count_t3==0)
                     {
+                        file[0].delete();
                         DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
                         dowloadFile_t3.download(getApplication());
                     }else if(count_t4==0)
                     {
+                        file[0].delete();
                         DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
                         dowloadFile_t4.download(getApplication());
                     }else if(count_t5==0)
@@ -285,6 +290,7 @@ public class ForegroundService_t5 extends Service {
                         dowloadFile_t5.download(getApplication());
                     }else if(count_t6==0)
                     {
+                        file[0].delete();
                         DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
                         dowloadFile_t6.download(getApplication());
                     }
