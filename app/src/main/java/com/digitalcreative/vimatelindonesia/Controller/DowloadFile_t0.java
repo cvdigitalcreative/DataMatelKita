@@ -124,9 +124,19 @@ public class DowloadFile_t0 {
                 url_t0 = dataSnapshot.child("link_tes").getValue().toString();
                 subpath_t0 = "t0.csv";
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
-
+                if(file.exists()){
+                    System.out.println("insert db");
+                    startService_t0();
+//                    insert_database(subpath_t0);
+//                        file.delete();
+                }else{
                     System.out.println("insert url");
                     downloadfromdropbox(url_t0, subpath_t0);
+
+
+
+                }
+
 
 
 
