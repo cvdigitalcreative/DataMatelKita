@@ -263,6 +263,9 @@ public class MainActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = pref.edit();
                             int status=pref.getInt("key_name2", 0);
                             System.out.println("status "+status);
+                            System.out.println("days "+days);
+                            System.out.println( count_t0>=300000
+                                    );
                             if(isMyServiceRunning(ForegroundService_t0.class)
                                     ||isMyServiceRunning(ForegroundService_t1.class)
                                     ||isMyServiceRunning(ForegroundService_t2.class)
@@ -273,27 +276,29 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
                                 if (days<=0 && status_download_db.trim().equals("1")
-                                        && count_t0>=300000
-                                        && count_t1>=500000
-                                        && count_t2>=500000
-                                        && count_t3>=500000
-                                        && count_t4>=500000
-                                        && count_t5>=300000
-                                        && count_t6>=500000
+                                        && count_t0>=308469
+                                        && count_t1>=538456
+                                        && count_t2>=558594
+                                        && count_t3>=510658
+                                        && count_t4>=530417
+                                        && count_t5>=332201
+                                        && count_t6>=332198
                                 ) {
 
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
                                 }else{
 //
-                                    Toast.makeText(getApplication(), "Sedang Mengupdate", Toast.LENGTH_LONG).show();
+                                    System.out.println("masuk sinilah coy");
                                     if
-                                    (  count_t0>=300000
-                                            && count_t1>=500000
-                                            && count_t2>=500000
-                                            && count_t3>=500000
-                                            && count_t4>=500000
-                                            && count_t5>=300000
-                                            && count_t6>=300000){
+                                    (       days>0
+                                            && status_download_db.trim().equals("1")
+                                            && count_t0>=308469
+                                            && count_t1>=538456
+                                            && count_t2>=558594
+                                            && count_t3>=510658
+                                            && count_t4>=530417
+                                            && count_t5>=332201
+                                            && count_t6>=332198){
                                         editor.clear();
                                         editor.commit(); // commit changes
                                         editor.putInt("key_name2", 0);
@@ -410,6 +415,7 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
                                         realm7.close();
+
                                         for (int i = 0; i < files.length; i++)
                                         {
                                             if(files[i].getName().contains("t0")
@@ -427,7 +433,8 @@ public class MainActivity extends AppCompatActivity {
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
                                     }else{
-                                        if(count_t0<=300000){
+                                        if(count_t0<=308469){
+                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration= new RealmConfiguration.Builder()
                                                     .name("vimatel.db")
@@ -446,6 +453,7 @@ public class MainActivity extends AppCompatActivity {
                                             dowloadFile_t0.download(getApplication());
                                         }else if(count_t1<=500000)
                                         {
+                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration2 = new RealmConfiguration.Builder()
                                                     .name("vimatel2.db")
@@ -464,6 +472,7 @@ public class MainActivity extends AppCompatActivity {
                                             dowloadFile_t1.download(getApplication());
                                         }else if(count_t2<=500000)
                                         {
+                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration3 = new RealmConfiguration.Builder()
                                                     .name("vimatel3.db")
@@ -482,6 +491,7 @@ public class MainActivity extends AppCompatActivity {
                                             dowloadFile_t2.download(getApplication());
                                         }else if(count_t3<=500000)
                                         {
+                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration4 = new RealmConfiguration.Builder()
                                                     .name("vimatel4.db")
@@ -500,6 +510,7 @@ public class MainActivity extends AppCompatActivity {
                                             dowloadFile_t3.download(getApplication());
                                         }else if(count_t4<=500000)
                                         {
+                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration5 = new RealmConfiguration.Builder()
                                                     .name("vimatel5.db")
@@ -518,6 +529,7 @@ public class MainActivity extends AppCompatActivity {
                                             dowloadFile_t4.download(getApplication());
                                         }else if(count_t5<=300000)
                                         {
+                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration6 = new RealmConfiguration.Builder()
                                                     .name("vimatel6.db")
@@ -536,6 +548,7 @@ public class MainActivity extends AppCompatActivity {
                                             dowloadFile_t5.download(getApplication());
                                         }else if(count_t6<=300000)
                                         {
+                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration7 = new RealmConfiguration.Builder()
                                                     .name("vimatel7.db")
@@ -553,6 +566,8 @@ public class MainActivity extends AppCompatActivity {
 
                                             DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
                                             dowloadFile_t6.download(getApplication());
+                                        }else{
+                                            Toast.makeText(getApplication(), "Data Paling Update", Toast.LENGTH_LONG).show();
                                         }
                                     }
 
