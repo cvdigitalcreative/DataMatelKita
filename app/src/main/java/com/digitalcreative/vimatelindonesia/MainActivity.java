@@ -170,19 +170,36 @@ public class MainActivity extends AppCompatActivity {
         String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
         File directory = new File(path);
         File[] files = directory.listFiles();
-        for (int i = 0; i < files.length; i++)
-        {
-            if(files[i].getName().contains("t0-")
-                    || files[i].getName().contains("t1-")
-                    || files[i].getName().contains("t2-")
-                    || files[i].getName().contains("t3-")
-                    || files[i].getName().contains("t4-")
-                    || files[i].getName().contains("t5-")
-                    || files[i].getName().contains("t6-")
-            ) {
-                files[i].delete();
+        if(count>=3700000){
+            for (int i = 0; i < files.length; i++)
+            {
+                if(files[i].getName().contains("t0")
+                        || files[i].getName().contains("t1")
+                        || files[i].getName().contains("t2")
+                        || files[i].getName().contains("t3")
+                        || files[i].getName().contains("t4")
+                        || files[i].getName().contains("t5")
+                        || files[i].getName().contains("t6")
+                ) {
+                    files[i].delete();
+                }
+            }
+        }else{
+            for (int i = 0; i < files.length; i++)
+            {
+                if(files[i].getName().contains("t0-")
+                        || files[i].getName().contains("t1-")
+                        || files[i].getName().contains("t2-")
+                        || files[i].getName().contains("t3-")
+                        || files[i].getName().contains("t4-")
+                        || files[i].getName().contains("t5-")
+                        || files[i].getName().contains("t6-")
+                ) {
+                    files[i].delete();
+                }
             }
         }
+
 
         FirebaseAuth firebaseAuth;
         FirebaseUser firebaseUser;
@@ -234,26 +251,27 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
                                 if (days<=0 && status_download_db.trim().equals("1")
-                                        && count_t0!=0
-                                        && count_t1!=0
-                                        && count_t2!=0
-                                        && count_t3!=0
-                                        && count_t4!=0
-                                        && count_t5!=0
-                                        && count_t6!=0
+                                        && count_t0>=300000
+                                        && count_t1>=300000
+                                        && count_t2>=300000
+                                        && count_t3>=300000
+                                        && count_t4>=300000
+                                        && count_t5>=300000
+                                        && count_t6>=300000
                                 ) {
 
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
                                 }else{
 //
                                     Toast.makeText(getApplication(), "Sedang Mengupdate", Toast.LENGTH_LONG).show();
-                                    if(count_t0!=0
-                                            && count_t1!=0
-                                            && count_t2!=0
-                                            && count_t3!=0
-                                            && count_t4!=0
-                                            && count_t5!=0
-                                            && count_t6!=0){
+                                    if
+                                    (count_t0>=300000
+                                            && count_t1>=300000
+                                            && count_t2>=300000
+                                            && count_t3>=300000
+                                            && count_t4>=300000
+                                            && count_t5>=300000
+                                            && count_t6>=300000){
                                         editor.clear();
                                         editor.commit(); // commit changes
                                         editor.putInt("key_name2", 0);
@@ -374,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
                                     }else{
-                                        if(count_t0==0){
+                                        if(count_t0<=300000){
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration= new RealmConfiguration.Builder()
                                                     .name("vimatel.db")
@@ -391,7 +409,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm.close();
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
-                                        }else if(count_t1==0)
+                                        }else if(count_t1<=300000)
                                         {
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration2 = new RealmConfiguration.Builder()
@@ -409,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm2.close();
                                             DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
                                             dowloadFile_t1.download(getApplication());
-                                        }else if(count_t2==0)
+                                        }else if(count_t2<=300000)
                                         {
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration3 = new RealmConfiguration.Builder()
@@ -427,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm3.close();
                                             DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
                                             dowloadFile_t2.download(getApplication());
-                                        }else if(count_t3==0)
+                                        }else if(count_t3<=300000)
                                         {
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration4 = new RealmConfiguration.Builder()
@@ -445,7 +463,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm4.close();
                                             DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
                                             dowloadFile_t3.download(getApplication());
-                                        }else if(count_t4==0)
+                                        }else if(count_t4<=300000)
                                         {
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration5 = new RealmConfiguration.Builder()
@@ -463,7 +481,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm5.close();
                                             DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
                                             dowloadFile_t4.download(getApplication());
-                                        }else if(count_t5==0)
+                                        }else if(count_t5<=300000)
                                         {
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration6 = new RealmConfiguration.Builder()
@@ -481,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm6.close();
                                             DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
                                             dowloadFile_t5.download(getApplication());
-                                        }else if(count_t6==0)
+                                        }else if(count_t6<=300000)
                                         {
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration7 = new RealmConfiguration.Builder()
