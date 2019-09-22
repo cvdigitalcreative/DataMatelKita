@@ -259,9 +259,9 @@ public class MainActivity extends AppCompatActivity {
                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
                             String informasi="Jumlah data anda "+ finalCount;
-                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = pref.edit();
-                            int status=pref.getInt("key_name2", 0);
+                            SharedPreferences prefs = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                            SharedPreferences.Editor editors = prefs.edit();
+                            int status=prefs.getInt("key_name2", 0);
                             System.out.println("status "+status);
                             System.out.println("days "+days);
                             System.out.println( count_t0>=300000
@@ -276,13 +276,13 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
                                 if (days<=0 && status_download_db.trim().equals("1")
-                                        && count_t0>=308469
-                                        && count_t1>=538456
-                                        && count_t2>=558594
-                                        && count_t3>=510658
-                                        && count_t4>=530417
-                                        && count_t5>=332201
-                                        && count_t6>=332198
+                                        && count_t0>=300000
+                                        && count_t1>=300000
+                                        && count_t2>=300000
+                                        && count_t3>=300000
+                                        && count_t4>=300000
+                                        && count_t5>=300000
+                                        && count_t6>=300000
                                 ) {
 
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
@@ -292,30 +292,35 @@ public class MainActivity extends AppCompatActivity {
                                     if
                                     (       days>0
                                             && status_download_db.trim().equals("1")
-                                            && count_t0>=308469
-                                            && count_t1>=538456
-                                            && count_t2>=558594
-                                            && count_t3>=510658
-                                            && count_t4>=530417
-                                            && count_t5>=332201
-                                            && count_t6>=332198){
+                                            && count_t0>=300000
+                                            && count_t1>=300000
+                                            && count_t2>=300000
+                                            && count_t3>=300000
+                                            && count_t4>=300000
+                                            && count_t5>=300000
+                                            && count_t6>=300000){
+//                                        clearApplicationData();
+                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = pref.edit();
                                         editor.clear();
                                         editor.commit(); // commit changes
                                         editor.putInt("key_name2", 0);
                                         editor.apply();
                                         System.out.println("status download "+status);
-
+                                        Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                         Realm.init(getApplicationContext());
                                         RealmConfiguration configuration= new RealmConfiguration.Builder()
                                                 .name("vimatel.db")
                                                 .schemaVersion(1)
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
+                                        Realm.deleteRealm(configuration);
                                         final Realm realm= Realm.getInstance(configuration);
                                         realm.executeTransaction(new Realm.Transaction() {
                                             @Override
                                             public void execute(Realm realm) {
                                                 realm.deleteAll();
+
                                             }
                                         });
                                         realm.close();
@@ -327,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
                                                 .schemaVersion(1)
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
+                                        Realm.deleteRealm(configuration2);
                                         final Realm realm2 = Realm.getInstance(configuration2);
                                         realm2.executeTransaction(new Realm.Transaction() {
                                             @Override
@@ -343,6 +349,7 @@ public class MainActivity extends AppCompatActivity {
                                                 .schemaVersion(1)
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
+                                        Realm.deleteRealm(configuration3);
                                         final Realm realm3 = Realm.getInstance(configuration3);
                                         realm3.executeTransaction(new Realm.Transaction() {
                                             @Override
@@ -359,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
                                                 .schemaVersion(1)
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
+                                        Realm.deleteRealm(configuration4);
                                         final Realm realm4 = Realm.getInstance(configuration4);
                                         realm4.executeTransaction(new Realm.Transaction() {
                                             @Override
@@ -375,6 +383,7 @@ public class MainActivity extends AppCompatActivity {
                                                 .schemaVersion(1)
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
+                                        Realm.deleteRealm(configuration5);
                                         final Realm realm5 = Realm.getInstance(configuration5);
                                         realm5.executeTransaction(new Realm.Transaction() {
                                             @Override
@@ -391,6 +400,7 @@ public class MainActivity extends AppCompatActivity {
                                                 .schemaVersion(1)
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
+                                        Realm.deleteRealm(configuration6);
                                         final Realm realm6 = Realm.getInstance(configuration6);
                                         realm6.executeTransaction(new Realm.Transaction() {
                                             @Override
@@ -407,6 +417,7 @@ public class MainActivity extends AppCompatActivity {
                                                 .schemaVersion(1)
                                                 .deleteRealmIfMigrationNeeded()
                                                 .build();
+                                        Realm.deleteRealm(configuration7);
                                         final Realm realm7 = Realm.getInstance(configuration7);
                                         realm7.executeTransaction(new Realm.Transaction() {
                                             @Override
@@ -433,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
                                     }else{
-                                        if(count_t0<=308469){
+                                        if(count_t0<=300000){
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration= new RealmConfiguration.Builder()
@@ -451,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm.close();
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
-                                        }else if(count_t1<=500000)
+                                        }else if(count_t1<=300000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -470,7 +481,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm2.close();
                                             DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
                                             dowloadFile_t1.download(getApplication());
-                                        }else if(count_t2<=500000)
+                                        }else if(count_t2<=300000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -489,7 +500,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm3.close();
                                             DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
                                             dowloadFile_t2.download(getApplication());
-                                        }else if(count_t3<=500000)
+                                        }else if(count_t3<=300000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -599,6 +610,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void clearApplicationData() {
+        File cacheDirectory = getCacheDir();
+        File applicationDirectory = new File(cacheDirectory.getParent());
+        if (applicationDirectory.exists()) {
+            String[] fileNames = applicationDirectory.list();
+            for (String fileName : fileNames) {
+                if (!fileName.equals("lib")) {
+                    deleteFile(new File(applicationDirectory, fileName));
+                }
+            }
+        }
+    }
+
+    public static boolean deleteFile(File file) {
+        boolean deletedAll = true;
+        if (file != null) {
+            if (file.isDirectory()) {
+                String[] children = file.list();
+                for (int i = 0; i < children.length; i++) {
+                    deletedAll = deleteFile(new File(file, children[i])) && deletedAll;
+                }
+            } else {
+                deletedAll = file.delete();
+            }
+        }
+
+        return deletedAll;
     }
     public static boolean checkStatus(Context context , int status) {
         DownloadManager downloadManager = (DownloadManager)
