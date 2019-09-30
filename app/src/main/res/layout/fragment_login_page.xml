@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:background="@drawable/login_textfield_rr"
-                    android:hint="matelkita@email.com"
+                    android:hint=""
                     android:inputType="textEmailAddress"
                     android:padding="15dp"
                     android:textColor="#000"
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:layout_marginEnd="55dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="56dp"
             android:background="@drawable/login_button_rr"
             android:paddingVertical="10dp"
             android:text="Masuk"
@@ -170,7 +170,23 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/bottom"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout4" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:background="@drawable/login_button_rr"
+            android:paddingVertical="10dp"
+            android:text="Register"
+            android:textColor="@color/whit_color"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/bottom"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/linearLayout4" />
 
         <LinearLayout
@@ -179,33 +195,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical"
-            android:paddingVertical="15dp"
-            android:background="#333030"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/whit_color"
-                    android:text="Tidak Mempunyai Akun ?  " />
-
-                <TextView
-                    android:id="@+id/btn_register"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:textStyle="bold"
-                    android:text="Buat Disini"
-                    android:textColor="@color/whit_color" />
-            </LinearLayout>
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

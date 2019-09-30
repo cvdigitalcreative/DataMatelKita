@@ -217,7 +217,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
         @Override
         protected List<Model_LacakMobil> doInBackground(String... params) {
-            List<Model_LacakMobil> temp1,temp2,temp3,temp4,temp5,temp6,temp7,safeWords;
+            List<Model_LacakMobil> temp1,temp2,temp3,temp4,temp5,temp6,temp7,safeWords,temp_manual;
             Realm.init(context);
             RealmConfiguration configuration = new RealmConfiguration.Builder()
                     .name("vimatel.db")
@@ -323,6 +323,21 @@ public class PencarianPage_Activity extends AppCompatActivity {
                 return  temp7;
             }
 
+
+            Realm.init(context);
+            RealmConfiguration configuration_manual = new RealmConfiguration.Builder()
+                    .name("vimatel_manual.db")
+                    .schemaVersion(1)
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            final Realm realm_manual = Realm.getInstance(configuration_manual);
+            list= realm_manual.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
+            temp_manual = realm_manual.copyFromRealm(list);
+            System.out.println(temp2);
+            realm_manual.close();
+            if(!temp_manual.isEmpty()){
+                return  temp_manual;
+            }
 
 
 

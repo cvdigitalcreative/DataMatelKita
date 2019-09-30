@@ -23,35 +23,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp">
+
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginHorizontal="5dp"
                     android:paddingVertical="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Nama Unit Mobil"
-                            android:textSize="@dimen/bantuan_addCar_textSize"
-                            android:textStyle="bold" />
-                        <EditText
-                            android:id="@+id/add_namamobil"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:inputType="text"
-                            android:textColor="#000"
-                            android:hint="Masukan Mobil"
-                            android:background="@color/base_grey_color"
-                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
-                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -75,6 +57,82 @@
                             android:background="@color/base_grey_color"
                             android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
                     </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Unit Mobil"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_namamobil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Mobil"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Finance"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_finance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Finnace"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pemilik Mobil"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/pemilik_mobil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Nama Pemilik Mobil"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -112,6 +170,7 @@
                     android:orientation="vertical"
                     android:layout_marginHorizontal="5dp"
                     android:paddingVertical="10dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -145,6 +204,30 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="Warna Mobil"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_warna"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Warna Mobil"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:text="Cabang"
                             android:textSize="@dimen/bantuan_addCar_textSize"
                             android:textStyle="bold" />
@@ -159,6 +242,7 @@
                             android:background="@color/base_grey_color"
                             android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -168,20 +252,21 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Nama Finance"
+                            android:text="Noka"
                             android:textSize="@dimen/bantuan_addCar_textSize"
                             android:textStyle="bold" />
                         <EditText
-                            android:id="@+id/add_finance"
+                            android:id="@+id/add_noka"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
                             android:inputType="text"
                             android:textColor="#000"
-                            android:hint="Masukan Finnace"
+                            android:hint="Masukan Noka"
                             android:background="@color/base_grey_color"
                             android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -205,6 +290,7 @@
                             android:background="@color/base_grey_color"
                             android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -214,17 +300,17 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Noka"
+                            android:text="Saldo"
                             android:textSize="@dimen/bantuan_addCar_textSize"
                             android:textStyle="bold" />
                         <EditText
-                            android:id="@+id/add_noka"
+                            android:id="@+id/add_saldo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
                             android:inputType="text"
                             android:textColor="#000"
-                            android:hint="Masukan Noka"
+                            android:hint="Masukan Saldo"
                             android:background="@color/base_grey_color"
                             android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
                     </LinearLayout>

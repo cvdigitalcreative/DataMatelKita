@@ -1,7 +1,7 @@
 <resources>
-    <dimen name="fab_margin">32dp</dimen>
-    <dimen name="padding_horizontal">32dp</dimen>
+    <dimen name="fab_margin">30dp</dimen>
+    <dimen name="padding_horizontal">30dp</dimen>
     <dimen name="padding_vertical">4dp</dimen>
-    <dimen name="small_pading_vertical">16dp</dimen>
-    <dimen name="text_keyboard_size">28sp</dimen>
+    <dimen name="small_pading_vertical">14dp</dimen>
+    <dimen name="text_keyboard_size">25sp</dimen>
 </resources>

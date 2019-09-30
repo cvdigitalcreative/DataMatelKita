@@ -69,9 +69,9 @@ public class LoginPage extends Fragment {
             pass = view.findViewById(R.id.password);
             pop_up = view.findViewById(R.id.pop_up_login);
 
-            //Button Register
-            final TextView btn_registrasi =  view.findViewById(R.id.btn_register);
-            btn_registrasi.setOnClickListener(new View.OnClickListener() {
+
+            final Button btn_regis =  view.findViewById(R.id.btn_register);
+            btn_regis.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -114,6 +114,7 @@ public class LoginPage extends Fragment {
         getpass = pass.getText().toString();
         if (getemail.matches("") && getpass.matches("")) {
             Toast.makeText(getActivity(), "Login Gagal - Email atau Password Kosong", Toast.LENGTH_SHORT).show();
+            pop_up.setVisibility(View.INVISIBLE);
         } else {
             firebaseAuth.signInWithEmailAndPassword(getemail, getpass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override

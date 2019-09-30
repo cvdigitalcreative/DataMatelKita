@@ -136,29 +136,7 @@
                             android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Cabang"
-                            android:textSize="@dimen/bantuan_addCar_textSize"
-                            android:textStyle="bold" />
-                        <EditText
-                            android:id="@+id/add_cabang"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:inputType="text"
-                            android:textColor="#000"
-                            android:hint="Masukan Cabang"
-                            android:background="@color/base_grey_color"
-                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
-                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -225,6 +203,30 @@
                             android:inputType="text"
                             android:textColor="#000"
                             android:hint="Masukan Noka"
+                            android:background="@color/base_grey_color"
+                            android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cabang"
+                            android:textSize="@dimen/bantuan_addCar_textSize"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/add_cabang"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:textColor="#000"
+                            android:hint="Masukan Cabang"
                             android:background="@color/base_grey_color"
                             android:textSize="@dimen/bantuan_addCar_textSize_editText"/>
                     </LinearLayout>

@@ -85,6 +85,7 @@ public class AkunPage extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getActivity(), BaseActivity.class);
                 startActivity(intent);
 //                LogoutPage update_profil = new LogoutPage();
