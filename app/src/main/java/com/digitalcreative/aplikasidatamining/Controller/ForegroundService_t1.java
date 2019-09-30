@@ -36,7 +36,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class ForegroundService_t1 extends Service {
-    public static final String CHANNEL_ID = "ForegroundServiceChannelDataMatel_t1";
+    public static final String CHANNEL_ID = "ForegroundServiceChannel_t1";
 
     Realm realm;
 
@@ -47,6 +47,7 @@ public class ForegroundService_t1 extends Service {
 
     String url_t0;
     String subpath_t0;
+    int status_foreground;
 
     @Override
     public void onCreate() {
@@ -56,21 +57,22 @@ public class ForegroundService_t1 extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
+        status_foreground=1;
         createNotificationChannel();
-//        Intent notificationIntent = new Intent(this, MainActivity.class);
-//        // Create an IntentFilter instance.
-//        IntentFilter intentFilter = new IntentFilter();
-//
-//        intentFilter.addAction("android.intent.action.ACTION_DOWNLOAD_COMPLETE");
-//
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-//                0, notificationIntent, 0);
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        // Create an IntentFilter instance.
+        IntentFilter intentFilter = new IntentFilter();
+
+        intentFilter.addAction("android.intent.action.ACTION_DOWNLOAD_COMPLETE");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Download Data")
                 .setContentText("sedang mendownload File")
                 .build();
-
+        System.out.println("masuk t1");
         startForeground(1, notification);
         subpath_t0 = "t1.csv";
         insertdata(subpath_t0);
@@ -82,10 +84,28 @@ public class ForegroundService_t1 extends Service {
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
+        if(!file[0].exists()){
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            int status=pref.getInt("key_name2", 0);
+            System.out.println("status download "+status);
+            editor.clear();
+            editor.commit(); // commit changes
+            editor.putInt("key_name2", 2);
+            editor.apply();
+            System.out.println("selesai t1 ");
+            System.out.println("nama file "+file[0].getAbsolutePath());
+
+            update_data_s();
+            status_foreground=1;
+            stopForegroundService();
+            DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
+            dowloadFile_t1.download(getApplication());
+        }
         final String localFile = file[0].toString();
         Realm.init(ForegroundService_t1.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
+                .name("datamatel2.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -100,7 +120,6 @@ public class ForegroundService_t1 extends Service {
                         // use comma as separator
                         final String[] country = line.split(",");
                         if(country.length==12){
-
                             model_lacakMobil.setNama_mobil(country[1]);
                             model_lacakMobil.setNo_plat(country[2]);
                             model_lacakMobil.setNamaunit(country[3]);
@@ -118,39 +137,151 @@ public class ForegroundService_t1 extends Service {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    int status=pref.getInt("key_name2", 0);
-                    System.out.println("status download "+status);
-                    editor.clear();
-                    editor.commit(); // commit changes
-                    editor.putInt("key_name2", 0);
-                    editor.apply();
-                    System.out.println("nama file "+file[0].getAbsolutePath());
-                    file[0].delete();
-                    String path= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
-                    File directory = new File(path);
-                    File[] files = directory.listFiles();
-                    for (int i = 0; i < files.length; i++)
-                    {
-                        if(files[i].getName().contains("t0-")
-                                || files[i].getName().contains("t1-")
-                                || files[i].getName().contains("t2-")
-                                || files[i].getName().contains("t3-")
-                                || files[i].getName().contains("t4-")
-                                || files[i].getName().contains("t5-")
-                        ) {
-                            files[i].delete();
-                        }
-                    }
-                    update_data_s();
-                    stopForegroundService();
-//            fixing_data();
-
                 }
             }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                int status=pref.getInt("key_name2", 0);
+                System.out.println("status download "+status);
+                editor.clear();
+                editor.commit(); // commit changes
+                editor.putInt("key_name2", 1);
+                editor.apply();
+
+                status_foreground=1;
+                stopForegroundService();
+                update_data_s();
+
+                //realm
+                final long count_t0;
+                final long count_t1;
+                final long count_t2;
+                final long count_t3;
+                final long count_t4;
+                final long count_t5;
+                final long count_t6;
+
+
+                Realm.init(getApplicationContext());
+                final RealmConfiguration configuration= new RealmConfiguration.Builder()
+                        .name("datamatel.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm= Realm.getInstance(configuration);
+                count_t0=realm.where(Model_LacakMobil.class).count();
+                realm.close();
+
+                Realm.init(getApplicationContext());
+                RealmConfiguration configuration2 = new RealmConfiguration.Builder()
+                        .name("datamatel2.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm2 = Realm.getInstance(configuration2);
+                count_t1=realm2.where(Model_LacakMobil.class).count();
+                realm2.close();
+
+                Realm.init(getApplicationContext());
+                RealmConfiguration configuration3 = new RealmConfiguration.Builder()
+                        .name("datamatel3.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm3 = Realm.getInstance(configuration3);
+                count_t2=realm3.where(Model_LacakMobil.class).count();
+                realm3.close();
+
+                Realm.init(getApplicationContext());
+                RealmConfiguration configuration4 = new RealmConfiguration.Builder()
+                        .name("datamatel4.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm4 = Realm.getInstance(configuration4);
+                count_t3=realm4.where(Model_LacakMobil.class).count();
+                realm4.close();
+
+                Realm.init(getApplicationContext());
+                RealmConfiguration configuration5 = new RealmConfiguration.Builder()
+                        .name("datamatel5.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm5 = Realm.getInstance(configuration5);
+                count_t4=realm5.where(Model_LacakMobil.class).count();
+                realm5.close();
+
+                Realm.init(getApplicationContext());
+                RealmConfiguration configuration6 = new RealmConfiguration.Builder()
+                        .name("datamatel6.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm6 = Realm.getInstance(configuration6);
+                count_t5=realm6.where(Model_LacakMobil.class).count();
+                realm6.close();
+
+                Realm.init(getApplicationContext());
+                RealmConfiguration configuration7 = new RealmConfiguration.Builder()
+                        .name("datamatel7.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm7 = Realm.getInstance(configuration7);
+
+                count_t6=realm7.where(Model_LacakMobil.class).count();
+                realm7.close();
+                if(count_t0==0){
+                    file[0].delete();
+                    DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
+                    dowloadFile_t0.download(getApplication());
+                }else if(count_t1==0)
+                {
+                    DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
+                    dowloadFile_t1.download(getApplication());
+                }else if(count_t2==0)
+                {
+                    file[0].delete();
+                    DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
+                    dowloadFile_t2.download(getApplication());
+                }else if(count_t3==0)
+                {
+                    file[0].delete();
+                    DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
+                    dowloadFile_t3.download(getApplication());
+                }else if(count_t4==0)
+                {
+                    file[0].delete();
+                    DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
+                    dowloadFile_t4.download(getApplication());
+                }else if(count_t5==0)
+                {
+                    file[0].delete();
+                    DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
+                    dowloadFile_t5.download(getApplication());
+                }else if(count_t6==0)
+                {
+                    file[0].delete();
+                    DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
+                    dowloadFile_t6.download(getApplication());
+                }
+                realm.close();
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                status_foreground=1;
+                DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
+                dowloadFile_t1.download(getApplication());
+                realm.close();
+            }
         });
+
+
 
 
 
@@ -197,6 +328,13 @@ public class ForegroundService_t1 extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(status_foreground!=1) {
+            Intent broadcastIntent = new Intent(this, BroadcastReceiverForegroundServiceRestart_t1.class);
+
+            sendBroadcast(broadcastIntent);
+            status_foreground=0;
+        }
+
     }
 
     @Nullable

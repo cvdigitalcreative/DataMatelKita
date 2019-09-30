@@ -1,5 +1,6 @@
 package com.digitalcreative.aplikasidatamining.View.LoginandRegister;
 
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -63,31 +64,31 @@ public class LoginPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login_page, container, false);
-        firebaseAuth = FirebaseAuth.getInstance();
-        email = view.findViewById(R.id.username);
-        pass = view.findViewById(R.id.password);
-        pop_up = view.findViewById(R.id.pop_up_login);
+            firebaseAuth = FirebaseAuth.getInstance();
+            email = view.findViewById(R.id.username);
+            pass = view.findViewById(R.id.password);
+            pop_up = view.findViewById(R.id.pop_up_login);
 
-        //Button Register
-        final TextView btn_registrasi =  view.findViewById(R.id.btn_register);
-        btn_registrasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container_base, new RegisterPage())
-                        .addToBackStack(null).commit();
-            }
-        });
 
-        //Button Login
-        final Button btn_login = view.findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkemail_instance();
+            final Button btn_regis =  view.findViewById(R.id.btn_register);
+            btn_regis.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container_base, new RegisterPage())
+                            .addToBackStack(null).commit();
+                }
+            });
 
-            }
-        });
+            //Button Login
+            final Button btn_login = view.findViewById(R.id.btn_login);
+            btn_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    checkemail_instance();
+
+                }
+            });
         int REQUEST_WRITE_STORAGE = 112;
         boolean hasPermission = (ContextCompat.checkSelfPermission(LoginPage.this.getContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
@@ -113,6 +114,7 @@ public class LoginPage extends Fragment {
         getpass = pass.getText().toString();
         if (getemail.matches("") && getpass.matches("")) {
             Toast.makeText(getActivity(), "Login Gagal - Email atau Password Kosong", Toast.LENGTH_SHORT).show();
+            pop_up.setVisibility(View.INVISIBLE);
         } else {
             firebaseAuth.signInWithEmailAndPassword(getemail, getpass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override

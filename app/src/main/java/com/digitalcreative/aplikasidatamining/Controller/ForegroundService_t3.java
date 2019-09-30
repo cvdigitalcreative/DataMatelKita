@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,14 +28,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class ForegroundService_t0 extends Service {
-    public static final String CHANNEL_ID = "ForegroundServiceChannel_t0";
+public class ForegroundService_t3 extends Service {
+    public static final String CHANNEL_ID = "ForegroundServiceChannel_t3";
 
     Realm realm;
 
@@ -43,11 +45,30 @@ public class ForegroundService_t0 extends Service {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
 
+    String url_t0;
     String subpath_t0;
+    String url_t1;
+    String subpath_t1;
+    String url_t2;
+    String subpath_t2;
+    String url_t3;
+    String subpath_t3;
+    String url_t4;
+    String subpath_t4;
+    String url_t5;
+    String subpath_t5;
+    String url_data_update;
+    String subpath_data_update;
+    private ArrayList<Long> jumlah_id;
+    private ArrayList<String> path_file;
+    private ArrayList<String>  url_file;
+    private ArrayList<Long> jumlah__download_id;
+    private int jumlah_file;
+    private long downloadID;
+
+    ProgressDialog progressDialog;
+    private static final int REQUEST_WRITE_STORAGE = 112;
     int status_foreground;
-
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,8 +76,8 @@ public class ForegroundService_t0 extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        status_foreground=0;
         String input = intent.getStringExtra("inputExtra");
+        status_foreground=0;
         createNotificationChannel();
         Intent notificationIntent = new Intent(this, MainActivity.class);
         // Create an IntentFilter instance.
@@ -73,13 +94,13 @@ public class ForegroundService_t0 extends Service {
                 .build();
 
         startForeground(1, notification);
-        subpath_t0 = "t0.csv";
+        subpath_t0 = "t3.csv";
         insertdata(subpath_t0);
         return START_NOT_STICKY;
     }
 
     public void insertdata(final String subpath) {
-        System.out.println("dor t 0 jalan");
+        System.out.println("jumlah file "+jumlah_file);
         final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
@@ -91,22 +112,25 @@ public class ForegroundService_t0 extends Service {
             System.out.println("status download "+status);
             editor.clear();
             editor.commit(); // commit changes
-            editor.putInt("key_name2", 1);
+            editor.putInt("key_name2", 4);
             editor.apply();
+            System.out.println("nama file "+file[0].getAbsolutePath());
+
             update_data_s();
             status_foreground=1;
             stopForegroundService();
-            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-            dowloadFile_t0.download(getApplication());
+            DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
+            dowloadFile_t3.download(getApplication());
         }
         final String localFile = file[0].toString();
-        Realm.init(ForegroundService_t0.this);
+        Realm.init(ForegroundService_t3.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("datamatel.db")
+                .name("datamatel4.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(configuration);
+
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
@@ -139,6 +163,7 @@ public class ForegroundService_t0 extends Service {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
+                realm.close();
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 int status=pref.getInt("key_name2", 0);
@@ -233,6 +258,7 @@ public class ForegroundService_t0 extends Service {
                 count_t6=realm7.where(Model_LacakMobil.class).count();
                 realm7.close();
                 if(count_t0==0){
+                    file[0].delete();
                     DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                     dowloadFile_t0.download(getApplication());
                 }else if(count_t1==0)
@@ -247,7 +273,6 @@ public class ForegroundService_t0 extends Service {
                     dowloadFile_t2.download(getApplication());
                 }else if(count_t3==0)
                 {
-                    file[0].delete();
                     DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
                     dowloadFile_t3.download(getApplication());
                 }else if(count_t4==0)
@@ -266,17 +291,18 @@ public class ForegroundService_t0 extends Service {
                     DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
                     dowloadFile_t6.download(getApplication());
                 }
-                realm.close();
+
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
                 status_foreground=1;
-                DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-                dowloadFile_t0.download(getApplication());
+                DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
+                dowloadFile_t3.download(getApplication());
                 realm.close();
             }
         });
+
 
 
 
@@ -313,7 +339,6 @@ public class ForegroundService_t0 extends Service {
 
     private void stopForegroundService() {
         Log.d("stop service", "Stop foreground service.");
-        System.out.println("foreground stop");
 
         // Stop foreground service and remove the notification.
         stopForeground(true);
@@ -325,14 +350,12 @@ public class ForegroundService_t0 extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(status_foreground!=1){
-            System.out.println("destroy foreground");
-            Intent broadcastIntent = new Intent(this, BroadcastReceiverForegroundServiceRestart_t0.class);
+        if(status_foreground!=1) {
+            status_foreground=0;
+            Intent broadcastIntent = new Intent(this, BroadcastReceiverForegroundServiceRestart_t3.class);
 
             sendBroadcast(broadcastIntent);
-            status_foreground=0;
         }
-
 
     }
 

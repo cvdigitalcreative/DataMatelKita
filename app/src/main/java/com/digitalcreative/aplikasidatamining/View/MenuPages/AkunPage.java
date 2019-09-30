@@ -1,13 +1,14 @@
 package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 
+import android.app.ActivityManager;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,21 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.BaseActivity;
-import com.digitalcreative.aplikasidatamining.MainActivity;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t0;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t1;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t2;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t3;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t4;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t5;
 import com.digitalcreative.aplikasidatamining.R;
-import com.digitalcreative.aplikasidatamining.View.HomePage.LogoutPage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,56 +67,25 @@ public class AkunPage extends Fragment {
 
         //do Function
         btnlogoutFunc();
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseUser =  firebaseAuth.getCurrentUser();
-        myRef = firebaseDatabase.getReference();
-        myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final String last_update_data= dataSnapshot.child("last_update_data").getValue().toString();
-                myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
-                        String last_update_data_sistem= dataSnapshots.child("update_terakhir").getValue().toString();
-                        System.out.println("cuy masuk akal");
-                        SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        Date dateobj = Calendar.getInstance().getTime();
+        if(isMyServiceRunning(ForegroundService_t0.class)
+                ||isMyServiceRunning(ForegroundService_t1.class)
+                ||isMyServiceRunning(ForegroundService_t2.class)
+                ||isMyServiceRunning(ForegroundService_t3.class)
+                ||isMyServiceRunning(ForegroundService_t4.class)
+                ||isMyServiceRunning(ForegroundService_t5.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+        ){
+            Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+        }
 
-                        Date date = null;
-                        try {
-                            date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
-                            Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
-                            long milliseconds = date_2.getTime() - date.getTime();
-                            long days = milliseconds / (1000 * 60 * 60 * 24);
-                            if (days>0 ) {
-                                Toast.makeText(getActivity(), "Silahkan Update Data", Toast.LENGTH_LONG).show();
-
-                            }
-                        }  catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         return view;
     }
 
-    private void btnlogoutFunc() {
+
+        private void btnlogoutFunc() {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getActivity(), BaseActivity.class);
                 startActivity(intent);
 //                LogoutPage update_profil = new LogoutPage();
@@ -127,6 +93,30 @@ public class AkunPage extends Fragment {
 //                fragmentTransaction.replace(R.id.container_base, update_profil).commit();
             }
         });
+    }
+    public static boolean checkStatus(Context context , int status) {
+        DownloadManager downloadManager = (DownloadManager)
+                context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Query query = new DownloadManager.Query();
+
+        query.setFilterByStatus(status);
+        Cursor c = downloadManager.query(query);
+        if (c.moveToFirst()) {
+            c.close();
+
+            return true;
+        }
+
+        return false;
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
     private void sayHelloboys(View view) {
         //TextView

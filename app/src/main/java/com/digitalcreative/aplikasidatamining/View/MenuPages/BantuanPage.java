@@ -4,10 +4,12 @@ package com.digitalcreative.aplikasidatamining.View.MenuPages;
 import android.Manifest;
 import android.app.ActivityManager;
 import android.app.DownloadManager;
+import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -26,12 +28,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t0;
+import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t1;
+import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t2;
+import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t3;
+import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t4;
+import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t5;
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService;
 import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t0;
 import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t1;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t2;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t3;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t4;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t5;
+import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t6;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
 import com.digitalcreative.aplikasidatamining.RealmHelper;
@@ -56,6 +71,8 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -71,7 +88,7 @@ public class BantuanPage extends Fragment {
 
     private static String DB_NAME = "tes.db";
     Realm realm;
-    RealmHelper realmHelper;
+
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseDatabase firebaseDatabase;
@@ -112,24 +129,8 @@ public class BantuanPage extends Fragment {
 
         //Init the Variable
         sayHelloboys(view);
-//        Realm.init(this.getContext());
-//        RealmConfiguration config =
-//                new RealmConfiguration.Builder()
-//                        .name("test.db")
-//                        .schemaVersion(1)
-//                        .deleteRealmIfMigrationNeeded()
-//                        .build();
-//        realm = Realm.getInstance(config);
-        //Set up Realm
-        Realm.init(this.getContext());
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(configuration);
+//
 
-        realmHelper = new RealmHelper(realm);
         //Actions
         doitBoys();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -143,17 +144,15 @@ public class BantuanPage extends Fragment {
         url_file=new ArrayList<>();
         jumlah__download_id=new ArrayList<>();
         jumlah_file=7;
-        mSettings = getActivity().getSharedPreferences("Settings", MODE_PRIVATE);
+         mSettings = getActivity().getSharedPreferences("Settings", MODE_PRIVATE);
         if(isMyServiceRunning(ForegroundService_t0.class)
-
                 ||isMyServiceRunning(ForegroundService_t1.class)
-
-                || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
-
+                ||isMyServiceRunning(ForegroundService_t2.class)
+                ||isMyServiceRunning(ForegroundService_t3.class)
+                ||isMyServiceRunning(ForegroundService_t4.class)
+                ||isMyServiceRunning(ForegroundService_t5.class) ||isMyServiceRunning(ForegroundService_t6.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
         ){
-
             Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-
         }
         myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -261,7 +260,7 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + "+6285268801717"));
+                intent.setData(Uri.parse("sms:" + "+6285268807171"));
                 startActivity(intent);
             }
         });
@@ -269,7 +268,7 @@ public class BantuanPage extends Fragment {
         wa_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + "+6285268801717";
+                String url = "https://api.whatsapp.com/send?phone=" + "+685268807171";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 try {
                     intent.setData(Uri.parse(url));
@@ -297,7 +296,7 @@ public class BantuanPage extends Fragment {
                 } else {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    callIntent.setData(Uri.parse("tel:" + "+6285268801717"));
+                    callIntent.setData(Uri.parse("tel:" + "+62852688071711"));
                     getActivity().startActivity(callIntent);
                 }
 
@@ -318,298 +317,199 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                Realm.init(BantuanPage.this.getContext());
-                RealmConfiguration configuration = new RealmConfiguration.Builder()
-                        .name("test.db")
+                Realm.init(getContext());
+                RealmConfiguration configuration= new RealmConfiguration.Builder()
+                        .name("datamatel.db")
                         .schemaVersion(1)
                         .deleteRealmIfMigrationNeeded()
                         .build();
-                realm = Realm.getInstance(configuration);
-                final long count = realm.where(Model_LacakMobil.class).count();
+                final Realm realm= Realm.getInstance(configuration);
+                long count = realm.where(Model_LacakMobil.class).count();
+                realm.close();
+                System.out.println("t0 ="+count);
+
+                Realm.init(getContext());
+                RealmConfiguration configuration2 = new RealmConfiguration.Builder()
+                        .name("datamatel2.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm2 = Realm.getInstance(configuration2);
+                count = realm2.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t1 ="+ realm2.where(Model_LacakMobil.class).count());
+                realm2.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration3 = new RealmConfiguration.Builder()
+                        .name("datamatel3.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm3 = Realm.getInstance(configuration3);
+                count = realm3.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t2 ="+realm3.where(Model_LacakMobil.class).count());
+                realm3.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration4 = new RealmConfiguration.Builder()
+                        .name("datamatel4.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm4 = Realm.getInstance(configuration4);
+                count = realm4.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t3 ="+ realm4.where(Model_LacakMobil.class).count());
+                realm4.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration5 = new RealmConfiguration.Builder()
+                        .name("datamatel5.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm5 = Realm.getInstance(configuration5);
+                System.out.println("t4 ="+realm5.where(Model_LacakMobil.class).count());
+                count = realm5.where(Model_LacakMobil.class).count()+count;
+                realm5.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration6 = new RealmConfiguration.Builder()
+                        .name("datamatel6.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm6 = Realm.getInstance(configuration6);
+                count = realm6.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t5 ="+realm6.where(Model_LacakMobil.class).count());
+                realm6.close();
+
+
+                Realm.init(getContext());
+                RealmConfiguration configuration7 = new RealmConfiguration.Builder()
+                        .name("datamatel7.db")
+                        .schemaVersion(1)
+                        .deleteRealmIfMigrationNeeded()
+                        .build();
+                final Realm realm7 = Realm.getInstance(configuration7);
+                count = realm7.where(Model_LacakMobil.class).count()+count;
+                System.out.println("t6 ="+realm7.where(Model_LacakMobil.class).count());
+                realm7.close();
+
+                //realm
 
 
                 firebaseAuth = FirebaseAuth.getInstance();
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 firebaseUser = firebaseAuth.getCurrentUser();
                 myRef = firebaseDatabase.getReference();
+                final long finalCount = count;
                 myRef.child("Users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-
                     @Override
-
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                         final String status_download_db = dataSnapshot.child("status_download_db").getValue().toString();
 
-
-
                         final String last_update_data = dataSnapshot.child("last_update_data").getValue().toString();
-
                         myRef.child("update_data").addListenerForSingleValueEvent(new ValueEventListener() {
-
                             @Override
-
                             public void onDataChange(@NonNull DataSnapshot dataSnapshots) {
-
                                 System.out.println("cuy masuk akal");
-
                                 String last_update_data_sistem = dataSnapshots.child("update_terakhir").getValue().toString();
-
                                 SimpleDateFormat curFormat = new SimpleDateFormat("dd/MM/yyyy");
-
                                 Date dateobj = Calendar.getInstance().getTime();
-
                                 SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
-
                                 SharedPreferences.Editor editor = pref.edit();
-
                                 int status=pref.getInt("key_name2", 0);
-
                                 Date date = null;
-
                                 try {
-
                                     date = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data);
-
                                     Date date_2 = new SimpleDateFormat("dd/MM/yyyy").parse(last_update_data_sistem);
-
                                     long milliseconds = date_2.getTime() - date.getTime();
-
                                     long days = milliseconds / (1000 * 60 * 60 * 24);
 
 
 
-
-
-
-
                                     if(isMyServiceRunning(ForegroundService_t0.class)
-
                                             ||isMyServiceRunning(ForegroundService_t1.class)
-
-
+                                            ||isMyServiceRunning(ForegroundService_t2.class)
+                                            ||isMyServiceRunning(ForegroundService_t3.class)
+                                            ||isMyServiceRunning(ForegroundService_t4.class)
+                                            ||isMyServiceRunning(ForegroundService_t5.class)
                                             || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
-
                                     ){
-
-                                        if(status==0){
-
-
-
-                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
-
-                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-
-                                            String informasi="Jumlah data anda "+count;
-
-                                            long progress=(count*100)/400000;
-
-                                            finished.setVisibility(View.VISIBLE);
-
-                                            tv0.setText(infomarsis);
-
-                                            tv1.setText(infomarsi);
-
-                                            tv2.setText(informasi);
-
-                                            if(progress>=100){
-
-                                                tv3.setText("Progress Data anda 100 %");
-
-                                            }else{
-
-                                                tv3.setText("Progress Data anda "+progress+ "%");
-
-                                            }
-
-
-
-                                        }else if(status==1)
-
-                                        {
-
-                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
-
-                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-
-                                            String informasi="Jumlah data anda "+count;
-
-                                            long progress=(count*100)/400000;
-
-                                            finished.setVisibility(View.VISIBLE);
-
-                                            tv0.setText(infomarsis);
-
-                                            tv1.setText(infomarsi);
-
-                                            tv2.setText(informasi);
-
-                                            if(progress>=100){
-
-                                                tv3.setText("Progress Data anda 100 %");
-
-                                            }else{
-
-                                                tv3.setText("Progress Data anda "+progress+ "%");
-
-                                            }
-
-                                        }
-
-                                        Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                    else{
-
-                                        if (days<=0 && status_download_db.trim().equals("1") && count>400000) {
-
-                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
-
-                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-
-                                            String informasi="Jumlah data anda "+count;
-
-                                            long progress=(count*100)/400000;
-
-                                            finished.setVisibility(View.VISIBLE);
-
-                                            tv0.setText(infomarsis);
-
-                                            tv1.setText(infomarsi);
-
-                                            tv2.setText(informasi);
-
-                                            if(progress>=100){
-
-                                                tv3.setText("Progress Data anda 100 %");
-
-                                            }else{
-
-                                                tv3.setText("Progress Data anda "+progress+ "%");
-
-                                            }
-
-                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
-
+                                        String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                        String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                        String informasi="Jumlah data anda "+ finalCount;
+                                        long progress=(finalCount *100)/3300000;
+                                        finished.setVisibility(View.VISIBLE);
+                                        tv0.setText(infomarsis);
+                                        tv1.setText(infomarsi);
+                                        tv2.setText(informasi);
+                                        if(progress>=100){
+                                            tv3.setText("Progress Data anda 100 %");
                                         }else{
-
-                                            if(status==0){
-
-
-
-                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
-
-                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-
-                                                String informasi="Jumlah data anda "+count;
-
-                                                long progress=(count*100)/400000;
-
-                                                finished.setVisibility(View.VISIBLE);
-
-                                                tv0.setText(infomarsis);
-
-                                                tv1.setText(infomarsi);
-
-                                                tv2.setText(informasi);
-
-                                                if(progress>=100){
-
-                                                    tv3.setText("Progress Data anda 100 %");
-
-                                                }else{
-
-                                                    tv3.setText("Progress Data anda "+progress+ "%");
-
-                                                }
-
-
-
-                                            }else if(status==1)
-
-                                            {
-
-                                                String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
-
-                                                String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-
-                                                String informasi="Jumlah data anda "+count;
-
-                                                long progress=(count*100)/400000;
-
-                                                finished.setVisibility(View.VISIBLE);
-
-                                                tv0.setText(infomarsis);
-
-                                                tv1.setText(infomarsi);
-
-                                                tv2.setText(informasi);
-
-                                                if(progress>=100){
-
-                                                    tv3.setText("Progress Data anda 100 %");
-
-                                                }else{
-
-                                                    tv3.setText("Progress Data anda "+progress+ "%");
-
-                                                }
-
-
-
-                                            }
-
-                                            Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-
+                                            tv3.setText("Progress Data anda "+progress+ "%");
                                         }
-
+                                        Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                     }
-
-
+                                    else{
+                                        if (days<=0 && status_download_db.trim().equals("1") && finalCount >3300000) {
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+                                            Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
+                                        }else{
+                                            String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
+                                            String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
+                                            String informasi="Jumlah data anda "+ finalCount;
+                                            long progress=(finalCount *100)/3300000;
+                                            finished.setVisibility(View.VISIBLE);
+                                            tv0.setText(infomarsis);
+                                            tv1.setText(infomarsi);
+                                            tv2.setText(informasi);
+                                            if(progress>=100){
+                                                tv3.setText("Progress Data anda 100 %");
+                                            }else{
+                                                tv3.setText("Progress Data anda "+progress+ "%");
+                                            }
+                                            Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
 
                                 } catch (ParseException e) {
-
                                     e.printStackTrace();
-
                                 }
 
 
 
 
-
-
-
-
-
                             }
-
-
 
                             @Override
-
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-
                             }
-
                         });
 
-
-
                     }
-
-
 
                     @Override
-
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-
                     }
-
                 });
 
 
@@ -688,78 +588,7 @@ public class BantuanPage extends Fragment {
         }
     }
 
-    public void insert_database(String subpath) {
-        System.out.println("kesini cuy");
 
-        insertdata(subpath);
-//          file[0].delete();
-
-
-    }
-
-    public void insertdata(final String subpath) {
-        System.out.println("jumlah file " + jumlah_file);
-        final Model_LacakMobil model_lacakMobil = new Model_LacakMobil();
-        // get writable database as we want to write data
-        final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
-        file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
-        final String localFile = file[0].toString();
-        Realm.init(this.getContext());
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(configuration);
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
-
-                    String line = "";
-                    while ((line = br.readLine()) != null) {
-                        // use comma as separator
-                        final String[] country = line.split(",");
-                        if (country.length == 12) {
-
-                            model_lacakMobil.setNama_mobil(country[1]);
-                            model_lacakMobil.setNo_plat(country[2]);
-                            model_lacakMobil.setNamaunit(country[3]);
-                            model_lacakMobil.setFinance(country[4]);
-                            model_lacakMobil.setOvd(country[5]);
-                            model_lacakMobil.setSaldo(country[6]);
-                            model_lacakMobil.setCabang(country[7]);
-                            model_lacakMobil.setNoka(country[8]);
-                            model_lacakMobil.setNosin(country[9]);
-                            model_lacakMobil.setTahun(country[10]);
-                            model_lacakMobil.setWarna(country[11]);
-                            bgRealm.insertOrUpdate(model_lacakMobil);
-                        }
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    System.out.println("nama file " + file[0].getAbsolutePath());
-                    System.out.println("jumlah file diolah " + jumlah_file);
-                    file[0].delete();
-                    if (jumlah_file == 1) {
-                        System.out.println("masuk sini");
-//                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-                        progress.dismiss();
-                        update_data();
-                    } else {
-                        jumlah_file = jumlah_file - 1;
-                        System.out.println("file exist " + file[0].exists());
-                    }
-
-
-//            fixing_data();
-
-                }
-            }
-        });
-    }
     public static boolean isDownloadManagerAvailable(Context context) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
@@ -773,4 +602,3 @@ public class BantuanPage extends Fragment {
         firebase.loadfirebase(getContext());
     }
 }
-

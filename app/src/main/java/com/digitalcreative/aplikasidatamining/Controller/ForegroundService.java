@@ -12,6 +12,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -29,7 +30,6 @@ import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.MainActivity;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
-import com.digitalcreative.aplikasidatamining.R;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.PencarianPage_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -78,7 +78,6 @@ public class ForegroundService extends Service {
     String subpath_data_update;
     private ArrayList<Long> jumlah_id;
     private ArrayList<String> path_file;
-    private ArrayList<String> path_file_download;
     private ArrayList<String>  url_file;
     private ArrayList<Long> jumlah__download_id;
     private int jumlah_file;
@@ -95,14 +94,14 @@ public class ForegroundService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
         createNotificationChannel();
-//        Intent notificationIntent = new Intent(this, MainActivity.class);
-//        // Create an IntentFilter instance.
-//        IntentFilter intentFilter = new IntentFilter();
-//
-//        intentFilter.addAction("android.intent.action.ACTION_DOWNLOAD_COMPLETE");
-//
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-//                0, notificationIntent, 0);
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        // Create an IntentFilter instance.
+        IntentFilter intentFilter = new IntentFilter();
+
+        intentFilter.addAction("android.intent.action.ACTION_DOWNLOAD_COMPLETE");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Download Data")
@@ -113,23 +112,38 @@ public class ForegroundService extends Service {
         //do heavy work on a background thread
         Realm.init(ForegroundService.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
+                .name("datamatel.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(configuration);
         long count = realm.where(Model_LacakMobil.class).count();
-        subpath_t0 = "t0.csv";
-        jumlah_file=1;
 
-        if(count<=400000  ){
+        String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        Log.d("Files", "Size: "+ files.length);
+
+
+        if(count<=2900000  ){
 //            realm.executeTransaction(new Realm.Transaction() {
 //                @Override
 //                public void execute(Realm realm) {
 //                    realm.deleteAll();
 //                }
 //            });
-
+            for (int i = 0; i < files.length; i++)
+            {
+                if(files[i].getName().contains("t0-")
+                        || files[i].getName().contains("t1-")
+                        || files[i].getName().contains("t2-")
+                        || files[i].getName().contains("t3-")
+                        || files[i].getName().contains("t4-")
+                        || files[i].getName().contains("t5-")
+                ) {
+                    files[i].delete();
+                }
+            }
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
@@ -137,23 +151,24 @@ public class ForegroundService extends Service {
             jumlah_id=new ArrayList<>();
             path_file=new ArrayList<>();
             url_file=new ArrayList<>();
-            path_file_download=new ArrayList<>();
             jumlah__download_id=new ArrayList<>();
-            jumlah_file=2;
+            jumlah_file=6;
             update_data();
 
         }else{
-            String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
-            File directory = new File(path);
-            File[] files = directory.listFiles();
-            Log.d("Files", "Size: "+ files.length);
             for (int i = 0; i < files.length; i++)
             {
-                if(files[i].getName().contains("t0") || files[i].getName().contains("t1")) {
+
+                if(files[i].getName().contains("t0")
+                        || files[i].getName().contains("t1")
+                        || files[i].getName().contains("t2")
+                        || files[i].getName().contains("t3")
+                        || files[i].getName().contains("t4")
+                        || files[i].getName().contains("t5")
+                ) {
                     files[i].delete();
                 }
             }
-
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
@@ -181,12 +196,42 @@ public class ForegroundService extends Service {
                                 if (days<=0 && status_download_db.trim().equals("1")) {
                                     subpath_t0 = "t0.csv";
                                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t0);
+
+
                                     subpath_t1 = "t1.csv";
                                     File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t1);
+
+
+                                    subpath_t2 = "t2.csv";
+                                    File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
+
+
+
+                                    subpath_t3 = "t3.csv";
+                                    File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
+
+                                    subpath_t4 = "t4.csv";
+
+                                    File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
+
+
+
+                                    subpath_t5 = "t5.csv";
+
+                                    File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
+
+
+
+
                                     if(!file.exists()
                                             && !file2.exists()
+                                            && !file3.exists()
+                                            && !file4.exists()
+                                            && !file5.exists()
 
+                                            && !file6.exists()
                                     ){
+                                        System.out.println("masuk sini");
                                         stopForegroundService();
                                     }else{
                                         if(file.exists()){
@@ -194,6 +239,23 @@ public class ForegroundService extends Service {
                                         }
                                         if(file2.exists()){
                                             jumlah_file=jumlah_file+1;
+                                        }
+                                        if(file3.exists()){
+                                            jumlah_file=jumlah_file+1;
+                                        }
+                                        if(file4.exists()){
+                                            jumlah_file=jumlah_file+1;
+                                        }
+                                        if(file5.exists()){
+
+                                            jumlah_file=jumlah_file+1;
+
+                                        }
+
+                                        if(file6.exists()){
+
+                                            jumlah_file=jumlah_file+1;
+
                                         }
 
 
@@ -203,8 +265,23 @@ public class ForegroundService extends Service {
                                         if(file2.exists()){
                                             insert_database(subpath_t1);
                                         }
+                                        if(file3.exists()){
+                                            insert_database(subpath_t2);
+                                        }
+                                        if(file4.exists()){
+                                            insert_database(subpath_t3);
+                                        }
+                                        if(file5.exists()){
+                                            insert_database(subpath_t4);
+                                        }
+                                        if(file6.exists()){
+                                            insert_database(subpath_t5);
+                                        }
+
+
                                     }
                                 }else{
+                                    System.out.println("masuk sini ");
                                     firebaseAuth = FirebaseAuth.getInstance();
                                     firebaseDatabase = FirebaseDatabase.getInstance();
                                     firebaseUser = firebaseAuth.getCurrentUser();
@@ -213,7 +290,7 @@ public class ForegroundService extends Service {
                                     path_file=new ArrayList<>();
                                     url_file=new ArrayList<>();
                                     jumlah__download_id=new ArrayList<>();
-                                    jumlah_file=2;
+                                    jumlah_file=6;
                                     registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
                                     update_data();
                                 }
@@ -245,7 +322,7 @@ public class ForegroundService extends Service {
     public void update_data(){
 
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
+                .name("datamatel.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -293,85 +370,95 @@ public class ForegroundService extends Service {
                 }
 
 
-//                url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
-//                subpath_t2 = "t2.csv";
-//                File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
-//                if(file3.exists()){
-//                    System.out.println("insert db");
-//                    insert_database(subpath_t2);
-//
-////                        file3.delete();
-//                }else{
-//                    System.out.println("insert url");
-//
-//                    path_file.add(subpath_t2);
-//                    url_file.add(url_t2);
-//
-//
-//                }
-//
-//
-//                url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
-//                subpath_t3 = "t3.csv";
-//                File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
-//                if(file4.exists()){
-//                    System.out.println("insert db");
-//                    insert_database(subpath_t3);
-////                        file4.delete();
-//                }else{
-//                    System.out.println("insert url");
-//                    path_file.add(subpath_t3);
-//                    url_file.add(url_t3);
-//
-//                }
-//
-//
-//
-//
-//                url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
-//                subpath_t4 = "t4.csv";
-//                File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
-//                if(file5.exists()){
-//                    System.out.println("insert db");
-//                    insert_database(subpath_t4);
-////                        file5.delete();
-//                }else{
-//                    System.out.println("insert url");
-//                    path_file.add(subpath_t4);
-//                    url_file.add(url_t4);
-//
-//                }
-//
-//
-//
-//                url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
-//                subpath_t5 = "t5.csv";
-//                File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
-//                if(file6.exists()){
-//                    System.out.println("insert db");
-//                    insert_database(subpath_t5);
-////                        file6.delete();
-//                }else{
-//                    System.out.println("insert url");
-//                    path_file.add(subpath_t5);
-//                    url_file.add(url_t5);
-//
-//                }
-//
-//
-//                url_data_update = dataSnapshot.child("link_data").getValue().toString();
-//                subpath_data_update = "dataupdate.csv";
-//                File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_data_update);
-//                if(file7.exists()){
-//                    System.out.println("insert db");
-//                    insert_database(subpath_data_update);
-////                        file7.delete();
-//                }else{
-//                    System.out.println("insert url");
-//                    path_file.add(subpath_data_update);
-//                    url_file.add(url_data_update);
-//
-//                }
+                url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
+                subpath_t2 = "t2.csv";
+                File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t2);
+                if(file3.exists()){
+                    System.out.println("insert db");
+                    insert_database(subpath_t2);
+
+//                        file3.delete();
+                }else{
+                    System.out.println("insert url");
+
+                    path_file.add(subpath_t2);
+                    url_file.add(url_t2);
+
+
+                }
+
+
+                url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
+                subpath_t3 = "t3.csv";
+                File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t3);
+                if(file4.exists()){
+                    System.out.println("insert db");
+                    insert_database(subpath_t3);
+//                        file4.delete();
+                }else{
+                    System.out.println("insert url");
+                    path_file.add(subpath_t3);
+                    url_file.add(url_t3);
+
+                }
+
+                url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
+
+                subpath_t4 = "t4.csv";
+
+                File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t4);
+
+                if(file5.exists()){
+
+                    System.out.println("insert db");
+
+                    insert_database(subpath_t4);
+
+//                        file5.delete();
+
+                }else{
+
+                    System.out.println("insert url");
+
+                    path_file.add(subpath_t4);
+
+                    url_file.add(url_t4);
+
+
+
+                }
+
+
+                url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
+
+                subpath_t5 = "t5.csv";
+
+                File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath_t5);
+
+                if(file6.exists()){
+
+                    System.out.println("insert db");
+
+                    insert_database(subpath_t5);
+
+//                        file6.delete();
+
+                }else{
+
+                    System.out.println("insert url");
+
+                    path_file.add(subpath_t5);
+
+                    url_file.add(url_t5);
+
+
+
+                }
+
+
+
+
+
 
                 for(int i=0; i<url_file.size(); i++){
                     downloadfromdropbox(url_file.get(i), path_file.get(i));
@@ -410,7 +497,7 @@ public class ForegroundService extends Service {
         final String localFile = file[0].toString();
         Realm.init(ForegroundService.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("test.db")
+                .name("datamatel.db")
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
@@ -419,7 +506,6 @@ public class ForegroundService extends Service {
             @Override
             public void execute(Realm bgRealm) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file[0]))) {
-                    file[0].delete();
                     String line = "";
                     while ((line = br.readLine()) != null) {
                         // use comma as separator
@@ -444,17 +530,50 @@ public class ForegroundService extends Service {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
+                    System.out.println("berhasil masukan data ");
                     System.out.println("nama file "+file[0].getAbsolutePath());
                     System.out.println("jumlah file diolah "+jumlah_file);
 
                     if( jumlah_file==1){
+                        String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+                        File directory = new File(path);
+                        File[] files = directory.listFiles();
+                        for (int i = 0; i < files.length; i++)
+                        {
+                            if(files[i].getName().contains("t0")
+                                    || files[i].getName().contains("t1")
+                                    || files[i].getName().contains("t2")
+                                    || files[i].getName().contains("t3")
+                                    || files[i].getName().contains("t4")
+                                    || files[i].getName().contains("t5")
+                            ) {
+                                files[i].delete();
+                            }
+                        }
                         System.out.println("masuk sini");
                         update_data_s();
+                        SharedPreferences mSettings = getApplication().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mSettings.edit();
+                        editor.putInt("download_status", 0);
                         stopForegroundService();
-                        createNotificationChannel2();
 //                    tv2.setText("Jumlah Data = " + String.valueOf(count));
 
                     }else{
+                        String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+                        File directory = new File(path);
+                        File[] files = directory.listFiles();
+                        for (int i = 0; i < files.length; i++)
+                        {
+                            if(files[i].getName().contains("t0-")
+                                    || files[i].getName().contains("t1-")
+                                    || files[i].getName().contains("t2-")
+                                    || files[i].getName().contains("t3-")
+                                    || files[i].getName().contains("t4-")
+                                    || files[i].getName().contains("t5-")
+                            ) {
+                                files[i].delete();
+                            }
+                        }
                         jumlah_file=jumlah_file-1;
                         update_data_s();
                         System.out.println("file exist "+file[0].exists());
@@ -476,21 +595,6 @@ public class ForegroundService extends Service {
 
 
 
-    }
-    private void createNotificationChannel2() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
     }
 
     private void update_data_s() {
@@ -522,6 +626,23 @@ public class ForegroundService extends Service {
         public void onReceive(Context context, Intent intent) {
 
             //Fetching the download id received with the broadcast
+//            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+//            jumlah_id.add(id);
+//            System.out.println("download selesai "+id);
+//            System.out.println("id download "+jumlah__download_id);
+//            System.out.println("jumlah id "+jumlah_id.size());
+//            System.out.println("jumlah download "+jumlah__download_id.size());
+//            int index=0;
+//            for(int i=0; i<jumlah__download_id.size(); i++){
+//                if(id==jumlah__download_id.get(i)){
+//                    index=i;
+//                    break;
+//                }
+//            }
+//            if(!path_file.isEmpty()){
+//                insert_database(path_file.get(index));
+//            }
+            //Fetching the download id received with the broadcast
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
 
             jumlah_id.add(id);
@@ -531,45 +652,17 @@ public class ForegroundService extends Service {
             System.out.println("jumlah download "+jumlah__download_id.size());
 
             // get the DownloadManager instance
-            DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
 
-            DownloadManager.Query q = new DownloadManager.Query();
-            Cursor c = manager.query(q);
-
-            if(c.moveToFirst()) {
-                do {
-                    String name = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
-                    System.out.println("nama file"+name);
-                    insert_database(name);
-                } while (c.moveToNext());
-            } else {
-                Log.i("DOWNLOAD LISTENER", "empty cursor :(");
+            int index=0;
+            for(int i=0; i<jumlah__download_id.size(); i++){
+                if(id==jumlah__download_id.get(i)){
+                    index=i;
+                    break;
+                }
             }
-
-            c.close();
-
-
-
-            //Checking if the received broadcast is for our enqueued download by matching download id
-
-//            if (jumlah_id.size()==jumlah__download_id.size()) {
-//                System.out.println("mulai memasukan data");
-//                for(int i=0; i<path_file.size(); i++){
-//                    insert_database(path_file.get(i));
-//                }
-//                Realm.init(context);
-//                RealmConfiguration configuration = new RealmConfiguration.Builder()
-//                        .name("test.db")
-//                        .schemaVersion(1)
-//                        .deleteRealmIfMigrationNeeded()
-//                        .build();
-//                realm = Realm.getInstance(configuration);
-//                long count = realm.where(Model_LacakMobil.class).count();
-////                    tv2.setText("Jumlah Data = " + String.valueOf(count));
-//
-//                Toast.makeText(context, "Berhasil download data jumlah data "+count, Toast.LENGTH_LONG).show();
-//
-//            }
+            if(!path_file.isEmpty()){
+                insert_database(path_file.get(index));
+            }
 
         }
     };
