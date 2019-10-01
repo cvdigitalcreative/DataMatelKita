@@ -260,7 +260,7 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + "+6285268807171"));
+                intent.setData(Uri.parse("sms:" + "+685268801717"));
                 startActivity(intent);
             }
         });
@@ -268,7 +268,7 @@ public class BantuanPage extends Fragment {
         wa_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + "+685268807171";
+                String url = "https://api.whatsapp.com/send?phone=" + "+685268801717";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 try {
                     intent.setData(Uri.parse(url));
@@ -296,7 +296,7 @@ public class BantuanPage extends Fragment {
                 } else {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    callIntent.setData(Uri.parse("tel:" + "+62852688071711"));
+                    callIntent.setData(Uri.parse("tel:" + "+685268801717"));
                     getActivity().startActivity(callIntent);
                 }
 
