@@ -2,7 +2,6 @@ package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,22 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.digitalcreative.aplikasidatamining.Controller.DataBaseHelper;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t0;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t1;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t2;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t3;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t4;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t5;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t6;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t0;
 import com.digitalcreative.aplikasidatamining.MainActivity;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

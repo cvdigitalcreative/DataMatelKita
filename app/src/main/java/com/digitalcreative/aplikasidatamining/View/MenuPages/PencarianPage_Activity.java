@@ -86,76 +86,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         realm.close();
         System.out.println("t0 ="+count);
 
-        Realm.init(getApplicationContext());
-        RealmConfiguration configuration2 = new RealmConfiguration.Builder()
-                .name("datamatel2.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        final Realm realm2 = Realm.getInstance(configuration2);
-        count = realm2.where(Model_LacakMobil.class).count()+count;
-        System.out.println("t1 ="+ realm2.where(Model_LacakMobil.class).count());
-        realm2.close();
 
-
-        Realm.init(getApplicationContext());
-        RealmConfiguration configuration3 = new RealmConfiguration.Builder()
-                .name("datamatel3.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        final Realm realm3 = Realm.getInstance(configuration3);
-        count = realm3.where(Model_LacakMobil.class).count()+count;
-        System.out.println("t2 ="+realm3.where(Model_LacakMobil.class).count());
-        realm3.close();
-
-
-        Realm.init(getApplicationContext());
-        RealmConfiguration configuration4 = new RealmConfiguration.Builder()
-                .name("datamatel4.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        final Realm realm4 = Realm.getInstance(configuration4);
-        count = realm4.where(Model_LacakMobil.class).count()+count;
-        System.out.println("t3 ="+ realm4.where(Model_LacakMobil.class).count());
-        realm4.close();
-
-
-        Realm.init(getApplicationContext());
-        RealmConfiguration configuration5 = new RealmConfiguration.Builder()
-                .name("datamatel5.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        final Realm realm5 = Realm.getInstance(configuration5);
-        System.out.println("t4 ="+realm5.where(Model_LacakMobil.class).count());
-        count = realm5.where(Model_LacakMobil.class).count()+count;
-        realm5.close();
-
-
-        Realm.init(getApplicationContext());
-        RealmConfiguration configuration6 = new RealmConfiguration.Builder()
-                .name("datamatel6.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        final Realm realm6 = Realm.getInstance(configuration6);
-        count = realm6.where(Model_LacakMobil.class).count()+count;
-        System.out.println("t5 ="+realm6.where(Model_LacakMobil.class).count());
-        realm6.close();
-
-
-        Realm.init(getApplicationContext());
-        RealmConfiguration configuration7 = new RealmConfiguration.Builder()
-                .name("datamatel7.db")
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        final Realm realm7 = Realm.getInstance(configuration7);
-        count = realm7.where(Model_LacakMobil.class).count()+count;
-        System.out.println("t6 ="+realm7.where(Model_LacakMobil.class).count());
-        realm7.close();
 
         if(count<=400000 ){
             Toast.makeText(context, "Data anda belum lengkap silahkan tgg beberapa saat sistem sedang memasukan data ", Toast.LENGTH_LONG).show();

@@ -42,9 +42,9 @@ public class DowloadFile_t0 {
         public void onReceive(Context context, Intent intent) {
             context.unregisterReceiver(onDownloadComplete_t0);
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-            if(id==downloadID){
+
                 startService_t0();
-            }
+
 
 //            if(jumlah_file!=5){
 //                jumlah_file=jumlah_file+1;

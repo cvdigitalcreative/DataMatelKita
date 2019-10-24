@@ -17,24 +17,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t0;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t1;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t2;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t3;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t4;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t5;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t6;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService;
 import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t0;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t1;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t2;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t3;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t4;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t5;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t6;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.AkunPage;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.BantuanPage;
@@ -266,16 +252,12 @@ public class MainActivity extends AppCompatActivity {
                             System.out.println("days "+days);
 
                             if(isMyServiceRunning(ForegroundService_t0.class)
-                                    ||isMyServiceRunning(ForegroundService_t1.class)
-                                    ||isMyServiceRunning(ForegroundService_t2.class)
-                                    ||isMyServiceRunning(ForegroundService_t3.class)
-                                    ||isMyServiceRunning(ForegroundService_t4.class)
-                                    ||isMyServiceRunning(ForegroundService_t5.class)  ||isMyServiceRunning(ForegroundService_t6.class) ||isMyServiceRunning(ForegroundService_t6.class)|| checkStatus(getApplication() , DownloadManager.STATUS_RUNNING)
+                                    || checkStatus(getApplication() , DownloadManager.STATUS_RUNNING)
                             ){
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
                                 if (days<=0 && status_download_db.trim().equals("1")
-                                        && count_t0>=400000
+                                        && count_t0>=350000
 
                                 ) {
 
@@ -286,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                                     if
                                     (       days>0
                                             && status_download_db.trim().equals("1")
-                                            && count_t0>=400000
+                                            && count_t0>=350000
                                         ){
 //                                        clearApplicationData();
                                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -315,106 +297,7 @@ public class MainActivity extends AppCompatActivity {
                                         realm.close();
 
 
-                                        Realm.init(getApplicationContext());
-                                        RealmConfiguration configuration2 = new RealmConfiguration.Builder()
-                                                .name("datamatel2.db")
-                                                .schemaVersion(1)
-                                                .deleteRealmIfMigrationNeeded()
-                                                .build();
-                                        Realm.deleteRealm(configuration2);
-                                        final Realm realm2 = Realm.getInstance(configuration2);
-                                        realm2.executeTransaction(new Realm.Transaction() {
-                                            @Override
-                                            public void execute(Realm realm) {
-                                                realm2.deleteAll();
-                                            }
-                                        });
-                                        realm2.close();
 
-
-                                        Realm.init(getApplicationContext());
-                                        RealmConfiguration configuration3 = new RealmConfiguration.Builder()
-                                                .name("datamatel3.db")
-                                                .schemaVersion(1)
-                                                .deleteRealmIfMigrationNeeded()
-                                                .build();
-                                        Realm.deleteRealm(configuration3);
-                                        final Realm realm3 = Realm.getInstance(configuration3);
-                                        realm3.executeTransaction(new Realm.Transaction() {
-                                            @Override
-                                            public void execute(Realm realm) {
-                                                realm3.deleteAll();
-                                            }
-                                        });
-                                        realm3.close();
-
-
-                                        Realm.init(getApplicationContext());
-                                        RealmConfiguration configuration4 = new RealmConfiguration.Builder()
-                                                .name("datamatel4.db")
-                                                .schemaVersion(1)
-                                                .deleteRealmIfMigrationNeeded()
-                                                .build();
-                                        Realm.deleteRealm(configuration4);
-                                        final Realm realm4 = Realm.getInstance(configuration4);
-                                        realm4.executeTransaction(new Realm.Transaction() {
-                                            @Override
-                                            public void execute(Realm realm) {
-                                                realm4.deleteAll();
-                                            }
-                                        });
-                                        realm4.close();
-
-
-                                        Realm.init(getApplicationContext());
-                                        RealmConfiguration configuration5 = new RealmConfiguration.Builder()
-                                                .name("datamatel5.db")
-                                                .schemaVersion(1)
-                                                .deleteRealmIfMigrationNeeded()
-                                                .build();
-                                        Realm.deleteRealm(configuration5);
-                                        final Realm realm5 = Realm.getInstance(configuration5);
-                                        realm5.executeTransaction(new Realm.Transaction() {
-                                            @Override
-                                            public void execute(Realm realm) {
-                                                realm5.deleteAll();
-                                            }
-                                        });
-                                        realm5.close();
-
-
-                                        Realm.init(getApplicationContext());
-                                        RealmConfiguration configuration6 = new RealmConfiguration.Builder()
-                                                .name("datamatel6.db")
-                                                .schemaVersion(1)
-                                                .deleteRealmIfMigrationNeeded()
-                                                .build();
-                                        Realm.deleteRealm(configuration6);
-                                        final Realm realm6 = Realm.getInstance(configuration6);
-                                        realm6.executeTransaction(new Realm.Transaction() {
-                                            @Override
-                                            public void execute(Realm realm) {
-                                                realm6.deleteAll();
-                                            }
-                                        });
-                                        realm6.close();
-
-
-                                        Realm.init(getApplicationContext());
-                                        RealmConfiguration configuration7 = new RealmConfiguration.Builder()
-                                                .name("datamatel7.db")
-                                                .schemaVersion(1)
-                                                .deleteRealmIfMigrationNeeded()
-                                                .build();
-                                        Realm.deleteRealm(configuration7);
-                                        final Realm realm7 = Realm.getInstance(configuration7);
-                                        realm7.executeTransaction(new Realm.Transaction() {
-                                            @Override
-                                            public void execute(Realm realm) {
-                                                realm7.deleteAll();
-                                            }
-                                        });
-                                        realm7.close();
 
                                         for (int i = 0; i < files.length; i++)
                                         {
@@ -433,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
                                     }else{
-                                        if(count_t0<=400000){
+                                        if(count_t0<=350000){
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration= new RealmConfiguration.Builder()

@@ -4,12 +4,10 @@ package com.digitalcreative.aplikasidatamining.View.MenuPages;
 import android.Manifest;
 import android.app.ActivityManager;
 import android.app.DownloadManager;
-import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -28,28 +26,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t0;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t1;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t2;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t3;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t4;
-import com.digitalcreative.aplikasidatamining.Controller.DowloadFile_t5;
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService;
 import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t0;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t1;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t2;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t3;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t4;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t5;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t6;
 import com.digitalcreative.aplikasidatamining.Model.Model_LacakMobil;
 import com.digitalcreative.aplikasidatamining.R;
-import com.digitalcreative.aplikasidatamining.RealmHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -58,10 +41,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,8 +50,6 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
-import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -146,11 +123,7 @@ public class BantuanPage extends Fragment {
         jumlah_file=7;
          mSettings = getActivity().getSharedPreferences("Settings", MODE_PRIVATE);
         if(isMyServiceRunning(ForegroundService_t0.class)
-                ||isMyServiceRunning(ForegroundService_t1.class)
-                ||isMyServiceRunning(ForegroundService_t2.class)
-                ||isMyServiceRunning(ForegroundService_t3.class)
-                ||isMyServiceRunning(ForegroundService_t4.class)
-                ||isMyServiceRunning(ForegroundService_t5.class) ||isMyServiceRunning(ForegroundService_t6.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+               || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
         ){
             Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
         }
@@ -433,11 +406,6 @@ public class BantuanPage extends Fragment {
 
 
                                     if(isMyServiceRunning(ForegroundService_t0.class)
-                                            ||isMyServiceRunning(ForegroundService_t1.class)
-                                            ||isMyServiceRunning(ForegroundService_t2.class)
-                                            ||isMyServiceRunning(ForegroundService_t3.class)
-                                            ||isMyServiceRunning(ForegroundService_t4.class)
-                                            ||isMyServiceRunning(ForegroundService_t5.class)
                                             || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
                                     ){
                                         String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;

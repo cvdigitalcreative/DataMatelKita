@@ -84,21 +84,8 @@ public class ForegroundService_t0 extends Service {
         // get writable database as we want to write data
         final File[] file = {new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath)};
         file[0] = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subpath);
-        if(!file[0].exists()){
-            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            int status=pref.getInt("key_name2", 0);
-            System.out.println("status download "+status);
-            editor.clear();
-            editor.commit(); // commit changes
-            editor.putInt("key_name2", 1);
-            editor.apply();
-            update_data_s();
-            status_foreground=1;
-            stopForegroundService();
-            DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
-            dowloadFile_t0.download(getApplication());
-        }
+        System.out.println("file t0");
+        System.out.println(file[0].exists());
         final String localFile = file[0].toString();
         Realm.init(ForegroundService_t0.this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
@@ -227,13 +214,6 @@ public class ForegroundService_t0 extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(status_foreground!=1){
-            System.out.println("destroy foreground");
-            Intent broadcastIntent = new Intent(this, BroadcastReceiverForegroundServiceRestart_t0.class);
-
-            sendBroadcast(broadcastIntent);
-            status_foreground=0;
-        }
 
 
     }

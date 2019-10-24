@@ -19,11 +19,6 @@ import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.BaseActivity;
 import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t0;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t1;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t2;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t3;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t4;
-import com.digitalcreative.aplikasidatamining.Controller.ForegroundService_t5;
 import com.digitalcreative.aplikasidatamining.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,11 +63,7 @@ public class AkunPage extends Fragment {
         //do Function
         btnlogoutFunc();
         if(isMyServiceRunning(ForegroundService_t0.class)
-                ||isMyServiceRunning(ForegroundService_t1.class)
-                ||isMyServiceRunning(ForegroundService_t2.class)
-                ||isMyServiceRunning(ForegroundService_t3.class)
-                ||isMyServiceRunning(ForegroundService_t4.class)
-                ||isMyServiceRunning(ForegroundService_t5.class) || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
+                || checkStatus(getContext() , DownloadManager.STATUS_RUNNING)
         ){
             Toast.makeText(getContext(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
         }
