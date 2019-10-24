@@ -443,7 +443,7 @@ public class BantuanPage extends Fragment {
                                         String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                         String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
                                         String informasi="Jumlah data anda "+ finalCount;
-                                        long progress=(finalCount *100)/3300000;
+                                        long progress=(finalCount *100)/400000;
                                         finished.setVisibility(View.VISIBLE);
                                         tv0.setText(infomarsis);
                                         tv1.setText(infomarsi);
@@ -456,11 +456,11 @@ public class BantuanPage extends Fragment {
                                         Toast.makeText(getActivity(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                     }
                                     else{
-                                        if (days<=0 && status_download_db.trim().equals("1") && finalCount >3300000) {
+                                        if (days<=0 && status_download_db.trim().equals("1") && finalCount >400000) {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
                                             String informasi="Jumlah data anda "+ finalCount;
-                                            long progress=(finalCount *100)/3300000;
+                                            long progress=(finalCount *100)/400000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);
@@ -475,7 +475,7 @@ public class BantuanPage extends Fragment {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
                                             String informasi="Jumlah data anda "+ finalCount;
-                                            long progress=(finalCount *100)/3300000;
+                                            long progress=(finalCount *100)/400000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
                                             tv1.setText(infomarsi);

@@ -157,7 +157,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
         System.out.println("t6 ="+realm7.where(Model_LacakMobil.class).count());
         realm7.close();
 
-        if(count<=3300000 ){
+        if(count<=400000 ){
             Toast.makeText(context, "Data anda belum lengkap silahkan tgg beberapa saat sistem sedang memasukan data ", Toast.LENGTH_LONG).show();
 
 
@@ -225,7 +225,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
                     .deleteRealmIfMigrationNeeded()
                     .build();
             realm = Realm.getInstance(configuration);
-            list= realm.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
+            list= realm.where(Model_LacakMobil.class).limit(5).contains("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
             temp1 = realm.copyFromRealm(list);
             System.out.println(temp1);
             realm.close();
@@ -234,106 +234,15 @@ public class PencarianPage_Activity extends AppCompatActivity {
             }
 
             Realm.init(context);
-            RealmConfiguration configuration2 = new RealmConfiguration.Builder()
-                    .name("datamatel2.db")
-                    .schemaVersion(1)
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            final Realm realm2 = Realm.getInstance(configuration2);
-            list= realm2.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp2 = realm2.copyFromRealm(list);
-            System.out.println(temp2);
-            realm2.close();
-            if(!temp2.isEmpty()){
-                return temp2;
-            }
-
-            Realm.init(context);
-            RealmConfiguration configuration3 = new RealmConfiguration.Builder()
-                    .name("datamatel3.db")
-                    .schemaVersion(1)
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            final Realm realm3 = Realm.getInstance(configuration3);
-            list= realm3.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp3 = realm3.copyFromRealm(list);
-            System.out.println(temp2);
-            realm3.close();
-            if(!temp3.isEmpty()){
-                return temp3;
-            }
-
-            Realm.init(context);
-            RealmConfiguration configuration4 = new RealmConfiguration.Builder()
-                    .name("datamatel4.db")
-                    .schemaVersion(1)
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            final Realm realm4 = Realm.getInstance(configuration4);
-            list= realm4.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp4 = realm4.copyFromRealm(list);
-            System.out.println(temp2);
-            realm4.close();
-            if(!temp4.isEmpty()){
-                return temp4;
-            }
-
-            Realm.init(context);
-            RealmConfiguration configuration5 = new RealmConfiguration.Builder()
-                    .name("datamatel5.db")
-                    .schemaVersion(1)
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            final Realm realm5 = Realm.getInstance(configuration5);
-            list= realm5.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp5 = realm5.copyFromRealm(list);
-            System.out.println(temp2);
-            realm5.close();
-            if(!temp5.isEmpty()){
-                return temp5;
-            }
-
-            Realm.init(context);
-            RealmConfiguration configuration6 = new RealmConfiguration.Builder()
-                    .name("datamatel6.db")
-                    .schemaVersion(1)
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            final Realm realm6 = Realm.getInstance(configuration6);
-            list= realm6.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp6 = realm6.copyFromRealm(list);
-            System.out.println(temp2);
-            realm6.close();
-            if(!temp6.isEmpty()){
-                return temp6;
-            }
-
-            Realm.init(context);
-            RealmConfiguration configuration7 = new RealmConfiguration.Builder()
-                    .name("datamatel7.db")
-                    .schemaVersion(1)
-                    .deleteRealmIfMigrationNeeded()
-                    .build();
-            final Realm realm7 = Realm.getInstance(configuration7);
-            list= realm7.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
-            temp7 = realm7.copyFromRealm(list);
-            System.out.println(temp2);
-            realm7.close();
-            if(!temp7.isEmpty()){
-                return  temp7;
-            }
-
-
-            Realm.init(context);
             RealmConfiguration configuration_manual = new RealmConfiguration.Builder()
                     .name("datamatel_manual.db")
                     .schemaVersion(1)
                     .deleteRealmIfMigrationNeeded()
                     .build();
             final Realm realm_manual = Realm.getInstance(configuration_manual);
-            list= realm_manual.where(Model_LacakMobil.class).limit(5).beginsWith("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
+            list= realm_manual.where(Model_LacakMobil.class).limit(5).contains("no_plat",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("noka",search.getText().toString(), Case.INSENSITIVE).or().beginsWith("nosin",search.getText().toString(), Case.INSENSITIVE).findAll();
             temp_manual = realm_manual.copyFromRealm(list);
-            System.out.println(temp2);
+
             realm_manual.close();
             if(!temp_manual.isEmpty()){
                 return  temp_manual;

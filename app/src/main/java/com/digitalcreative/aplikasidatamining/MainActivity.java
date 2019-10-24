@@ -264,8 +264,7 @@ public class MainActivity extends AppCompatActivity {
                             int status=prefs.getInt("key_name2", 0);
                             System.out.println("status "+status);
                             System.out.println("days "+days);
-                            System.out.println( count_t0>=300000
-                                    );
+
                             if(isMyServiceRunning(ForegroundService_t0.class)
                                     ||isMyServiceRunning(ForegroundService_t1.class)
                                     ||isMyServiceRunning(ForegroundService_t2.class)
@@ -276,13 +275,8 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                             }else{
                                 if (days<=0 && status_download_db.trim().equals("1")
-                                        && count_t0>=500000
-                                        && count_t1>=500000
-                                        && count_t2>=500000
-                                        && count_t3>=500000
-                                        && count_t4>=500000
-                                        && count_t5>=500000
-                                        && count_t6>=500000
+                                        && count_t0>=400000
+
                                 ) {
 
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
@@ -292,13 +286,8 @@ public class MainActivity extends AppCompatActivity {
                                     if
                                     (       days>0
                                             && status_download_db.trim().equals("1")
-                                            && count_t0>=500000
-                                            && count_t1>=500000
-                                            && count_t2>=500000
-                                            && count_t3>=500000
-                                            && count_t4>=500000
-                                            && count_t5>=500000
-                                            && count_t6>=500000){
+                                            && count_t0>=400000
+                                        ){
 //                                        clearApplicationData();
                                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = pref.edit();
@@ -444,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
                                     }else{
-                                        if(count_t0<=500000){
+                                        if(count_t0<=400000){
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration= new RealmConfiguration.Builder()
@@ -462,123 +451,6 @@ public class MainActivity extends AppCompatActivity {
                                             realm.close();
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
-                                        }else if(count_t1<=500000)
-                                        {
-                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-                                            Realm.init(getApplicationContext());
-                                            RealmConfiguration configuration2 = new RealmConfiguration.Builder()
-                                                    .name("datamatel2.db")
-                                                    .schemaVersion(1)
-                                                    .deleteRealmIfMigrationNeeded()
-                                                    .build();
-                                            final Realm realm2 = Realm.getInstance(configuration2);
-                                            realm2.executeTransaction(new Realm.Transaction() {
-                                                @Override
-                                                public void execute(Realm realm) {
-                                                    realm2.deleteAll();
-                                                }
-                                            });
-                                            realm2.close();
-                                            DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
-                                            dowloadFile_t1.download(getApplication());
-                                        }else if(count_t2<=500000)
-                                        {
-                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-                                            Realm.init(getApplicationContext());
-                                            RealmConfiguration configuration3 = new RealmConfiguration.Builder()
-                                                    .name("datamatel3.db")
-                                                    .schemaVersion(1)
-                                                    .deleteRealmIfMigrationNeeded()
-                                                    .build();
-                                            final Realm realm3 = Realm.getInstance(configuration3);
-                                            realm3.executeTransaction(new Realm.Transaction() {
-                                                @Override
-                                                public void execute(Realm realm) {
-                                                    realm3.deleteAll();
-                                                }
-                                            });
-                                            realm3.close();
-                                            DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
-                                            dowloadFile_t2.download(getApplication());
-                                        }else if(count_t3<=500000)
-                                        {
-                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-                                            Realm.init(getApplicationContext());
-                                            RealmConfiguration configuration4 = new RealmConfiguration.Builder()
-                                                    .name("datamatel4.db")
-                                                    .schemaVersion(1)
-                                                    .deleteRealmIfMigrationNeeded()
-                                                    .build();
-                                            final Realm realm4 = Realm.getInstance(configuration4);
-                                            realm4.executeTransaction(new Realm.Transaction() {
-                                                @Override
-                                                public void execute(Realm realm) {
-                                                    realm4.deleteAll();
-                                                }
-                                            });
-                                            realm4.close();
-                                            DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
-                                            dowloadFile_t3.download(getApplication());
-                                        }else if(count_t4<=500000)
-                                        {
-                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-                                            Realm.init(getApplicationContext());
-                                            RealmConfiguration configuration5 = new RealmConfiguration.Builder()
-                                                    .name("datamatel5.db")
-                                                    .schemaVersion(1)
-                                                    .deleteRealmIfMigrationNeeded()
-                                                    .build();
-                                            final Realm realm5 = Realm.getInstance(configuration5);
-                                            realm5.executeTransaction(new Realm.Transaction() {
-                                                @Override
-                                                public void execute(Realm realm) {
-                                                    realm5.deleteAll();
-                                                }
-                                            });
-                                            realm5.close();
-                                            DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
-                                            dowloadFile_t4.download(getApplication());
-                                        }else if(count_t5<=500000)
-                                        {
-                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-                                            Realm.init(getApplicationContext());
-                                            RealmConfiguration configuration6 = new RealmConfiguration.Builder()
-                                                    .name("datamatel6.db")
-                                                    .schemaVersion(1)
-                                                    .deleteRealmIfMigrationNeeded()
-                                                    .build();
-                                            final Realm realm6 = Realm.getInstance(configuration6);
-                                            realm6.executeTransaction(new Realm.Transaction() {
-                                                @Override
-                                                public void execute(Realm realm) {
-                                                    realm6.deleteAll();
-                                                }
-                                            });
-                                            realm6.close();
-                                            DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
-                                            dowloadFile_t5.download(getApplication());
-                                        }else if(count_t6<=500000)
-                                        {
-                                            Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
-                                            Realm.init(getApplicationContext());
-                                            RealmConfiguration configuration7 = new RealmConfiguration.Builder()
-                                                    .name("datamatel7.db")
-                                                    .schemaVersion(1)
-                                                    .deleteRealmIfMigrationNeeded()
-                                                    .build();
-                                            final Realm realm7 = Realm.getInstance(configuration7);
-                                            realm7.executeTransaction(new Realm.Transaction() {
-                                                @Override
-                                                public void execute(Realm realm) {
-                                                    realm7.deleteAll();
-                                                }
-                                            });
-                                            realm7.close();
-
-                                            DowloadFile_t6 dowloadFile_t6=new DowloadFile_t6();
-                                            dowloadFile_t6.download(getApplication());
-                                        }else{
-                                            Toast.makeText(getApplication(), "Data Paling Update", Toast.LENGTH_LONG).show();
                                         }
                                     }
 
