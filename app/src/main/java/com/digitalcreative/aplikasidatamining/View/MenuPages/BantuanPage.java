@@ -241,7 +241,7 @@ public class BantuanPage extends Fragment {
         wa_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + "+6285268801717";
+                String url = "https://api.whatsapp.com/send?phone=" + "+628127448554";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 try {
                     intent.setData(Uri.parse(url));
@@ -269,7 +269,7 @@ public class BantuanPage extends Fragment {
                 } else {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    callIntent.setData(Uri.parse("tel:" + "+6285268801717"));
+                    callIntent.setData(Uri.parse("tel:" + "+628127448554"));
                     getActivity().startActivity(callIntent);
                 }
 
