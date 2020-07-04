@@ -72,7 +72,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="finance : "
+                            android:text="Finance : "
                             android:textSize="15dp"
                             android:textColor="#f6fa0218"/>
                         <TextView

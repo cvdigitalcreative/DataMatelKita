@@ -442,7 +442,7 @@ public class BantuanPage extends Fragment {
                                     ){
                                         String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                         String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                        String informasi="Jumlah data anda "+ finalCount;
+                                        String informasi="KODE "+ finalCount;
                                         long progress=(finalCount *100)/3300000;
                                         finished.setVisibility(View.VISIBLE);
                                         tv0.setText(infomarsis);
@@ -459,7 +459,7 @@ public class BantuanPage extends Fragment {
                                         if (days<=0 && status_download_db.trim().equals("1") && finalCount >3300000) {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+ finalCount;
+                                            String informasi="KODE "+ finalCount;
                                             long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
@@ -474,7 +474,7 @@ public class BantuanPage extends Fragment {
                                         }else{
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+ finalCount;
+                                            String informasi="KODE "+ finalCount;
                                             long progress=(finalCount *100)/3300000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);

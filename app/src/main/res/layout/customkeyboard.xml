@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="2dp"
-    android:background="#F8EFEF"
+    android:background="#ED1000"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_1"
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_2"
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_3"
@@ -74,7 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_4"
@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_5"
@@ -112,7 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <ImageView
                 android:id="@+id/img_cancel"
@@ -133,7 +133,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_6"
@@ -152,7 +152,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_7"
@@ -171,7 +171,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_8"
@@ -190,7 +190,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_9"
@@ -209,7 +209,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_0"
@@ -228,7 +228,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/keyboardcolor2"
+            android:background="#673AB7"
             android:gravity="center">
             <ImageView
                 android:id="@+id/img_delete"
@@ -262,7 +262,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -284,7 +284,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -306,7 +306,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -328,7 +328,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -350,7 +350,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -372,7 +372,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -394,7 +394,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -416,7 +416,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -438,7 +438,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -460,7 +460,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -498,7 +498,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -520,7 +520,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -542,7 +542,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -564,7 +564,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -586,7 +586,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -608,7 +608,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -630,7 +630,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -652,7 +652,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -674,7 +674,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -710,7 +710,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -732,7 +732,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -754,7 +754,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -776,7 +776,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -798,7 +798,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -820,7 +820,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -842,7 +842,7 @@
                 android:layout_height="@dimen/layout_height"
                 android:layout_margin="@dimen/margin_keyboard"
                 android:layout_weight="1"
-                android:background="@color/keyboardcolor"
+                android:background="#673AB7"
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="@dimen/paddingLayout">
@@ -865,7 +865,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@color/keyboardcolor"
+            android:background="#FF9800"
             android:gravity="center"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"

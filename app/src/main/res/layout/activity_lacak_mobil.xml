@@ -11,7 +11,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F3E9E9"
+        android:background="#7EDA14"
         android:paddingVertical="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,8 @@
                 android:textColor="#000"
                 android:textSize="25sp"
                 android:gravity="center|left"
-                android:hint="Masukkan Kendaraan, Noka, Nosin"
-                android:textColorHint="#807E7E"
+                android:hint="DISINI KETIK NOPOL/NOKA/NOSIN"
+                android:textColorHint="@color/whit_color"
                 app:queryBackground="@color/transparan"
                 android:background="@color/transparan"
                 android:maxLines="1"/>
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
-        android:text="                              Data Tidak Ditemukan"
+        android:text="                              DATA KOSONG"
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="75dp"
         android:visibility="invisible" />

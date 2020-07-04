@@ -11,7 +11,7 @@
         android:id="@+id/bg_red"
         android:layout_width="0dp"
         android:layout_height="140dp"
-        android:background="#2196F3"
+        android:background="#0BE313"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,9 +54,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="16dp"
+                android:textSize="12dp"
                 android:gravity="center"
-                android:text="Cari Kendaraan" />
+                android:text="KETIK DISINI UNTUK CARI KENDARAAN" />
         </LinearLayout>
     </LinearLayout>
 

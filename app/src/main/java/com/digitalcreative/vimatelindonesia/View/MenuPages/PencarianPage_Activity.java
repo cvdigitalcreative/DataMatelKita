@@ -162,7 +162,7 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 
         }else{
-            Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "KODE = " + String.valueOf(count), Toast.LENGTH_LONG).show();
         }
     }
 

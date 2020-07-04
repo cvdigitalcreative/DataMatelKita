@@ -273,16 +273,16 @@ public class MainActivity extends AppCompatActivity {
                                     ||isMyServiceRunning(ForegroundService_t4.class)
                                     ||isMyServiceRunning(ForegroundService_t5.class)  ||isMyServiceRunning(ForegroundService_t6.class) ||isMyServiceRunning(ForegroundService_t6.class)|| checkStatus(getApplication() , DownloadManager.STATUS_RUNNING)
                             ){
-                                Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(), "Sedang update DATA cek selalu supaya cepat DATA masuk ", Toast.LENGTH_LONG).show();
                             }else{
                                 if (days<=0 && status_download_db.trim().equals("1")
-                                        && count_t0>=500000
-                                        && count_t1>=500000
-                                        && count_t2>=500000
-                                        && count_t3>=500000
-                                        && count_t4>=500000
-                                        && count_t5>=500000
-                                        && count_t6>=500000
+                                        && count_t0>=700000
+                                        && count_t1>=700000
+                                        && count_t2>=700000
+                                        && count_t3>=700000
+                                        && count_t4>=700000
+                                        && count_t5>=700000
+                                        && count_t6>=700000
                                 ) {
 
                                     Toast.makeText(getApplication(), "Data Terupdate", Toast.LENGTH_LONG).show();
@@ -292,13 +292,13 @@ public class MainActivity extends AppCompatActivity {
                                     if
                                     (       days>0
                                             && status_download_db.trim().equals("1")
-                                            && count_t0>=500000
-                                            && count_t1>=500000
-                                            && count_t2>=500000
-                                            && count_t3>=500000
-                                            && count_t4>=500000
-                                            && count_t5>=500000
-                                            && count_t6>=500000){
+                                            && count_t0>=700000
+                                            && count_t1>=700000
+                                            && count_t2>=700000
+                                            && count_t3>=700000
+                                            && count_t4>=700000
+                                            && count_t5>=700000
+                                            && count_t6>=700000){
 //                                        clearApplicationData();
                                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = pref.edit();
@@ -444,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
                                     }else{
-                                        if(count_t0<=500000){
+                                        if(count_t0<=700000){
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
                                             RealmConfiguration configuration= new RealmConfiguration.Builder()
@@ -462,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm.close();
                                             DowloadFile_t0 dowloadFile_t0=new DowloadFile_t0();
                                             dowloadFile_t0.download(getApplication());
-                                        }else if(count_t1<=500000)
+                                        }else if(count_t1<=700000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -481,7 +481,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm2.close();
                                             DowloadFile_t1 dowloadFile_t1=new DowloadFile_t1();
                                             dowloadFile_t1.download(getApplication());
-                                        }else if(count_t2<=500000)
+                                        }else if(count_t2<=700000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -500,7 +500,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm3.close();
                                             DowloadFile_t2 dowloadFile_t2=new DowloadFile_t2();
                                             dowloadFile_t2.download(getApplication());
-                                        }else if(count_t3<=500000)
+                                        }else if(count_t3<=700000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -519,7 +519,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm4.close();
                                             DowloadFile_t3 dowloadFile_t3=new DowloadFile_t3();
                                             dowloadFile_t3.download(getApplication());
-                                        }else if(count_t4<=500000)
+                                        }else if(count_t4<=700000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -538,7 +538,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm5.close();
                                             DowloadFile_t4 dowloadFile_t4=new DowloadFile_t4();
                                             dowloadFile_t4.download(getApplication());
-                                        }else if(count_t5<=500000)
+                                        }else if(count_t5<=700000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());
@@ -557,7 +557,7 @@ public class MainActivity extends AppCompatActivity {
                                             realm6.close();
                                             DowloadFile_t5 dowloadFile_t5=new DowloadFile_t5();
                                             dowloadFile_t5.download(getApplication());
-                                        }else if(count_t6<=500000)
+                                        }else if(count_t6<=700000)
                                         {
                                             Toast.makeText(getApplication(), "Sedang mengupdate data silahkan check beberapa saat lagi", Toast.LENGTH_LONG).show();
                                             Realm.init(getApplicationContext());

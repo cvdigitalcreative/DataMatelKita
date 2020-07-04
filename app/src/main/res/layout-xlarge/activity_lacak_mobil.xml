@@ -41,7 +41,7 @@
                 android:textColor="#000"
                 android:textSize="14sp"
                 android:gravity="center|left"
-                android:hint="Masukkan Kendaraan, Noka, Nosin"
+                android:hint="DISINI KETIK NOPOL/NOKA/NOSIN"
                 android:textColorHint="#807E7E"
                 app:queryBackground="@color/transparan"
                 android:background="@color/transparan"
@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Data Kosong"
+        android:text="DATA KOSNG"
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="25sp"
         android:visibility="invisible" />

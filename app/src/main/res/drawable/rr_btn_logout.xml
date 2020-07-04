@@ -7,8 +7,8 @@
                 android:radius="20dp" />
             <gradient
                 android:angle="-0"
-                android:startColor="@color/baseColor"
-                android:endColor="#2196F3" />
+                android:startColor="#FFC107"
+                android:endColor="#79D311" />
         </shape>
     </item>
 </selector>

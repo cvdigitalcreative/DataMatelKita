@@ -73,8 +73,8 @@ public class DowloadFile_t5 {
 
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
-            request.setDescription("Some descrition");
-            request.setTitle("Some title");
+            request.setDescription("Data Baru");
+            request.setTitle("Download Data6");
 // in order for this if to run, you must use the android 3.2 to compile your app
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 request.allowScanningByMediaScanner();

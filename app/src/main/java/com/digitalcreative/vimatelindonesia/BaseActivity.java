@@ -71,7 +71,7 @@ public class BaseActivity extends AppCompatActivity {
                             FragmentTransaction fragmentTransaction =  getSupportFragmentManager().beginTransaction();
                             fragmentTransaction.add(R.id.container_base, fragment);
                             fragmentTransaction.commit();
-                            Toast.makeText(getApplicationContext(), "Silahkan Perpanjang Masa Aktif Anda", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Masa Aktif Habis HUB WA Admin", Toast.LENGTH_SHORT).show();
 
                         }
                     } catch (ParseException e) {

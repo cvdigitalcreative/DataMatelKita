@@ -94,12 +94,12 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
                                     saldo=formatRupiah.format(Double.valueOf(model.getSaldo()));
                                 }
                                 intent.putExtra(Intent.EXTRA_TEXT,
-                                        "Dikirim melalui aplikasi data matel nusantara ->"
-                                                +"Link : https://play.google.com/store/apps/details?id=com.digitalcreative.vimatelindonesia "+"\n"
-                                                +"Nomor Polisi : " +model.getNo_plat() +"\n"
-                                                +"Model Unit : " +model.getNamaunit() +"\n"
-                                                +"Nomor Rangka : " +model.getNoka() +"\n"
-                                                +"Nomor Mesin : " +model.getNosin() +"\n"
+                                        "APK VIMATEL INDONESIA R2&R4 ->"
+                                                +"Link : is.gd/umiENz "+"\n"
+                                                +"Nopol: " +model.getNo_plat() +"\n"
+                                                +"Unit : " +model.getNamaunit() +"\n"
+                                                +"Noka : " +model.getNoka() +"\n"
+                                                +"Nosin: " +model.getNosin() +"\n"
                                                 +"Finance : " +model.getFinance() +"\n"
                                                 +"OVD : " +model.getOvd() +"\n"
                                                 +"Saldo : " +saldo +"\n"

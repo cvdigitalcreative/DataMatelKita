@@ -29,13 +29,13 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/base_grey_color">
+            android:background="#FF5722">
 
             <LinearLayout
                 android:id="@+id/btn_costumer_service"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/whit_color"
+                android:background="#CDDC39"
                 android:clickable="true"
                 android:orientation="vertical"
                 android:paddingHorizontal="15dp"
@@ -94,14 +94,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="7dp"
-                    android:background="@color/base_grey_color" />
+                    android:background="#FFEB3B" />
             </LinearLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/whit_color"
+                android:background="#FFC107"
                 android:paddingHorizontal="15dp"
                 android:paddingBottom="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -159,8 +159,8 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="#30ca59"
-                        app:civ_border_color="#dedede"
+                        android:src="#E91E63"
+                        app:civ_border_color="#FF9800"
                         app:civ_border_width="3dp" />
 
                     <ImageView
@@ -187,7 +187,7 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="#43a2fa"
+                        android:src="#FF5722"
                         app:civ_border_color="#dedede"
                         app:civ_border_width="3dp" />
 
@@ -216,7 +216,7 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@color/colorPrimary"
+                        android:src="#930736"
                         app:civ_border_color="#dedede"
                         app:civ_border_width="2dp" />
 
@@ -390,7 +390,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Jumlah Data :"/>
+                android:text=" :"/>
             <TextView
                 android:id="@+id/text_bantuan_2"
                 android:layout_width="match_parent"
