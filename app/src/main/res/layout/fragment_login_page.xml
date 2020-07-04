@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/loginregister_white"
+    android:background="#FF5722"
     tools:context=".View.LoginandRegister.LoginPage"
     android:orientation="vertical">
 
@@ -12,6 +12,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
@@ -19,6 +20,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/login_top"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:text="Selamat Datang,"
+            android:text="Selamat Datang"
             android:textColor="@color/whit_color"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -41,9 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="Masuk!"
+            android:text="Di APK TARGET R4"
             android:textColor="@color/whit_color"
-            android:textSize="36sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -52,10 +54,10 @@
             android:id="@+id/circleImageView3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
-            android:src="@mipmap/ic_logonew"
+            android:layout_marginStart="125dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:src="@mipmap/logo_circle3"
             app:civ_border_color="#fff"
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -89,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:background="@drawable/login_textfield_rr"
-                    android:hint="matelkita@email.com"
+                    android:hint=""
                     android:inputType="textEmailAddress"
                     android:padding="15dp"
                     android:textColor="#000"
@@ -107,7 +109,7 @@
                     android:layout_marginBottom="8dp"
                     android:background="@color/loginregister_white"
                     android:paddingHorizontal="10dp"
-                    android:text="Email Address"
+                    android:text="Email"
                     android:textColor="#000"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toTopOf="@+id/username"
@@ -128,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/login_textfield_rr"
-                    android:hint="*******"
+                    android:hint=""
                     android:inputType="textPassword"
                     android:padding="15dp"
                     android:textColor="#000"
@@ -181,7 +183,7 @@
             android:layout_marginEnd="55dp"
             android:background="@drawable/login_button_rr"
             android:paddingVertical="10dp"
-            android:text="Register"
+            android:text="DAFTAR DI Klik DISINI"
             android:textColor="@color/whit_color"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/bottom"
@@ -204,35 +206,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/pop_up_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#A4000000"
+            android:clickable="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Sedang Login"
+                android:textColor="@color/whit_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Tunggu beberapa saat"
+                android:textColor="@color/whit_color" />
+        </LinearLayout>
+
     </android.support.constraint.ConstraintLayout>
-    <LinearLayout
-        android:id="@+id/pop_up_login"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#A4000000"
-        android:clickable="false"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Sedang Login"
-            android:textColor="@color/whit_color"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Tunggu beberapa saat"
-            android:textColor="@color/whit_color" />
-    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

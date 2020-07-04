@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Detail Kendaraan"
-            android:textColor="@color/whit_color"
+            android:textColor="#673AB7"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

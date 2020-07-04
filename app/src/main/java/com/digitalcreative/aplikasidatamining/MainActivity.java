@@ -244,7 +244,6 @@ public class MainActivity extends AppCompatActivity {
                             long days = milliseconds / (1000 * 60 * 60 * 24);
                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                            String informasi="Jumlah data anda "+ finalCount;
                             SharedPreferences prefs = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                             SharedPreferences.Editor editors = prefs.edit();
                             int status=prefs.getInt("key_name2", 0);

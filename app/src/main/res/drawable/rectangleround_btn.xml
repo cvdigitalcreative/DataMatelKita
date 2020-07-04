@@ -10,8 +10,8 @@
                 android:bottomRightRadius="5dp"/>
             <gradient
                 android:angle="-0"
-                android:startColor="#fcffff"
-                android:endColor="#fbfeff" />
+                android:startColor="#FFC107"
+                android:endColor="#FF9800" />
         </shape>
     </item>
 </selector>

@@ -65,7 +65,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@mipmap/ic_logo"
+                        android:src="@mipmap/logo_circle3"
                         app:civ_border_color="#fff"
                         app:civ_border_width="2dp"
                         app:layout_constraintStart_toStartOf="parent"

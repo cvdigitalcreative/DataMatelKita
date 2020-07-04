@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/base_grey_color"
+    android:background="#FFC107"
     tools:context=".View.MenuPages.AkunPage">
 
     <!-- TODO: Update blank fragment layout -->
@@ -32,7 +32,7 @@
                 android:id="@+id/bg_red"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                android:background="@color/loginregister_white"
+                android:background="#FFEB3B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +65,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@mipmap/ic_logo"
+                        android:src="@mipmap/logo_circle3"
                         app:civ_border_color="#fff"
                         app:civ_border_width="2dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -282,7 +282,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/baseColor"
+                android:background="#F44336"
                 android:text="keluar"
                 android:textStyle="bold"
                 android:textColor="@color/whit_color"

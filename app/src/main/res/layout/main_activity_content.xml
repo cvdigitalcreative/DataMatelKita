@@ -18,8 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/base_gradient_color_bnv"
         app:itemBackground="@drawable/itembackground"
-        app:itemIconTint="@color/bottomnavigationbar_clickable_color"
-        app:itemTextColor="@color/bnv_textColor"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/colorPrimary"
         app:menu="@menu/menu"
         app:labelVisibilityMode="selected"
         app:itemHorizontalTranslationEnabled="false"/>

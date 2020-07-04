@@ -4,8 +4,8 @@
             <corners
                 android:radius="20dp" />
             <solid
-                android:color="#F0F0F0"/>
+                android:color="#FFC107"/>
             <stroke
-                android:color="@color/loginregister_white"
+                android:color="#FFC107"
                 android:width="2dp"/>
 </shape>

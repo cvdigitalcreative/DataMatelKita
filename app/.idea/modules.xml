@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-280801338/DataMatelKita-Master_development.iml" filepath="$PROJECT_DIR$/.idea/modules/-280801338/DataMatelKita-Master_development.iml" group="DataMatelKita-Master_development" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="DataMatelKita-Master_development/app" />
+    </modules>
+  </component>
+</project>

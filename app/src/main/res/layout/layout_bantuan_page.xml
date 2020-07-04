@@ -29,13 +29,13 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/base_grey_color">
+            android:background="#F44336">
 
             <LinearLayout
                 android:id="@+id/btn_costumer_service"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/whit_color"
+                android:background="#F44336"
                 android:clickable="true"
                 android:orientation="vertical"
                 android:paddingHorizontal="15dp"
@@ -94,14 +94,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="7dp"
-                    android:background="@color/base_grey_color" />
+                    android:background="#9C27B0" />
             </LinearLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/whit_color"
+                android:background="#FF9800"
                 android:paddingHorizontal="15dp"
                 android:paddingBottom="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -160,7 +160,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="#30ca59"
-                        app:civ_border_color="#dedede"
+                        app:civ_border_color="#F44336"
                         app:civ_border_width="3dp" />
 
                     <ImageView
@@ -188,7 +188,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="#43a2fa"
-                        app:civ_border_color="#dedede"
+                        app:civ_border_color="#F44336"
                         app:civ_border_width="3dp" />
 
                     <ImageView
@@ -217,7 +217,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@color/colorPrimary"
-                        app:civ_border_color="#dedede"
+                        app:civ_border_color="#F44336"
                         app:civ_border_width="2dp" />
 
                     <ImageView
@@ -378,7 +378,7 @@
             android:orientation="vertical"
             android:paddingVertical="20dp"
             android:paddingHorizontal="40dp"
-            android:background="#fff">
+            android:background="#F44336">
             <TextView
                 android:id="@+id/text_bantuan_cuy"
                 android:layout_width="match_parent"

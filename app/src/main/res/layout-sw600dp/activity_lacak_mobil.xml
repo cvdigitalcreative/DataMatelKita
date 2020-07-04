@@ -42,7 +42,7 @@
                 android:textColor="#000"
                 android:textSize="23sp"
                 android:gravity="center|left"
-                android:hint="Masukkan Kendaraan, Noka, Nosin"
+                android:hint="DISINI KETK NOPOL/NOKA/NOSIN"
                 android:textColorHint="#807E7E"
                 app:queryBackground="@color/transparan"
                 android:background="@color/transparan"

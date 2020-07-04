@@ -5,5 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container_base"
-    android:background="@color/base_color"
+    android:background="#FFEB3B"
     tools:context=".BaseActivity"/>

@@ -9,11 +9,12 @@
     </item>
     <item>
         <shape
+
             android:shape="rectangle"  >
             <gradient
                 android:angle="-0"
-                android:startColor="@color/baseColor"
-                android:endColor="#8A2F2F" />
+                android:startColor="#FF9800"
+                android:endColor="#FFC107" />
         </shape>
     </item>
 </layer-list>

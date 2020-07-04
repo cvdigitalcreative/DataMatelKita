@@ -88,12 +88,11 @@ public class PencarianPage_Activity extends AppCompatActivity {
 
 
 
-        if(count<=400000 ){
-            Toast.makeText(context, "Data anda belum lengkap silahkan tgg beberapa saat sistem sedang memasukan data ", Toast.LENGTH_LONG).show();
+        if(count<=500000 ){
+            Toast.makeText(context, "Data anda belum lengkap Tunggu sedang memasukan data ", Toast.LENGTH_LONG).show();
 
 
         }else{
-            Toast.makeText(context, "Jumlah Data = " + String.valueOf(count), Toast.LENGTH_LONG).show();
         }
     }
 

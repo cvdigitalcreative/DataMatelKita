@@ -220,7 +220,7 @@ public class BantuanPage extends Fragment {
             System.out.println("id download "+jumlah__download_id);
             System.out.println("jumlah id "+jumlah_id.size());
             System.out.println("jumlah download "+jumlah__download_id.size());
-            Toast.makeText(getActivity(), "Data berhasil didownload tgg beberapa saat untuk masuk ke file", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Data berhasil didownload tunggu beberapa saat lagi untuk lengkapi data", Toast.LENGTH_LONG).show();
 
 
 
@@ -233,7 +233,7 @@ public class BantuanPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + "+6285268801717"));
+                intent.setData(Uri.parse("sms:" + "+6281292983143"));
                 startActivity(intent);
             }
         });
@@ -241,7 +241,7 @@ public class BantuanPage extends Fragment {
         wa_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + "+628127448554";
+                String url = "https://api.whatsapp.com/send?phone=" + "+6281292983143";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 try {
                     intent.setData(Uri.parse(url));
@@ -257,7 +257,7 @@ public class BantuanPage extends Fragment {
             public void onClick(View v) {
 //                Intent callIntent = new Intent(Intent.ACTION_CALL);
 //                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                callIntent.setData(Uri.parse("tel:" + "+6285268801717"));
+//                callIntent.setData(Uri.parse("tel:" + "+6281292983143"));
 //                getActivity().startActivity(callIntent);
                 int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE);
 
@@ -269,7 +269,7 @@ public class BantuanPage extends Fragment {
                 } else {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    callIntent.setData(Uri.parse("tel:" + "+628127448554"));
+                    callIntent.setData(Uri.parse("tel:" + "+6281292983143"));
                     getActivity().startActivity(callIntent);
                 }
 
@@ -410,7 +410,7 @@ public class BantuanPage extends Fragment {
                                     ){
                                         String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                         String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                        String informasi="Jumlah data anda "+ finalCount;
+                                        String informasi="Kode "+ finalCount;
                                         long progress=(finalCount *100)/400000;
                                         finished.setVisibility(View.VISIBLE);
                                         tv0.setText(infomarsis);
@@ -427,7 +427,7 @@ public class BantuanPage extends Fragment {
                                         if (days<=0 && status_download_db.trim().equals("1") && finalCount >400000) {
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+ finalCount;
+                                            String informasi="Kode "+ finalCount;
                                             long progress=(finalCount *100)/400000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
@@ -442,7 +442,7 @@ public class BantuanPage extends Fragment {
                                         }else{
                                             String infomarsi="Tanggal Update Data Anda " +last_update_data_sistem;
                                             String infomarsis="Tanggal Data Terbaru Sistem " +last_update_data_sistem;
-                                            String informasi="Jumlah data anda "+ finalCount;
+                                            String informasi="Kode "+ finalCount;
                                             long progress=(finalCount *100)/400000;
                                             finished.setVisibility(View.VISIBLE);
                                             tv0.setText(infomarsis);
