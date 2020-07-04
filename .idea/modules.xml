@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DataMatelKita.iml" filepath="$PROJECT_DIR$/DataMatelKita.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataMatelKita.iml" filepath="$PROJECT_DIR$/DataMatelKita.iml" group="DataMatelKita" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="DataMatelKita/app" />
     </modules>
   </component>
 </project>
